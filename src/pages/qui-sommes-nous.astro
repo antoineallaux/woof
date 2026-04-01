@@ -11,8 +11,17 @@ import Badge from '../components/ui/Badge.astro';
 >
 
   <!-- ===== SECTION 1 : HERO bg-primary-darker ===== -->
-  <section class="py-20 bg-primary-darker text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="relative py-20 text-white overflow-hidden">
+    <img
+      src="https://www.herkules-fitness.com/wp-content/uploads/2026/04/20-OrganiserUneSeance.jpg"
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 w-full h-full object-cover"
+      fetchpriority="high"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-primary-darker/80"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <div class="text-center max-w-3xl mx-auto mb-12">
         <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-bold text-xs px-3 py-1.5 rounded-full mb-6">
