@@ -2,57 +2,375 @@
 import Layout from '../layouts/Layout.astro';
 import FAQSection from '../components/sections/FAQSection.astro';
 import CTAFinal from '../components/sections/CTAFinal.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import { getCollection } from 'astro:content';
+
+const allProducts = await getCollection('products');
+const agilityProducts = allProducts
+  .filter((p) => p.data.category === 'agility' || p.data.category === 'saut')
+  .slice(0, 4);
 
 const agilityFaqs = [
   {
-    q: "Qu'est-ce que l'agility canine ?",
-    a: "L'agility canine est un sport qui consiste à guider son chien sur un parcours d'obstacles dans un temps limité. Née en Grande-Bretagne en 1978, cette discipline développe la complicité entre le chien et son maître, améliore l'obéissance, l'agilité et le bien-être mental de l'animal. Elle est pratiquée aussi bien en compétition qu'en loisir dans les parcs publics.",
+    q: "À partir de quel âge un chien peut-il faire de l'agility ?",
+    a: "Il est recommandé d'attendre que le chien ait au moins 12 mois, et idéalement 18 mois pour les grandes races, avant de commencer l'agility avec des sauts. Les articulations d'un chiot ne sont pas encore consolidées. Pour les exercices au sol (tunnels, slalom lent), on peut commencer dès 6-8 mois.",
   },
   {
-    q: "À partir de quel âge un chien peut-il pratiquer l'agility ?",
-    a: "Il est recommandé d'attendre que le chien ait au moins 12 mois, et idéalement 18 mois pour les grandes races, avant de commencer l'agility avec des sauts. Les articulations d'un chiot ne sont pas encore consolidées et les exercices d'impact répété peuvent provoquer des lésions durables. Pour les exercices au sol (tunnels, slalom lent), on peut commencer dès 6-8 mois.",
+    q: "Quelle surface faut-il prévoir pour installer un parcours ?",
+    a: "Un parcours pour collectivité nécessite 30 à 60m² au minimum pour un parcours complet. Des configurations plus denses sont possibles avec nos configurations spéciales en L ou en U.",
   },
   {
-    q: "L'agility est-elle adaptée à tous les chiens ?",
-    a: "L'agility convient à la grande majorité des chiens, quelle que soit leur race ou leur taille. Les équipements Woof! sont disponibles en version petits chiens (barres à hauteur réduite) et grands chiens. Même les chiens âgés peuvent pratiquer une forme douce d'agility, adaptée à leurs capacités physiques. Seuls les chiens ayant des contre-indications médicales doivent consulter un vétérinaire avant de commencer.",
+    q: "Les équipements sont-ils adaptés à une utilisation intensive ?",
+    a: "Oui, nos équipements sont spécialement conçus pour une utilisation collective en libre accès. Acier galvanisé thermolaqué EN 16630, chaque module est prévu pour durer 20 ans sans maintenance complexe.",
+  },
+  {
+    q: "Proposez-vous l'installation des équipements ?",
+    a: "Oui, Woof! propose une prestation complète d'installation par des équipes qualifiées dans toute la France. Nous pouvons également vous fournir des plans d'implantation personnalisés et vous accompagner dans les démarches administratives pour votre commune.",
   },
 ];
 
 const benefits = [
-  { icon: '🧠', title: 'Bien-être mental', desc: "L'agility stimule les capacités cognitives du chien et renforce sa confiance en lui grâce à la résolution de problèmes et à la mémorisation des enchaînements." },
-  { icon: '💪', title: 'Condition physique', desc: "Un parcours d'agility travaille l'endurance, la coordination et la souplesse du chien. Une session de 20 minutes équivaut à plusieurs kilomètres de marche." },
-  { icon: '❤️', title: 'Lien maître-chien', desc: "La pratique de l'agility renforce considérablement la communication et la confiance mutuelle entre le chien et son propriétaire, base de toute éducation réussie." },
+  {
+    title: 'Bien-être physique',
+    desc: "L'agility améliore la condition physique, la coordination et l'endurance de votre chien. Des exercices réguliers maintiennent un poids santé et renforcent les muscles.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`,
+  },
+  {
+    title: 'Stimulation mentale',
+    desc: "Les chiens qui pratiquent l'agility régulièrement montrent une réduction de l'anxiété, moins d'aboiements excessifs. L'intelligence du chien est constamment sollicitée.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
+  },
+  {
+    title: 'Relation maître-chien',
+    desc: "La communication et la confiance entre le chien et son maître se développent considérablement. L'agility crée une connexion unique grâce à une pratique conjointe.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
+  },
+  {
+    title: 'Obéissance naturelle',
+    desc: "L'apprentissage des obstacles renforce naturellement l'obéissance du chien de manière ludique et positive, sans contrainte ni punition.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+  },
+  {
+    title: 'Socialisation',
+    desc: "Les parcs canins avec agility favorisent les rencontres entre chiens et propriétaires. Une occasion unique pour les chiens peu sociables de s'ouvrir aux autres.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`,
+  },
+  {
+    title: "Canalisation de l'énergie",
+    desc: "Les chiens actifs comme les Borders Collies ou les Malinois trouvent dans l'agility un exutoire idéal pour leur énergie débordante. Comportements destructeurs réduits.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
+  },
+];
+
+const obstacles = [
+  { name: 'Haies de saut', desc: "L'obstacle de base en agility que le chien doit franchir sans la faire tomber." },
+  { name: 'Tunnel', desc: 'Passage confiné que le chien doit traverser rapidement. Développe la confiance.' },
+  { name: 'Passerelle', desc: 'Structure en hauteur avec rampes. Teste l\'équilibre et la concentration.' },
+  { name: 'Slalom', desc: 'Série de piquets que le chien zigzague. L\'obstacle le plus technique de l\'agility.' },
+  { name: 'Palissade (A-Frame)', desc: 'Plan incliné que le chien monte et descend. Travaille la proprioception.' },
+  { name: 'Balançoire', desc: 'Planche pivotante que le chien doit basculer avec son poids. Développe le courage.' },
+  { name: 'Plateforme de dressage', desc: 'Surface surélevée pour le positionnement et l\'apprentissage des directions.' },
+  { name: 'Cerceaux et pneus', desc: 'Obstacles de franchissement circulaires de différentes hauteurs et diamètres.' },
+];
+
+const communeCards = [
+  { title: 'Valorisation des espaces verts', desc: "Un parcours agility transforme un espace vert classique en lieu de vie actif. La fréquentation augmente et la perception du parc s'améliore." },
+  { title: 'Image moderne de la commune', desc: "Proposer un espace de bien-être animal est perçu positivement pour le bien-être animal et la qualité de vie. Un investissement à forte valeur symbolique." },
+  { title: 'Sécurité et cohabitation', desc: "Des espaces dédiés réduisent les conflits entre les propriétaires de chiens et les autres habitants. Un outil de médiation sociale efficace." },
+  { title: 'Lien social renforcé', desc: "Les parcs canins avec agility deviennent des lieux de rencontre et d'échange. Ils renforcent le sentiment de communauté et les liens de voisinage." },
 ];
 ---
 
 <Layout
-  title="L'Agility Canine — Guide Complet pour Collectivités | Woof"
-  description="Tout savoir sur l'agility canine : bienfaits, réglementation, équipements, pratique. Guide complet pour les communes souhaitant installer un parcours agility."
+  title="Parcours Agility Canine pour Collectivités — Équipements Professionnels | Woof"
+  description="Offrez des plateformes de sport en extérieur de qualité à l'agility canine. Des équipements professionnels, accessibles et durables pour le bien-être des chiens et de leurs maîtres."
 >
-  <section class="py-16 bg-bg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mb-16">
-        <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Guide complet</p>
-        <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-text mb-6 leading-tight">
-          L'agility canine en collectivité
+
+  <!-- ===== SECTION 1 : HERO ===== -->
+  <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+    <img
+      src="/assets/hero-agility-dog.webp"
+      alt="Chien sur parcours d'agility dans un parc public"
+      class="absolute inset-0 w-full h-full object-cover"
+      fetchpriority="high"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-primary-darker/85 via-primary-darker/60 to-transparent"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+      <div class="max-w-2xl">
+        <span class="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 text-white font-bold text-xs px-3 py-1.5 rounded-full mb-6">
+          Sport canin &amp; Bien-être
+        </span>
+
+        <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
+          Parcours Agility : L'Équipement Idéal pour vos Parcs Canins
         </h1>
-        <p class="text-muted text-lg leading-relaxed">
-          L'agility canine est bien plus qu'un simple loisir : c'est un vecteur de lien social, de bien-être animal et d'attractivité pour votre commune.
+
+        <p class="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
+          Offrez des plateformes de sport en extérieur de qualité à l'agility canine. Des équipements professionnels, accessibles et durables pour le bien-être des chiens et de leurs maîtres.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <Button href="/produits" variant="white" size="lg">
+            Voir nos équipements
+          </Button>
+          <Button
+            href="/contact"
+            variant="outline"
+            size="lg"
+            class="border-white text-white hover:bg-white hover:text-primary-darker"
+          >
+            Demander un devis gratuit
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2 : QU'EST-CE QUE L'AGILITY — Split 60/40 ===== -->
+  <section class="py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+
+        <!-- Texte 60% -->
+        <div class="lg:col-span-3">
+          <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Sport canin &amp; Bien-être</p>
+          <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-6">
+            Qu'est-ce que l'agility canine ?
+          </h2>
+          <div class="text-muted text-base leading-relaxed space-y-4 mb-8">
+            <p>
+              L'agility est un sport canin où le chien guidé par son maître, doit franchir différents obstacles dans un temps précis. Plus qu'une discipline sportive, l'agility renforce la complicité entre l'animal et son propriétaire, développe l'intelligence du chien et améliore considérablement son bien-être.
+            </p>
+            <p>
+              Née en Grande-Bretagne à la fin des années 1970 au Crufts Dog Show, l'agility s'est développée dans le monde entier pour devenir aujourd'hui une pratique courante aussi bien en club qu'en compétition internationale.
+            </p>
+            <p>
+              L'installation de parcours d'agility dans les espaces publics permet à toutes les typologies de chiens de découvrir cette activité enrichissante, sans avoir besoin de recourir à un club. C'est une solution moderne pour développer une offre des espaces dans les collectivités.
+            </p>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-4">
+            <div class="text-center bg-surface rounded-xl p-4 border border-primary-light">
+              <div class="font-display font-extrabold text-3xl text-primary mb-1">100+</div>
+              <div class="text-muted text-xs font-semibold">Communes équipées</div>
+            </div>
+            <div class="text-center bg-surface rounded-xl p-4 border border-primary-light">
+              <div class="font-display font-extrabold text-3xl text-primary mb-1">15+</div>
+              <div class="text-muted text-xs font-semibold">Années d'expérience</div>
+            </div>
+            <div class="text-center bg-surface rounded-xl p-4 border border-primary-light">
+              <div class="font-display font-extrabold text-3xl text-primary mb-1">100%</div>
+              <div class="text-muted text-xs font-semibold">Made in Europe</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 40% -->
+        <div class="lg:col-span-2">
+          <img
+            src="/assets/features-tunnel-dog.webp"
+            alt="Chien dans un tunnel d'agility"
+            class="w-full h-80 lg:h-[480px] object-cover rounded-2xl shadow-lg"
+            loading="lazy"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3 : LES BIENFAITS — 6 cards ===== -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Une activité complète</p>
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Les bienfaits de l'agility pour le chien
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          Une activité complète qui profite à votre chien et qui est très recommandée par les vétérinaires et éducateurs canins.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-        {benefits.map((item) => (
-          <div class="bg-surface rounded-2xl p-6 border border-primary-light">
-            <div class="text-3xl mb-4" aria-hidden="true">{item.icon}</div>
-            <h2 class="font-display font-bold text-lg text-text mb-2">{item.title}</h2>
-            <p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {benefits.map((b) => (
+          <div class="bg-white rounded-2xl p-6 border border-primary-light shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4" aria-hidden="true" set:html={b.icon} />
+            <h3 class="font-display font-bold text-lg text-text mb-2">{b.title}</h3>
+            <p class="text-muted text-sm leading-relaxed">{b.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- ===== SECTION 4 : LES OBSTACLES — grille 4x2 ===== -->
+  <section class="py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Les obstacles d'un parcours agility
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          La gamme Woof! couvre tous les types d'obstacles pour proposer des parcours complets qui développent les compétences agilitiques chez le chien.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {obstacles.map((obs) => (
+          <div class="bg-surface border border-primary-light rounded-xl p-5 hover:border-primary transition-colors">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mb-3" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="font-display font-bold text-sm text-text mb-1">{obs.name}</h3>
+            <p class="text-muted text-xs leading-relaxed">{obs.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5 : ACCESSIBLE À TOUS ===== -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+        <div>
+          <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-6">
+            L'agility accessible à tous les chiens
+          </h2>
+          <p class="text-muted text-base leading-relaxed mb-6">
+            Contrairement aux idées reçues, l'agility n'est pas réservée aux chiens de race ou aux champions. Dans les parcs publics d'agility Woof!, tous les chiens, quelle que soit leur taille ou leur âge, peuvent pratiquer cette discipline. Les parcours publics sont dimensionnés pour accueillir tout le monde.
+          </p>
+
+          <ul class="space-y-3 mb-8">
+            {[
+              "Hauteur des obstacles ajustable",
+              "Progression à son rythme",
+              "Accessible dès l'âge de 12 mois",
+            ].map((item) => (
+              <li class="flex items-center gap-3 text-text font-semibold text-sm">
+                <span class="w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="grid grid-cols-2 gap-4">
+          {[
+            { num: '2', label: 'Catégories de taille' },
+            { num: '3', label: 'Niveaux par obstacle' },
+            { num: '100%', label: 'Acier galvanisé' },
+            { num: '50m²', label: 'Surface minimum' },
+          ].map((s) => (
+            <div class="bg-white rounded-2xl p-6 text-center border border-primary-light shadow-sm">
+              <div class="font-display font-extrabold text-4xl text-primary mb-2">{s.num}</div>
+              <div class="text-muted text-sm font-semibold">{s.label}</div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 6 : POURQUOI INSTALLER — 4 cards communes ===== -->
+  <section class="py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <Badge class="mb-4">Pour les collectivités</Badge>
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Pourquoi installer un parcours agility dans votre commune ?
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          De plus en plus de municipalités investissent dans des espaces canins équipés. C'est une réponse directe aux nouvelles attentes des citoyens propriétaires de chiens.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {communeCards.map((card, i) => (
+          <div class="bg-surface border border-primary-light rounded-2xl p-7 hover:shadow-md transition-shadow">
+            <div class="w-8 h-8 bg-primary text-white font-display font-extrabold text-sm rounded-lg flex items-center justify-center mb-4">
+              {i + 1}
+            </div>
+            <h3 class="font-display font-bold text-lg text-text mb-2">{card.title}</h3>
+            <p class="text-muted text-sm leading-relaxed">{card.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 7 : CTA SOMBRE ===== -->
+  <section class="py-20 bg-primary-darker">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-white/80 text-base sm:text-lg leading-relaxed mb-8">
+        En France, on compte plus de 7 millions de chiens. Dans les zones urbaines, les propriétaires recherchent des espaces adaptés pour leurs compagnons. Un parc équipé d'un parcours agility devient rapidement un lieu de vie apprécié, renforçant l'attractivité de votre commune.
+      </p>
+      <Button href="/contact" variant="white" size="lg">
+        Étudier votre projet →
+      </Button>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 8 : NOS ÉQUIPEMENTS — 4 produits ===== -->
+  <section class="py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Nos équipements d'agility
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          Découvrez notre gamme d'obstacles professionnels conçus et fabriqués pour les collectivités.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        {agilityProducts.map((product) => (
+          <a
+            href={`/produits/${product.slug}`}
+            class="group bg-white rounded-2xl border border-primary-light overflow-hidden hover:shadow-lg transition-shadow no-underline"
+          >
+            <div class="aspect-square overflow-hidden bg-surface">
+              <img
+                src={product.data.image}
+                alt={product.data.name}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-4">
+              <p class="text-xs text-muted font-mono mb-1">{product.data.ref}</p>
+              <h3 class="font-display font-bold text-sm text-text line-clamp-2">{product.data.name}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center">
+        <Button href="/produits" variant="outline" size="lg">
+          Voir tous les produits →
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 9 : FAQ ===== -->
   <FAQSection faqs={agilityFaqs} />
+
+  <!-- ===== SECTION 10 : CTA FINAL ===== -->
   <CTAFinal />
+
 </Layout>

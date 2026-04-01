@@ -1,55 +1,285 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CTAFinal from '../components/sections/CTAFinal.astro';
-
-const stats = [
-  { num: '500+', label: 'Communes équipées' },
-  { num: '20+', label: "Ans d'expérience" },
-  { num: '5 ans', label: 'Garantie sur gamme' },
-];
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
 ---
 
 <Layout
   title="Qui sommes-nous — Woof! par Herkules Fitness | Leader Européen"
   description="Woof! est une marque de Herkules Fitness, leader européen des équipements de sport en extérieur depuis plus de 20 ans. 500+ communes équipées en Europe."
 >
-  <section class="py-16 bg-bg">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Notre histoire</p>
-      <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-text mb-8 leading-tight">
-        La puissance d'un leader européen au service de l'agility canine
-      </h1>
 
-      <div class="prose prose-lg prose-headings:font-display prose-headings:font-bold prose-a:text-primary max-w-none mb-16">
-        <p>
-          <strong>Woof!</strong> est la marque d'équipements d'agility canine de <strong>Herkules Fitness</strong>,
-          le leader européen des équipements de sport et de loisirs en extérieur pour collectivités.
-          Fondée il y a plus de 20 ans, Herkules Fitness a équipé plus de <strong>500 communes en Europe</strong>
-          avec des équipements de qualité professionnelle.
-        </p>
-        <h2>Notre expertise industrielle</h2>
-        <p>
-          Notre savoir-faire dans la fabrication d'équipements extérieurs durables nous a naturellement conduits
-          vers le marché de l'agility canine. Nous appliquons les mêmes exigences industrielles à nos équipements
-          Woof! : acier galvanisé thermolaqué, certification EN 16630, tests de résistance aux intempéries et au vandalisme.
-        </p>
-        <h2>Notre engagement qualité</h2>
-        <p>
-          Tous nos équipements sont fabriqués en Europe et bénéficient d'une garantie de 5 ans.
-          Notre SAV est basé en France, et les pièces détachées sont disponibles pendant 10 ans minimum.
-          Nous accompagnons chaque collectivité de la conception à la maintenance.
+  <!-- ===== SECTION 1 : HERO bg-primary-darker ===== -->
+  <section class="py-20 bg-primary-darker text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-bold text-xs px-3 py-1.5 rounded-full mb-6">
+          À PROPOS DE NOUS
+        </span>
+        <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-white leading-tight mb-6">
+          Woof! l'expertise Herkules Fitness au service du bien-être canin
+        </h1>
+        <p class="text-white/80 text-base sm:text-lg leading-relaxed">
+          Depuis plus de 20 ans, le groupe Herkules Fitness conçoit et fabrique des équipements de sport en extérieur pour les collectivités européennes.
         </p>
       </div>
 
-      <div class="grid grid-cols-3 gap-6">
-        {stats.map((stat) => (
-          <div class="bg-surface rounded-2xl p-6 text-center border border-primary-light">
-            <div class="font-display font-extrabold text-4xl text-primary mb-2">{stat.num}</div>
-            <div class="text-muted text-sm font-semibold">{stat.label}</div>
+      <!-- Stats inline -->
+      <div class="flex flex-wrap justify-center gap-8 border-t border-white/20 pt-10">
+        {[
+          { num: '20+', label: "Années d'expérience" },
+          { num: '500+', label: 'Communes équipées' },
+          { num: '15', label: 'Pays en Europe' },
+          { num: '5 ans', label: 'Garantie standard' },
+        ].map((s) => (
+          <div class="text-center">
+            <div class="font-display font-extrabold text-3xl text-white mb-1">{s.num}</div>
+            <div class="text-white/60 text-sm">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2 : NOTRE HISTOIRE — Split ===== -->
+  <section class="py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+        <div>
+          <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-6">
+            Notre histoire
+          </h2>
+          <div class="text-muted text-base leading-relaxed space-y-4">
+            <p>
+              Herkules Fitness est né de la conviction que l'activité physique en plein air devait être accessible à tous. Depuis notre création, nous avons équipé des milliers d'espaces publics pour les communes à travers l'Europe.
+            </p>
+            <p>
+              Face à la demande croissante des municipalités pour des espaces dédiés aux chiens, nous avons créé Woof! : une gamme complète d'équipements d'agility canine, bénéficiant de notre savoir-faire industriel et de notre expertise des collectivités.
+            </p>
+            <p>
+              Chaque produit Woof! est conçu dans nos usines européennes, avec les mêmes standards de qualité qui font la réputation de Herkules Fitness auprès des professionnels.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <img
+            src="/assets/features-tunnel-dog.webp"
+            alt="Chien pratiquant l'agility"
+            class="w-full h-80 lg:h-[440px] object-cover rounded-2xl shadow-lg"
+            loading="lazy"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3 : HERKULES FITNESS — fond bg-surface ===== -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-12">
+        <Badge class="mb-4">Notre Maison Mère</Badge>
+        <div class="font-display font-extrabold text-5xl sm:text-6xl text-primary-darker tracking-tight mb-4" aria-label="Herkules">
+          HERKULES
+        </div>
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Herkules Fitness, leader du fitness extérieur
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          Woof! est née de l'expertise d'Herkules Fitness, spécialiste reconnu du matériel de fitness en plein air pour les collectivités européennes depuis plus de 20 ans.
+        </p>
+      </div>
+
+      <!-- Image large -->
+      <div class="mb-12 rounded-2xl overflow-hidden shadow-lg">
+        <img
+          src="/assets/hero-agility-dog.webp"
+          alt="Espace de fitness extérieur Herkules Fitness"
+          class="w-full h-64 sm:h-80 object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      <!-- 3 feature cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+        {[
+          {
+            title: 'Fitness & Street Workout',
+            desc: "Des stations de fitness au poids du corps et des structures street workout robustes pour créer des sports dynamiques dans vos espaces publics.",
+          },
+          {
+            title: 'Sport Santé & Seniors',
+            desc: "Des équipements ergonomiques certifiés pour les seniors et personnes à mobilité réduite, favorisant l'équilibre, la coordination et l'autonomie.",
+          },
+          {
+            title: 'Qualité & Normes',
+            desc: "Tous nos équipements Herkules respectent la norme européenne EN 16630 et sont conçus pour durer 20 ans sans maintenance complexe.",
+          },
+        ].map((card) => (
+          <div class="bg-white rounded-2xl p-6 border border-primary-light shadow-sm">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mb-4" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="font-display font-bold text-base text-text mb-2">{card.title}</h3>
+            <p class="text-muted text-sm leading-relaxed">{card.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {[
+          { num: '500+', label: 'Appareils installés' },
+          { num: '20+', label: "Ans d'expérience" },
+          { num: '100+', label: 'Appareils différents' },
+          { num: '15', label: 'Pays en Europe' },
+        ].map((s) => (
+          <div class="bg-white rounded-xl p-5 text-center border border-primary-light">
+            <div class="font-display font-extrabold text-3xl text-primary mb-1">{s.num}</div>
+            <div class="text-muted text-xs font-semibold">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4 : PASSION DU SPORT — bg-primary-darker ===== -->
+  <section class="py-20 bg-primary-darker text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl text-white leading-tight mb-6">
+        La passion du sport, l'amour de l'humain
+      </h2>
+      <p class="text-white/80 text-base sm:text-lg leading-relaxed mb-4">
+        Chez Herkules Fitness, nous concevons des appareils de fitness extérieur avec passion et respect. Notre mission est de créer des espaces inclusifs et durables où chacun, quel que soit son âge ou ses capacités, peut se dépenser et profiter de moments de bien-être.
+      </p>
+      <p class="text-white/80 text-base sm:text-lg leading-relaxed mb-10">
+        Cette philosophie guide également Woof! : offrir aux collectivités des équipements d'agility canine de qualité professionnelle, accessibles et durables.
+      </p>
+
+      <!-- Stats -->
+      <div class="flex flex-wrap justify-center gap-8 mb-10 border-t border-white/20 pt-10">
+        {['500+', '20+', '100+', '15'].map((num) => (
+          <div class="font-display font-extrabold text-3xl text-white">{num}</div>
+        ))}
+      </div>
+
+      <a
+        href="#"
+        class="inline-flex items-center gap-2 text-white/80 hover:text-white font-bold text-sm underline underline-offset-4 transition-colors"
+      >
+        Découvrir Herkules Fitness →
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5 : NOS VALEURS — 4 cards ===== -->
+  <section class="py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Nos valeurs
+        </h2>
+        <p class="text-muted text-base">
+          Les principes qui guident notre travail au quotidien.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { title: 'Excellence', desc: "Des équipements de qualité supérieure, conçus pour durer des décennies.", num: '01' },
+          { title: 'Durabilité', desc: "Engagement environnemental fort avec des matériaux recyclables et une production locale.", num: '02' },
+          { title: 'Accompagnement', desc: "Un service client dédié aux collectivités, de la conception à l'installation.", num: '03' },
+          { title: 'Expertise B2G', desc: "Maîtrise des marchés publics et des contraintes des collectivités territoriales.", num: '04' },
+        ].map((val) => (
+          <div class="bg-surface border border-primary-light rounded-2xl p-6 hover:shadow-md transition-shadow">
+            <div class="font-display font-extrabold text-3xl text-primary/20 mb-3">{val.num}</div>
+            <h3 class="font-display font-bold text-lg text-text mb-2">{val.title}</h3>
+            <p class="text-muted text-sm leading-relaxed">{val.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
-  <CTAFinal />
+
+  <!-- ===== SECTION 6 : MAILLAGE TERRITORIAL ===== -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+        <div>
+          <Badge class="mb-4">Le Réseau Herkules</Badge>
+          <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-6">
+            Un maillage territorial au plus proche de vous
+          </h2>
+          <p class="text-muted text-base leading-relaxed mb-8">
+            Le réseau Herkules, c'est un ensemble de distributeurs et d'installateurs partenaires répartis sur tout le territoire français. Cette organisation nous permet d'agir de façon locale, au plus proche de nos clients, partout en France. Que vous soyez une commune rurale ou une métropole, vous bénéficiez d'un interlocuteur dédié qui connaît votre territoire et ses spécificités.
+          </p>
+
+          <!-- Bullet list -->
+          <ul class="space-y-3 text-text text-sm font-semibold">
+            {[
+              'Conseils personnalisés et études de terrain',
+              'Installation par des professionnels qualifiés',
+              'Service après-vente de proximité',
+            ].map((item) => (
+              <li class="flex items-start gap-3">
+                <span class="w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- 4 items grid -->
+        <div class="grid grid-cols-2 gap-4">
+          {[
+            { title: 'Présence nationale', sub: 'Partout en France' },
+            { title: 'Installation pro', sub: 'Équipes certifiées' },
+            { title: 'Proximité', sub: 'Interlocuteur local' },
+            { title: 'SAV réactif', sub: 'Intervention rapide' },
+          ].map((item) => (
+            <div class="bg-white rounded-xl p-5 border border-primary-light text-center shadow-sm">
+              <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="font-display font-bold text-sm text-text mb-1">{item.title}</h3>
+              <p class="text-muted text-xs">{item.sub}</p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 7 : CTA FINAL PERSONNALISÉ ===== -->
+  <section class="py-20 bg-primary">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mb-4">
+        Travaillons ensemble
+      </h2>
+      <p class="text-white/80 text-base sm:text-lg mb-10 max-w-2xl mx-auto">
+        Découvrez comment Woof! peut transformer les espaces verts de votre commune en lieu de vie pour tous.
+      </p>
+      <Button href="/contact" variant="white" size="lg">
+        Nous contacter →
+      </Button>
+    </div>
+  </section>
+
 </Layout>
