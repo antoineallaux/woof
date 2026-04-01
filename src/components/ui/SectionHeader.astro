@@ -1,0 +1,29 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  subtitle?: string;
+  center?: boolean;
+  light?: boolean;
+}
+const { label, title, subtitle, center = false, light = false } = Astro.props;
+---
+<div class:list={[center && 'text-center']}>
+  {label && (
+    <p class:list={['font-bold text-xs tracking-widest uppercase mb-3', light ? 'text-primary-light' : 'text-primary']}>
+      {label}
+    </p>
+  )}
+  <h2 class:list={['font-display font-extrabold text-3xl md:text-4xl leading-tight mb-4', light ? 'text-white' : 'text-text']}>
+    {title}
+  </h2>
+  {subtitle && (
+    <p class:list={[
+      'text-base leading-relaxed max-w-2xl',
+      center && 'mx-auto',
+      light ? 'text-white/70' : 'text-muted',
+    ]}>
+      {subtitle}
+    </p>
+  )}
+</div>
