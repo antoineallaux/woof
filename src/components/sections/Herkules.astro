@@ -1,0 +1,45 @@
+---
+import Button from '../ui/Button.astro';
+
+const steps = [
+  { num: '01', title: 'Conseil & Design', desc: 'Étude personnalisée et conception sur-mesure de votre parcours.' },
+  { num: '02', title: 'Mandat Administratif', desc: 'Accompagnement dans vos démarches de marchés publics.' },
+  { num: '03', title: 'Installation', desc: 'Pose professionnelle par nos équipes certifiées.' },
+];
+---
+
+<section class="py-20 bg-primary-darker text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+      <div>
+        <p class="font-bold text-xs text-primary-light uppercase tracking-widest mb-3">Herkules Fitness</p>
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-white leading-tight mb-6">
+          La puissance d'un leader européen au service de l'agility canine.
+        </h2>
+        <p class="text-white/70 text-base leading-relaxed mb-3">
+          Woof! est une marque de <strong class="text-white">Herkules Fitness</strong>, le leader européen des équipements de sports et de loisirs en extérieur. Fort de plus de 20 ans d'expérience, Herkules Fitness a équipé plus de 500 communes en Europe.
+        </p>
+        <p class="text-white/70 text-base leading-relaxed mb-8">
+          Cette expertise industrielle se traduit par des processus de fabrication rigoureux, une logistique optimisée et un accompagnement complet des collectivités dans leurs projets d'aménagement de parcours canins agility.
+        </p>
+        <Button href="/contact" variant="white" size="lg">
+          Démarrer votre projet →
+        </Button>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        {steps.map((step) => (
+          <div class="flex items-start gap-5 bg-white/5 border border-white/10 rounded-xl p-5">
+            <div class="font-display font-extrabold text-3xl text-primary flex-shrink-0 leading-none">{step.num}</div>
+            <div>
+              <h3 class="font-display font-bold text-base text-white mb-1">{step.title}</h3>
+              <p class="text-white/60 text-sm leading-relaxed">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>

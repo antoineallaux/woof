@@ -1,0 +1,53 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+
+const benefits = [
+  { icon: '🤝', title: 'Lien social renforcé', desc: 'Un lieu de rencontre pour les propriétaires de chiens.' },
+  { icon: '🌿', title: 'Espaces verts préservés', desc: 'Des zones dédiées pour moins de déjections sauvages.' },
+  { icon: '🐕', title: 'Bien-être animal', desc: 'Activité physique et mentale complète pour les chiens.' },
+];
+---
+
+<section class="py-20 bg-bg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <div class="order-2 lg:order-1 rounded-2xl overflow-hidden">
+        <img
+          src="/assets/features-tunnel-dog.webp"
+          alt="Propriétaire et son chien dans un parc d'agility canine municipal"
+          class="w-full h-80 lg:h-96 object-cover rounded-2xl"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="order-1 lg:order-2">
+        <div class="mb-8">
+          <SectionHeader
+            label="Guide pour les élus"
+            title="Pourquoi installer un parcours canin agility dans votre commune ?"
+            subtitle="Avec plus de 7 millions de chiens en France, offrir des espaces adaptés devient essentiel. Un parcours d'agility valorise vos espaces verts et renforce l'attractivité de votre commune."
+          />
+        </div>
+
+        <div class="flex flex-col gap-4 mb-8">
+          {benefits.map((b) => (
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-xl flex-shrink-0" aria-hidden="true">{b.icon}</div>
+              <div>
+                <h3 class="font-display font-bold text-base text-text">{b.title}</h3>
+                <p class="text-muted text-sm mt-0.5">{b.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <Button href="/agility" variant="primary" size="lg">
+          En savoir plus sur l'agility →
+        </Button>
+      </div>
+
+    </div>
+  </div>
+</section>

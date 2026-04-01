@@ -1,0 +1,51 @@
+---
+import Button from '../ui/Button.astro';
+
+const steps = [
+  { icon: '💬', title: 'Conseils personnalisés', desc: 'Nos experts analysent vos besoins et vous orientent vers les meilleures solutions.' },
+  { icon: '📐', title: 'Plans sur-mesure', desc: 'Conception de plans adaptés à votre espace et à vos contraintes techniques.' },
+  { icon: '🎨', title: 'Visuels & rendus 3D', desc: 'Visualisez votre projet avant réalisation grâce à nos rendus photoréalistes.' },
+  { icon: '📅', title: 'Planification', desc: 'Organisation et coordination de toutes les étapes de votre projet.' },
+  { icon: '🔧', title: 'Installation', desc: 'Pose professionnelle par nos équipes ou partenaires certifiés.' },
+  { icon: '⚙️', title: 'Maintenance', desc: 'Suivi et entretien pour garantir la durabilité de vos équipements.' },
+];
+---
+
+<section class="py-20 bg-surface">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="mb-12">
+      <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">À vos côtés</p>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+        Un accompagnement personnalisé de A à Z
+      </h2>
+      <p class="text-muted text-base leading-relaxed max-w-2xl">
+        Du premier contact jusqu'à la maintenance, nos équipes vous accompagnent à chaque étape de votre projet d'aménagement canin.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+      {steps.map((step) => (
+        <div class="bg-white rounded-xl p-5 border border-primary-light">
+          <div class="text-2xl mb-3" aria-hidden="true">{step.icon}</div>
+          <h3 class="font-display font-bold text-sm text-text mb-1">{step.title}</h3>
+          <p class="text-muted text-xs leading-relaxed">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 border border-primary flex flex-col sm:flex-row items-center gap-6">
+      <div class="flex-1">
+        <p class="font-bold text-xs text-primary uppercase tracking-wider mb-1">Réseau national</p>
+        <h3 class="font-display font-bold text-lg text-text mb-2">Un accompagnement au plus près de chez vous</h3>
+        <p class="text-muted text-sm leading-relaxed">
+          Grâce à notre réseau de distributeurs répartis à travers toute la France, nous sommes en mesure de vous accompagner localement.
+        </p>
+      </div>
+      <Button href="/contact" variant="primary" size="md" class="flex-shrink-0">
+        Trouver mon interlocuteur →
+      </Button>
+    </div>
+
+  </div>
+</section>
