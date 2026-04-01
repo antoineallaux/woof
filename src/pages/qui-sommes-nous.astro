@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTAFinal from '../components/sections/CTAFinal.astro';
+
+const stats = [
+  { num: '500+', label: 'Communes équipées' },
+  { num: '20+', label: "Ans d'expérience" },
+  { num: '5 ans', label: 'Garantie sur gamme' },
+];
+---
+
+<Layout
+  title="Qui sommes-nous — Woof! par Herkules Fitness | Leader Européen"
+  description="Woof! est une marque de Herkules Fitness, leader européen des équipements de sport en extérieur depuis plus de 20 ans. 500+ communes équipées en Europe."
+>
+  <section class="py-16 bg-bg">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Notre histoire</p>
+      <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-text mb-8 leading-tight">
+        La puissance d'un leader européen au service de l'agility canine
+      </h1>
+
+      <div class="prose prose-lg prose-headings:font-display prose-headings:font-bold prose-a:text-primary max-w-none mb-16">
+        <p>
+          <strong>Woof!</strong> est la marque d'équipements d'agility canine de <strong>Herkules Fitness</strong>,
+          le leader européen des équipements de sport et de loisirs en extérieur pour collectivités.
+          Fondée il y a plus de 20 ans, Herkules Fitness a équipé plus de <strong>500 communes en Europe</strong>
+          avec des équipements de qualité professionnelle.
+        </p>
+        <h2>Notre expertise industrielle</h2>
+        <p>
+          Notre savoir-faire dans la fabrication d'équipements extérieurs durables nous a naturellement conduits
+          vers le marché de l'agility canine. Nous appliquons les mêmes exigences industrielles à nos équipements
+          Woof! : acier galvanisé thermolaqué, certification EN 16630, tests de résistance aux intempéries et au vandalisme.
+        </p>
+        <h2>Notre engagement qualité</h2>
+        <p>
+          Tous nos équipements sont fabriqués en Europe et bénéficient d'une garantie de 5 ans.
+          Notre SAV est basé en France, et les pièces détachées sont disponibles pendant 10 ans minimum.
+          Nous accompagnons chaque collectivité de la conception à la maintenance.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-6">
+        {stats.map((stat) => (
+          <div class="bg-surface rounded-2xl p-6 text-center border border-primary-light">
+            <div class="font-display font-extrabold text-4xl text-primary mb-2">{stat.num}</div>
+            <div class="text-muted text-sm font-semibold">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CTAFinal />
+</Layout>

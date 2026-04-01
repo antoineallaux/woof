@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Demandez un Devis Gratuit — Parcours Canin Agility | Woof"
+  description="Contactez Woof! pour un devis gratuit personnalisé sous 48h. Parcours canin agility pour collectivités. Tél : +33 1 84 60 23 30"
+>
+  <section class="py-16 bg-bg">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+        <!-- Form -->
+        <div>
+          <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Contact</p>
+          <h1 class="font-display font-extrabold text-3xl sm:text-4xl text-text mb-4">
+            Demandez un devis gratuit
+          </h1>
+          <p class="text-muted mb-8">Réponse garantie sous 48h. Devis personnalisé, sans engagement.</p>
+
+          <form class="flex flex-col gap-5" name="contact" method="POST" novalidate>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-bold text-text block mb-1.5" for="prenom">Prénom *</label>
+                <input
+                  id="prenom" name="prenom" type="text" required autocomplete="given-name"
+                  placeholder="Jean"
+                  class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                />
+              </div>
+              <div>
+                <label class="text-sm font-bold text-text block mb-1.5" for="nom">Nom *</label>
+                <input
+                  id="nom" name="nom" type="text" required autocomplete="family-name"
+                  placeholder="Dupont"
+                  class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                />
+              </div>
+            </div>
+            <div>
+              <label class="text-sm font-bold text-text block mb-1.5" for="email">Email *</label>
+              <input
+                id="email" name="email" type="email" required autocomplete="email"
+                placeholder="jean.dupont@mairie.fr"
+                class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+              />
+            </div>
+            <div>
+              <label class="text-sm font-bold text-text block mb-1.5" for="commune">Commune / Organisme *</label>
+              <input
+                id="commune" name="commune" type="text" required
+                placeholder="Mairie de..."
+                class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+              />
+            </div>
+            <div>
+              <label class="text-sm font-bold text-text block mb-1.5" for="telephone">Téléphone</label>
+              <input
+                id="telephone" name="telephone" type="tel" autocomplete="tel"
+                placeholder="01 23 45 67 89"
+                class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+              />
+            </div>
+            <div>
+              <label class="text-sm font-bold text-text block mb-1.5" for="message">Votre projet *</label>
+              <textarea
+                id="message" name="message" required rows={4}
+                placeholder="Décrivez votre projet : surface disponible, budget estimé, nombre d'obstacles souhaités..."
+                class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl transition-colors text-base"
+            >
+              Envoyer ma demande de devis →
+            </button>
+            <p class="text-xs text-muted text-center">
+              Réponse garantie sous 48h. Vos données ne sont jamais revendues.
+            </p>
+          </form>
+        </div>
+
+        <!-- Contact info -->
+        <div class="lg:pt-16">
+          <div class="bg-surface rounded-2xl p-8 border border-primary-light mb-6">
+            <h2 class="font-display font-bold text-lg text-text mb-6">Nos coordonnées</h2>
+            <div class="flex flex-col gap-4">
+              <div class="flex items-start gap-3">
+                <span class="text-xl mt-0.5" aria-hidden="true">📍</span>
+                <div>
+                  <p class="font-bold text-sm text-text">Adresse</p>
+                  <p class="text-muted text-sm">Ile du Platais<br />78670 Villennes Sur Seine</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-xl mt-0.5" aria-hidden="true">📞</span>
+                <div>
+                  <p class="font-bold text-sm text-text">Téléphone</p>
+                  <a href="tel:+33184602330" class="text-primary font-semibold text-sm hover:text-primary-dark transition-colors">
+                    +33 1 84 60 23 30
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-primary-darker rounded-2xl p-6 text-white">
+            <ul class="flex flex-col gap-2">
+              {[
+                'Devis gratuit sous 48h',
+                'Accompagnement marchés publics',
+                "Plans d'implantation offerts",
+                'Installation par équipes certifiées',
+              ].map((item) => (
+                <li class="flex items-center gap-2 font-bold text-sm">
+                  <span class="text-primary" aria-hidden="true">✓</span> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

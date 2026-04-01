@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FAQSection from '../components/sections/FAQSection.astro';
+import CTAFinal from '../components/sections/CTAFinal.astro';
+
+const agilityFaqs = [
+  {
+    q: "Qu'est-ce que l'agility canine ?",
+    a: "L'agility canine est un sport qui consiste à guider son chien sur un parcours d'obstacles dans un temps limité. Née en Grande-Bretagne en 1978, cette discipline développe la complicité entre le chien et son maître, améliore l'obéissance, l'agilité et le bien-être mental de l'animal. Elle est pratiquée aussi bien en compétition qu'en loisir dans les parcs publics.",
+  },
+  {
+    q: "À partir de quel âge un chien peut-il pratiquer l'agility ?",
+    a: "Il est recommandé d'attendre que le chien ait au moins 12 mois, et idéalement 18 mois pour les grandes races, avant de commencer l'agility avec des sauts. Les articulations d'un chiot ne sont pas encore consolidées et les exercices d'impact répété peuvent provoquer des lésions durables. Pour les exercices au sol (tunnels, slalom lent), on peut commencer dès 6-8 mois.",
+  },
+  {
+    q: "L'agility est-elle adaptée à tous les chiens ?",
+    a: "L'agility convient à la grande majorité des chiens, quelle que soit leur race ou leur taille. Les équipements Woof! sont disponibles en version petits chiens (barres à hauteur réduite) et grands chiens. Même les chiens âgés peuvent pratiquer une forme douce d'agility, adaptée à leurs capacités physiques. Seuls les chiens ayant des contre-indications médicales doivent consulter un vétérinaire avant de commencer.",
+  },
+];
+
+const benefits = [
+  { icon: '🧠', title: 'Bien-être mental', desc: "L'agility stimule les capacités cognitives du chien et renforce sa confiance en lui grâce à la résolution de problèmes et à la mémorisation des enchaînements." },
+  { icon: '💪', title: 'Condition physique', desc: "Un parcours d'agility travaille l'endurance, la coordination et la souplesse du chien. Une session de 20 minutes équivaut à plusieurs kilomètres de marche." },
+  { icon: '❤️', title: 'Lien maître-chien', desc: "La pratique de l'agility renforce considérablement la communication et la confiance mutuelle entre le chien et son propriétaire, base de toute éducation réussie." },
+];
+---
+
+<Layout
+  title="L'Agility Canine — Guide Complet pour Collectivités | Woof"
+  description="Tout savoir sur l'agility canine : bienfaits, réglementation, équipements, pratique. Guide complet pour les communes souhaitant installer un parcours agility."
+>
+  <section class="py-16 bg-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-16">
+        <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Guide complet</p>
+        <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-text mb-6 leading-tight">
+          L'agility canine en collectivité
+        </h1>
+        <p class="text-muted text-lg leading-relaxed">
+          L'agility canine est bien plus qu'un simple loisir : c'est un vecteur de lien social, de bien-être animal et d'attractivité pour votre commune.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        {benefits.map((item) => (
+          <div class="bg-surface rounded-2xl p-6 border border-primary-light">
+            <div class="text-3xl mb-4" aria-hidden="true">{item.icon}</div>
+            <h2 class="font-display font-bold text-lg text-text mb-2">{item.title}</h2>
+            <p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FAQSection faqs={agilityFaqs} />
+  <CTAFinal />
+</Layout>
