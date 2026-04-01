@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import Button from '../components/ui/Button.astro';
+import CTAFinal from '../components/sections/CTAFinal.astro';
+
+const products = await getCollection('products');
+
+const categories = [
+  { id: 'all', label: 'Tous les produits' },
+  { id: 'saut', label: 'Saut' },
+  { id: 'tunnel', label: 'Tunnels' },
+  { id: 'contact', label: 'Contact & Équilibre' },
+  { id: 'plateforme', label: 'Plateformes' },
+];
+---
+
+<Layout
+  title="Nos Produits — Équipements d'Agility Canin | Woof"
+  description="Découvrez toute la gamme d'équipements d'agility canine Woof! pour collectivités : haies de saut, tunnels, passerelles, balances. Certifiés EN 16630, garantie 5 ans."
+>
+  <section class="py-16 bg-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="mb-10">
+        <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Notre gamme</p>
+        <h1 class="font-display font-extrabold text-4xl text-text mb-4">
+          Équipements d'agility canine pour collectivités
+        </h1>
+        <p class="text-muted text-base max-w-2xl">
+          Tous nos équipements sont fabriqués en Europe, certifiés EN 16630 et garantis 5 ans.
+          Chaque obstacle est pensé pour un usage intensif en espace public.
+        </p>
+      </div>
+
+      <!-- Category filters -->
+      <div class="flex flex-wrap gap-2 mb-10" id="filters" role="group" aria-label="Filtrer par catégorie">
+        {categories.map((cat) => (
+          <button
+            class:list={[
+              'px-4 py-2 rounded-full text-sm font-bold border transition-colors filter-btn',
+              cat.id === 'all'
+                ? 'bg-primary text-white border-primary active'
+                : 'bg-white text-text border-primary-light hover:border-primary hover:text-primary',
+            ]}
+            data-category={cat.id}
+            aria-pressed={cat.id === 'all' ? 'true' : 'false'}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Products grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">
+        {products.map((product) => (
+          <article
+            class="bg-white rounded-2xl overflow-hidden border border-primary-light hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+            data-category={product.data.category}
+            id={product.data.slug}
+          >
+            <div class="aspect-[4/3] overflow-hidden bg-surface">
+              <img
+                src={product.data.image}
+                alt={product.data.imageAlt}
+                class="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-6">
+              <span class="text-xs font-bold text-primary uppercase tracking-wider">{product.data.category}</span>
+              <h2 class="font-display font-bold text-lg text-text mt-1 mb-2">{product.data.name}</h2>
+              <p class="text-muted text-sm leading-relaxed mb-4">{product.data.description}</p>
+              <div class="flex flex-wrap gap-1 mb-4">
+                {product.data.features.slice(0, 3).map((f: string) => (
+                  <span class="text-xs font-semibold bg-surface text-primary-dark px-2 py-1 rounded-full">{f}</span>
+                ))}
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-muted">Réf. {product.data.ref}</span>
+                <Button href="/contact" variant="primary" size="sm">Demander un devis</Button>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <CTAFinal />
+</Layout>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('#products-grid [data-category]');
+
+  btns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.category!;
+
+      // Update button states
+      btns.forEach((b) => {
+        const isActive = b === btn;
+        b.classList.toggle('bg-primary', isActive);
+        b.classList.toggle('text-white', isActive);
+        b.classList.toggle('border-primary', isActive);
+        b.classList.toggle('bg-white', !isActive);
+        b.classList.toggle('text-text', !isActive);
+        b.classList.toggle('border-primary-light', !isActive);
+        b.setAttribute('aria-pressed', String(isActive));
+      });
+
+      // Filter cards
+      cards.forEach((card) => {
+        const show = cat === 'all' || card.dataset.category === cat;
+        (card as HTMLElement).style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>
