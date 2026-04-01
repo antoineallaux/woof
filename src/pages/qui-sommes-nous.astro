@@ -268,8 +268,16 @@ import Badge from '../components/ui/Badge.astro';
   </section>
 
   <!-- ===== SECTION 7 : CTA FINAL PERSONNALISÉ ===== -->
-  <section class="py-20 bg-primary">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+  <section class="relative py-20 overflow-hidden">
+    <img
+      src="https://www.herkules-fitness.com/wp-content/uploads/2026/04/38-MaitriserPasserelle.jpg"
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-primary/85"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mb-4">
         Travaillons ensemble
       </h2>
