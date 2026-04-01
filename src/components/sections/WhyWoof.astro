@@ -1,0 +1,66 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+
+const features = [
+  {
+    icon: '🛡️',
+    title: 'Durabilité Extrême',
+    desc: 'Acier galvanisé thermolaqué résistant aux intempéries, à la corrosion et au vandalisme. Conçu pour un usage intensif en milieu collectif.',
+  },
+  {
+    icon: '✅',
+    title: 'Sécurité Certifiée',
+    desc: 'Conforme aux normes européennes EN 16630. Coins arrondis, surfaces antidérapantes et hauteurs adaptées pour la sécurité des chiens.',
+  },
+  {
+    icon: '⭐',
+    title: 'Sérénité Garantie',
+    desc: 'Garantie 5 ans sur toute la gamme. SAV basé en France, pièces détachées disponibles pendant 10 ans.',
+  },
+];
+
+const advantages = [
+  'Fabrication européenne certifiée',
+  'Livraison et installation sur site',
+  "Accompagnement marchés publics",
+  "Plans d'implantation personnalisés",
+  'Formation à la maintenance',
+  'Devis gratuit sous 48h',
+];
+---
+
+<section class="py-20 bg-surface">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="mb-12">
+      <SectionHeader
+        label="Expertise & Qualité"
+        title="Pourquoi choisir Woof pour votre parcours canin agility ?"
+        subtitle="Depuis plus de 20 ans, Herkules Fitness conçoit des équipements de sports en extérieur pour les collectivités européennes. Woof! perpétue cette expertise dans le domaine de l'agility canine."
+      />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      {features.map((f) => (
+        <div class="bg-white rounded-2xl p-6 border border-primary-light">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-2xl mb-4" aria-hidden="true">{f.icon}</div>
+          <h3 class="font-display font-bold text-lg text-text mb-2">{f.title}</h3>
+          <p class="text-muted text-sm leading-relaxed">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 border border-primary-light">
+      <h3 class="font-display font-bold text-base text-text mb-4">Les avantages Woof pour les collectivités</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {advantages.map((adv) => (
+          <div class="flex items-center gap-2 text-sm font-semibold text-text">
+            <span class="w-5 h-5 bg-primary rounded-full flex items-center justify-center text-white text-xs flex-shrink-0" aria-hidden="true">✓</span>
+            {adv}
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
