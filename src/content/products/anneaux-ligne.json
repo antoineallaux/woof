@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG20"
+  "ref": "AG20",
+  "faq": [
+    {
+      "question": "Comment s'utilise cet obstacle à trois cerceaux ?",
+      "answer": "Le chien doit traverser les trois cerceaux successivement. La disposition en diagonale, du plus bas au plus haut, crée une difficulté croissante. C'est un excellent exercice pour travailler la fluidité et l'impulsion dans votre aire d'ébats canine, adapté aux chiens ayant déjà une petite expérience du saut."
+    },
+    {
+      "question": "Cet obstacle convient-il à tous les niveaux ?",
+      "answer": "Grâce à son premier anneau situé bas, cet obstacle agility permet une initiation en douceur. Les chiens plus sportifs peuvent enchaîner la série complète jusqu'au cerceau le plus haut. Cette progressivité rend l'équipement pertinent pour tous les niveaux d'utilisateurs fréquentant votre parc canin collectivité ou camping."
+    },
+    {
+      "question": "Quel bénéfice physique pour le chien ?",
+      "answer": "Traverser les Anneaux ligne demande au chien de viser juste et de gérer sa trajectoire en l'air. Cela développe la proprioception et la coordination motrice. C'est un exercice plus complexe qu'une simple haie, enrichissant l'offre sportive de votre parcours canin agility pour les clubs et propriétaires passionnés."
+    },
+    {
+      "question": "Peut-on choisir la couleur des cerceaux ?",
+      "answer": "Oui, la personnalisation des couleurs est possible. Choisir des teintes contrastées pour les Anneaux ligne aide le chien à mieux percevoir l'obstacle dans l'espace. Cela permet aussi d'harmoniser le design de l'agrès avec le reste du mobilier urbain de votre parc pour chien ou l'identité de votre ville."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/j4q56achca611n5fq94l6/AG20-Anneaux-Ligne.pdf?rlkey=pn6hjdf193e7n7w2je31ezcea&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/2k7w09v5776ho6m16ls0t/AG-20.dwg?rlkey=51qfnm2dnu9flknci1jh455fs&dl=0"
 }

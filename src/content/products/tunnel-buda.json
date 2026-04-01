@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG24"
+  "ref": "AG24",
+  "faq": [
+    {
+      "question": "Pourquoi choisir ce design de niche pour un tunnel ?",
+      "answer": "Ce design rend l'équipement moins intimidant et plus familier qu'un tube industriel standard. Il thématise votre parc canin municipal, le rendant plus chaleureux pour les familles. C'est un excellent moyen d'encourager les propriétaires de chiens débutants à s'essayer à l'agility sur votre parcours sportif public."
+    },
+    {
+      "question": "En quelle matière est faite la façade ?",
+      "answer": "La façade est fabriquée en PEHD (Polyéthylène Haute Densité), un matériau imputrescible qui ne décolore pas. Le tunnel lui-même est en PVC renforcé ou structuré. Cet ensemble constitue un obstacle agility conçu pour durer des années dans un parc pour chien soumis aux intempéries et au vandalisme."
+    },
+    {
+      "question": "Le tunnel est-il accessible aux grands chiens ?",
+      "answer": "Le diamètre du tunnel est standardisé (généralement 60 cm) pour permettre le passage confortable de la majorité des races, du petit Terrier au grand Berger. La façade Niche est dimensionnée pour ne pas gêner l'entrée, garantissant une fluidité de passage optimale sur votre terrain d'agility public."
+    },
+    {
+      "question": "L'entretien est-il facile pour la commune ?",
+      "answer": "L'entretien est très simple. La façade en PEHD et l'intérieur du tunnel lisse se nettoient facilement au jet d'eau haute pression si nécessaire. Il n'y a pas de recoins inaccessibles. C'est un atout pour les services techniques municipaux chargés de la propreté du mobilier urbain canin."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/s6452cw1evtskxl640i15/AG24-Tunnel-Buda.pdf?rlkey=ngu6nnya4fg5wp6mjb22m8kq1&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/0r4rvgfc970zc599bwcft/AG-24.dwg?rlkey=83n98zlhr2jdox2s6kuxuoyb0&dl=0"
 }

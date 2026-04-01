@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG05"
+  "ref": "AG05",
+  "faq": [
+    {
+      "question": "En quoi consiste l'exercice de la passerelle agility ?",
+      "answer": "Le chien doit emprunter la rampe de montée, traverser la partie horizontale en hauteur sans se précipiter, puis redescendre jusqu'au sol. C'est un exercice complet qui sollicite la proprioception et l'obéissance, parfait pour canaliser l'énergie des animaux dans votre aire d'ébats canine."
+    },
+    {
+      "question": "Le revêtement est-il sûr pour les coussinets ?",
+      "answer": "La sécurité est notre priorité. Toute la surface de marche est recouverte d'un granulé de caoutchouc ou d'une texture antidérapante haute performance. Cela garantit une adhérence maximale pour le chien, même en cas de pluie ou d'humidité matinale sur le parcours sportif canin."
+    },
+    {
+      "question": "La passerelle bouge-t-elle quand un gros chien passe dessus ?",
+      "answer": "Absolument pas. Conçue pour les collectivités, cette structure est massive et doit être scellée au sol (béton). Elle ne vibre pas et ne oscille pas, même lors du passage rapide d'un chien de grand gabarit, assurant une expérience rassurante pour l'animal et son propriétaire."
+    },
+    {
+      "question": "Peut-on adapter les couleurs de l'obstacle ?",
+      "answer": "Oui, en tant que fabricant pour les collectivités, nous pouvons personnaliser les coloris de la structure métallique et des zones de contact. Cela vous permet d'harmoniser votre parcours agility avec l'identité visuelle de votre ville ou la charte graphique de votre camping."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/h0f8m641up0npdv7f38na/AG05-A-Frame.pdf?rlkey=633xa7hddpys7utxjm7vdp2wu&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/wdzcr3t4s022w2cus98rz/AG-05.dwg?rlkey=8btt2wj3sueezvpzm7rcvh38v&dl=0"
 }

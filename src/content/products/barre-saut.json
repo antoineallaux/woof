@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG17"
+  "ref": "AG17",
+  "faq": [
+    {
+      "question": "Pourquoi choisir une barre réglable pour un parc canin ?",
+      "answer": "La Barre de Saut 5 Niveaux permet d'accueillir tous les usagers, du petit chien débutant au chien sportif confirmé. Cette modularité rend votre parcours canin collectivité beaucoup plus attractif, car chaque propriétaire peut adapter la difficulté de l'obstacle aux capacités de son animal, favorisant une utilisation inclusive."
+    },
+    {
+      "question": "Le système de réglage est-il solide pour un usage public ?",
+      "answer": "Oui, le mécanisme de changement de hauteur est conçu pour résister à une utilisation intensive en milieu urbain. Il est simple, intuitif et sécurisé pour éviter tout pincement de doigt. Contrairement aux équipements de club fragiles, cette barre de saut pour parcours canin agility est pensée \"anti-vandalisme\" et durabilité."
+    },
+    {
+      "question": "Que se passe-t-il si le chien heurte la barre ?",
+      "answer": "La sécurité est primordiale. La barre est conçue pour être suffisamment légère pour ne pas blesser l'animal en cas d'impact, mais attachée de manière sécurisée pour ne pas être volée. Sur ce modèle pour parc canin collectivité, nous privilégions des matériaux absorbant les chocs et des formes arrondies sans arêtes vives."
+    },
+    {
+      "question": "Ce matériel résiste-t-il à la corrosion ?",
+      "answer": "Fabriquée en acier galvanisé thermolaqué, la structure de la Barre de Saut 3 Niveaux est totalement insensible à la rouille et aux intempéries. C'est un point crucial pour les mairies, car cela garantit que le mécanisme de réglage ne grippera pas avec le temps, même après des années d'exposition à la pluie."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/cg540p4kabcdcvhfylavr/AG17-Barres-de-Saut-R-glables.pdf?rlkey=lqp1vueshhh8xgd21iuohabwr&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/zktjhv33lri81jobrzbpv/AG-17.dwg?rlkey=5r48p2wrlobxor5imbir0cfco&dl=0"
 }

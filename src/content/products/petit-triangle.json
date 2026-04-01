@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG08"
+  "ref": "AG08",
+  "faq": [
+    {
+      "question": "Pourquoi choisir une forme triangulaire pour ce module de parc canin ?",
+      "answer": "La forme triangulaire change des podiums carrés classiques et offre un challenge différent pour le chien. Elle oblige l'animal à être plus précis dans le placement de ses pattes, renforçant ainsi la proprioception et la concentration au sein de votre aire d'ébats canine municipale."
+    },
+    {
+      "question": "Quels chiens peuvent utiliser cette plateforme triangle agility ?",
+      "answer": "Ce module est particulièrement adapté aux chiens de petite et moyenne taille ainsi qu'aux chiots. Sa surface compacte est parfaite pour l'apprentissage des ordres de base comme le assis sans intimider l'animal, rendant votre parcours canin collectivité accessible aux débutants."
+    },
+    {
+      "question": "Ce mobilier résiste-t-il bien à la pluie et au soleil ?",
+      "answer": "Fabriquée en acier galvanisé thermolaqué, la Petite Plateforme de dressage triangle est conçue pour rester en extérieur toute l'année. Elle ne rouille pas et résiste aux UV, ce qui en fait un équipement durable pour les parcs pour chiens gérés par les collectivités."
+    },
+    {
+      "question": "Comment fixer ce petit module au sol ?",
+      "answer": "Pour éviter le vol et assurer la stabilité lors des sauts, cet équipement doit être scellé au sol sur des plots en béton. Une fixation rigide est indispensable pour tout mobilier urbain canin afin de prévenir les accidents et garantir la pérennité de l'installation."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/3of9wrbubwz4zcogenqrf/AG08-Petit-triangle.pdf?rlkey=oj9vkdhhxmgeeznebm0yyffzi&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/0d7pbzqp7h2jyxlrhd698/AG-08.dwg?rlkey=6xume5zfgj5t8gkdjlizoa5we&dl=0"
 }

@@ -25,6 +25,9 @@ const products = defineCollection({
     imageAlt: z.string(),
     features: z.array(z.string()),
     ref: z.string(),
+    faq: z.array(z.object({ question: z.string(), answer: z.string() })).default([]),
+    technicalSheet: z.string().nullable().optional(),
+    dwgFile: z.string().nullable().optional(),
   }),
 });
 

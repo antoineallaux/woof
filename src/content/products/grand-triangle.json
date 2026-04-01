@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG09"
+  "ref": "AG09",
+  "faq": [
+    {
+      "question": "Quelle est la différence avec le petit modèle triangle ?",
+      "answer": "Ce grand modèle offre une surface d'évolution bien plus importante. Elle est parfaitement adaptée aux races géantes ou pour des exercices impliquant deux chiens simultanément. C'est un atout polyvalent pour diversifier les activités au sein de votre parc pour chien municipal et satisfaire tous les propriétaires."
+    },
+    {
+      "question": "Ce matériel résiste-t-il aux chiens lourds ?",
+      "answer": "Absolument. La structure en acier renforcé est calculée pour supporter le poids de plusieurs grands chiens sans fléchir. Cette solidité est indispensable pour un obstacle agility installé en libre accès, garantissant la sécurité des animaux et la pérennité de l'investissement pour la mairie ou le camping."
+    },
+    {
+      "question": "Le plateau est-il glissant en hiver ou sous la pluie ?",
+      "answer": "Non, la sécurité est une constante sur nos produits. Le plateau bénéficie d'un revêtement antidérapant très efficace, même en conditions humides ou givrées. Les chiens peuvent sauter et se réceptionner en toute confiance sur cet équipement de parc canin, réduisant considérablement les risques de blessures accidentelles."
+    },
+    {
+      "question": "Quel est l'intérêt pour l'éducation canine ?",
+      "answer": "Ce module sert de table de pause ou de zone de calme. Il est idéal pour apprendre au chien à rester immobile à distance (le pas bouger) malgré les distractions du parc public. C'est un outil pédagogique précieux pour les clubs canins utilisant les infrastructures municipales pour leurs cours."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/lhw8p13ctpp3oap9sby0u/AG09-Grand-triangle.pdf?rlkey=qz2toh40ssn4uincx8gzabeae&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/lh3y1z39djrou6btim8aj/AG-09.dwg?rlkey=x1u7m4dabq9w4lwsn672dnpwq&dl=0"
 }

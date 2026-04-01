@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG36"
+  "ref": "AG36",
+  "faq": [
+    {
+      "question": "Pourquoi choisir le modèle Dog Park 2 de grande taille ?",
+      "answer": "Ce modèle se distingue par son envergure et sa richesse d'activités. Il offre une expérience immersive unique dans un parc canin collectivité. Avec ses multiples niveaux et ses tunnels intégrés, c'est un véritable terrain de jeu tout-en-un qui garantit des heures d'amusement et de dépense énergétique pour les visiteurs."
+    },
+    {
+      "question": "Combien de chiens peuvent l'utiliser simultanément ?",
+      "answer": "Grâce à sa surface généreuse, le Dog Park 2 peut accueillir un groupe de chiens en même temps. C'est l'équipement idéal pour favoriser la socialisation dans un parc pour chien très fréquenté. Les zones de circulation larges permettent aux animaux de se croiser ou de jouer ensemble sans agressivité."
+    },
+    {
+      "question": "Quels exercices permet cet obstacle agility complet ?",
+      "answer": "C'est un obstacle agility ultra-polyvalent. Le chien travaille la montée d'escalier, la traversée de tunnel, l'équilibre sur les plateformes et la descente de rampe. Cette variété sollicite tous les groupes musculaires et l'intellect de l'animal, faisant de votre parcours canin un lieu d'entraînement physique et mental optimal."
+    },
+    {
+      "question": "Est-ce assez résistant pour un parc public ?",
+      "answer": "Absolument. Conçu pour l'agility collectivités, le Dog Park 2 utilise des matériaux robustes comme l'acier galvanisé et le PEHD. Il résiste aux griffures, aux chocs et aux intempéries. C'est un investissement durable, capable de supporter l'usage intensif quotidien d'un parc public urbain ouvert toute l'année."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": "https://www.dropbox.com/scl/fi/xy0mz9s1extw0bx8m3o88/AG-36.dwg?rlkey=q53r69axpgrfg89n1ek8wsw8r&dl=0"
 }

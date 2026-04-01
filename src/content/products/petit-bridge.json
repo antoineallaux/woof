@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG01"
+  "ref": "AG01",
+  "faq": [
+    {
+      "question": "À quels types de chiens s'adresse ce petit pont pour aire canine ?",
+      "answer": "Ce module est spécifiquement conçu pour les chiens débutants, les chiots ou les races de petite taille. Moins impressionnant qu'une grande passerelle, ce Petit Bridge permet d'apprendre le franchissement en douceur dans votre parc canin municipal, rendant l'activité accessible à tous les usagers, même les moins expérimentés."
+    },
+    {
+      "question": "La petite palissade convient-il à toutes les races de chiens ?",
+      "answer": "Oui, la petite palissade est conçu pour accueillir toutes les races de chiens dans votre parc canin. Sa hauteur réduite le rend particulièrement adapté aux chiens débutants, aux chiots et aux petites races."
+    },
+    {
+      "question": "Quel est l'intérêt éducatif de cet agrès pour les chiens ?",
+      "answer": "Ce module de montée et descente développe la proprioception (conscience du corps) et la confiance du chien. En franchissant l'obstacle, l'animal apprend à gérer son équilibre et à se concentrer, renforçant ainsi sa complicité avec son maître au sein de votre aire d'ébats pour chiens."
+    },
+    {
+      "question": "Cet équipement nécessite-t-il un entretien particulier ?",
+      "answer": "Non, l'entretien est minimal. Une simple inspection visuelle régulière et un nettoyage à l'eau suffisent pour maintenir cet obstacle agility en parfait état. Sa conception robuste est pensée pour minimiser les interventions des services techniques municipaux sur le long terme."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/xxynoeo5ieqkks4qcki58/AG01-Petit-Bridge.pdf?rlkey=wit0cuj45kjuzuui0w3lxto2q&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/5ae9snui0lahbcjhqdv8z/AG-01.dwg?rlkey=wqmfvkh2wrsvyzgm5lvgvhtvw&dl=0"
 }

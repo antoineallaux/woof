@@ -13,5 +13,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG28/B"
+  "ref": "AG28/B",
+  "faq": [
+    {
+      "question": "Qu'est-ce qui distingue le Tunnel Figiel ?",
+      "answer": "Le Tunnel Figiel se distingue par son design original et ses dimensions optimisées. Un tunnel performant et esthétique pour votre parc canin."
+    },
+    {
+      "question": "Pourquoi choisir ce tunnel vert pour notre parc ?",
+      "answer": "Le vert du Tunnel Milou s'intègre harmonieusement dans les espaces verts naturels. Contrairement aux couleurs très vives, ce design offre une esthétique douce tout en restant ludique. C'est un choix parfait pour un parcours canin collectivité souhaitant allier plaisir du jeu et respect paysager du parc public."
+    },
+    {
+      "question": "Ce tunnel résiste-t-il bien aux intempéries ?",
+      "answer": "Les façades sont en PEHD (Polyéthylène Haute Densité), un matériau imputrescible idéal pour le mobilier urbain. Il résiste aux UV, à la pluie et aux chocs. Votre obstacle agility conservera sa belle couleur verte année après année, sans entretien particulier pour les services techniques de la mairie."
+    },
+    {
+      "question": "Les gros chiens peuvent-ils passer dedans ?",
+      "answer": "Le diamètre du corps du tunnel est standardisé pour laisser passer confortablement la majorité des races, du petit chien au grand gabarit. La découpe de la façade du Tunnel Milou est optimisée pour ne pas gêner l'entrée, garantissant une fluidité parfaite sur votre terrain d'agility public."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": null
 }

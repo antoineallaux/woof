@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG21"
+  "ref": "AG21",
+  "faq": [
+    {
+      "question": "Quel est l'objectif de cet obstacle à trois cercles ?",
+      "answer": "L'objectif est d'inciter le chien à traverser les anneaux en sautant. Les trois hauteurs distinctes permettent une progression adaptée au niveau de l'animal. Cet obstacle agility développe la visée et la confiance, rendant votre parcours canin collectivité attractif pour les maîtres débutants comme confirmés souhaitant s'amuser."
+    },
+    {
+      "question": "Les gravures de pattes sont-elles durables ?",
+      "answer": "Oui, sur le modèle 3 Cercles, les gravures de pattes de chien sont usinées dans la masse du panneau, révélant la couleur interne. Ce design thématique est inaltérable et renforce l'identité de votre parc pour chien, créant un environnement ludique et soigné immédiatement identifiable par les usagers."
+    },
+    {
+      "question": "Quel est l'intérêt pour l'éducation du chien ?",
+      "answer": "Sauter à travers un cercle demande plus de concentration que sauter une haie. Le chien doit apprendre à rassembler ses pattes. C'est un excellent exercice de proprioception qui valorise l'offre de votre aire d'ébats canine auprès des clubs d'éducation et des propriétaires soucieux du développement de leur animal."
+    },
+    {
+      "question": "Quel entretien demande le PEHD en extérieur ?",
+      "answer": "L'entretien est quasi nul. Le PEHD ne nécessite ni peinture, ni lasure, ni traitement antirouille. Les graffitis s'enlèvent facilement avec un solvant adapté et la pluie suffit souvent à nettoyer les panneaux. C'est la solution idéale pour les services techniques gérant le mobilier urbain d'un parc canin."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/afw61pzr2rxze5mt5xgzq/AG21-3-Cercles.pdf?rlkey=ta9vjqwcks65obtafe716m1b7&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/kci85q6rf7bnefys6pnl6/AG-21.dwg?rlkey=wonj2bq4uthw9nnioi11ea4i3&dl=0"
 }

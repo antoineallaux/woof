@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG28"
+  "ref": "AG28",
+  "faq": [
+    {
+      "question": "La couleur rouge résiste-t-elle au soleil ?",
+      "answer": "Oui, les façades sont fabriquées en PEHD (Polyéthylène Haute Densité) teinté dans la masse. Ce matériau est traité contre les UV, ce qui garantit que le rouge vif du Tunnel Rex ne ternira pas avec le temps. Votre parc canin municipal conservera son aspect neuf et attractif durablement."
+    },
+    {
+      "question": "Les grands chiens peuvent-ils passer dans le Tunnel Rex ?",
+      "answer": "Le diamètre du tunnel est standardisé pour permettre le passage fluide de la majorité des races canines, du bouledogue au berger. La découpe de la façade en forme de chien est étudiée pour ne pas gêner l'entrée, assurant une accessibilité optimale pour tous les usagers de votre aire canine."
+    },
+    {
+      "question": "Comment fixer ce tunnel au sol ?",
+      "answer": "Pour garantir la sécurité et la stabilité face au vent, le Tunnel Rex doit être scellé au sol. Les façades reposent sur des supports qui doivent être fixés dans des massifs en béton. Une installation rigide est impérative pour cet équipement de mobilier urbain canin en accès libre."
+    },
+    {
+      "question": "Cet équipement demande-t-il beaucoup d'entretien ?",
+      "answer": "L'entretien est très facile. La surface lisse du PEHD et du tunnel n'accroche pas la saleté. Un nettoyage occasionnel au jet d'eau suffit pour redonner son éclat au chien rouge. C'est une solution économique et pratique pour les services techniques en charge de votre parc pour chien."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/6q2zi55qyfkoqt64msthc/AG28-Tube-Rex.pdf?rlkey=fjx6siap2jjgbs13iyz2zecrl&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/3yphl85m4kv8wfqsi6i37/AG-28.dwg?rlkey=0w1ecrgz701u0bc6wxqrbkxqn&dl=0"
 }

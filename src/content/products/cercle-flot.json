@@ -13,5 +13,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG22"
+  "ref": "AG22",
+  "faq": [
+    {
+      "question": "Pourquoi choisir un cercle flottant réglable pour un parc canin ?",
+      "answer": "Le réglage de la hauteur est essentiel pour l'inclusivité. Il permet d'adapter l'obstacle agility aussi bien aux petits chiens débutants qu'aux grands sportifs. Cette flexibilité rend votre parcours canin collectivité utilisable par l'ensemble des usagers, favorisant une progression pédagogique en toute sécurité pour chaque animal."
+    },
+    {
+      "question": "Quel est l'avantage du PEHD pour cet obstacle agility ?",
+      "answer": "Le PEHD est un matériau plastique haute densité imputrescible et sans échardes. Contrairement au bois ou au métal rouillé, il garantit une sécurité optimale. Pour un parc pour chien municipal, c'est l'assurance d'un équipement durable, résistant aux UV et à l'urine, sans coût d'entretien structurel."
+    },
+    {
+      "question": "Les gravures de pattes sont-elles durables ?",
+      "answer": "Les gravures de pattes sont usinées directement dans la masse du panneau PEHD bicolore. Elles ne s'effacent pas comme de la peinture et ne s'écaillent pas. Cela confère une identité visuelle qualitative et pérenne à votre aménagement urbain, renforçant le caractère ludique de votre aire canine."
+    },
+    {
+      "question": "Le système de réglage résiste-t-il au vandalisme ?",
+      "answer": "Le mécanisme de réglage du Cercle flottant est conçu pour être simple et robuste, adapté à l'usage public intensif. Il permet de modifier la hauteur sans pièces détachables fragiles. C'est une solution technique fiable pour les mairies souhaitant installer de l'agility collectivités sans risque de casse fréquente."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/ief4tym71bk184rluhdc4/AG22-Cercle-Flot.pdf?rlkey=k8royoi9fepu3jjfmfl61peqz&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/i6a00t1nwpsv1dkby1hlz/AG-22.dwg?rlkey=u7vbyf53hti6iue73dxs63lmu&dl=0"
 }

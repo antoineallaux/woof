@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG15"
+  "ref": "AG15",
+  "faq": [
+    {
+      "question": "Les Barres Hautes sont un module de saut fixe destiné aux chiens sportifs de votre parcours canin agility. Plus hautes que le modèle standard, elles offrent un challenge physique stimulant pour les races de moyenne et grande taille. En acier galvanisé robuste, cet obstacle est conçu pour résister à l'usage intensif des parcs publics.",
+      "answer": "Cet obstacle agility est destiné aux chiens de gabarit moyen à grand (Bergers, Labradors) ayant déjà une expérience du saut. La hauteur supérieure demande une bonne impulsion et une réception contrôlée, ce qui en fait un agrès de perfectionnement idéal pour compléter votre aire d'ébats canine municipale."
+    },
+    {
+      "question": "Est-ce dangereux si le chien touche la barre fixe ?",
+      "answer": "La sécurité est une priorité. Bien que les barres soient fixes pour éviter le vandalisme et le vol de pièces détachées, leur profil tubulaire est rond et lisse pour minimiser l'impact. Ce compromis garantit la durabilité de votre mobilier urbain canin tout en assurant une pratique sûre pour l'animal."
+    },
+    {
+      "question": "Comment assurer la stabilité de cet obstacle haut ?",
+      "answer": "En raison de sa hauteur et de la force d'impulsion des grands chiens, ce module doit impérativement être scellé au sol sur des massifs en béton. Une fixation rigide est la seule option pour empêcher tout basculement et garantir la sécurité des visiteurs de votre parc pour chien public."
+    },
+    {
+      "question": "Peut-on adapter la couleur à notre charte graphique ?",
+      "answer": "Oui, Woof propose la personnalisation des coloris pour les Barres Hautes. Vous pouvez opter pour des couleurs vives pour signaler la zone sportive ou des tons neutres pour une intégration paysagère douce. Cela permet de créer un parcours canin agility unique et cohérent avec l'identité de votre ville."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/1jn3c6t89pz1da35cwvh3/AG15-Barres-Hautes.pdf?rlkey=mzias89htoaj8305am4ipluc8&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/zyx5nufivsqnlthtzoe2x/AG-15.dwg?rlkey=nwplo2xtiuojj84247vtphgvw&dl=0"
 }

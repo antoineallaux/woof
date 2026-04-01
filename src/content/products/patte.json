@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG23"
+  "ref": "AG23",
+  "faq": [
+    {
+      "question": "Pourquoi installer cet obstacle en forme de patte ?",
+      "answer": "Au-delà de sa fonction sportive, l'obstacle Patte sert de repère visuel fort. Son design ludique et coloré embellit instantanément votre aire canine. C'est un équipement signature qui incite les propriétaires à entrer dans le parc canin et qui sert souvent de décor pour les photos souvenirs des usagers."
+    },
+    {
+      "question": "Est-ce adapté aux chiens débutants ?",
+      "answer": "Oui, c'est sa vocation première. L'ouverture circulaire est située à une hauteur basse, ce qui rend le franchissement très accessible. C'est l'obstacle agility parfait pour mettre en confiance les chiots et les petits chiens qui découvrent les joies du parcours sportif canin sans appréhension du vide."
+    },
+    {
+      "question": "En quelle matière est fabriquée cette patte géante ?",
+      "answer": "Nous utilisons du PEHD (Polyéthylène Haute Densité) massif pour cet équipement. Ce matériau est imputrescible, résiste aux UV et aux intempéries. Contrairement au bois peint qui s'écaille, l'obstacle Patte conserve ses couleurs vives durablement, garantissant une esthétique impeccable pour votre parc pour chien municipal année après année."
+    },
+    {
+      "question": "Peut-on l'utiliser autrement que pour sauter ?",
+      "answer": "Tout à fait. De nombreux éducateurs utilisent l'obstacle Patte pour apprendre au chien la focalisation. C'est aussi un excellent cadre pour travailler le statique (assis ou couché) en regardant à travers le trou. Sa polyvalence en fait un atout pour les associations fréquentant votre terrain d'agility."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/zw12vfpqsezvqqbf05ts6/AG23-Patte.pdf?rlkey=cc8zegm8cefs4hwghjlxjtd3g&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/e9o3q287caexbrokku280/AG-23.dwg?rlkey=32me79q9zlb49e8pkykvwc2xz&dl=0"
 }

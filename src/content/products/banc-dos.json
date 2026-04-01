@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "BN"
+  "ref": "BN",
+  "faq": [
+    {
+      "question": "Qu'est-ce que le Banc Dos pour parc canin ?",
+      "answer": "Le Banc Dos est un banc confortable avec dossier pour les propriétaires de chiens. Il offre un espace de repos agréable dans votre parc canin."
+    },
+    {
+      "question": "Pourquoi installer un banc en forme d'os ?",
+      "answer": "Ce design thématique renforce l'identité visuelle de votre parc pour chien. Contrairement à un banc de ville classique, le Banc Dos s'intègre totalement à l'univers ludique de l'agility collectivités. Il crée une atmosphère conviviale et amusante qui plaît autant aux promeneurs qu'aux familles fréquentant l'aire canine municipale."
+    },
+    {
+      "question": "Quels matériaux pour ce banc canin ?",
+      "answer": "Fabriqué PEHD, ce banc est conçu pour l'extérieur. Il est choisi pour sa résistance au vandalisme et aux intempéries. Le Banc Dos reste impeccable malgré la pluie ou l'urine, idéal pour équiper durablement un parcours canin collectivité sans dégradation rapide."
+    },
+    {
+      "question": "L'entretien est-il contraignant pour la ville ?",
+      "answer": "Absolument pas. Le Banc Dos ne nécessite ni peinture ni traitement annuel. Sa surface non poreuse se nettoie facilement et ne craint pas les détergents. Pour les services techniques gérant le parc canin agility, c'est l'assurance d'un mobilier propre et hygiénique avec une intervention humaine réduite au minimum."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": "https://www.dropbox.com/scl/fi/r5pi7se6dhk0c9r45cmic/BN-Banc-Dos.dwg?rlkey=nev57afagq4urwirlfxtcun9j&dl=0"
 }

@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "PL"
+  "ref": "PL",
+  "faq": [
+    {
+      "question": "Pourquoi installer un porte-laisses dans le sas d'entrée ?",
+      "answer": "Installer un Porte Laisse dans le sas améliore le confort des usagers. Il permet aux propriétaires d'avoir les mains libres pour refermer la grille ou préparer leur animal. Cet accessoire évite que les laisses ne traînent au sol, contribuant à la propreté et à l'organisation de votre parc canin municipal."
+    },
+    {
+      "question": "Combien de chiens ou laisses peut-il accueillir ?",
+      "answer": "Ce modèle vertical dispose de quatre emplacements distincts. Il est conçu pour gérer le flux habituel d'une entrée de parcours canin agility. Plusieurs maîtres peuvent s'en servir simultanément pour suspendre leur matériel ou attacher brièvement leur chien le temps de s'équiper, sans gêner les autres visiteurs de l'aire."
+    },
+    {
+      "question": "Peut-on y attacher le chien directement ?",
+      "answer": "Oui, la structure du Porte Laisse est suffisamment solide pour servir de point d'attache temporaire pour un chien calme. C'est très utile si le maître doit ramasser une déjection ou s'occuper d'un second animal. Cette polyvalence sécurise les moments de transition au sein de votre aménagement d'agility collectivités."
+    },
+    {
+      "question": "Où placer cet équipement dans le parc ?",
+      "answer": "L'emplacement stratégique est à l'intérieur du sas de sécurité ou juste à l'entrée du terrain. Le Porte Laisse doit être scellé au sol sur un massif béton pour garantir sa stabilité. Une installation bien pensée fluidifie les entrées et sorties, améliorant l'expérience utilisateur de votre parcours sportif canin."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": null
 }

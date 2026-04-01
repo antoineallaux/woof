@@ -13,5 +13,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "ABII"
+  "ref": "ABII",
+  "faq": [
+    {
+      "question": "Comment fixer cet abri métallique sur un terrain agility ?",
+      "answer": "Pour une sécurité optimale dans un parc canin public, cet abri doit être scellé sur une dalle en béton. Cette fixation garantit la stabilité de la structure face aux vents violents et empêche tout déplacement ou vol, assurant ainsi la pérennité de votre investissement communal."
+    },
+    {
+      "question": "Cet abri résiste-t-il au vandalisme en zone urbaine ?",
+      "answer": "Oui, cet abris en métal est spécifiquement conçu pour les environnements publics exigeants. Sa structure en acier est extrêmement résistante aux chocs, aux graffitis et aux tentatives de dégradation, ce qui en fait le mobilier idéal pour un parcours canin agility situé en ville ou en accès libre."
+    },
+    {
+      "question": "La toiture protège-t-elle efficacement de la chaleur sur le parcours ?",
+      "answer": "La toiture de cet abri pour aire de jeux canine est étudiée pour offrir une ombre dense et protectrice. Elle permet aux maîtres et aux chiens de faire une pause au frais lors des journées ensoleillées, rendant la pratique de l'agility plus agréable et sécurisée en été."
+    },
+    {
+      "question": "Peut-on choisir la couleur de cet abri pour parcours sportif canin ?",
+      "answer": "Absolument. Nous proposons une large gamme de coloris pour la structure métallique. Vous pouvez ainsi harmoniser cet abri avec le reste du mobilier urbain de votre commune ou utiliser les couleurs de votre charte graphique pour une intégration paysagère réussie au sein du parc."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": "https://www.dropbox.com/scl/fi/qh6z5rjnduoggycp4l8eu/ABII-Abri-En-M-tal.dwg?rlkey=ihdg618lo56hy5vk1tnugu4lo&dl=0"
 }

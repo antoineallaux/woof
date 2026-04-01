@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "PI"
+  "ref": "PI",
+  "faq": [
+    {
+      "question": "Pourquoi installer un panneau d'information à l'entrée ?",
+      "answer": "Installer un Panneau info est crucial pour définir les règles du jeu dès l'arrivée. Il informe les propriétaires sur le comportement attendu (ramassage des déjections, surveillance des chiens). C'est un outil de prévention essentiel qui décharge la responsabilité de la mairie en cas d'incident sur le parcours canin collectivité."
+    },
+    {
+      "question": "Ce panneau résiste-t-il aux intempéries et au soleil ?",
+      "answer": "Oui, conçu pour l'affichage urbain permanent, le Panneau info est fabriqué en matériaux résistants aux UV et à la corrosion (aluminium, HPL ou stratifié). L'impression est protégée pour ne pas décolorer, assurant que les consignes de votre aire d'agility collectivités restent lisibles des années durant."
+    },
+    {
+      "question": "Peut-on personnaliser le texte et le logo ?",
+      "answer": "Tout à fait. Vous pouvez adapter le texte au règlement spécifique de votre commune et ajouter le logo de la ville. Une signalétique personnalisée renforce l'identité de votre parcours canin collectivité et montre l'implication de la municipalité dans le bien-être animal et la gestion des espaces publics."
+    },
+    {
+      "question": "Faut-il entretenir ce panneau régulièrement ?",
+      "answer": "L'entretien est très léger. Il suffit de nettoyer la surface une fois par an pour retirer la poussière ou la mousse. Les matériaux sont souvent traités anti-graffitis pour faciliter le nettoyage. C'est un équipement de parcours canin collectivité durable qui demande peu d'intervention des services techniques."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": null
 }

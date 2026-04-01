@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG37"
+  "ref": "AG37",
+  "faq": [
+    {
+      "question": "Pourquoi installer un labyrinthe dans un parc canin ?",
+      "answer": "Le Labyrinthe offre une alternative aux efforts physiques intenses. Il permet de travailler le calme et la réflexion au sein de votre parc canin collectivité. C'est une activité apaisante idéale pour canaliser l'énergie des chiens excités tout en leur proposant un défi ludique original, différent des sauts classiques."
+    },
+    {
+      "question": "Les parois sont-elles résistantes pour l'extérieur ?",
+      "answer": "Fabriquées en panneaux de PEHD robustes et montants en acier, les parois du Labyrinthe résistent parfaitement aux intempéries et aux UV. Cet obstacle agility est conçu pour durer dans un parc pour chien soumis aux aléas climatiques. Il ne pourrit pas et conserve son aspect esthétique sans entretien complexe."
+    },
+    {
+      "question": "Cet obstacle est-il difficile pour les chiens ?",
+      "answer": "Le niveau de difficulté dépend du tracé, mais le principe reste accessible à tous. Le chien doit simplement avancer et trouver son chemin. C'est un obstacle parcours canin agility très inclusif, adapté aux chiots comme aux chiens âgés qui ne peuvent plus sauter mais veulent participer à l'activité."
+    },
+    {
+      "question": "Comment nettoyer les parois du labyrinthe ?",
+      "answer": "Les parois lisses en PEHD sont très faciles à nettoyer. Les graffitis ou les salissures s'enlèvent avec des produits adaptés ou un nettoyeur haute pression. C'est un atout majeur pour les services municipaux gérant cet obstacle agility, garantissant une propreté constante de l'équipement dans l'espace public communal."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/ri1coltw4x5pddb4tar1r/AG37-Labyrinthe.pdf?rlkey=uqaosn1oqtjvoci6ki39rnfz3&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/10apg0qrc7fgxtq3rj99m/AG-37.dwg?rlkey=tpnmmndyygy99cow75sljauey&dl=0"
 }

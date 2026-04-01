@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "PLII"
+  "ref": "PLII",
+  "faq": [
+    {
+      "question": "Pourquoi choisir ce design en forme d'os ?",
+      "answer": "Ce design en forme d'os thématise immédiatement l'entrée de votre parc pour chien. Il rend l'espace plus convivial et accueillant qu'un simple poteau utilitaire. Le Porte Laisse II participe à l'identité visuelle de votre aménagement, signalant clairement aux passants qu'ils entrent dans une zone dédiée à l'agility collectivités."
+    },
+    {
+      "question": "Combien de laisses peut-on accrocher ?",
+      "answer": "Ce modèle dispose de cinq emplacements distincts, offrant une capacité supérieure aux modèles standards. Cette fonctionnalité est essentielle pour les parcs très fréquentés. Le Porte Laisse II permet à plusieurs propriétaires de gérer leurs équipements simultanément, fluidifiant ainsi le trafic aux heures de pointe sur votre parcours canin."
+    },
+    {
+      "question": "Où doit-on installer cet équipement ?",
+      "answer": "L'emplacement idéal se situe dans le sas de sécurité ou juste à l'entrée de la zone de jeu. Le Porte Laisse II doit être scellé au sol sur un massif en béton pour garantir sa stabilité. Une installation fixe empêche le vol et assure la sécurité des usagers du parcours sportif canin."
+    },
+    {
+      "question": "Les couleurs sont-elles personnalisables ?",
+      "answer": "Le corps en forme d'os est souvent disponible en plusieurs coloris vifs. Choisir une couleur contrastée permet de rendre l'équipement bien visible pour les usagers. Cela ajoute une touche de gaieté à l'entrée de votre parc pour chien et incite les propriétaires à utiliser ce service pratique mis à leur disposition."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": null
 }

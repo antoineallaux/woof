@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG29"
+  "ref": "AG29",
+  "faq": [
+    {
+      "question": "Pourquoi choisir ce modèle XXL pour notre parc ?",
+      "answer": "En tant que plus grand modèle du catalogue, la Grande Passerelle sert de point d'orgue visuel à votre aménagement. Elle attire immédiatement l'attention et valorise votre parcours canin. C'est l'équipement idéal pour les grands espaces, offrant un défi à la hauteur des chiens sportifs de votre commune."
+    },
+    {
+      "question": "Quel est l'avantage des pieds en bois ?",
+      "answer": "Les pieds en bois confèrent à cet obstacle agility une esthétique naturelle et chaleureuse (« nature play »). Contrairement aux structures entièrement métalliques, elle s'harmonise avec la végétation d'un parc pour chien ou d'un sous-bois. C'est le choix privilégié des collectivités soucieuses de l'intégration paysagère de leur mobilier."
+    },
+    {
+      "question": "Le bois résiste-t-il bien en extérieur ?",
+      "answer": "Nous utilisons des essences de bois traitées autoclave ou naturellement imputrescibles, sélectionnées pour leur résistance aux intempéries et aux insectes. Cela garantit la longévité de la structure dans votre parc canin municipal. Le mariage du bois et des fixations métal assure une robustesse à toute épreuve."
+    },
+    {
+      "question": "Est-ce un obstacle difficile pour les chiens ?",
+      "answer": "C'est un obstacle de niveau intermédiaire à confirmé. La hauteur et l'étroitesse relative de la planche demandent au chien de la concentration et une bonne proprioception. C'est un agrès valorisant qui permet aux chiens de progresser et de gagner en assurance sur votre parcours canin agility."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": null
 }

@@ -13,5 +13,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "BNII"
+  "ref": "BNII",
+  "faq": [
+    {
+      "question": "Pourquoi choisir un banc en forme d'os ?",
+      "answer": "Ce design original thématise instantanément votre aire d'ébats. Le Banc Os signale visuellement la fonction de l'espace. Contrairement au mobilier urbain classique, il crée une ambiance détendue et amusante, parfaite pour un parcours canin collectivité où la convivialité entre propriétaires de chiens est primordiale pour la vie de quartier."
+    },
+    {
+      "question": "Quels sont les avantages du PEHD pour ce banc ?",
+      "answer": "Le PEHD est le matériau roi pour l'agility collectivités. Il est imputrescible, ne s'écaille pas et résiste aux UV. Pour une mairie, choisir ce matériau garantit que le banc restera coloré et intègre pendant des années, sans demander de peinture ni d'entretien structurel coûteux malgré l'exposition extérieure."
+    },
+    {
+      "question": "Les chiens peuvent-ils monter sur le banc ?",
+      "answer": "Oui, le Banc Os est extrêmement robuste. Les chiens peuvent y grimper sans l'abîmer, le transformant parfois en obstacle agility improvisé pour le statique. Le PEHD résiste parfaitement aux griffures et à l'urine, ce qui en fait le mobilier idéal pour un environnement canin intense et fréquenté."
+    },
+    {
+      "question": "Comment nettoyer ce banc public ?",
+      "answer": "L'hygiène est cruciale dans un parc public. La surface lisse et non poreuse du banc se nettoie très simplement au jet d'eau ou avec un désinfectant classique. Il sèche vite et n'absorbe pas les odeurs, assurant un confort sanitaire optimal pour les visiteurs de votre parcours canin."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": "https://www.dropbox.com/scl/fi/921zmej0bxcn8rktzrxk5/BN-Banc-Os.dwg?rlkey=40x0ahdj69rt2cg9ri1jx8l8r&dl=0"
 }

@@ -1,0 +1,207 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map(p => ({ params: { slug: p.data.slug }, props: { product: p } }));
+}
+
+const { product } = Astro.props;
+const { name, slug, category, description, longDescription, image, imageAlt, features, ref, faq, technicalSheet, dwgFile } = product.data;
+
+// 4 produits complémentaires (même catégorie, ou aléatoires si pas assez)
+const allProducts = await getCollection('products');
+const related = allProducts
+  .filter(p => p.data.slug !== slug)
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 4);
+
+// Category label display
+const categoryLabels: Record<string, string> = {
+  saut: 'Obstacle Saut', tunnel: 'Tunnel', contact: 'Contact & Équilibre',
+  plateforme: 'Plateforme', mobilier: 'Mobilier', agility: 'Équipement Agility'
+};
+
+// Product schema JSON-LD
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": name,
+  "description": description,
+  "image": image,
+  "brand": { "@type": "Brand", "name": "Woof!" },
+  "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "EUR", "seller": { "@type": "Organization", "name": "Woof!" } }
+};
+
+// BreadcrumbList schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://woof-parcs.fr/" },
+    { "@type": "ListItem", "position": 2, "name": "Produits", "item": "https://woof-parcs.fr/produits" },
+    { "@type": "ListItem", "position": 3, "name": name }
+  ]
+};
+
+// FAQPage schema if FAQs exist
+const faqSchema = faq.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map(f => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  }))
+} : null;
+
+const schemas = [productSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
+---
+
+<Layout title={`${name} | Woof!`} description={description} schema={schemas}>
+  <!-- Breadcrumb -->
+  <nav class="max-w-6xl mx-auto px-4 pt-28 pb-4 text-sm text-muted font-body" aria-label="Fil d'Ariane">
+    <ol class="flex items-center gap-2">
+      <li><a href="/" class="hover:text-primary transition-colors">Accueil</a></li>
+      <li><span class="text-muted/50">/</span></li>
+      <li><a href="/produits" class="hover:text-primary transition-colors">Produits</a></li>
+      <li><span class="text-muted/50">/</span></li>
+      <li class="text-text font-semibold truncate">{name}</li>
+    </ol>
+  </nav>
+
+  <!-- Product hero -->
+  <section class="max-w-6xl mx-auto px-4 py-8">
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      <!-- Image -->
+      <div class="relative">
+        <span class="absolute top-4 left-4 bg-white border border-primary/20 text-primary text-xs font-label font-bold px-3 py-1 rounded-full z-10">
+          Réf. {ref}
+        </span>
+        <div class="aspect-square bg-surface rounded-2xl overflow-hidden flex items-center justify-center p-8">
+          <img src={image} alt={imageAlt} class="w-full h-full object-contain" loading="eager" />
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="flex flex-col gap-6">
+        <div>
+          <span class="text-xs font-label font-bold uppercase tracking-widest text-primary mb-2 block">
+            {categoryLabels[category] ?? category}
+          </span>
+          <h1 class="font-display font-extrabold text-4xl text-text leading-tight mb-4">{name}</h1>
+          <p class="text-muted font-body text-base leading-relaxed">{longDescription}</p>
+        </div>
+
+        <!-- Features -->
+        <ul class="flex flex-col gap-2">
+          {features.map(f => (
+            <li class="flex items-center gap-3 text-text font-body text-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"></span>
+              {f}
+            </li>
+          ))}
+        </ul>
+
+        <!-- Download buttons -->
+        {(technicalSheet || dwgFile) && (
+          <div class="flex flex-wrap gap-3">
+            {technicalSheet && (
+              <a href={technicalSheet} target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 border border-text/20 text-text hover:border-primary hover:text-primary transition-colors px-4 py-2 rounded-lg text-sm font-body font-semibold">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                Fiche technique PDF
+              </a>
+            )}
+            {dwgFile && (
+              <a href={dwgFile} target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 border border-text/20 text-text hover:border-primary hover:text-primary transition-colors px-4 py-2 rounded-lg text-sm font-body font-semibold">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Fichier DWG
+              </a>
+            )}
+          </div>
+        )}
+
+        <!-- CTA devis -->
+        <div class="bg-surface border border-primary/20 rounded-xl p-5">
+          <p class="font-display font-bold text-text text-base mb-1">Demandez un devis gratuit</p>
+          <p class="text-muted text-sm font-body mb-4">Notre équipe vous accompagne dans votre projet d'aménagement.</p>
+          <Button href="/contact" variant="primary" size="md">Demander un devis →</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ section -->
+  {faq.length > 0 && (
+    <section class="max-w-3xl mx-auto px-4 py-16">
+      <h2 class="font-display font-extrabold text-3xl text-text text-center mb-10">
+        Questions fréquentes sur {name.split(' - ')[0]}
+      </h2>
+      <div class="flex flex-col gap-3" id="faq-product">
+        {faq.map((item, i) => (
+          <div class="border border-primary/20 rounded-xl overflow-hidden bg-white">
+            <button
+              class="w-full flex items-center justify-between px-6 py-4 text-left font-body font-semibold text-text hover:text-primary transition-colors"
+              aria-expanded="false"
+              data-faq-btn={i}>
+              <span>{item.question}</span>
+              <svg class="w-5 h-5 flex-shrink-0 text-primary transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="hidden px-6 pb-5" data-faq-content={i}>
+              <p class="text-muted font-body text-sm leading-relaxed">{item.answer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Related products -->
+  <section class="max-w-6xl mx-auto px-4 py-12 border-t border-primary/10">
+    <h2 class="font-display font-extrabold text-2xl text-text text-center mb-8">Produits complémentaires</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {related.map(p => (
+        <a href={`/produits/${p.data.slug}`} class="group bg-white border border-primary/10 rounded-xl overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all">
+          <div class="aspect-square bg-surface flex items-center justify-center p-4">
+            <img src={p.data.image} alt={p.data.imageAlt} class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <div class="p-3">
+            <span class="text-[10px] font-label font-bold uppercase tracking-widest text-primary block mb-1">
+              {categoryLabels[p.data.category] ?? p.data.category}
+            </span>
+            <p class="font-display font-bold text-sm text-text leading-tight mb-1">{p.data.name.split(' - ')[0]}</p>
+            <p class="text-xs text-muted font-body">Réf. {p.data.ref}</p>
+            <span class="text-xs text-primary font-semibold font-body mt-2 block">Découvrir →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Back link -->
+  <div class="max-w-6xl mx-auto px-4 pb-16">
+    <a href="/produits" class="inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-body text-sm font-semibold">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Retour au catalogue
+    </a>
+  </div>
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('[data-faq-btn]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const i = btn.getAttribute('data-faq-btn');
+      const content = document.querySelector(`[data-faq-content="${i}"]`);
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      content.classList.toggle('hidden');
+      btn.querySelector('svg').style.transform = expanded ? '' : 'rotate(180deg)';
+    });
+  });
+</script>

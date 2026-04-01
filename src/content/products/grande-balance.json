@@ -6,6 +6,32 @@
   "longDescription": "La Grande Balance Woof! est conçue pour les parcours d'agility professionnels en espace public. Sa structure en acier galvanisé thermolaqué résiste aux intempéries et au vandalisme. Les zones de contact colorées guident naturellement le chien. Conforme EN 16630.",
   "image": "/assets/AG04.webp",
   "imageAlt": "Grande Balance pour parcours agility chien - Woof!",
-  "features": ["Acier galvanisé thermolaqué", "Surface antidérapante", "Conforme EN 16630", "Garantie 5 ans", "Hauteur réglable"],
-  "ref": "AG04"
+  "features": [
+    "Acier galvanisé thermolaqué",
+    "Surface antidérapante",
+    "Conforme EN 16630",
+    "Garantie 5 ans",
+    "Hauteur réglable"
+  ],
+  "ref": "AG04",
+  "faq": [
+    {
+      "question": "Le basculement est-il dangereux pour le chien ?",
+      "answer": "Non, le mécanisme est conçu pour un basculement fluide et progressif. Des butées en caoutchouc amortissent la fin de course pour éviter un choc violent qui pourrait effrayer l'animal ou provoquer des blessures, garantissant une pratique sereine sur le terrain d'agility."
+    },
+    {
+      "question": "La Grande Balance supporte-t-elle les grands chiens ?",
+      "answer": "Oui, la Grande Balance est conçue pour supporter des chiens de toutes tailles. Sa structure renforcée en acier galvanisé garantit stabilité et durabilité dans les parcs canins à forte fréquentation."
+    },
+    {
+      "question": "Quel est l'intérêt pédagogique de la balance ?",
+      "answer": "C'est un excellent exercice de confiance et de maîtrise de soi. Le chien doit apprendre à avancer doucement jusqu'au point de bascule et attendre que la planche touche le sol, renforçant ainsi le lien d'écoute avec son maître au sein de l'aire d'ébats."
+    },
+    {
+      "question": "Quelle surface de sécurité faut-il prévoir ?",
+      "answer": "Compte tenu du mouvement de la planche et de l'envergure du module, il est nécessaire de prévoir une zone de dégagement libre d'obstacles tout autour de la Grande Balance. Cela permet au chien de descendre en toute sécurité et aux maîtres de circuler sans risque."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/33uw4ayvbuvxwegeeay6q/AG04-Grand-Pont-Bascule.pdf?rlkey=aydjb17qq7e5sscljl4txmsaj&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/dvqs0436xmcjmcy6wvbfd/AG-04.dwg?rlkey=ty72nm947sqqemg25qabdpmed&dl=0"
 }

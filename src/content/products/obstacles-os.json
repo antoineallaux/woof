@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG12"
+  "ref": "AG12",
+  "faq": [
+    {
+      "question": "Pourquoi choisir cet obstacle en forme d'os pour un parc canin ?",
+      "answer": "Le design en forme d'os de cet obstacle agility apporte une identité visuelle forte et amusante à votre aire canine. Contrairement aux haies classiques, l'Obstacle OS crée immédiatement une atmosphère conviviale et thématique, très appréciée des usagers des parcs publics et des campings dog-friendly."
+    },
+    {
+      "question": "Peut-on combiner plusieurs obstacles OS ensemble ?",
+      "answer": "Tout à fait. L'Obstacle OS est conçu pour être modulaire. Vous pouvez en installer deux ou trois à la suite pour créer un saut en longueur ou une ligne de gymnastique rythmique. Cette modularité permet de varier la difficulté et l'intérêt sportif de votre parcours canin collectivité selon l'espace disponible."
+    },
+    {
+      "question": "Ce matériel est-il assez solide pour un parc public ?",
+      "answer": "Fabriqué en acier galvanisé thermolaqué, l'Obstacle OS est conçu spécifiquement pour résister au vandalisme et à l'usure en milieu urbain. Il ne craint ni la rouille, ni les chocs, ni l'urine. C'est un choix durable pour les mairies souhaitant équiper leur parc pour chien avec du mobilier pérenne."
+    },
+    {
+      "question": "L'entretien est-il facile pour les services municipaux ?",
+      "answer": "L'entretien est quasi inexistant. La finition thermolaquée de haute qualité empêche l'adhérence des salissures et protège contre la corrosion. Un simple jet d'eau occasionnel suffit pour redonner son éclat à cet équipement de parcours canin collectivité, simplifiant la tâche des agents d'entretien de la commune."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/cdjurq23z3028jhjljttu/AG12-Obstacles-Os.pdf?rlkey=04mhqdztdazrb62ega5xw5obf&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/67u3yjdcdha2ugakiihmx/AG-12.dwg?rlkey=wfl9w9ddsgtjt9r9526hogbdn&dl=0"
 }

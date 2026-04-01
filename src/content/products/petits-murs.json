@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG32"
+  "ref": "AG32",
+  "faq": [
+    {
+      "question": "Quel est l'intérêt de cet enchaînement de murs ?",
+      "answer": "Enchaîner quatre sauts demande au chien de réguler son effort et sa cadence. C'est un excellent exercice cardiovasculaire pour un parcours canin. Les Petits Murs obligent l'animal à rester concentré sur la série complète, améliorant ainsi sa discipline et sa coordination motrice au sein de l'aire d'ébats."
+    },
+    {
+      "question": "Cet obstacle agility est-il adapté aux petits chiens ?",
+      "answer": "Oui, la hauteur modérée des Petits Murs est spécialement étudiée pour être franchissable par la majorité des races, y compris les petits gabarits. C'est un obstacle agility inclusif qui permet aux débutants de s'initier au saut en série sans craindre une hauteur excessive ou dangereuse."
+    },
+    {
+      "question": "Quelle est la durabilité de ces barrières pour une collectivité ?",
+      "answer": "Conçus pour l'agility collectivités, ces modules sont fabriqués en matériaux robustes ( bois traité) résistants aux intempéries et aux UV. Ils ne craignent ni la pluie ni l'urine, garantissant une longévité maximale avec un minimum d'entretien pour les services municipaux."
+    },
+    {
+      "question": "Quel exercice éducatif peut-on faire avec les Petits Murs ?",
+      "answer": "Au-delà du saut, cet équipement de parc canin permet de travailler le pas bouger entre chaque barrière ou le saut à la demande. C'est un outil polyvalent pour les éducateurs canins qui peuvent complexifier l'exercice en demandant des arrêts ou des changements de rythme."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/ey5e8fu6czr92ud98y7nd/AG32-Petits-Murs.pdf?rlkey=zu2r3ku1p6h0hls0mflpp5wt4&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/52oedba0ivngh63sg5qgn/AG-32.dwg?rlkey=yohsgf2i7t7ab62wb4cnmfr7r&dl=0"
 }

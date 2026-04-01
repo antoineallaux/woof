@@ -13,5 +13,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG30"
+  "ref": "AG30",
+  "faq": [
+    {
+      "question": "Pourquoi choisir ce modèle avec cadre en bois ?",
+      "answer": "Ce modèle est conçu pour s'intégrer harmonieusement dans les espaces verts, les forêts ou les campings \"nature\". Le bois offre une esthétique douce qui ne dénature pas le paysage, contrairement au métal industriel. C'est le choix privilégié pour créer un parcours canin collectivité chaleureux et respectueux de l'environnement."
+    },
+    {
+      "question": "Quel est l'avantage d'associer le bois et le PEHD ?",
+      "answer": "L'association est stratégique : le bois apporte la solidité structurelle et l'esthétique, tandis que le PEHD (l'anneau central) garantit une zone de passage imputrescible et sans échardes. Cet obstacle agility combine ainsi durabilité technique et intégration paysagère, répondant aux exigences esthétiques et fonctionnelles des mairies."
+    },
+    {
+      "question": "Cet obstacle est-il difficile pour les chiens ?",
+      "answer": "Le saut dans un cerceau demande un peu plus de technique qu'une haie simple, car le chien doit viser. Cependant, la taille de l'ouverture est standardisée pour faciliter le passage. C'est un obstacle de niveau intermédiaire qui enrichit l'expérience sportive au sein de votre parc canin municipal."
+    },
+    {
+      "question": "L'entretien est-il plus lourd que pour du métal ?",
+      "answer": "Le PEHD ne demande aucun entretien. Le bois peut griser avec le temps, ce qui est un processus naturel n'altérant pas sa solidité. Si vous souhaitez conserver la teinte d'origine, une simple application de lasure tous les quelques années suffit à maintenir l'éclat de votre parcours sportif canin."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": null
 }

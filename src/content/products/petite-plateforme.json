@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG06"
+  "ref": "AG06",
+  "faq": [
+    {
+      "question": "Pourquoi installer une petite plateforme de dressage dans un parc canin ?",
+      "answer": "Cet équipement structure l'activité dans votre aire canine en offrant une zone de calme. Il est essentiel pour travailler la concentration du chien au milieu d'un parcours agility. C'est un point de repère éducatif très apprécié des clubs canins et des propriétaires fréquentant les espaces publics."
+    },
+    {
+      "question": "Ce module est-il adapté à tous les chiens ?",
+      "answer": "Oui, sa hauteur réduite rend cette table de pause accessible aux chiots et aux chiens de petite taille. Contrairement aux obstacles de saut, elle ne sollicite pas les articulations, ce qui en fait un agrès inclusif pour tout type de chien évoluant sur votre parcours canin municipal."
+    },
+    {
+      "question": "Quelle est la résistance de ce matériel en extérieur ?",
+      "answer": "Fabriquée en acier galvanisé thermolaqué, la petite plateforme résiste parfaitement aux intempéries et à l'urine. C'est un choix durable pour une mairie car elle ne pourrit pas comme le bois. Elle garantit une longévité maximale à votre aménagement de parc canin agility sans frais de maintenance élevés."
+    },
+    {
+      "question": "Le revêtement est-il sécurisé contre les glissades ?",
+      "answer": "La surface de la plateforme est traitée avec un revêtement antidérapant haute performance. Cela assure la sécurité des animaux même par temps de pluie. Les chiens peuvent y grimper et tenir la position sans glisser, un critère de sécurité indispensable pour tout équipement de parcours sportif canin en accès libre."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/79p3hcapy7fsrr0d462l7/AG06-Plateforme-Basse.pdf?rlkey=hyk8y7vuqmtvk3yrrnzv7bwbb&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/hbj852bvi4i6zas5kwu65/AG-06.dwg?rlkey=blu3fuk067koq6sxtf3ixdha4&dl=0"
 }

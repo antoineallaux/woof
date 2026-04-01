@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG10"
+  "ref": "AG10",
+  "faq": [
+    {
+      "question": "Quel est l'intérêt du Triple Stand dans un parc canin ?",
+      "answer": "Ce module agility offre un exercice complet combinant saut et équilibre. En enchaînant les trois niveaux, le chien améliore sa proprioception et sa confiance. C'est un équipement visuel fort qui attire les utilisateurs et rend votre parcours canin public attractif pour tous les niveaux, du débutant au confirmé."
+    },
+    {
+      "question": "Ce matériel résiste-t-il au vandalisme en ville ?",
+      "answer": "Oui, le Triple Stand est fabriqué en acier galvanisé thermolaqué, un matériau choisi pour sa résistance extrême. Contrairement au bois, il ne craint ni les chocs, ni les brûlures, ni les graffitis. C'est la solution idéale pour garantir la longévité de votre mobilier urbain canin en accès libre."
+    },
+    {
+      "question": "Peut-on l'utiliser pour l'éducation canine ?",
+      "answer": "Absolument. Le Triple Stand sert aussi de podiums pour travailler le statique à différentes hauteurs, comme le assis ou le pas bouger. Les clubs canins et les éducateurs apprécient cette polyvalence qui transforme un simple jeu en outil pédagogique au cœur de votre parc pour chien municipal."
+    },
+    {
+      "question": "Cet équipement convient-il aux grands chiens ?",
+      "answer": "La structure en acier est dimensionnée pour supporter le poids de chiens de grand gabarit sans bouger. Les plateformes sont suffisamment larges pour une réception stable. C'est un équipement robuste adapté à l'usage intensif par toutes les races fréquentant votre aire d'ébats canine publique."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/7y4vpv3tgu7jkytn3b8pl/AG10-Triple-Stand.pdf?rlkey=3c04lxbr6a2vicrvz5fcjwabe&dl=0",
+  "dwgFile": null
 }

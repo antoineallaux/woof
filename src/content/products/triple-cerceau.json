@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG31"
+  "ref": "AG31",
+  "faq": [
+    {
+      "question": "Pourquoi choisir trois cerceaux à la suite ?",
+      "answer": "Cet obstacle agility permet de travailler la gymnastique de saut en série. Contrairement à un cerceau unique, le Triple Cerceaux oblige le chien à anticiper la réception pour enchaîner le bond suivant. C'est un exercice excellent pour la condition physique des chiens sportifs fréquentant votre parc canin municipal."
+    },
+    {
+      "question": "Est-ce un obstacle difficile pour les débutants ?",
+      "answer": "Avec ses trois hauteurs différentes, cet agrès offre une difficulté progressive. Les chiens débutants peuvent s'exercer sur l'anneau le plus bas, tandis que les plus agiles tentent l'enchaînement complet. Cette modularité rend votre parcours canin agility attractif pour tous les niveaux, du chiot à l'adulte confirmé."
+    },
+    {
+      "question": "Cet équipement résiste-t-il à un usage intensif ?",
+      "answer": "Fabriqué en matériaux ultra-résistants comme l'acier galvanisé, le Triple Cerceaux est conçu pour durer. Il résiste aux intempéries, aux UV et à l'usage intensif typique d'un parc pour chien public. C'est un investissement pérenne pour les collectivités souhaitant limiter les frais de maintenance de leur mobilier urbain."
+    },
+    {
+      "question": "Quel est l'apport éducatif de ce module ?",
+      "answer": "Cet équipement demande au chien une grande concentration. Il doit focaliser son attention sur trois cibles successives. C'est un outil formidable pour les cours d'éducation canine dispensés dans votre parc pour chien, permettant de travailler le focus et l'écoute du maître malgré l'excitation du jeu."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": null
 }

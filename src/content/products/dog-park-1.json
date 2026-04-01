@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG35"
+  "ref": "AG35",
+  "faq": [
+    {
+      "question": "Quels éléments composent la structure Dog Park 1 ?",
+      "answer": "Le Dog Park 1 regroupe plusieurs agrès en une seule structure massive. Il combine les défis de grimpe via des escaliers, de traversée sous tunnel et d'équilibre sur des plateformes hautes. C'est une solution tout-en-un idéale pour créer un parcours canin collectivité dynamique sans multiplier les petits modules dispersés sur le terrain."
+    },
+    {
+      "question": "Combien de chiens peuvent jouer simultanément ?",
+      "answer": "En raison de sa taille intermédiaire à grande, le Dog Park 1 permet à plusieurs chiens d'évoluer en même temps tout en gardant leurs distances. Cela favorise la socialisation tout en réduisant les files d'attente, un atout majeur pour la gestion des flux dans un parc pour chien très fréquenté."
+    },
+    {
+      "question": "Quelles sont les contraintes d'installation ?",
+      "answer": "L'installation de cette structure volumineuse nécessite une préparation rigoureuse du sol. Le scellement sur des massifs en béton est obligatoire pour assurer la stabilité de l'ensemble des plateformes et rampes. Une pose professionnelle garantit la sécurité absolue des animaux sur cet obstacle agility d'envergure installé dans votre commune."
+    },
+    {
+      "question": "Quel est l'avantage esthétique de ce module ?",
+      "answer": "Installer le Dog Park 1 crée un point d'attraction visuel fort. Son architecture complexe et ses couleurs signalent immédiatement la présence d'une zone ludique de qualité. C'est un élément structurant qui valorise l'image de votre commune et attire les visiteurs vers votre parcours canin agility nouvellement créé."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": "https://www.dropbox.com/scl/fi/k6lfthekrh04jczmiczfk/AG-35.dwg?rlkey=n4tjjnpj2e9mnluiznsfvhbif&dl=0"
 }

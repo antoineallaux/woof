@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG16B"
+  "ref": "AG16B",
+  "faq": [
+    {
+      "question": "En quoi consiste cet obstacle pour parc canin ?",
+      "answer": "Le chien doit traverser les 6 arceaux le plus vite possible sans en sortir latéralement. C'est un exercice de vitesse et de précision qui prépare au tunnel classique. Dans un parcours canin collectivité, la Piste Tube offre une alternative ludique et visuelle, très appréciée pour l'initiation des chiots."
+    },
+    {
+      "question": "Quelle différence avec un tunnel rigide classique ?",
+      "answer": "La Piste Tube est ajourée, ce qui la rend beaucoup moins intimidante pour les chiens craintifs. Le maître garde un contact visuel permanent avec l'animal à travers les arceaux. C'est l'équipement parfait pour un parc pour chien public accueillant des chiens de tous niveaux, du débutant au confirmé."
+    },
+    {
+      "question": "Comment installer ces arceaux au sol ?",
+      "answer": "L'alignement est essentiel pour cet obstacle. Les 6 arceaux doivent être scellés individuellement dans le sol (massif béton) pour garantir qu'ils restent bien verticaux. Une installation fixe est requise pour éviter que les éléments ne soient arrachés, assurant la sécurité des utilisateurs de votre parcours sportif canin."
+    },
+    {
+      "question": "Peut-on courber la trajectoire de la piste ?",
+      "answer": "Lors de l'installation, vous avez la liberté de sceller les arceaux en ligne droite parfaite ou de créer une légère courbe pour augmenter la difficulté technique. Cette flexibilité de pose permet d'adapter la Piste Tube à la topographie de votre terrain d'agility et de varier les défis."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/n9zgivqmgczxkrb5dph1n/AG16B-Piste-Tube.pdf?rlkey=wkowc0s16654pw8pez5c4o8ku&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/bia7imbawnpx65fqu9so9/AG-16B.dwg?rlkey=vv6y5h5jnpcf3jlgdgc524apn&dl=0"
 }

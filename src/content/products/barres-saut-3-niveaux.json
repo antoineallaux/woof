@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG18"
+  "ref": "AG18",
+  "faq": [
+    {
+      "question": "Pourquoi choisir une barre réglable pour un parc canin ?",
+      "answer": "La Barre de Saut 3 Niveaux permet d'accueillir tous les usagers, du petit chien débutant au chien sportif confirmé. Cette modularité rend votre parcours canin collectivité beaucoup plus attractif, car chaque propriétaire peut adapter la difficulté de l'obstacle aux capacités de son animal, favorisant une utilisation inclusive."
+    },
+    {
+      "question": "Le système de réglage est-il solide pour un usage public ?",
+      "answer": "Oui, le mécanisme de changement de hauteur est conçu pour résister à une utilisation intensive en milieu urbain. Il est simple, intuitif et sécurisé pour éviter tout pincement de doigt. Contrairement aux équipements de club fragiles, cette barre de saut pour parcours canin agility est pensée \"anti-vandalisme\" et durabilité."
+    },
+    {
+      "question": "Que se passe-t-il si le chien heurte la barre ?",
+      "answer": "La sécurité est primordiale. La barre est conçue pour être suffisamment légère pour ne pas blesser l'animal en cas d'impact, mais attachée de manière sécurisée pour ne pas être volée. Sur ce modèle pour parc canin collectivité, nous privilégions des matériaux absorbant les chocs et des formes arrondies sans arêtes vives."
+    },
+    {
+      "question": "Quel est l'avantage pédagogique de l'ajustabilité ?",
+      "answer": "Pouvoir monter la barre progressivement permet de bâtir la confiance du chien. Il apprend à évaluer l'obstacle et à ajuster son impulsion. C'est un outil formidable pour les séances d'éducation canine organisées dans votre commune, permettant de transformer un simple jeu en véritable séance d'entraînement sur le parcours agility."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/v635uta3mtvvabxf1o5uo/AG18-Barres-de-Saut-3-niveaux.pdf?rlkey=891edg978gvdpv2d493km42i2&dl=0",
+  "dwgFile": null
 }

@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG02"
+  "ref": "AG02",
+  "faq": [
+    {
+      "question": "Pour quels types de chiens la grande palissade est-elle adaptée ?",
+      "answer": "Contrairement aux petits modules, cette grande palissade pour parc canin est dimensionnée pour accueillir les chiens de moyenne et grande taille. C'est l'équipement roi pour les races sportives (Bergers, Labradors) qui peuvent y exercer leur motricité et leur concentration dans un espace dédié de votre commune."
+    },
+    {
+      "question": "Le revêtement est-il sécurisé pour éviter les chutes ?",
+      "answer": "La sécurité est notre priorité sur un parcours agility collectivité. La surface de marche de la grande palissade est intégralement recouverte d'un matériau antidérapant haute performance. Cela permet aux chiens d'évoluer en hauteur sans risquer de glisser, même si le matériel est mouillé par la pluie."
+    },
+    {
+      "question": "Quels exercices peut-on faire avec la grande palissade ?",
+      "answer": "La grande palissade permet de travailler l'équilibre, la confiance et la coordination des chiens. Dans un parc canin, il peut être intégré à un parcours complet d'agility pour varier les exercices."
+    },
+    {
+      "question": "La grande palissade nécessite-t-il un entretien particulier ?",
+      "answer": "Non, la grande palissade est conçu pour une maintenance minimale. Son revêtement thermolaqué le protège contre la corrosion. Un simple nettoyage occasionnel suffit pour conserver son aspect dans votre parc canin."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/nmm1v4tvk98dou9ml0eqp/AG02-Grand-Bridge.pdf?rlkey=em6fjladuh4wvssliun9ojl7t&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/na0e3owhgwdbdmd85dn40/AG-02.dwg?rlkey=x2r53psjs4rl2sx0ouhqks0e4&dl=0"
 }

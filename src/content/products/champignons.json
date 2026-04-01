@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG11"
+  "ref": "AG11",
+  "faq": [
+    {
+      "question": "En quoi consiste l'exercice du Champignon sur un parcours canin ?",
+      "answer": "L'exercice demande au chien de sauter de plateforme en plateforme sans toucher le sol. Contrairement à un simple saut, cet enchaînement de cinq bonds sollicite l'endurance, la coordination et l'évaluation des distances. C'est un défi physique stimulant pour les chiens actifs fréquentant votre aire d'ébats canine municipale."
+    },
+    {
+      "question": "Quelle est la différence entre le Champignon et le Triple Stand ?",
+      "answer": "Le Champignon comporte cinq plateformes au lieu de trois, et elles sont généralement plus écartées. Cela crée un parcours de saut en ligne droite plus long et plus intense. C'est un obstacle de niveau intermédiaire qui complète parfaitement les modules d'initiation dans un grand parcours canin collectivité."
+    },
+    {
+      "question": "Ce module est-il conçu pour durer en extérieur ?",
+      "answer": "Oui, la structure est fabriquée en acier galvanisé thermolaqué, garantissant une résistance totale à la corrosion et aux intempéries. Les plateformes sont conçues pour supporter les chocs répétés. C'est un investissement pérenne pour les mairies, ne nécessitant pas de remplacement fréquent contrairement aux équipements en bois."
+    },
+    {
+      "question": "Quels chiens peuvent utiliser cet obstacle de saut ?",
+      "answer": "En raison de l'écartement entre les plateformes, le Champignon s'adresse plutôt aux chiens de taille moyenne à grande (Border Collie, Berger, Labrador). Les petits chiens peuvent l'utiliser comme slalom au sol ou sauter sur les plateformes les plus basses si la configuration le permet dans votre parc public."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/mr5hmihkp7744ksuny9ku/AG11-Champignons.pdf?rlkey=r896p2e48a2a5awspmwdolly2&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/ii1sgc7xtkcmaqdg0vhm7/AG-11.dwg?rlkey=opxsnoek8x7wkfqrfge32dto4&dl=0"
 }

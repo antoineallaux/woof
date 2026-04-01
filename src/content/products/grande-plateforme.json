@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG07"
+  "ref": "AG07",
+  "faq": [
+    {
+      "question": "Cet équipement agility est-il résistant pour un usage intensif en collectivité ?",
+      "answer": "Conçue en acier galvanisé thermolaqué, la Grande Plateforme de dressage est fabriquée pour résister à l'usage intensif des parcs publics ouverts 24h/24. Elle ne craint ni les griffures répétées, ni les intempéries, ni l'urine. C'est un investissement pérenne pour les collectivités cherchant du mobilier urbain canin sans entretien."
+    },
+    {
+      "question": "Le revêtement est-il adapté pour éviter les glissades sous la pluie ?",
+      "answer": "Oui, la sécurité est notre priorité absolue. Le plateau de la Grande Plateforme de dressage est recouvert d'un matériau antidérapant haute performance. Cela assure une adhérence parfaite pour les coussinets du chien, même par temps de pluie, évitant tout risque de chute accidentelle sur le parcours sportif canin."
+    },
+    {
+      "question": "Peut-on utiliser ce module pour le toilettage en extérieur ?",
+      "answer": "Absolument. De nombreux propriétaires utilisent la Grande Plateforme de dressage comme table de toilettage d'appoint pour brosser leur chien après une session de jeu dans la boue. Sa hauteur permet au maître de s'occuper de son animal sans se baisser, ajoutant une fonctionnalité pratique à votre espace canin."
+    },
+    {
+      "question": "Peut-on personnaliser la couleur de la structure métallique ?",
+      "answer": "En tant que fabricant, nous proposons la personnalisation des coloris de la Grande Plateforme de dressage. Vous pouvez choisir une teinte qui s'intègre à l'environnement paysager de votre commune ou qui respecte le code couleur de votre camping, pour un aménagement harmonieux, esthétique et unique."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/pq6els24yrd3w1wffx7yc/AG07-Plateforme-Haute.pdf?rlkey=2ca4o9qjd98jinuub65qzh7rs&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/rbca2b198fhgd6dnwf6m0/AG-07.dwg?rlkey=cqa4u716wwwwk5drtbwn57ok5&dl=0"
 }

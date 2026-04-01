@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG19"
+  "ref": "AG19",
+  "faq": [
+    {
+      "question": "Quel est le principe de l'obstacle Anneaux triangle ?",
+      "answer": "Le chien doit traverser l'un des cerceaux en sautant. La disposition en triangle crée un volume visuel unique qui change des haies classiques. C'est un exercice de visée et de souplesse qui dynamise l'activité physique au sein de votre parc canin collectivité, amusant aussi bien les maîtres que les animaux."
+    },
+    {
+      "question": "Est-ce adapté aux chiens débutants dans un parc canin ?",
+      "answer": "Oui, cet obstacle agility est ludique et accessible. Les cerceaux situés au niveau inférieur permettent une initiation en douceur au franchissement d'obstacle cerclé. Il favorise la confiance du chien dans un environnement de parc pour chien municipal, sans l'appréhension que peut susciter un tunnel sombre ou étroit."
+    },
+    {
+      "question": "Pourquoi choisir ce design en triangle ?",
+      "answer": "La forme triangulaire est très graphique et attire l'œil. C'est un élément photogénique qui incite les propriétaires à utiliser le parcours canin agility. De plus, elle permet de varier les hauteurs de saut ou de trajectoire, offrant un défi renouvelé par rapport à un pneu de saut simple classique."
+    },
+    {
+      "question": "Quel intérêt pédagogique pour l'animal ?",
+      "answer": "Traverser un cerceau demande une meilleure proprioception que sauter une simple barre. Le chien doit rassembler ses pattes pour passer au centre. C'est un excellent exercice de coordination et de conscience du corps, valorisant l'offre éducative de votre parc canin collectivité auprès des clubs et éducateurs locaux."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/agw91b7rp0i0z4eytwt1b/AG19-Anneaux-Triangle.pdf?rlkey=4j1d8rw31sye0oqwhrgreqjtx&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/7p0601y6gb4yl8eo3m5m0/AG19-Anneaux-Triangle.dwg?rlkey=dtft4cjv02yeflvah3nm7nuht&dl=0"
 }

@@ -12,5 +12,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG33"
+  "ref": "AG33",
+  "faq": [
+    {
+      "question": "Quel est l'intérêt de combiner escalier, tube et rampe ?",
+      "answer": "L'association escaliers et rampe enrichit l'exercice physique. Le chien doit gérer deux types de surfaces inclinées en plus du tunnel. Cela travaille la coordination des pattes et la proprioception. C'est un module technique qui diversifie les activités offertes dans votre parc canin municipal ou votre camping dog-friendly."
+    },
+    {
+      "question": "Peut-on voir le chien quand il est dans le tube ?",
+      "answer": "Le tube est conçu pour permettre une surveillance visuelle, souvent grâce à des matériaux translucides ou des ouvertures. Cela rassure le chien qui ne se sent pas piégé et permet au maître de guider son animal tout au long de la traversée de cet obstacle agility surélevé."
+    },
+    {
+      "question": "Cet obstacle convient-il aux chiens peureux ?",
+      "answer": "La hauteur peut impressionner les débutants au début. Il est conseillé d'accompagner le chien doucement sur les marches. Une fois la peur du vide surmontée, cet obstacle agility devient très ludique et gratifiant, renforçant le lien de confiance entre le maître et le chien au sein du parc."
+    },
+    {
+      "question": "Les grands chiens peuvent-ils emprunter le tube ?",
+      "answer": "Le diamètre du tunnel est prévu pour laisser passer la plupart des races moyennes et grandes. La structure porteuse est calculée pour supporter le poids de chiens lourds. C'est un équipement robuste adapté à l'usage intensif d'un parcours canin collectivité accueillant une grande diversité de visiteurs canins."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/n7rvqr5wpqh00ql7pyvlm/AG33-Tube.pdf?rlkey=w11f3ztkdf3nysr8czduspvu9&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/5cg3y7357i9a1nz2vibu5/AG-33.dwg?rlkey=8lzggozyfnh03ivky2uoynmxh&dl=0"
 }

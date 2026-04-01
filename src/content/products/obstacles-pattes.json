@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG13"
+  "ref": "AG13",
+  "faq": [
+    {
+      "question": "Pourquoi choisir l'Obstacle Pattes pour notre parc canin ?",
+      "answer": "Le design unique de cet obstacle agility avec ses découpes en forme de pattes apporte une identité visuelle forte à votre espace. Il signale immédiatement aux usagers qu'ils entrent dans une zone dédiée aux chiens. C'est un élément de mobilier urbain canin qui valorise l'image dog-friendly de votre collectivité."
+    },
+    {
+      "question": "La hauteur de saut est-elle adaptée à tous les chiens ?",
+      "answer": "La barre de saut est positionnée à une hauteur standard qui convient à la majorité des chiens de taille moyenne et grande. Pour un parcours canin collectivité inclusif, cet obstacle propose un challenge physique accessible, favorisant l'exercice sans mettre en danger les articulations des animaux."
+    },
+    {
+      "question": "Comment installer cet obstacle de saut durablement ?",
+      "answer": "Pour garantir la stabilité de la haie lors des passages répétés, l'Obstacle Pattes doit être scellé au sol sur des massifs en béton. Une fixation solide est indispensable pour empêcher le basculement de la structure et assurer la sécurité des usagers de votre parc pour chien municipal."
+    },
+    {
+      "question": "Peut-on choisir la couleur de cet obstacle agility ?",
+      "answer": "Oui, nous offrons la possibilité de personnaliser les coloris de la structure. Vous pouvez choisir des couleurs vives pour faire ressortir les motifs de pattes ou des teintes plus sobres pour intégrer l'équipement à la nature environnante. Cette flexibilité permet d'harmoniser votre parcours canin avec l'esthétique de la ville."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/5erxv4tby9ho01m1ygcvh/AG13-Obstacles-Pattes.pdf?rlkey=4a7jv1lrsix5068g23xpf17l7&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/gw9fjn4lih05vzt5bw5t8/AG13-Obstacles-Pattes.dwg?rlkey=qgrloaea0xkm7bd9glwdwcmcq&dl=0"
 }

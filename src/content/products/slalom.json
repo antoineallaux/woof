@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG16/A"
+  "ref": "AG16/A",
+  "faq": [
+    {
+      "question": "Est-ce un obstacle difficile pour les chiens débutants ?",
+      "answer": "Le slalom parcours canin est un obstacle technique qui demande un apprentissage. Cependant, avec seulement 6 poteaux, cette version pour parc public reste accessible pour l'initiation. C'est un excellent défi ludique qui fidélise les usagers, les incitant à revenir s'entraîner régulièrement dans votre aire canine."
+    },
+    {
+      "question": "Quel est le matériau des poteaux de slalom ?",
+      "answer": "Nous utilisons de l'acier galvanisé thermolaqué pour la structure. Cela garantit une résistance totale à la corrosion et à l'urine canine. Contrairement aux poteaux en PVC qui peuvent casser et devenir coupants avec le temps, notre slalom parc pour chien est un investissement durable et anti-vandalisme."
+    },
+    {
+      "question": "Les poteaux présentent-ils un risque si le chien les percute ?",
+      "answer": "La sécurité est notre priorité pour l'agility collectivités. Les poteaux sont lisses et de diamètre adapté pour ne pas blesser l'animal. Ils sont solidement fixés pour résister aux chocs, mais conçus pour ne pas traumatiser le chien lors de son passage rapide en zigzag à travers l'obstacle."
+    },
+    {
+      "question": "À quoi sert le slalom pour l'éducation du chien ?",
+      "answer": "Cet obstacle agility développe la souplesse latérale et l'obéissance. Le chien doit suivre les indications du maître sans sauter de porte. C'est l'exercice roi pour renforcer la complicité et la connexion maître-chien au sein de votre espace canin public ou de votre terrain de camping."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": null
 }

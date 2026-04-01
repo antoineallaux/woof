@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG14"
+  "ref": "AG14",
+  "faq": [
+    {
+      "question": "Pourquoi installer ces Barres dans un parc canin municipal ?",
+      "answer": "Ce module à deux niveaux offre une progressivité idéale pour les usagers de votre aire canine. Il permet aux maîtres de tester les capacités de leur chien sur une hauteur basse avant de passer à la suivante. C'est un équipement inclusif qui rassure les débutants sur le parcours d'agilité."
+    },
+    {
+      "question": "Quelle est la différence avec les haies de saut classiques ?",
+      "answer": "Contrairement aux haies de compétition ajustables, les Barres pour parcours canin collectivité sont fixes et proposent deux hauteurs distinctes prêtes à l'emploi. Cela simplifie l'utilisation en libre accès : pas de réglage à faire, le maître choisit simplement la barre adaptée à la taille de son chien."
+    },
+    {
+      "question": "Ce matériel est-il adapté aux petits chiens ?",
+      "answer": "Absolument. Les hauteurs réduites de cet obstacle agility sont spécialement pensées pour les petits gabarits et les chiots en apprentissage. C'est l'agrès parfait pour démocratiser la pratique sportive dans votre parc pour chien, permettant à toutes les races de participer sans risque de blessure."
+    },
+    {
+      "question": "Quel est l'intérêt éducatif de ce double saut ?",
+      "answer": "Cet obstacle permet de travailler la commande de saut en douceur. Le fait d'avoir deux hauteurs permet au chien de comprendre l'exercice sur la barre la plus basse avant de tenter la plus haute. C'est un outil pédagogique excellent pour les cours d'éducation canine dispensés dans votre commune."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/57pex73qeedzmqyny4f5k/AG14-Barres.pdf?rlkey=3l6c8s7mt4kgbyls0uzp9vcq1&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/aug03ngoh46gx7vo6cr06/AG-14.dwg?rlkey=v8sqn6oqul2bkqhn6q2n5oadd&dl=0"
 }

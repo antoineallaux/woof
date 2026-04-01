@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG34"
+  "ref": "AG34",
+  "faq": [
+    {
+      "question": "De quoi est composé l'obstacle Dog Park 3 ?",
+      "answer": "Cet équipement est un complexe multi-activités regroupant plusieurs défis en un seul bloc. Il permet au chien de monter par des marches, de traverser une plateforme de liaison et de redescendre via une pente douce. C'est un obstacle agility complet qui optimise l'espace de votre parcours canin collectivité."
+    },
+    {
+      "question": "Cet équipement convient-il aux petits espaces ?",
+      "answer": "Oui, le Dog Park 3 est conçu spécifiquement pour maximiser les fonctionnalités dans une emprise au sol réduite. Il est parfait pour les communes ou les campings disposant d'une surface limitée mais souhaitant tout de même offrir un parcours canin agility attractif et varié à leurs usagers à quatre pattes."
+    },
+    {
+      "question": "Est-ce difficile pour les chiens débutants ?",
+      "answer": "Ce module est idéal pour l'initiation. Les hauteurs sont étudiées pour être accessibles et permettent d'appréhender les escaliers et les plans inclinés en douceur. C'est un outil pédagogique rassurant pour les chiens découvrant les joies de l'agility collectivités, favorisant une progression rapide sans générer de peur du vide."
+    },
+    {
+      "question": "Quel est l'intérêt éducatif de cet obstacle ?",
+      "answer": "Ce module permet de travailler plusieurs compétences simultanées : la montée d'escaliers, souvent crainte par certains chiens urbains, la traversée en hauteur et la descente contrôlée. C'est un obstacle agility riche qui renforce la confiance du chien et sa coordination motrice globale sur le parcours sportif."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": "https://www.dropbox.com/scl/fi/2byh98rlcyxrjyvuli931/AG-34.dwg?rlkey=44211kdupqeri8db4mjxyoq3l&dl=0"
 }

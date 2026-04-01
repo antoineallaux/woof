@@ -13,5 +13,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "ABI"
+  "ref": "ABI",
+  "faq": [
+    {
+      "question": "Comment installer cet abris en bois dans un parcours canin collectivité ?",
+      "answer": "L'installation de cet abri pour aire canine nécessite un ancrage solide au sol, sur dalle béton ou plots, pour garantir la sécurité des visiteurs. Une fois scellé, il offre une stabilité parfaite, essentielle pour le mobilier urbain installé dans un parcours canin public soumis aux aléas climatiques."
+    },
+    {
+      "question": "Quelle est la capacité de cet abri pour terrain d'agility ?",
+      "answer": "Cet abris en bois est dimensionné pour accueillir confortablement un petit groupe d'accompagnateurs ou un banc public. Il crée un point de convivialité central, permettant aux propriétaires de socialiser à l'abri tout en gardant un visuel direct sur les modules du parcours sportif canin."
+    },
+    {
+      "question": "Cet abri convient-il à un parc canin agility en zone naturelle ?",
+      "answer": "Absolument. Contrairement aux structures métalliques industrielles, cet abris en bois est plébiscité par les architectes paysagistes pour son aspect chaleureux. Il est idéal pour les parcours agility situés en forêt, dans les campings ou les zones protégées souhaitant respecter une charte environnementale stricte."
+    },
+    {
+      "question": "Cet abri en bois pour espace canin résiste-t-il à la pluie et à la neige ?",
+      "answer": "Oui, le bois utilisé pour cet abri de parc canin est traité autoclave ou naturellement imputrescible pour résister aux conditions extérieures difficiles. La toiture est conçue pour évacuer efficacement les eaux pluviales, garantissant un espace sec pour les maîtres, quelle que soit la saison."
+    }
+  ],
+  "technicalSheet": null,
+  "dwgFile": "https://www.dropbox.com/scl/fi/i128qo8ida4ndpy3xrx6q/ABI-Abri-En-Bois.dwg?rlkey=26t85ypyn1xc2os5liisf99h3&dl=0"
 }

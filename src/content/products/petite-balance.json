@@ -12,5 +12,25 @@
     "Garantie 5 ans",
     "Installation incluse"
   ],
-  "ref": "AG03"
+  "ref": "AG03",
+  "faq": [
+    {
+      "question": "À quoi sert la Petite Balance dans un parc canin ?",
+      "answer": "La Petite Balance est un équipement d'agility essentiel pour développer l'équilibre, la proprioception et la confiance des chiens. Elle bascule légèrement, obligeant le chien à ajuster sa posture, ce qui renforce ses muscles stabilisateurs."
+    },
+    {
+      "question": "La Petite Balance est-elle sécurisée pour les chiens ?",
+      "answer": "Oui, la Petite Balance pour parc canin dispose d'un système de basculement contrôlé et progressif. La surface antidérapante assure une adhérence optimale pour éviter les glissades."
+    },
+    {
+      "question": "Cet obstacle convient-il aux petits chiens ?",
+      "answer": "Oui, ce modèle est parfaitement dimensionné pour les races de petite et moyenne taille ainsi que pour les chiots. La hauteur et l'amplitude de bascule sont réduites par rapport à la Grande Balance, rendant l'apprentissage moins intimidant pour les usagers de votre aire d'ébats canine."
+    },
+    {
+      "question": "Faut-il sceller cet agrès au sol ?",
+      "answer": "Oui, pour garantir le bon fonctionnement du pivot et la sécurité des usagers, la Petite Balance doit être fixée sur une surface plane et stable (dalle béton ou plots). Un ancrage solide est impératif pour éviter tout déplacement du module lors des passages répétés des chiens."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/9mc220otcw0j8a9u0nwxm/AG03-Petite-Balance.pdf?rlkey=n4rispp2kntrr1mpvl3g2vuun&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/dmdl5h1egb7nym91updzt/AG-03.dwg?rlkey=9n31x052nxcrplx86gxk3w1wn&dl=0"
 }

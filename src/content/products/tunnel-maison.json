@@ -13,5 +13,25 @@
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG25/B"
+  "ref": "AG25/B",
+  "faq": [
+    {
+      "question": "Quelle est la différence avec le tunnel maison standard ?",
+      "answer": "La différence majeure est la longueur. Le Tunnel Maison XL mesure le double du modèle classique, offrant une traversée plus longue et plus obscure. C'est un obstacle agility de niveau intermédiaire qui augmente la difficulté et le plaisir sportif au sein de votre parcours canin collectivité."
+    },
+    {
+      "question": "Est-ce plus difficile pour le chien de traverser ?",
+      "answer": "Oui, la longueur accrue demande plus de confiance et de témérité à l'animal pour s'engager jusqu'au bout. C'est un excellent exercice pour renforcer le courage du chien. Ce module complète parfaitement les tunnels courts d'initiation dans une aire d'ébats canine municipale bien équipée."
+    },
+    {
+      "question": "Comment fixer ce grand module au sol ?",
+      "answer": "En raison de sa prise au vent et de sa longueur, une fixation solide est impérative. Les façades doivent être scellées sur des plots en béton. Des points d'ancrage intermédiaires peuvent être nécessaires pour maintenir le tube au sol, garantissant la sécurité des usagers de votre parcours sportif canin."
+    },
+    {
+      "question": "Pourquoi garder le design maison sur un grand tunnel ?",
+      "answer": "Le design en forme de maisonnette adoucit l'aspect technique de l'obstacle. Même en version XL, il reste ludique et accueillant pour les familles. Cela permet d'intégrer un équipement sportif volumineux de manière harmonieuse et esthétique dans le paysage de votre parc pour chien ou camping."
+    }
+  ],
+  "technicalSheet": "https://www.dropbox.com/scl/fi/i2s8ph68h799urshlekbj/AG25B-Tunnel-Maison.pdf?rlkey=pvswfzllm9xvz1m73q7ux40fl&dl=0",
+  "dwgFile": null
 }
