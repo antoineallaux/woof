@@ -1,0 +1,16 @@
+{
+  "name": "Porte Laisse - Mobilier Parc Canin",
+  "slug": "porte-laisse",
+  "category": "mobilier",
+  "description": "Porte-Laisse pour parc canin en acier. Support pratique et robuste permettant d'accrocher les laisses, offrant un confort essentiel aux usagers de l'aire canine",
+  "longDescription": "Le Porte Laisse est un équipement indispensable pour organiser l'entrée de votre parc canin agility. Doté de quatre crochets robustes et d'un panneau décoratif gravé, il permet de suspendre les laisses ou d'attacher temporairement les chiens. C'est l'accessoire pratique qui sécurise et fluidifie l'accès à votre parcours canin collectivité.",
+  "image": "/images/products/PL.jpg",
+  "imageAlt": "Porte Laisse - Mobilier Parc Canin",
+  "features": [
+    "Mobilier urbain durable",
+    "Crochet inox anti-rouille",
+    "Conforme EN 16630",
+    "Garantie 5 ans"
+  ],
+  "ref": "PL"
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Abris en Bois - Mobilier Parc Canin",
+  "slug": "abris-en-bois",
+  "category": "mobilier",
+  "description": "Abris en bois robuste pour parc canin. Créez une zone de repos conviviale et abritée pour maîtres et chiens. Idéal pour l'aménagement des collectivités.",
+  "longDescription": "L'Abris en Bois est l'aménagement indispensable pour le confort des usagers de votre parc canin. Ce refuge esthétique permet aux maîtres de s'abriter des intempéries ou du soleil tout en surveillant leur chien sur le parcours agility. Sa structure naturelle s'intègre harmonieusement dans les espaces verts des collectivités et campings.",
+  "image": "/images/products/ABI.jpg",
+  "imageAlt": "Abris en Bois - Mobilier Parc Canin",
+  "features": [
+    "Structure en bois naturel",
+    "Mobilier urbain durable",
+    "Protection intempéries",
+    "Conforme EN 16630",
+    "Garantie 5 ans"
+  ],
+  "ref": "ABI"
+}

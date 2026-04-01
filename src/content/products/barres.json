@@ -1,0 +1,16 @@
+{
+  "name": "Barres - Parcours Agility Chien",
+  "slug": "barres",
+  "category": "saut",
+  "description": "Barres agility en acier pour parc canin. Agrès robuste et polyvalent à hauteur réglable, idéal pour l'entraînement au saut de tous les chiens.",
+  "longDescription": "Les Barres sont un module de saut double conçu pour l'initiation dans votre parcours canin agility. Composé de deux hauteurs basses fixes, il permet aux chiens débutants et de petite taille de s'entraîner progressivement. Fabriqué en acier galvanisé, cet obstacle garantit une résistance optimale pour les parcs publics.",
+  "image": "https://www.herkules-fitness.com/wp-content/uploads/2025/02/AG14.webp",
+  "imageAlt": "Barres - Parcours Agility Chien",
+  "features": [
+    "Acier galvanisé thermolaqué",
+    "Conforme EN 16630",
+    "Garantie 5 ans",
+    "Installation incluse"
+  ],
+  "ref": "AG14"
+}

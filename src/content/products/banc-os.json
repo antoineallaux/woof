@@ -1,0 +1,17 @@
+{
+  "name": "Banc Os - Mobilier Parc Canin",
+  "slug": "banc-os",
+  "category": "mobilier",
+  "description": "Banc Os pour parc canin en acier. Assise originale et robuste apportant une touche ludique et du confort aux visiteurs de votre aire canine extérieure.",
+  "longDescription": "Le Banc Os est une assise ludique sans dossier, idéale pour aménager votre parc canin agility. Fabriqué en PEHD résistant, ce banc en forme d'os apporte une touche décorative unique. Il offre un repos pratique aux maîtres tout en résistant aux intempéries et aux griffes dans les espaces publics.",
+  "image": "/images/products/BNII.jpg",
+  "imageAlt": "Banc Os - Mobilier Parc Canin",
+  "features": [
+    "Polyéthylène haute densité",
+    "Mobilier urbain durable",
+    "Assise ergonomique",
+    "Conforme EN 16630",
+    "Garantie 5 ans"
+  ],
+  "ref": "BNII"
+}

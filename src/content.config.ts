@@ -18,7 +18,7 @@ const products = defineCollection({
   schema: z.object({
     name: z.string(),
     slug: z.string(),
-    category: z.enum(['saut', 'tunnel', 'contact', 'plateforme']),
+    category: z.string(),
     description: z.string(),
     longDescription: z.string(),
     image: z.string(),
