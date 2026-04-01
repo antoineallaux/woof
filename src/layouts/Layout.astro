@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  schema?: object | object[];
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.href,
+  ogImage = '/assets/hero-agility-dog.webp',
+  noindex = false,
+  schema,
+} = Astro.props;
+
+const siteUrl = 'https://woof-parcs.fr';
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": ["Organization", "LocalBusiness"],
+  "name": "Woof!",
+  "url": siteUrl,
+  "logo": `${siteUrl}/assets/logo-header-woof.png`,
+  "description": "Équipements d'agility canine professionnels pour collectivités. Une marque du groupe Herkules Fitness.",
+  "telephone": "+33184602330",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Ile du Platais",
+    "addressLocality": "Villennes Sur Seine",
+    "postalCode": "78670",
+    "addressCountry": "FR"
+  },
+  "sameAs": []
+};
+
+const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:site_name" content="Woof!" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+    <link rel="icon" type="image/png" href="/assets/logo-header-woof.png" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    {schemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+  </head>
+  <body class="bg-bg text-text font-body">
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

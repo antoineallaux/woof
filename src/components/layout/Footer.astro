@@ -1,0 +1,69 @@
+---
+const productLinks = [
+  { label: 'Obstacles de saut', href: '/produits?category=saut' },
+  { label: 'Tunnels', href: '/produits?category=tunnel' },
+  { label: 'Passerelles', href: '/produits?category=contact' },
+  { label: 'Plateformes', href: '/produits?category=plateforme' },
+];
+const companyLinks = [
+  { label: 'Qui sommes-nous', href: '/qui-sommes-nous' },
+  { label: "L'Agility", href: '/agility' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
+];
+const legalLinks = [
+  { label: 'Mentions légales', href: '/mentions-legales' },
+  { label: 'Politique de confidentialité', href: '/confidentialite' },
+  { label: 'CGV', href: '/cgv' },
+];
+---
+
+<footer class="bg-text text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+      <div class="md:col-span-1">
+        <img src="/assets/logo-woof-yellow.png" alt="Woof!" class="h-10 w-auto mb-4" />
+        <p class="text-white/60 text-sm leading-relaxed mb-4">
+          Équipements d'agility canine professionnels pour collectivités. Une marque du groupe Herkules Fitness, leader européen.
+        </p>
+        <div class="flex flex-col gap-2 text-sm text-white/60">
+          <span>📍 Ile du Platais, 78670 Villennes Sur Seine</span>
+          <a href="tel:+33184602330" class="hover:text-primary transition-colors">📞 +33 1 84 60 23 30</a>
+          <a href="/contact" class="hover:text-primary transition-colors">✉️ Nous contacter</a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-display font-bold text-base mb-4">Nos Produits</h3>
+        <ul class="flex flex-col gap-2">
+          {productLinks.map(({ label, href }) => (
+            <li><a href={href} class="text-sm text-white/60 hover:text-primary transition-colors">{label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-display font-bold text-base mb-4">Entreprise</h3>
+        <ul class="flex flex-col gap-2">
+          {companyLinks.map(({ label, href }) => (
+            <li><a href={href} class="text-sm text-white/60 hover:text-primary transition-colors">{label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-display font-bold text-base mb-4">Informations</h3>
+        <ul class="flex flex-col gap-2">
+          {legalLinks.map(({ label, href }) => (
+            <li><a href={href} class="text-sm text-white/60 hover:text-primary transition-colors">{label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <p class="text-white/40 text-sm">© 2026 Woof! — Une marque Herkules Fitness</p>
+      <p class="text-white/40 text-sm">Tous droits réservés</p>
+    </div>
+  </div>
+</footer>
