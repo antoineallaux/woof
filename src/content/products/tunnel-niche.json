@@ -1,0 +1,11 @@
+{
+  "name": "Tunnel Niche",
+  "slug": "tunnel-niche",
+  "category": "tunnel",
+  "description": "Tunnel rigide en forme de niche, obstacle incontournable de tout parcours d'agility canin.",
+  "longDescription": "Le Tunnel Niche Woof! est un obstacle polyvalent qui stimule la confiance et l'agilité du chien. Sa structure rigide en PEHD résiste aux UV et aux chocs. L'entrée en forme de niche attire naturellement le chien. Facile à ancrer dans le sol avec les fixations fournies.",
+  "image": "/assets/AG24.webp",
+  "imageAlt": "Tunnel Niche pour parcours agility chien - Woof!",
+  "features": ["Structure PEHD anti-UV", "Ancrage sol inclus", "Intérieur lavable", "Conforme EN 16630", "Garantie 5 ans"],
+  "ref": "AG24"
+}
