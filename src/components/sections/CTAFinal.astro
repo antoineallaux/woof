@@ -1,0 +1,30 @@
+---
+import Button from '../ui/Button.astro';
+---
+
+<section class="py-20 bg-primary">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mb-4">
+      Prêt à créer un espace canin dans votre commune ?
+    </h2>
+    <p class="text-white/80 text-base sm:text-lg mb-10 max-w-2xl mx-auto">
+      Nos experts vous accompagnent de la conception à l'installation. Obtenez un devis personnalisé gratuit en 48h.
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-4 mb-10">
+      <Button href="/contact" variant="white" size="lg">
+        📋 Demander un devis gratuit
+      </Button>
+      <Button href="tel:+33184602330" variant="outline" size="lg" class="border-white text-white hover:bg-white hover:text-primary-darker">
+        📞 Nous appeler
+      </Button>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-6 text-white/70 text-sm">
+      <span><span aria-hidden="true">📍</span> Ile du Platais, 78670 Villennes Sur Seine</span>
+      <span><span aria-hidden="true">📞</span> +33 1 84 60 23 30</span>
+    </div>
+
+  </div>
+</section>

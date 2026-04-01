@@ -1,0 +1,104 @@
+---
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  faqs?: FAQItem[];
+}
+
+const defaultFaqs: FAQItem[] = [
+  {
+    q: "Quel budget prévoir pour un parcours d'agility canin ?",
+    a: "Le budget pour un parcours d'agility canin varie selon la taille et le nombre d'obstacles. Un parcours complet de 8 à 12 obstacles pour une collectivité est généralement compris entre 8 000 € et 25 000 € HT, installation incluse. Nous établissons des devis personnalisés gratuits en moins de 48h, adaptés à votre budget et à la surface disponible.",
+  },
+  {
+    q: "Quelle surface faut-il pour installer un parcours canin ?",
+    a: "Un parcours canin agility de base nécessite environ 300 à 400 m² pour offrir une expérience satisfaisante. Un parcours complet demande idéalement 600 à 800 m². Nous pouvons adapter notre gamme à des espaces plus restreints en sélectionnant les obstacles les plus adaptés à votre configuration.",
+  },
+  {
+    q: "Les équipements sont-ils conformes aux normes de sécurité ?",
+    a: "Oui, tous nos équipements Woof! sont conformes à la norme européenne EN 16630 relative aux équipements d'entraînement en plein air. Ils sont conçus avec des finitions antidérapantes, des coins arrondis et des matériaux résistants aux intempéries et au vandalisme. Chaque livraison est accompagnée du certificat de conformité.",
+  },
+  {
+    q: "Quelle est la durée de vie des équipements d'agility ?",
+    a: "Nos équipements en acier galvanisé thermolaqué sont conçus pour durer 15 à 20 ans en usage intensif extérieur. Nous offrons une garantie de 5 ans sur toute la gamme, et les pièces détachées sont disponibles pendant 10 ans minimum après l'achat. Un entretien annuel simple suffit à maintenir les équipements en parfait état.",
+  },
+  {
+    q: "Comment se déroule l'installation d'un parcours canin ?",
+    a: "L'installation est réalisée par nos équipes certifiées ou nos partenaires locaux. Elle comprend la préparation du terrain, la pose des ancres béton, l'assemblage des obstacles et les tests de sécurité finaux. L'installation d'un parcours complet prend généralement 1 à 2 jours. Nous fournissons ensuite un plan d'entretien et une formation à la maintenance.",
+  },
+  {
+    q: "Proposez-vous un accompagnement pour les marchés publics ?",
+    a: "Oui, nous accompagnons les collectivités dans leurs démarches de marchés publics. Notre équipe administrative peut vous aider à rédiger les cahiers des charges, fournir les documents techniques nécessaires et vous guider dans les procédures d'appel d'offres. Nous avons l'expérience de centaines de marchés publics en France et en Europe.",
+  },
+];
+
+const { faqs = defaultFaqs } = Astro.props;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    "name": q,
+    "acceptedAnswer": { "@type": "Answer", "text": a },
+  })),
+};
+---
+
+<section class="py-20 bg-bg">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+      <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Questions fréquentes</p>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight">
+        Tout savoir sur les parcours d'agility pour collectivités
+      </h2>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      {faqs.map((faq, i) => (
+        <div class="border border-primary-light rounded-xl overflow-hidden">
+          <button
+            class="w-full text-left px-6 py-4 flex items-center justify-between gap-4 bg-white hover:bg-surface transition-colors font-display font-bold text-sm sm:text-base text-text"
+            aria-expanded="false"
+            data-faq-toggle={i}
+          >
+            <span>{faq.q}</span>
+            <svg class="w-5 h-5 flex-shrink-0 text-primary transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="hidden px-6 pb-5 pt-2 bg-white text-muted text-sm leading-relaxed" data-faq-answer={i}>
+            {faq.a}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQPage JSON-LD schema -->
+<script is:inline define:vars={{ faqSchema }}>
+  const el = document.createElement('script');
+  el.type = 'application/ld+json';
+  el.textContent = JSON.stringify(faqSchema);
+  document.head.appendChild(el);
+</script>
+
+<script>
+  document.querySelectorAll('[data-faq-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const idx = (btn as HTMLElement).dataset.faqToggle;
+      const answer = document.querySelector(`[data-faq-answer="${idx}"]`) as HTMLElement;
+      const svg = btn.querySelector('svg') as SVGElement;
+      const isOpen = !answer.classList.contains('hidden');
+      answer.classList.toggle('hidden', isOpen);
+      svg.style.transform = isOpen ? '' : 'rotate(180deg)';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+</script>
