@@ -18,7 +18,14 @@ import Layout from '../layouts/Layout.astro';
           </h1>
           <p class="text-muted mb-8">Réponse garantie sous 48h. Devis personnalisé, sans engagement.</p>
 
-          <form class="flex flex-col gap-5" name="contact" method="POST" novalidate>
+          <div id="form-success" class="hidden bg-primary-light border border-primary rounded-xl p-6 text-center mb-4">
+            <p class="font-display font-bold text-primary-darker text-lg mb-1">Demande envoyée !</p>
+            <p class="text-muted text-sm">Nous vous répondrons sous 48h.</p>
+          </div>
+          <div id="form-error" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
+            <p class="text-red-700 text-sm font-semibold">Une erreur est survenue. Veuillez réessayer ou nous appeler.</p>
+          </div>
+          <form id="contact-form" class="flex flex-col gap-5" novalidate>
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="text-sm font-bold text-text block mb-1.5" for="prenom">Prénom *</label>
@@ -79,6 +86,32 @@ import Layout from '../layouts/Layout.astro';
               Réponse garantie sous 48h. Vos données ne sont jamais revendues.
             </p>
           </form>
+
+          <script is:inline>
+            document.getElementById('contact-form').addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const form = e.target;
+              const btn = form.querySelector('button[type="submit"]');
+              btn.disabled = true;
+              btn.textContent = 'Envoi en cours...';
+              const formData = new FormData(form);
+              try {
+                const res = await fetch('/api/contact', { method: 'POST', body: formData });
+                if (res.ok) {
+                  form.style.display = 'none';
+                  document.getElementById('form-success').classList.remove('hidden');
+                } else {
+                  document.getElementById('form-error').classList.remove('hidden');
+                  btn.disabled = false;
+                  btn.textContent = 'Envoyer ma demande de devis →';
+                }
+              } catch {
+                document.getElementById('form-error').classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = 'Envoyer ma demande de devis →';
+              }
+            });
+          </script>
         </div>
 
         <!-- Contact info -->

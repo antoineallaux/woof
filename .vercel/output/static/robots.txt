@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /mentions-legales
+Disallow: /confidentialite
+Disallow: /cgv
+
+Sitemap: https://woof-parcs.fr/sitemap-index.xml
