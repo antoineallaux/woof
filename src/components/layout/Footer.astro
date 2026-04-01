@@ -1,4 +1,5 @@
 ---
+const year = new Date().getFullYear();
 const productLinks = [
   { label: 'Obstacles de saut', href: '/produits?category=saut' },
   { label: 'Tunnels', href: '/produits?category=tunnel' },
@@ -27,9 +28,9 @@ const legalLinks = [
           Équipements d'agility canine professionnels pour collectivités. Une marque du groupe Herkules Fitness, leader européen.
         </p>
         <div class="flex flex-col gap-2 text-sm text-white/60">
-          <span>📍 Ile du Platais, 78670 Villennes Sur Seine</span>
-          <a href="tel:+33184602330" class="hover:text-primary transition-colors">📞 +33 1 84 60 23 30</a>
-          <a href="/contact" class="hover:text-primary transition-colors">✉️ Nous contacter</a>
+          <span><span aria-hidden="true">📍</span> Ile du Platais, 78670 Villennes Sur Seine</span>
+          <a href="tel:+33184602330" class="hover:text-primary transition-colors"><span aria-hidden="true">📞</span> +33 1 84 60 23 30</a>
+          <a href="/contact" class="hover:text-primary transition-colors"><span aria-hidden="true">✉️</span> Nous contacter</a>
         </div>
       </div>
 
@@ -62,7 +63,7 @@ const legalLinks = [
     </div>
 
     <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2">
-      <p class="text-white/40 text-sm">© 2026 Woof! — Une marque Herkules Fitness</p>
+      <p class="text-white/40 text-sm">© {year} Woof! — Une marque Herkules Fitness</p>
       <p class="text-white/40 text-sm">Tous droits réservés</p>
     </div>
   </div>

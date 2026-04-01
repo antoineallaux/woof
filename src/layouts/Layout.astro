@@ -9,7 +9,7 @@ interface Props {
   canonical?: string;
   ogImage?: string;
   noindex?: boolean;
-  schema?: object | object[];
+  schema?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -21,7 +21,7 @@ const {
   schema,
 } = Astro.props;
 
-const siteUrl = 'https://woof-parcs.fr';
+const siteUrl = Astro.site?.origin ?? 'https://woof-parcs.fr';
 
 const orgSchema = {
   "@context": "https://schema.org",
@@ -38,7 +38,6 @@ const orgSchema = {
     "postalCode": "78670",
     "addressCountry": "FR"
   },
-  "sameAs": []
 };
 
 const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];

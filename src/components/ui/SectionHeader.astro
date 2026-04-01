@@ -5,8 +5,9 @@ interface Props {
   subtitle?: string;
   center?: boolean;
   light?: boolean;
+  as?: 'h1' | 'h2' | 'h3';
 }
-const { label, title, subtitle, center = false, light = false } = Astro.props;
+const { label, title, subtitle, center = false, light = false, as: Tag = 'h2' } = Astro.props;
 ---
 <div class:list={[center && 'text-center']}>
   {label && (
@@ -14,9 +15,9 @@ const { label, title, subtitle, center = false, light = false } = Astro.props;
       {label}
     </p>
   )}
-  <h2 class:list={['font-display font-extrabold text-3xl md:text-4xl leading-tight mb-4', light ? 'text-white' : 'text-text']}>
+  <Tag class:list={['font-display font-extrabold text-3xl md:text-4xl leading-tight mb-4', light ? 'text-white' : 'text-text']}>
     {title}
-  </h2>
+  </Tag>
   {subtitle && (
     <p class:list={[
       'text-base leading-relaxed max-w-2xl',

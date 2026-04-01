@@ -16,7 +16,7 @@ const currentPath = Astro.url.pathname;
         <img src="/assets/logo-header-woof.png" alt="Woof! - Parcours Canin Agility" class="h-9 w-auto" />
       </a>
 
-      <nav class="hidden md:flex items-center gap-6">
+      <nav class="hidden md:flex items-center gap-6" aria-label="Navigation principale">
         {navLinks.map(({ label, href }) => (
           <a
             href={href}
@@ -56,7 +56,7 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <div id="mobile-menu" class="hidden md:hidden border-t border-primary-light bg-bg px-4 py-4">
-    <nav class="flex flex-col gap-3">
+    <nav class="flex flex-col gap-3" aria-label="Menu mobile">
       {navLinks.map(({ label, href }) => (
         <a href={href} class="font-semibold text-sm py-2 text-text/80 hover:text-primary transition-colors">
           {label}
