@@ -1,8 +1,8 @@
 /* src/styles/global.css */
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@import "@fontsource/syne/700.css";
-@import "@fontsource/syne/800.css";
+@import "@fontsource/outfit/700.css";
+@import "@fontsource/outfit/800.css";
 @import "@fontsource/nunito/400.css";
 @import "@fontsource/nunito/600.css";
 @import "@fontsource/nunito/700.css";
@@ -18,7 +18,7 @@
   --color-text: #1C1C1C;
   --color-muted: #6B7280;
 
-  --font-display: 'Syne', sans-serif;
+  --font-display: 'Outfit', sans-serif;
   --font-body: 'Nunito', sans-serif;
 }
 
