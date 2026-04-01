@@ -1,0 +1,80 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+
+const products = [
+  {
+    name: 'Grande Balance',
+    slug: 'grande-balance',
+    image: '/assets/AG04.webp',
+    imageAlt: 'Grande Balance - Parcours Agility Chien - Woof!',
+    category: 'Équilibre & Contact',
+    ref: 'AG04',
+  },
+  {
+    name: 'Barre de Saut 5 Niveaux',
+    slug: 'barre-saut-5-niveaux',
+    image: '/assets/AG17.webp',
+    imageAlt: 'Barre de Saut 5 Niveaux - Parcours Agility Chien - Woof!',
+    category: 'Saut',
+    ref: 'AG17',
+  },
+  {
+    name: 'Tunnel Niche',
+    slug: 'tunnel-niche',
+    image: '/assets/AG24.webp',
+    imageAlt: 'Tunnel Niche - Parcours Agility Chien - Woof!',
+    category: 'Tunnel',
+    ref: 'AG24',
+  },
+];
+---
+
+<section class="py-20 bg-bg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8">
+      <SectionHeader
+        label="Équipements d'agility canine"
+        title="Nos Best-Sellers pour Parcours Canin Agility"
+      />
+      <Button href="/produits" variant="outline" size="md" class="flex-shrink-0">
+        Voir tout le catalogue →
+      </Button>
+    </div>
+
+    <p class="text-muted text-base leading-relaxed mb-10 max-w-3xl">
+      Découvrez les équipements d'agility canine les plus plébiscités par les mairies et collectivités locales.
+      Chaque obstacle est certifié EN 16630 et garanti 5 ans.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {products.map((product) => (
+        <article class="bg-white rounded-2xl overflow-hidden border border-primary-light hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+          <div class="aspect-[4/3] overflow-hidden bg-surface">
+            <img
+              src={product.image}
+              alt={product.imageAlt}
+              class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-bold text-primary uppercase tracking-wider">{product.category}</span>
+            <h3 class="font-display font-bold text-lg text-text mt-1 mb-3">{product.name}</h3>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-muted font-semibold">Réf. {product.ref}</span>
+              <a
+                href={`/produits#${product.slug}`}
+                class="text-sm font-bold text-primary hover:text-primary-dark transition-colors"
+              >
+                Voir le détail →
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
