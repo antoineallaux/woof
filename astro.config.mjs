@@ -6,9 +6,17 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  site: 'https://woof-parcs.fr',
+  site: 'https://www.woof-parcs.fr',
+  trailingSlash: 'always',
   adapter: vercel(),
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    // pages légales exclues : bloquées par robots.txt, incohérent de les déclarer
+    sitemap({
+      filter: (page) =>
+        !['/cgv/', '/confidentialite/', '/mentions-legales/'].some((p) => page.endsWith(p)),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

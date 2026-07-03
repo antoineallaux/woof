@@ -113,11 +113,11 @@ const communeCards = [
         </p>
 
         <div class="flex flex-wrap gap-3">
-          <Button href="/produits" variant="white" size="lg">
+          <Button href="/produits/" variant="white" size="lg">
             Voir nos équipements
           </Button>
           <Button
-            href="/contact"
+            href="/contact/"
             variant="outline"
             size="lg"
             class="border-white text-white hover:bg-white hover:text-primary-darker"
@@ -319,7 +319,7 @@ const communeCards = [
       <p class="text-white/80 text-base sm:text-lg leading-relaxed mb-8">
         En France, on compte plus de 7 millions de chiens. Dans les zones urbaines, les propriétaires recherchent des espaces adaptés pour leurs compagnons. Un parc équipé d'un parcours agility devient rapidement un lieu de vie apprécié, renforçant l'attractivité de votre commune.
       </p>
-      <Button href="/contact" variant="white" size="lg">
+      <Button href="/contact/" variant="white" size="lg">
         Étudier votre projet →
       </Button>
     </div>
@@ -340,7 +340,7 @@ const communeCards = [
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         {agilityProducts.map((product) => (
           <a
-            href={`/produits/${product.slug}`}
+            href={`/produits/${product.slug}/`}
             class="group bg-white rounded-2xl border border-primary-light overflow-hidden hover:shadow-lg transition-shadow no-underline"
           >
             <div class="aspect-square overflow-hidden bg-surface">
@@ -360,7 +360,7 @@ const communeCards = [
       </div>
 
       <div class="text-center">
-        <Button href="/produits" variant="outline" size="lg">
+        <Button href="/produits/" variant="outline" size="lg">
           Voir tous les produits →
         </Button>
       </div>

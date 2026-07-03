@@ -96,7 +96,7 @@ import Layout from '../layouts/Layout.astro';
               btn.textContent = 'Envoi en cours...';
               const formData = new FormData(form);
               try {
-                const res = await fetch('/api/contact', { method: 'POST', body: formData });
+                const res = await fetch('/api/contact/', { method: 'POST', body: formData });
                 if (res.ok) {
                   form.style.display = 'none';
                   document.getElementById('form-success').classList.remove('hidden');

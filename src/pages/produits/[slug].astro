@@ -24,15 +24,16 @@ const categoryLabels: Record<string, string> = {
   plateforme: 'Plateforme', mobilier: 'Mobilier', agility: 'Équipement Agility'
 };
 
-// Product schema JSON-LD
+const siteUrl = Astro.site?.origin ?? 'https://www.woof-parcs.fr';
+
+// Product schema JSON-LD (pas d'offers : vente sur devis, pas de prix public)
 const productSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
   "name": name,
   "description": description,
-  "image": image,
-  "brand": { "@type": "Brand", "name": "Woof!" },
-  "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "EUR", "seller": { "@type": "Organization", "name": "Woof!" } }
+  "image": `${siteUrl}${image}`,
+  "brand": { "@type": "Brand", "name": "Woof!" }
 };
 
 // BreadcrumbList schema
@@ -40,8 +41,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://woof-parcs.fr/" },
-    { "@type": "ListItem", "position": 2, "name": "Produits", "item": "https://woof-parcs.fr/produits" },
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": `${siteUrl}/` },
+    { "@type": "ListItem", "position": 2, "name": "Produits", "item": `${siteUrl}/produits/` },
     { "@type": "ListItem", "position": 3, "name": name }
   ]
 };
@@ -66,7 +67,7 @@ const schemas = [productSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
     <ol class="flex items-center gap-2">
       <li><a href="/" class="hover:text-primary transition-colors">Accueil</a></li>
       <li><span class="text-muted/50">/</span></li>
-      <li><a href="/produits" class="hover:text-primary transition-colors">Produits</a></li>
+      <li><a href="/produits/" class="hover:text-primary transition-colors">Produits</a></li>
       <li><span class="text-muted/50">/</span></li>
       <li class="text-text font-semibold truncate">{name}</li>
     </ol>
@@ -129,7 +130,7 @@ const schemas = [productSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
         <div class="bg-surface border border-primary/20 rounded-xl p-5">
           <p class="font-display font-bold text-text text-base mb-1">Demandez un devis gratuit</p>
           <p class="text-muted text-sm font-body mb-4">Notre équipe vous accompagne dans votre projet d'aménagement.</p>
-          <Button href="/contact" variant="primary" size="md">Demander un devis →</Button>
+          <Button href="/contact/" variant="primary" size="md">Demander un devis →</Button>
         </div>
       </div>
     </div>
@@ -167,7 +168,7 @@ const schemas = [productSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
     <h2 class="font-display font-extrabold text-2xl text-text text-center mb-8">Produits complémentaires</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       {related.map(p => (
-        <a href={`/produits/${p.data.slug}`} class="group bg-white border border-primary/10 rounded-xl overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all">
+        <a href={`/produits/${p.data.slug}/`} class="group bg-white border border-primary/10 rounded-xl overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all">
           <div class="aspect-square bg-surface flex items-center justify-center p-4">
             <img src={p.data.image} alt={p.data.imageAlt} class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
           </div>
@@ -186,7 +187,7 @@ const schemas = [productSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
 
   <!-- Back link -->
   <div class="max-w-6xl mx-auto px-4 pb-16">
-    <a href="/produits" class="inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-body text-sm font-semibold">
+    <a href="/produits/" class="inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-body text-sm font-semibold">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       Retour au catalogue
     </a>

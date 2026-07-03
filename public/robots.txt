@@ -5,4 +5,4 @@ Disallow: /mentions-legales
 Disallow: /confidentialite
 Disallow: /cgv
 
-Sitemap: https://woof-parcs.fr/sitemap-index.xml
+Sitemap: https://www.woof-parcs.fr/sitemap-index.xml
