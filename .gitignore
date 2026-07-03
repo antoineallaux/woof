@@ -23,3 +23,13 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# outils de session Claude
+.worktrees/
+.superpowers/
+.playwright-mcp/
+
+# artefacts d'audit (captures, listings)
+/images-list.json
+/produits-full.png
+/woof-homepage-full.png
