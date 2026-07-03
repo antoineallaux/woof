@@ -16,6 +16,13 @@ const { Content } = await render(post);
 
 const siteUrl = Astro.site?.origin ?? 'https://www.woof-parcs.fr';
 
+const author = {
+  name: 'Antoine Allaux',
+  role: 'Fondateur de Woof!',
+  bio: "Fondateur de Woof! et dirigeant du groupe Herkules Fitness, spécialiste des équipements sportifs d'extérieur pour collectivités. Il accompagne mairies, bailleurs et aménageurs dans la création de parcs canins et d'aires d'agility durables et sécurisés.",
+  url: `${siteUrl}/qui-sommes-nous/`,
+};
+
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -23,7 +30,14 @@ const articleSchema = {
   "description": post.data.description,
   "image": `${siteUrl}${post.data.image}`,
   "datePublished": post.data.pubDate.toISOString(),
-  "author": { "@type": "Organization", "name": "Woof!" },
+  "author": {
+    "@type": "Person",
+    "name": author.name,
+    "jobTitle": author.role,
+    "description": author.bio,
+    "url": author.url,
+    "worksFor": { "@type": "Organization", "name": "Woof!" }
+  },
   "publisher": {
     "@type": "Organization",
     "name": "Woof!",
@@ -36,7 +50,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Accueil", "item": `${siteUrl}/` },
-    { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${siteUrl}/blog` },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${siteUrl}/blog/` },
     { "@type": "ListItem", "position": 3, "name": post.data.title },
   ],
 };
@@ -66,12 +80,13 @@ const breadcrumbSchema = {
         {post.data.title}
       </h1>
       <p class="text-muted text-base mb-4">{post.data.description}</p>
-      <time
-        class="text-xs text-muted block mb-8"
-        datetime={post.data.pubDate.toISOString()}
-      >
-        Publié le {post.data.pubDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
-      </time>
+      <p class="text-xs text-muted mb-8">
+        Par <a href="/qui-sommes-nous/" class="font-semibold text-text hover:text-primary">{author.name}</a>
+        <span aria-hidden="true"> · </span>
+        <time datetime={post.data.pubDate.toISOString()}>
+          Publié le {post.data.pubDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+      </p>
 
       <!-- Hero image -->
       <img
@@ -86,6 +101,14 @@ const breadcrumbSchema = {
       <div class="prose prose-lg prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline max-w-none">
         <Content />
       </div>
+
+      <!-- Auteur -->
+      <aside class="mt-12 bg-surface border border-primary/20 rounded-xl p-6">
+        <p class="text-xs font-label font-bold uppercase tracking-widest text-primary mb-2">À propos de l'auteur</p>
+        <p class="font-display font-bold text-text text-lg mb-1">{author.name}</p>
+        <p class="text-muted font-body text-sm leading-relaxed mb-3">{author.bio}</p>
+        <a href="/qui-sommes-nous/" class="text-sm font-body font-semibold text-primary hover:underline">En savoir plus sur Woof! →</a>
+      </aside>
 
     </div>
   </article>
