@@ -5,7 +5,9 @@ Site Astro SSG sur Vercel : la plupart des correctifs tiennent dans 3-4 fichiers
 
 ---
 
-## Lot 1 — Correctifs bloquants (~1 h, impact fort)
+## Lot 1 — Correctifs bloquants (~1 h, impact fort) — ✅ FAIT le 26/08/2026
+
+Livré en un commit sur `main` : bug og:image corrigé (`toAbs()` dans `Layout.astro`, condition dans `blog/[...slug].astro`), article échauffement réécrit (1 285 mots), 12 redirections 301 dans `vercel.json` (dont les 2 doublons produits supprimés), footer corrigé (`/produits/?category=`), 3 liens vides `](//)`  remplacés. Note : `petite-passerelle` redirigée vers `pont-i-aframe` (« Passerelle »), plus cohérent que `petit-bridge` (« Petite Palissade »).
 
 ### 1.1 Réparer les URL d'images malformées — 34 articles
 `src/layouts/Layout.astro` — remplacer aux lignes 62 et 69 :
@@ -34,7 +36,7 @@ const toAbs = (u) => (u?.startsWith('http') ? u : `${siteUrl}${u}`);
 | `/produits/grande-palissade` | `/produits/grand-bridge/` |
 | `/produits/petite-palissade` | `/produits/petit-bridge/` |
 | `/produits/passerelle` | `/produits/pont-i-aframe/` |
-| `/produits/petite-passerelle` | `/produits/petit-bridge/` |
+| `/produits/petite-passerelle` | `/produits/pont-i-aframe/` |
 | `/produits/tunnel-milou` | `/produits/tunnel-figiel/` |
 | `/produits/barres-saut` | `/produits/barres-saut-3-niveaux/` |
 | `/produits/tunnel` | `/produits/` |
