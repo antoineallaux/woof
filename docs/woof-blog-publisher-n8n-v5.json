@@ -1,0 +1,424 @@
+{
+  "name": "Woof! Blog Auto-Publisher v5",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10 * * *"
+            }
+          ]
+        },
+        "timezone": "Europe/Paris"
+      },
+      "id": "node-0001",
+      "name": "Chaque jour à 10h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "sheet",
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "1Q4i_K5OyF94ZFsBU3HNOFlCJWPHaOYsplir0VnCBX2M",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "PostPlanning de publication",
+          "mode": "name"
+        },
+        "range": "A:F",
+        "options": {
+          "returnAllRows": true
+        }
+      },
+      "id": "node-0002",
+      "name": "Lire le Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        460,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REMPLACER_PAR_ID_CREDENTIAL_GSHEETS",
+          "name": "Google Sheets OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const todayStr = new Date().toLocaleDateString('fr-FR', {\n  timeZone: 'Europe/Paris',\n  day: '2-digit',\n  month: '2-digit',\n  year: 'numeric'\n});\n\nreturn items.filter(item => {\n  const date = (item.json['Date'] || '').trim();\n  const statut = (item.json['Statut'] || '').trim();\n  return date === todayStr && statut === 'À publier';\n});"
+      },
+      "id": "node-0003",
+      "name": "Filtrer articles du jour",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const SYSTEM_PROMPT = \"Tu es un expert en rédaction SEO française spécialisé dans les parcs canins (caniparcs) et les équipements d'agility pour collectivités. Tu rédiges pour Woof!, une marque du groupe Herkules Fitness, fabricant d'équipements de sport en extérieur présent dans plus de 500 communes en Europe. Produits certifiés EN 16630, garantie 5 ans, installation incluse.\\n\\nTon audience : élus locaux, directeurs des services techniques, responsables des espaces verts dans les mairies et intercommunalités françaises.\\n\\nMOTS-CLÉS À INTÉGRER NATURELLEMENT (selon le sujet) : parc canin, caniparc, parc chien collectivité, agility canine, matériel agility professionnel, aire canine, espace canin.\\n\\nRÈGLES DE RÉDACTION :\\n- Longueur : 1200-1600 mots\\n- Structure : introduction accrocheuse, puis une section \\\"## À retenir\\\" avec 4-5 puces synthétiques, puis 4-6 sections H2 (avec H3 si utile), conclusion avec appel à l'action vers le devis gratuit\\n- Ton : expert, rassurant, institutionnel mais accessible\\n- Listes à puces pour la lisibilité\\n- Format : Markdown compatible MDX, PAS de frontmatter YAML, PAS de titre H1\\n\\nLIENS INTERNES — RÈGLE ABSOLUE : tu ne peux lier QUE les URLs listées ci-dessous, telles quelles. N'invente JAMAIS d'URL produit. Si un produit n'est pas dans la liste, n'en fais pas un lien. Intègre 2 à 4 liens produits pertinents par article.\\n- /produits/3-cercles/ : 3 Cercles\\n- /produits/a-frame-grand/ : Grande Passerelle\\n- /produits/abris-en-bois/ : Abris en Bois\\n- /produits/abris-en-metal/ : Abris en Métal\\n- /produits/anneaux-ligne/ : Anneaux Ligne\\n- /produits/anneaux-triangle/ : Anneaux Triangle\\n- /produits/banc-dos/ : Banc Dos\\n- /produits/banc-os/ : Banc Os\\n- /produits/barre-saut/ : Barre de Saut 5 Niveaux\\n- /produits/barres-hautes/ : Barres Hautes\\n- /produits/barres-saut-3-niveaux/ : Barre de Saut 3 Niveaux\\n- /produits/barres/ : Barres\\n- /produits/cerceau/ : Cerceau\\n- /produits/cercle-flot/ : Cercle Flot\\n- /produits/champignons/ : Champignons\\n- /produits/dog-park-1/ : Dog Park 1\\n- /produits/dog-park-2/ : Dog Park 2\\n- /produits/dog-park-3/ : Dog Park 3\\n- /produits/grand-bridge/ : Grande Palissade\\n- /produits/grand-triangle/ : Grand Triangle\\n- /produits/grande-balance/ : Grande Balance\\n- /produits/grande-plateforme/ : Grande Plateforme\\n- /produits/labyrinthe/ : Labyrinthe\\n- /produits/obstacles-os/ : Obstacles Os\\n- /produits/obstacles-pattes/ : Obstacles Pattes\\n- /produits/panneau-info/ : Panneau info\\n- /produits/patte/ : Patte\\n- /produits/petit-bridge/ : Petite Palissade\\n- /produits/petit-triangle/ : Petit Triangle\\n- /produits/petite-balance/ : Petite Balance\\n- /produits/petite-plateforme/ : Petite Plateforme\\n- /produits/petits-murs/ : Petits Murs\\n- /produits/piste-tube/ : Piste Tube\\n- /produits/pont-i-aframe/ : Passerelle\\n- /produits/porte-laisse-ii/ : Porte Laisse II\\n- /produits/porte-laisse/ : Porte Laisse\\n- /produits/slalom/ : Slalom\\n- /produits/triple-cerceau/ : Triple Cerceau\\n- /produits/triple-stand/ : Triple Stand\\n- /produits/tube-maison/ : Tunnel Maison\\n- /produits/tube/ : Tube\\n- /produits/tunnel-buda/ : Tunnel Niche\\n- /produits/tunnel-figiel/ : Tunnel Milou\\n- /produits/tunnel-maison/ : Tunnel Maison XL\\n- /produits/tunnel-rex/ : Tunnel Rex\\nAutres pages internes autorisées : /produits/ , /agility/ , /contact/ , /blog/ , /qui-sommes-nous/\\n\\nSOURCES EXTERNES — OBLIGATOIRE : cite 2 à 3 sources externes faisant autorité (Légifrance, service-public.fr, centrale-canine.fr, afnor.org, sites de mairies). Si tu n'es pas certain de l'URL exacte d'une page, lie le domaine racine. Jamais de lien inventé.\\n\\nFORMAT DE SORTIE — OBLIGATOIRE, réponds EXACTEMENT dans ce format, sans aucun texte avant ni après :\\nSEO_TITLE: <titre pour Google, 50-58 caractères maximum, mot-clé principal en tête>\\nSEO_DESCRIPTION: <description pour Google, 130-155 caractères, bénéfice + incitation>\\nIMAGE_ALT: <description factuelle de l'image d'illustration, 8-15 mots>\\n---ARTICLE---\\n<le corps de l'article en Markdown>\\n\\nINTERDIT : tout commentaire méta (\\\"je vais rédiger\\\", \\\"voici l'article\\\", etc.). Ta réponse commence directement par \\\"SEO_TITLE:\\\".\";\n\nconst titre = $input.item.json['Titre'] || '';\nconst categorie = $input.item.json['Catégorie'] || '';\n\nconst body = {\n  model: 'claude-sonnet-5',\n  max_tokens: 8000,\n  system: SYSTEM_PROMPT,\n  messages: [\n    {\n      role: 'user',\n      content: 'Rédige un article de blog SEO complet sur : ' + titre + '\\n\\nCatégorie : ' + categorie + '\\n\\nL\\'article doit apporter une vraie valeur informative aux collectivités françaises (équipements, réglementation, budget, entretien selon le sujet), intégrer naturellement 2-3 références à Woof! et Herkules Fitness, et se terminer par un appel à l\\'action pour demander un devis gratuit. Respecte strictement le format de sortie SEO_TITLE / SEO_DESCRIPTION / IMAGE_ALT / ---ARTICLE---.'\n    }\n  ]\n};\n\nreturn [{ json: { ...items[0].json, claudeBody: JSON.stringify(body) } }];"
+      },
+      "id": "node-0004",
+      "name": "Préparer prompt Claude",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "options": {
+          "timeout": 180000
+        },
+        "jsonBody": "={{ $json.claudeBody }}"
+      },
+      "id": "node-0005",
+      "name": "Appel Claude API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1120,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REMPLACER_PAR_ID_CREDENTIAL_ANTHROPIC",
+          "name": "Anthropic API Key (x-api-key)"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const ALLOWED_URLS = [\"/produits/3-cercles/\", \"/produits/a-frame-grand/\", \"/produits/abris-en-bois/\", \"/produits/abris-en-metal/\", \"/produits/anneaux-ligne/\", \"/produits/anneaux-triangle/\", \"/produits/banc-dos/\", \"/produits/banc-os/\", \"/produits/barre-saut/\", \"/produits/barres-hautes/\", \"/produits/barres-saut-3-niveaux/\", \"/produits/barres/\", \"/produits/cerceau/\", \"/produits/cercle-flot/\", \"/produits/champignons/\", \"/produits/dog-park-1/\", \"/produits/dog-park-2/\", \"/produits/dog-park-3/\", \"/produits/grand-bridge/\", \"/produits/grand-triangle/\", \"/produits/grande-balance/\", \"/produits/grande-plateforme/\", \"/produits/labyrinthe/\", \"/produits/obstacles-os/\", \"/produits/obstacles-pattes/\", \"/produits/panneau-info/\", \"/produits/patte/\", \"/produits/petit-bridge/\", \"/produits/petit-triangle/\", \"/produits/petite-balance/\", \"/produits/petite-plateforme/\", \"/produits/petits-murs/\", \"/produits/piste-tube/\", \"/produits/pont-i-aframe/\", \"/produits/porte-laisse-ii/\", \"/produits/porte-laisse/\", \"/produits/slalom/\", \"/produits/triple-cerceau/\", \"/produits/triple-stand/\", \"/produits/tube-maison/\", \"/produits/tube/\", \"/produits/tunnel-buda/\", \"/produits/tunnel-figiel/\", \"/produits/tunnel-maison/\", \"/produits/tunnel-rex/\", \"/produits/\", \"/agility/\", \"/contact/\", \"/blog/\", \"/qui-sommes-nous/\", \"/\"];\n\nconst sheetData = $('Filtrer articles du jour').item.json;\n\n// 1. Extraction robuste : concaténer TOUS les blocs text (jamais content[0].text)\nconst blocks = $input.item.json.content || [];\nconst raw = blocks.filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\nif (!raw) throw new Error('Réponse Claude vide');\n\n// 2. Parser le format à marqueurs\nconst m = raw.match(/SEO_TITLE:\\s*(.+)\\s*\\nSEO_DESCRIPTION:\\s*(.+)\\s*\\nIMAGE_ALT:\\s*(.+)\\s*\\n---ARTICLE---\\s*\\n([\\s\\S]+)/);\nif (!m) throw new Error('Format de sortie invalide (marqueurs SEO_TITLE/---ARTICLE--- absents)');\nconst seoTitle = m[1].trim();\nconst seoDescription = m[2].trim();\nconst imageAlt = m[3].trim();\nlet article = m[4].trim();\n\n// 3. Garde-fous contenu\nconst words = article.split(/\\s+/).length;\nif (words < 700) throw new Error(`Article trop court : ${words} mots (minimum 700)`);\nconst banned = ['je vais rédiger', 'je vais rechercher', 'avant de rédiger', \"voici l'article\", 'en tant qu’ia', \"en tant qu'ia\", 'en tant qu’assistant', \"en tant qu'assistant\"];\nconst lower = article.toLowerCase();\nfor (const b of banned) {\n  if (lower.includes(b)) throw new Error(`Phrase interdite détectée : \"${b}\"`);\n}\nif (/^#\\s/m.test(article)) throw new Error('Titre H1 détecté dans le corps');\n\n// 4. Garde-fous SEO (le schéma Astro rejette title>65 / desc>165 : on bloque avant)\nif (seoTitle.length < 20 || seoTitle.length > 65) throw new Error(`seoTitle : ${seoTitle.length} caractères (attendu 20-65)`);\nif (seoDescription.length < 80 || seoDescription.length > 165) throw new Error(`seoDescription : ${seoDescription.length} caractères (attendu 80-165)`);\n\n// 5. Liens internes : dé-linker toute URL produit hors liste blanche (le texte est conservé)\nconst ALLOWED = new Set(ALLOWED_URLS);\nlet unlinked = 0;\narticle = article.replace(/\\[([^\\]]+)\\]\\((\\/[^)\\s]*)\\)/g, (full, text, url) => {\n  const norm = url.endsWith('/') ? url : url + '/';\n  if (ALLOWED.has(norm)) return `[${text}](${norm})`;\n  unlinked++;\n  return text;\n});\n\n// 6. Lien externe requis\nconst extLinks = (article.match(/\\]\\(https?:\\/\\/(?!www\\.woof-parcs\\.fr)[^)]+\\)/g) || []).length;\n\n// 7. Frontmatter\nconst titre = sheetData['Titre'] || '';\nconst categorie = sheetData['Catégorie'] || '';\nconst imageUrl = sheetData['Image URL'] || '';\nconst date = sheetData['Date'] || '';\nconst rowNumber = sheetData['row_number'] || '';\n\nconst parts = date.split('/');\nconst isoDate = parts.length === 3 ? `${parts[2]}-${parts[1]}-${parts[0]}` : date;\n\nconst slug = titre\n  .toLowerCase()\n  .normalize('NFD')\n  .replace(/[̀-ͯ]/g, '')\n  .replace(/['’]/g, '')\n  .replace(/[^a-z0-9\\s-]/g, '')\n  .trim()\n  .replace(/\\s+/g, '-')\n  .replace(/-+/g, '-');\n\nconst esc = (s) => s.replace(/\"/g, \"'\");\nconst mdx = `---\ntitle: \"${esc(titre)}\"\ndescription: \"${esc(seoDescription)}\"\nseoTitle: \"${esc(seoTitle)}\"\nseoDescription: \"${esc(seoDescription)}\"\npubDate: ${isoDate}\nimage: \"${imageUrl}\"\nimageAlt: \"${esc(imageAlt)}\"\ncategory: \"${categorie}\"\n---\n\n${article}`;\n\nconst mdxBase64 = Buffer.from(mdx, 'utf-8').toString('base64');\nreturn [{ json: { slug, mdxBase64, titre, date, isoDate, rowNumber, categorie, imageUrl, words, extLinks, unlinked } }];"
+      },
+      "id": "node-0006",
+      "name": "Valider + Formater MDX",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1340,
+        300
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.github.com/repos/antoineallaux/woof/contents/src/content/blog/{{ $json.slug }}.mdx",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "X-GitHub-Api-Version",
+              "value": "2022-11-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"message\": \"content: publish blog article - {{ $json.titre }}\",\n  \"content\": \"{{ $json.mdxBase64 }}\",\n  \"branch\": \"main\"\n}",
+        "options": {
+          "retryOnFail": true,
+          "maxTries": 2
+        }
+      },
+      "id": "node-0007",
+      "name": "Commit MDX sur GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1560,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REMPLACER_PAR_ID_CREDENTIAL_GITHUB",
+          "name": "GitHub Token (Authorization: Bearer ghp_...)"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "resource": "sheet",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Q4i_K5OyF94ZFsBU3HNOFlCJWPHaOYsplir0VnCBX2M",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "PostPlanning de publication",
+          "mode": "name"
+        },
+        "range": "A:F",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Valider + Formater MDX').item.json.rowNumber }}",
+            "Statut": "Publié"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "row_number",
+              "type": "number",
+              "display": true,
+              "required": false,
+              "displayName": "row_number",
+              "defaultMatch": true,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Statut",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Statut",
+              "defaultMatch": false,
+              "canBeUsedToMatch": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-0008",
+      "name": "Marquer Publié dans le Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1780,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REMPLACER_PAR_ID_CREDENTIAL_GSHEETS",
+          "name": "Google Sheets OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "sheet",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Q4i_K5OyF94ZFsBU3HNOFlCJWPHaOYsplir0VnCBX2M",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "PostPlanning de publication",
+          "mode": "name"
+        },
+        "range": "A:F",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Filtrer articles du jour').item.json.row_number }}",
+            "Statut": "=Erreur : {{ ($json.error?.message || $json.message || 'inconnue').toString().substring(0, 180) }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "row_number",
+              "type": "number",
+              "display": true,
+              "required": false,
+              "displayName": "row_number",
+              "defaultMatch": true,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Statut",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Statut",
+              "defaultMatch": false,
+              "canBeUsedToMatch": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "marquer-erreur-sheet-v5",
+      "name": "Marquer Erreur dans le Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1780,
+        520
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REMPLACER_PAR_ID_CREDENTIAL_GSHEETS",
+          "name": "Google Sheets OAuth2"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Chaque jour à 10h": {
+      "main": [
+        [
+          {
+            "node": "Lire le Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire le Google Sheet": {
+      "main": [
+        [
+          {
+            "node": "Filtrer articles du jour",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrer articles du jour": {
+      "main": [
+        [
+          {
+            "node": "Préparer prompt Claude",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer prompt Claude": {
+      "main": [
+        [
+          {
+            "node": "Appel Claude API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Appel Claude API": {
+      "main": [
+        [
+          {
+            "node": "Valider + Formater MDX",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Marquer Erreur dans le Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Commit MDX sur GitHub": {
+      "main": [
+        [
+          {
+            "node": "Marquer Publié dans le Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Marquer Erreur dans le Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valider + Formater MDX": {
+      "main": [
+        [
+          {
+            "node": "Commit MDX sur GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Marquer Erreur dans le Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true
+  },
+  "versionId": "5",
+  "id": "woof-blog-auto-publisher-v5",
+  "tags": [
+    {
+      "name": "woof"
+    },
+    {
+      "name": "blog"
+    }
+  ]
+}
