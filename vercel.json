@@ -10,5 +10,31 @@
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/produits/grande-passerelle", "destination": "/produits/a-frame-grand/", "permanent": true },
+    { "source": "/produits/grande-passerelle/", "destination": "/produits/a-frame-grand/", "permanent": true },
+    { "source": "/produits/grande-palissade", "destination": "/produits/grand-bridge/", "permanent": true },
+    { "source": "/produits/grande-palissade/", "destination": "/produits/grand-bridge/", "permanent": true },
+    { "source": "/produits/petite-palissade", "destination": "/produits/petit-bridge/", "permanent": true },
+    { "source": "/produits/petite-palissade/", "destination": "/produits/petit-bridge/", "permanent": true },
+    { "source": "/produits/passerelle", "destination": "/produits/pont-i-aframe/", "permanent": true },
+    { "source": "/produits/passerelle/", "destination": "/produits/pont-i-aframe/", "permanent": true },
+    { "source": "/produits/petite-passerelle", "destination": "/produits/pont-i-aframe/", "permanent": true },
+    { "source": "/produits/petite-passerelle/", "destination": "/produits/pont-i-aframe/", "permanent": true },
+    { "source": "/produits/tunnel-milou", "destination": "/produits/tunnel-figiel/", "permanent": true },
+    { "source": "/produits/tunnel-milou/", "destination": "/produits/tunnel-figiel/", "permanent": true },
+    { "source": "/produits/barres-saut", "destination": "/produits/barres-saut-3-niveaux/", "permanent": true },
+    { "source": "/produits/barres-saut/", "destination": "/produits/barres-saut-3-niveaux/", "permanent": true },
+    { "source": "/produits/tunnel", "destination": "/produits/", "permanent": true },
+    { "source": "/produits/tunnel/", "destination": "/produits/", "permanent": true },
+    { "source": "/produits/barre-saut-5-niveaux", "destination": "/produits/barre-saut/", "permanent": true },
+    { "source": "/produits/barre-saut-5-niveaux/", "destination": "/produits/barre-saut/", "permanent": true },
+    { "source": "/produits/tunnel-niche", "destination": "/produits/tunnel-buda/", "permanent": true },
+    { "source": "/produits/tunnel-niche/", "destination": "/produits/tunnel-buda/", "permanent": true },
+    { "source": "/categories/parcours-agility-chien", "destination": "/produits/", "permanent": true },
+    { "source": "/categories/parcours-agility-chien/", "destination": "/produits/", "permanent": true },
+    { "source": "/blog/etude-les-benefices-du-parc-canin-sur-la-sante-des-proprietaire", "destination": "/blog/etude-les-benefices-du-parc-canin-sur-la-sante-des-proprietaires/", "permanent": true },
+    { "source": "/blog/etude-les-benefices-du-parc-canin-sur-la-sante-des-proprietaire/", "destination": "/blog/etude-les-benefices-du-parc-canin-sur-la-sante-des-proprietaires/", "permanent": true }
   ]
 }

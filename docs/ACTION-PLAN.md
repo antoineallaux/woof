@@ -1,88 +1,183 @@
 # Plan d'action SEO — woof-parcs.fr
 
-Priorisé par impact / effort. Le site est en Astro sur Vercel : la plupart des correctifs tiennent dans `astro.config.mjs`, `vercel.json` et les layouts.
+Issu de l'audit du 26 août 2026 (`FULL-AUDIT-REPORT.md`). Priorisé par impact / effort.
+Site Astro SSG sur Vercel : la plupart des correctifs tiennent dans 3-4 fichiers.
 
 ---
 
-## 🔴 Priorité 1 — Alignement du domaine canonique (impact fort, effort faible)
+## Lot 1 — Correctifs bloquants (~1 h, impact fort)
 
-**Le** correctif de cet audit. Choisir **un seul hôte** et tout aligner dessus. Recommandation : garder `www.woof-parcs.fr` (c'est ce que Vercel sert déjà) — sinon inverser la redirection, mais ne pas rester dans l'état actuel.
+### 1.1 Réparer les URL d'images malformées — 34 articles
+`src/layouts/Layout.astro` — remplacer aux lignes 62 et 69 :
+```astro
+---
+const toAbs = (u) => (u?.startsWith('http') ? u : `${siteUrl}${u}`);
+---
+<meta property="og:image" content={toAbs(ogImage)} />
+<meta name="twitter:image" content={toAbs(ogImage)} />
+```
+`src/pages/blog/[...slug].astro:31` — même logique dans le schéma `BlogPosting` :
+```js
+"image": post.data.image?.startsWith('http') ? post.data.image : `${siteUrl}${post.data.image}`,
+```
+**Vérification** : `curl -s <url_article> | grep 'og:image'` ne doit plus contenir `woof-parcs.frhttps`.
 
-1. **Canonicals** : `site: 'https://www.woof-parcs.fr'` dans `astro.config.mjs` → corrige d'un coup canonicals, sitemap et og:url générés.
-2. **Sitemap** : régénérer (les 92 URLs doivent être en www).
-3. **robots.txt** : `Sitemap: https://www.woof-parcs.fr/sitemap-index.xml`.
-4. **JSON-LD** : `Organization.url`, `logo` et toutes les URLs de schema en www.
-5. **Redirection** : vérifier que non-www → www est en **308 permanent** (config domaine Vercel : définir www comme domaine principal, redirect 308).
-6. Après déploiement : Search Console → ajouter la propriété www si absente, soumettre le sitemap.
+### 1.2 Traiter l'article cassé
+`src/content/blog/echauffement-canin-...` : réécrire complètement (le contenu actuel est le prompt de l'IA, 163 mots) ou passer `draft: true` en attendant. Ne pas laisser en ligne.
 
-## 🔴 Priorité 2 — Cohérence robots.txt / sitemap (5 min)
+### 1.3 Rediriger les 9 liens internes en 404
+`vercel.json`, section `redirects` (permanent 301) :
 
-- Retirer `/cgv/`, `/confidentialite/`, `/mentions-legales/` du sitemap (elles sont en Disallow — signaux contradictoires).
-- Alternative : lever le Disallow et mettre `noindex` sur ces pages (plus propre : le Disallow n'empêche pas l'indexation, seulement le crawl).
+| Source | Destination |
+|---|---|
+| `/produits/grande-passerelle` | `/produits/a-frame-grand/` |
+| `/produits/grande-palissade` | `/produits/grand-bridge/` |
+| `/produits/petite-palissade` | `/produits/petit-bridge/` |
+| `/produits/passerelle` | `/produits/pont-i-aframe/` |
+| `/produits/petite-passerelle` | `/produits/petit-bridge/` |
+| `/produits/tunnel-milou` | `/produits/tunnel-figiel/` |
+| `/produits/barres-saut` | `/produits/barres-saut-3-niveaux/` |
+| `/produits/tunnel` | `/produits/` |
+| `/categories/parcours-agility-chien` | `/produits/` |
+| `/blog/etude-les-benefices-du-parc-canin-sur-la-sante-des-proprietaire` | `/blog/etude-les-benefices-du-parc-canin-sur-la-sante-des-proprietaires/` |
 
-## 🟠 Priorité 3 — Trailing slash unique (30 min)
+Corriger aussi les 2 liens `//` (liens vides) dans `etude-les-benefices...` et `pourquoi-varier-les-obstacles...`.
 
-`/produits/grande-balance` et `/produits/grande-balance/` répondent tous deux 200.
-- Astro : `trailingSlash: 'always'` (ou `'never'`, mais cohérent avec les canonicals qui ont le slash → `'always'`).
-- Sur Vercel, `"trailingSlash": true` dans `vercel.json` ajoute la redirection 308 automatique.
-- Harmoniser les liens internes (ils sont actuellement sans slash).
+### 1.4 Supprimer les 2 doublons produits
+Supprimer `src/content/products/barre-saut-5-niveaux.json` (ref AG17, doublon de `barre-saut`) et `tunnel-niche.json` (ref AG24, doublon de `tunnel-buda`), puis ajouter les 301 correspondantes vers `/produits/barre-saut/` et `/produits/tunnel-buda/`.
 
-## 🟠 Priorité 4 — Maillage interne des produits (impact fort, effort moyen)
+### 1.5 Supprimer les 348 redirections internes
+Dans le composant de navigation : `/produits?category=X` → `/produits/?category=X` (4 liens × 87 pages).
 
-44 fiches produit avec un seul lien entrant chacune :
-- **Produits similaires** : bloc « Dans la même gamme » sur chaque fiche (3-4 produits, même catégorie).
-- **Blog → produits** : les 34 articles mentionnent balance, tunnel, cerceau, slalom… sans lier les fiches. Ajouter 2-3 liens contextuels par article vers les produits concernés.
-- **Anchor text** : donner un `aria-label`/texte aux 52 liens images.
+---
 
-## 🟠 Priorité 5 — E-E-A-T du blog (impact moyen-fort, effort moyen)
+## Lot 2 — On-page et données structurées (~2-3 h, impact fort)
 
-- Créer un auteur réel (`Person` avec nom, bio courte, photo) et remplacer `author: Organization` dans le schema BlogPosting.
-- Ajouter une page auteur liée depuis chaque article.
-- Ajouter `dateModified` et sourcer les affirmations (norme EN 16630, études citées dans les articles « étude » et « avis vétérinaire » → nommer les sources).
+### 2.1 Titles et meta descriptions dédiés
+`src/content.config.ts` — ajouter au schéma de la collection blog :
+```ts
+seoTitle: z.string().max(60).optional(),
+seoDescription: z.string().max(160).optional(),
+```
+Puis dans `blog/[...slug].astro` : `title={post.data.seoTitle ?? post.data.title}`, idem pour la description.
+Concerne 36 titles (dont un à 124 caractères) et 35 descriptions (dont une à 438 caractères). Commencer par les 10 articles les plus stratégiques.
 
-## 🟡 Priorité 6 — Corrections schema (1 h)
-
-- `Product.image` : URL absolue (`https://www.woof-parcs.fr/assets/AG04.webp`).
-- `Offer` sans prix : soit retirer `offers` (B2B devis), soit garder et accepter l'absence de rich result prix. Ne pas inventer de prix.
-- `Organization.sameAs` : ajouter LinkedIn/réseaux sociaux + lien herkules-fitness.com si pertinent.
-- `FAQPage` : garder le contenu visible (utile aux visiteurs et aux IA), mais savoir qu'aucun rich result Google n'en sortira (restreint depuis août 2023).
-
-## 🟡 Priorité 7 — Headers de sécurité (30 min)
-
-Dans `vercel.json` :
-```json
-{
-  "headers": [{
-    "source": "/(.*)",
-    "headers": [
-      { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-      { "key": "X-Content-Type-Options", "value": "nosniff" },
-      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-      { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-      { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" }
-    ]
-  }]
+### 2.2 Enrichir le schéma `Product` — 47 fiches
+`src/pages/produits/[slug].astro:29` :
+```js
+"sku": ref,
+"material": "Acier galvanisé thermolaqué / PEHD",
+"manufacturer": { "@type": "Organization", "name": "Herkules Fitness" },
+"offers": {
+  "@type": "Offer",
+  "availability": "https://schema.org/InStock",
+  "priceCurrency": "EUR",
+  "url": `${siteUrl}/produits/${slug}/`,
+  "seller": { "@type": "Organization", "name": "Woof!" }
 }
 ```
-(CSP : à construire progressivement, commencer en `Content-Security-Policy-Report-Only`.)
+Pas de prix inventé : l'`Offer` sans `price` ne déclenchera pas d'extrait enrichi, mais consolide l'entité produit pour Google et les LLM.
 
-## 🟢 Priorité 8 — Visibilité IA / GEO (1 h)
+### 2.3 Corriger le schéma d'organisation
+`src/layouts/Layout.astro` — passer de `["Organization", "LocalBusiness"]` à `Organization` seul, et ajouter :
+```js
+"sameAs": ["https://www.herkules-fitness.com", "<URL LinkedIn Herkules>"],
+"areaServed": { "@type": "Country", "name": "France" },
+"parentOrganization": { "@type": "Organization", "name": "Herkules Fitness" }
+```
+Woof! ne reçoit pas de public : `LocalBusiness` est déclaré sans les champs qui le rendraient éligible (`image`, `openingHours`, `geo`).
 
-- Créer `/public/llms.txt` : nom du site, description, liens vers /produits, /agility, /blog, /contact.
-- Contenu « citable » : ajouter chiffres sourcés et définitions nettes dans les articles piliers.
+### 2.4 `og:image` par fiche produit
+`src/pages/produits/[slug].astro:64` : `<Layout ... ogImage={image}>`.
 
-## 🟢 Priorité 9 — Finitions social meta (15 min)
-
-- `og:image:width` = 1200, `og:image:height` = 630.
-- `twitter:site` si un compte existe.
+### 2.5 Les 2 `alt` manquants
+Sur `/qui-sommes-nous/`.
 
 ---
 
-## Vérifications post-déploiement
+## Lot 3 — Contenu et E-E-A-T (récurrent, impact moyen-fort)
 
-1. `curl -I https://woof-parcs.fr/` → doit renvoyer **308** vers www.
-2. Canonical de l'accueil = `https://www.woof-parcs.fr/`.
-3. Sitemap : toutes les URLs en www, sans les pages légales.
-4. Rich Results Test Google sur une fiche produit.
-5. Search Console : soumettre le sitemap, surveiller la couverture 2-3 semaines.
-6. Relancer PageSpeed Insights (rate-limité pendant l'audit) pour valider les Core Web Vitals.
+### 3.1 Relancer le pipeline n8n
+Dernière publication : 1er avril 2026, soit près de 5 mois. Migrer le workflow v5 sur la branche `main` et ajouter au prompt trois garde-fous qui auraient évité les problèmes actuels :
+- title ≤ 60 caractères, description ≤ 160 ;
+- **ne jamais deviner un slug produit** — fournir la liste réelle des 47 slugs dans le prompt ;
+- 2-3 liens externes vers des sources faisant autorité.
+
+Ajouter une étape de validation avant commit : rejeter tout article de moins de 600 mots ou contenant « je vais », « avant de rédiger », « voici l'article ».
+
+### 3.2 Aligner les slugs produits sur les noms français
+Cause racine des 404 du lot 1.3, et gain SEO direct : `grande-passerelle` est une requête, `a-frame-grand` non.
+
+| Slug actuel | Slug cible |
+|---|---|
+| `a-frame-grand` | `grande-passerelle` |
+| `grand-bridge` | `grande-palissade` |
+| `petit-bridge` | `petite-palissade` |
+| `pont-i-aframe` | `passerelle` |
+| `tunnel-buda` | `tunnel-niche` |
+| `tunnel-figiel` | `tunnel-milou` |
+| `tube-maison` | `tunnel-maison` |
+| `dog-park-1/2/3` | à franciser |
+
+Avec 301 depuis les anciens slugs. À faire **après** le lot 1 (les redirections du 1.3 deviendront alors inutiles, mais elles ne coûtent rien).
+
+### 3.3 Ajouter des sources externes
+0 lien sortant sur 34 articles. Priorité aux articles réglementaires (`ce-que-dit-la-loi`, `responsabilite-juridique`, `hygiene-et-proprete`, `urbanisme-implanter`) : Légifrance, AFNOR / norme EN 16630, Code rural. C'est ce qui rend un contenu citable par Google comme par les LLM.
+
+### 3.4 Ajouter `dateModified` au schéma `BlogPosting`
+Absent des 34 articles. Permet de valoriser une mise à jour sans republier.
+
+### 3.5 Étoffer `/contact/`
+97 mots. Ajouter : délai de réponse 48 h, périmètre France entière, étapes du devis, procédure marchés publics, interlocuteurs.
+
+---
+
+## Lot 4 — Performance et images (~2 h, impact moyen)
+
+### 4.1 Rapatrier les 34 images de blog depuis Supabase
+Elles sont servies avec `cache-control: no-cache`, non mises en cache par Cloudflare (`cf-cache-status: MISS`), 172 Ko, sur un domaine tiers sans `preconnect` — le tout sur l'image LCP de chaque article. Les déplacer vers `/public/assets/blog/` pour bénéficier du CDN Vercel comme le reste du site.
+Palliatif immédiat si le rapatriement prend du temps :
+```html
+<link rel="preconnect" href="https://yjqprmiaolgdzswplonj.supabase.co" crossorigin>
+```
+
+### 4.2 Passer aux composants images d'Astro
+Aucune des 543 `<img>` n'a de `srcset` : un mobile télécharge la même image qu'un écran 27 pouces. `astro:assets` (`<Image>` / `<Picture>`) génère automatiquement dimensions, `srcset` et WebP.
+Le risque de CLS est faible (toutes les images ont une contrainte de hauteur CSS) — le gain porte sur le poids transféré.
+
+### 4.3 Convertir l'image LCP de l'accueil
+`/assets/26-CerceauDeSaut.jpg` : 130 Ko en JPEG. Convertir en WebP et redimensionner pour le viewport mobile.
+
+### 4.4 Alléger les logos
+`logo-header-woof.png` (21 Ko) et `logo-woof-yellow.png` (19 Ko) sont chargés sur les 87 pages. Un SVG ou un WebP optimisé ferait moins de 5 Ko.
+
+### 4.5 Favicon dédié
+Actuellement `logo-header-woof.png` (21 Ko). Un PNG 32×32 suffit.
+
+---
+
+## Lot 5 — Compléments (~1 h, impact faible)
+
+- **`lastmod` dans le sitemap** — activer l'option du plugin `@astrojs/sitemap`.
+- **`llms-full.txt`** — absent. Le `llms.txt` est déjà à 90/100 ; une version étendue listant les 47 produits et les 34 articles améliorerait la citabilité en recherche générative.
+- **CSP** — seul en-tête de sécurité manquant (85/100). Aucun impact SEO, à traiter comme un point sécurité.
+- **`twitter:site` / `twitter:creator`** — optionnels, à ajouter si un compte X existe.
+- **`og:image:width` / `og:image:height`** (1200×630) — améliore le rendu des aperçus sociaux.
+
+---
+
+## Ordre d'exécution recommandé
+
+1. **Lot 1** en une session — 5 correctifs, tous vérifiables par `curl`, impact immédiat sur le partage social et le maillage interne.
+2. **Lot 2** dans la foulée — même zone de code, un seul déploiement possible avec le lot 1.
+3. **Lot 3.1 et 3.2** — le pipeline et les slugs sont liés : régler les slugs avant de relancer la publication évite de regénérer des 404.
+4. **Lot 4** quand le temps le permet — mesurable une fois les Core Web Vitals accessibles.
+5. **Lot 5** en fin de cycle.
+
+## À mesurer après déploiement
+
+Les Core Web Vitals n'ont pas pu être mesurés (quota PageSpeed dépassé). Après le lot 1 :
+- Search Console → **Signaux Web essentiels** (données terrain, plus fiables que le labo) ;
+- Search Console → **Indexation** : vérifier la disparition des 404 ;
+- Test des résultats enrichis sur un article (image de l'`Article`) et une fiche produit ;
+- Aperçu de partage LinkedIn sur un article (validation directe du correctif 1.1).

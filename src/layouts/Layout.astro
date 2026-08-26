@@ -23,6 +23,9 @@ const {
 
 const siteUrl = Astro.site?.origin ?? 'https://www.woof-parcs.fr';
 
+// Ne préfixe que les chemins relatifs (les images blog Supabase sont déjà absolues)
+const toAbs = (u: string) => (u.startsWith('http') ? u : `${siteUrl}${u}`);
+
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness"],
@@ -59,14 +62,14 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:image" content={toAbs(ogImage)} />
     <meta property="og:site_name" content="Woof!" />
     <meta property="og:locale" content="fr_FR" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+    <meta name="twitter:image" content={toAbs(ogImage)} />
 
     <link rel="icon" type="image/png" href="/assets/logo-header-woof.png" />
 
