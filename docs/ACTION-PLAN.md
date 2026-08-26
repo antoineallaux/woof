@@ -53,7 +53,9 @@ Dans le composant de navigation : `/produits?category=X` → `/produits/?categor
 
 ---
 
-## Lot 2 — On-page et données structurées (~2-3 h, impact fort)
+## Lot 2 — On-page et données structurées (~2-3 h, impact fort) — ✅ FAIT le 26/08/2026
+
+Livré : champs `seoTitle`/`seoDescription` ajoutés au schéma blog et remplis sur les 34 articles (mots-clés issus de la recherche : « parc canin », « caniparc » — terme utilisé par les mairies, absent du site jusqu'ici —, « agility collectivité », « matériel agility professionnel »). Titles de /agility/ et /qui-sommes-nous/ raccourcis. Résultat : 0 title > 60 car. sur les 88 pages. Schéma Product enrichi (sku, manufacturer Herkules, material déduit des descriptions, audience, Offer sans prix). Organization seul avec sameAs (herkules-fitness.com + linkedin.com/company/herkules-outdoor-fitness), parentOrganization, areaServed France. og:image produit spécifique. Point 2.5 : faux positif — les 2 `alt=""` de /qui-sommes-nous/ sont des images décoratives avec `aria-hidden`, conformes.
 
 ### 2.1 Titles et meta descriptions dédiés
 `src/content.config.ts` — ajouter au schéma de la collection blog :
