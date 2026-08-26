@@ -26,13 +26,14 @@ const siteUrl = Astro.site?.origin ?? 'https://www.woof-parcs.fr';
 // Ne préfixe que les chemins relatifs (les images blog Supabase sont déjà absolues)
 const toAbs = (u: string) => (u.startsWith('http') ? u : `${siteUrl}${u}`);
 
+// Organization (pas LocalBusiness : fabricant livrant en France entière, pas de point de vente)
 const orgSchema = {
   "@context": "https://schema.org",
-  "@type": ["Organization", "LocalBusiness"],
+  "@type": "Organization",
   "name": "Woof!",
   "url": siteUrl,
   "logo": `${siteUrl}/assets/logo-header-woof.png`,
-  "description": "Équipements d'agility canine professionnels pour collectivités. Une marque du groupe Herkules Fitness.",
+  "description": "Fabricant français d'équipements d'agility canine et de caniparcs pour collectivités. Une marque du groupe Herkules Fitness.",
   "telephone": "+33184602330",
   "address": {
     "@type": "PostalAddress",
@@ -41,6 +42,16 @@ const orgSchema = {
     "postalCode": "78670",
     "addressCountry": "FR"
   },
+  "areaServed": { "@type": "Country", "name": "France" },
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Herkules Fitness",
+    "url": "https://www.herkules-fitness.com"
+  },
+  "sameAs": [
+    "https://www.herkules-fitness.com",
+    "https://www.linkedin.com/company/herkules-outdoor-fitness"
+  ],
 };
 
 const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];

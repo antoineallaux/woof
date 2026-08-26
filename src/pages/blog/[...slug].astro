@@ -57,8 +57,8 @@ const breadcrumbSchema = {
 ---
 
 <Layout
-  title={`${post.data.title} | Blog Woof`}
-  description={post.data.description}
+  title={post.data.seoTitle ?? `${post.data.title} | Blog Woof`}
+  description={post.data.seoDescription ?? post.data.description}
   ogImage={post.data.image}
   schema={[articleSchema, breadcrumbSchema]}
 >

@@ -6,6 +6,9 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    // Title/description dédiés aux SERP (≤60 / ≤160 car.), repli sur title/description
+    seoTitle: z.string().max(65).optional(),
+    seoDescription: z.string().max(165).optional(),
     pubDate: z.coerce.date(),
     image: z.string(),
     imageAlt: z.string(),

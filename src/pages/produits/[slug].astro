@@ -26,14 +26,33 @@ const categoryLabels: Record<string, string> = {
 
 const siteUrl = Astro.site?.origin ?? 'https://www.woof-parcs.fr';
 
-// Product schema JSON-LD (pas d'offers : vente sur devis, pas de prix public)
+// Matériau déduit des descriptions (acier galvanisé / PEHD / bois)
+const fullText = `${description} ${longDescription}`.toLowerCase();
+const materials = [
+  fullText.includes('acier') && 'Acier galvanisé thermolaqué',
+  fullText.includes('pehd') && 'PEHD (polyéthylène haute densité)',
+  fullText.includes('bois') && 'Bois',
+].filter(Boolean);
+
+// Product schema JSON-LD (Offer sans prix : vente sur devis)
 const productSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
   "name": name,
+  "sku": ref,
   "description": description,
   "image": `${siteUrl}${image}`,
-  "brand": { "@type": "Brand", "name": "Woof!" }
+  "brand": { "@type": "Brand", "name": "Woof!" },
+  "manufacturer": { "@type": "Organization", "name": "Herkules Fitness" },
+  ...(materials.length > 0 && { "material": materials.join(', ') }),
+  "audience": { "@type": "Audience", "audienceType": "Collectivités, mairies, bailleurs, entreprises" },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "EUR",
+    "url": `${siteUrl}/produits/${slug}/`,
+    "seller": { "@type": "Organization", "name": "Woof!" }
+  }
 };
 
 // BreadcrumbList schema
@@ -61,7 +80,7 @@ const faqSchema = faq.length > 0 ? {
 const schemas = [productSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
 ---
 
-<Layout title={`${name} | Woof!`} description={description} schema={schemas}>
+<Layout title={`${name} | Woof!`} description={description} ogImage={image} schema={schemas}>
   <!-- Breadcrumb -->
   <nav class="max-w-6xl mx-auto px-4 pt-28 pb-4 text-sm text-muted font-body" aria-label="Fil d'Ariane">
     <ol class="flex items-center gap-2">
