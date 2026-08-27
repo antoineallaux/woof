@@ -82,7 +82,9 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={toAbs(ogImage)} />
 
-    <link rel="icon" type="image/png" href="/assets/logo-header-woof.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
     {schemas.map((s) => (
