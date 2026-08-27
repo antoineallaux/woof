@@ -1,9 +1,0 @@
----
-// Interface d'administration Keystatic (édite le contenu via commits GitHub)
-import { Admin } from '@keystatic/core/ui';
-import config from '../../../keystatic.config';
-
-export const prerender = false;
----
-
-<Admin config={config} client:only="react" />

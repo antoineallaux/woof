@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import react from '@astrojs/react';
+import keystatic from '@keystatic/astro';
 
 export default defineConfig({
   site: 'https://www.woof-parcs.fr',
@@ -14,6 +15,7 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [
     react(),
+    keystatic(),
     mdx(),
     // pages légales exclues : bloquées par robots.txt, incohérent de les déclarer
     sitemap({
