@@ -21,6 +21,7 @@ export default defineConfig({
     sitemap({
       filter: (page) =>
         !['/cgv/', '/confidentialite/', '/mentions-legales/'].some((p) => page.endsWith(p)),
+      lastmod: new Date(),
     }),
   ],
   vite: {

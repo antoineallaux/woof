@@ -74,6 +74,8 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={toAbs(ogImage)} />
+    {ogImage === '/assets/hero-agility-dog.webp' && <meta property="og:image:width" content="1600" />}
+    {ogImage === '/assets/hero-agility-dog.webp' && <meta property="og:image:height" content="1195" />}
     <meta property="og:site_name" content="Woof!" />
     <meta property="og:locale" content="fr_FR" />
 

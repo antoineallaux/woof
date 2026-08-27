@@ -10,6 +10,7 @@ const blog = defineCollection({
     seoTitle: z.string().max(65).optional(),
     seoDescription: z.string().max(165).optional(),
     pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
     image: z.string(),
     imageAlt: z.string(),
     category: z.string().default('Agility canine'),

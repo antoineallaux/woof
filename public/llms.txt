@@ -15,3 +15,7 @@
 
 - Téléphone : +33 1 84 60 23 30
 - Adresse : Ile du Platais, 78670 Villennes-sur-Seine, France
+
+## Version complète
+
+- [llms-full.txt](https://www.woof-parcs.fr/llms-full.txt) : liste détaillée des produits et articles de blog

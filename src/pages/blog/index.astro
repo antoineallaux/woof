@@ -24,6 +24,8 @@ const posts = (await getCollection('blog'))
             <a href={`/blog/${post.id}/`}>
               <img
                 src={post.data.image}
+                srcset={post.data.image.endsWith('/image.webp') ? `${post.data.image.replace('/image.webp', '/image-600.webp')} 600w, ${post.data.image} 1200w` : undefined}
+                sizes="(max-width: 768px) 100vw, 400px"
                 alt={post.data.imageAlt}
                 class="w-full h-48 object-cover"
                 loading="lazy"

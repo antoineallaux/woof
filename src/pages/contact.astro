@@ -155,6 +155,63 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
       </div>
+
+      <!-- Déroulement du devis -->
+      <div class="mt-20">
+        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-text mb-4">
+          Comment se déroule votre demande de devis ?
+        </h2>
+        <p class="text-muted mb-8 max-w-3xl">
+          Woof! accompagne les communes, intercommunalités, bailleurs et gestionnaires de sites privés
+          dans la création de parcs canins et parcours d'agility, partout en <strong>France métropolitaine</strong>.
+          De la première esquisse à l'installation, un interlocuteur unique suit votre projet.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              step: '1',
+              title: 'Échange sous 48 h',
+              text: "Après réception de votre demande, nous vous recontactons sous 48 h ouvrées pour préciser votre projet : surface disponible, publics visés, budget envisagé.",
+            },
+            {
+              step: '2',
+              title: "Plan d'implantation offert",
+              text: "Nous concevons gratuitement un plan d'implantation adapté à votre terrain, avec une sélection de modules conformes à la norme EN 16630.",
+            },
+            {
+              step: '3',
+              title: 'Devis détaillé',
+              text: "Vous recevez un devis complet : fourniture, livraison, installation par nos équipes certifiées et garantie 5 ans sur les structures.",
+            },
+            {
+              step: '4',
+              title: 'Installation',
+              text: "Nos équipes installent le parc sur site. Nous restons disponibles après la pose pour l'entretien et les extensions futures.",
+            },
+          ].map((item) => (
+            <div class="bg-surface rounded-2xl p-6 border border-primary-light">
+              <p class="font-display font-extrabold text-primary text-2xl mb-2" aria-hidden="true">{item.step}</p>
+              <h3 class="font-display font-bold text-base text-text mb-2">{item.title}</h3>
+              <p class="text-muted text-sm">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Marchés publics -->
+      <div class="mt-12 bg-surface rounded-2xl p-8 border border-primary-light">
+        <h2 class="font-display font-bold text-xl text-text mb-3">Collectivités et marchés publics</h2>
+        <p class="text-muted text-sm mb-3 max-w-3xl">
+          Habitués aux procédures des collectivités, nous répondons aux consultations et appels d'offres :
+          mémoire technique, fiches produits détaillées, certificats de conformité EN 16630 et attestations
+          d'assurance sont fournis avec chaque réponse. Nos devis sont compatibles avec les seuils de
+          commande publique (achat direct, MAPA) et nous acceptons le paiement par mandat administratif.
+        </p>
+        <p class="text-muted text-sm max-w-3xl">
+          Vous préparez un budget prévisionnel ou un dossier de subvention ? Demandez une estimation
+          indicative : elle vous servira de base de chiffrage avant même le lancement de votre consultation.
+        </p>
+      </div>
     </div>
   </section>
 </Layout>
