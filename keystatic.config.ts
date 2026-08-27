@@ -17,11 +17,14 @@ export default config({
       schema: {
         title: fields.slug({
           name: { label: 'Nom du média', description: 'Ex. : caniparc-hiver-drainage' },
-          slug: { label: 'Slug (nom du fichier)', description: 'Détermine l’URL de l’image' },
+          slug: {
+            label: 'Slug (nom du fichier)',
+            description: 'L’image sera servie sur : /assets/blog/<slug>/image.webp — c’est ce chemin qu’il faut coller dans la colonne « Image URL » du Google Sheet',
+          },
         }),
         image: fields.image({
           label: 'Fichier image',
-          description: 'WebP ou JPEG recommandé, ~1200px de large, < 200 Ko',
+          description: 'WebP ou JPEG recommandé, ~1200px de large, < 200 Ko. Après « Save », l’image est en ligne en ~2 minutes.',
           directory: 'public/assets/blog',
           publicPath: '/assets/blog/',
           validation: { isRequired: true },
