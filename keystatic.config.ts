@@ -9,6 +9,29 @@ export default config({
     brand: { name: 'Woof! Admin' },
   },
   collections: {
+    media: collection({
+      label: 'Médias (images)',
+      path: 'src/media/*',
+      format: { data: 'json' },
+      slugField: 'title',
+      schema: {
+        title: fields.slug({
+          name: { label: 'Nom du média', description: 'Ex. : caniparc-hiver-drainage' },
+          slug: { label: 'Slug (nom du fichier)', description: 'Détermine l’URL de l’image' },
+        }),
+        image: fields.image({
+          label: 'Fichier image',
+          description: 'WebP ou JPEG recommandé, ~1200px de large, < 200 Ko',
+          directory: 'public/assets/blog',
+          publicPath: '/assets/blog/',
+          validation: { isRequired: true },
+        }),
+        alt: fields.text({
+          label: 'Description (texte alternatif)',
+          description: 'Décrit l’image pour le SEO et l’accessibilité',
+        }),
+      },
+    }),
     blog: collection({
       label: 'Articles de blog',
       path: 'src/content/blog/*',
