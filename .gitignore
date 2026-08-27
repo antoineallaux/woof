@@ -33,3 +33,6 @@ pnpm-debug.log*
 /images-list.json
 /produits-full.png
 /woof-homepage-full.png
+
+# docs stratégiques hors repo public (déplacés dans ~/Projects/woof-docs-prives)
+docs/
