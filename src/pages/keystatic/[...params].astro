@@ -1,0 +1,10 @@
+---
+// Page définie dans src/pages (et non seulement injectée par l'intégration) :
+// en Astro 6, les routes injectées n'enregistrent pas le renderer React dans
+// le build serveur (renderers = [] → NoMatchingRenderer en prod).
+import { Keystatic } from '../../keystatic-page';
+
+export const prerender = false;
+---
+
+<Keystatic client:only="react" />
