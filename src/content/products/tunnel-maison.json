@@ -1,37 +1,36 @@
 {
-  "name": "Tunnel Maison XL - Parcours Agility Chien",
+  "name": "Tunnel Maison - Parcours Agility Chien",
   "slug": "tunnel-maison",
   "category": "tunnel",
-  "description": "Tunnel Maison XL agility en PEHD et acier. Structure robuste pour stimuler l'exploration et la confiance du chien en espace fermé. Idéal pour parcs canins.",
-  "longDescription": "Le Tunnel Maison XL est la version allongée de notre obstacle emblématique. Avec sa longueur doublée et ses façades ludiques, il offre un défi supérieur pour votre parcours canin agility. Idéal pour les grands espaces, cet équipement robuste en PEHD garantit une expérience de jeu prolongée dans les parcs publics.",
-  "image": "/assets/products/AG25B.webp",
-  "imageAlt": "Tunnel Maison XL - Parcours Agility Chien",
+  "description": "Tube Maison agility en PEHD et acier. Tunnel ludique qui développe l'exploration et la confiance des chiens. Idéal pour parcs canins et collectivités.",
+  "longDescription": "Le Tunnel maison est un obstacle ludique incontournable pour votre parcours canin agility. Doté de façades en forme de petite maison à chaque extrémité, il transforme l'exercice du tunnel en jeu amusant. Robuste et sécurisé, il est conçu pour résister aux intempéries dans les parcs publics et campings.",
+  "image": "/assets/products/AG25.webp",
+  "imageAlt": "Tunnel Maison - Parcours Agility Chien",
   "features": [
-    "Polyéthylène haute densité",
     "Acier galvanisé",
     "Tissu résistant aux UV",
     "Conforme EN 16630",
     "Garantie 5 ans"
   ],
-  "ref": "AG25/B",
+  "ref": "AG25",
   "faq": [
     {
-      "question": "Quelle est la différence avec le tunnel maison standard ?",
-      "answer": "La différence majeure est la longueur. Le Tunnel Maison XL mesure le double du modèle classique, offrant une traversée plus longue et plus obscure. C'est un obstacle agility de niveau intermédiaire qui augmente la difficulté et le plaisir sportif au sein de votre parcours canin collectivité."
+      "question": "Pourquoi choisir un tunnel maison pour un parc canin ?",
+      "answer": "Ce design original rend le parcours canin collectivité plus attractif et moins austère qu'un tunnel de compétition standard. L'aspect petite maison rassure les chiens débutants et plaît beaucoup aux familles, créant une ambiance conviviale et ludique au sein de votre aire d'ébats municipale."
     },
     {
-      "question": "Est-ce plus difficile pour le chien de traverser ?",
-      "answer": "Oui, la longueur accrue demande plus de confiance et de témérité à l'animal pour s'engager jusqu'au bout. C'est un excellent exercice pour renforcer le courage du chien. Ce module complète parfaitement les tunnels courts d'initiation dans une aire d'ébats canine municipale bien équipée."
+      "question": "Quels matériaux composent ce tunnel pour parcours canin ?",
+      "answer": "Les façades sont en PEHD (Polyéthylène Haute Densité), un matériau imputrescible et résistant aux UV. Le corps du tunnel est en matériau souple ou rigide renforcé. Cet assemblage garantit une durabilité maximale pour cet obstacle agility installé en permanence dans les espaces verts publics."
     },
     {
-      "question": "Comment fixer ce grand module au sol ?",
-      "answer": "En raison de sa prise au vent et de sa longueur, une fixation solide est impérative. Les façades doivent être scellées sur des plots en béton. Des points d'ancrage intermédiaires peuvent être nécessaires pour maintenir le tube au sol, garantissant la sécurité des usagers de votre parcours sportif canin."
+      "question": "Ce tunnel est-il adapté aux grands chiens ?",
+      "answer": "Oui, le diamètre du tube est standardisé (60 cm) pour laisser passer confortablement les chiens de taille moyenne et grande. Les façades du Tunnel maison sont découpées pour ne pas entraver l'entrée ou la sortie, assurant une fluidité parfaite sur votre terrain d'agility public."
     },
     {
-      "question": "Pourquoi garder le design maison sur un grand tunnel ?",
-      "answer": "Le design en forme de maisonnette adoucit l'aspect technique de l'obstacle. Même en version XL, il reste ludique et accueillant pour les familles. Cela permet d'intégrer un équipement sportif volumineux de manière harmonieuse et esthétique dans le paysage de votre parc pour chien ou camping."
+      "question": "Comment installer ce tunnel maison au sol ?",
+      "answer": "Pour garantir la stabilité face au vent et aux passages répétés, les façades doivent être scellées sur des plots en béton. Une fixation rigide est indispensable pour que le Tunnel maison reste en place et sécurisé, répondant aux exigences des aménagements de parcs canins collectivités."
     }
   ],
-  "technicalSheet": "https://www.dropbox.com/scl/fi/i2s8ph68h799urshlekbj/AG25B-Tunnel-Maison.pdf?rlkey=pvswfzllm9xvz1m73q7ux40fl&dl=0",
-  "dwgFile": null
+  "technicalSheet": "https://www.dropbox.com/scl/fi/pfjlpehzf5704rs12mccv/AG25-Tube-Maison.pdf?rlkey=hmcj1a2cjo5dsjvx7rec7nlhl&dl=0",
+  "dwgFile": "https://www.dropbox.com/scl/fi/eep62mqlh8s3mieymjlvk/AG-25.dwg?rlkey=njbjv523c9ft69dzcjxnmuvj2&dl=0"
 }
