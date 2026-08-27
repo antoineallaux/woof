@@ -20,7 +20,8 @@ const products = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/products' }),
   schema: z.object({
     name: z.string(),
-    slug: z.string(),
+    // le slug canonique est le nom de fichier (entry id) ; ce champ hérité est ignoré
+    slug: z.string().optional(),
     category: z.string(),
     description: z.string(),
     longDescription: z.string(),

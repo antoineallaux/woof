@@ -4,5 +4,8 @@ Allow: /
 Disallow: /mentions-legales
 Disallow: /confidentialite
 Disallow: /cgv
+Disallow: /admin
+Disallow: /keystatic
+Disallow: /api/
 
 Sitemap: https://www.woof-parcs.fr/sitemap-index.xml

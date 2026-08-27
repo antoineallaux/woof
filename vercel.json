@@ -12,6 +12,8 @@
     }
   ],
   "redirects": [
+    { "source": "/admin", "destination": "/keystatic", "permanent": false },
+    { "source": "/admin/", "destination": "/keystatic", "permanent": false },
     { "source": "/produits/grande-passerelle", "destination": "/produits/a-frame-grand/", "permanent": true },
     { "source": "/produits/grande-passerelle/", "destination": "/produits/a-frame-grand/", "permanent": true },
     { "source": "/produits/grande-palissade", "destination": "/produits/grand-bridge/", "permanent": true },

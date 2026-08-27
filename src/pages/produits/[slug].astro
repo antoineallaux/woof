@@ -5,16 +5,17 @@ import Button from '../../components/ui/Button.astro';
 
 export async function getStaticPaths() {
   const products = await getCollection('products');
-  return products.map(p => ({ params: { slug: p.data.slug }, props: { product: p } }));
+  return products.map(p => ({ params: { slug: p.id }, props: { product: p } }));
 }
 
 const { product } = Astro.props;
-const { name, slug, category, description, longDescription, image, imageAlt, features, ref, faq, technicalSheet, dwgFile } = product.data;
+const slug = product.id;
+const { name, category, description, longDescription, image, imageAlt, features, ref, faq, technicalSheet, dwgFile } = product.data;
 
 // 4 produits complémentaires (même catégorie, ou aléatoires si pas assez)
 const allProducts = await getCollection('products');
 const related = allProducts
-  .filter(p => p.data.slug !== slug)
+  .filter(p => p.id !== slug)
   .sort(() => 0.5 - Math.random())
   .slice(0, 4);
 
@@ -187,7 +188,7 @@ const schemas = [productSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
     <h2 class="font-display font-extrabold text-2xl text-text text-center mb-8">Produits complémentaires</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       {related.map(p => (
-        <a href={`/produits/${p.data.slug}/`} class="group bg-white border border-primary/10 rounded-xl overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all">
+        <a href={`/produits/${p.id}/`} class="group bg-white border border-primary/10 rounded-xl overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all">
           <div class="aspect-square bg-surface flex items-center justify-center p-4">
             <img src={p.data.image} alt={p.data.imageAlt} class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
           </div>
