@@ -10,7 +10,7 @@ export const GET: APIRoute = async () => {
   const lines = [
     '# Woof! — Catalogue et contenus complets',
     '',
-    "> Woof! est un fabricant français d'équipements d'agility canine pour collectivités (mairies, communes, bailleurs, entreprises). Parcours canins certifiés EN 16630, garantie 5 ans, installation incluse. Marque du groupe Herkules Fitness.",
+    "> Woof! est un fabricant français d'équipements d'agility canine pour collectivités (mairies, communes, bailleurs, entreprises). Parcours canins garantis 5 ans, installation incluse. Marque du groupe Herkules Fitness.",
     '',
     '## Pages principales',
     '',
