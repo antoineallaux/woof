@@ -57,10 +57,21 @@ const categories = [
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">
         {products.map((product) => (
           <article
-            class="bg-white rounded-2xl overflow-hidden border border-primary-light hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+            class="relative bg-white rounded-2xl overflow-hidden border border-primary-light hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
             data-category={product.data.category}
             id={product.id}
           >
+            <button
+              data-add-devis
+              data-slug={product.id}
+              data-name={product.data.name}
+              data-ref={product.data.ref}
+              data-image={product.data.image}
+              class="absolute top-3 right-3 z-10 bg-white border border-primary/30 text-primary hover:bg-primary hover:text-white text-xs font-bold px-3 py-1.5 rounded-full transition-colors shadow-sm"
+              aria-label={`Ajouter ${product.data.name} à ma sélection devis`}
+            >
+              <span data-add-label>+ Devis</span>
+            </button>
             <a href={`/produits/${product.id}/`} class="block">
               <div class="aspect-[4/3] overflow-hidden bg-surface">
                 <img

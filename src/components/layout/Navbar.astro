@@ -34,6 +34,12 @@ const currentPath = Astro.url.pathname;
         <a href="tel:+33184602330" class="text-sm font-semibold text-muted hover:text-primary transition-colors">
           +33 1 84 60 23 30
         </a>
+        <a href="/devis/" class="relative p-2 text-text/70 hover:text-primary transition-colors" aria-label="Votre sélection pour devis">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007Z" />
+          </svg>
+          <span data-panier-badge class="hidden absolute top-0 right-0 bg-primary text-white text-[10px] font-bold rounded-full min-w-4 h-4 px-1 flex items-center justify-center">0</span>
+        </a>
         <a
           href="/contact/"
           class="bg-primary hover:bg-primary-dark text-white font-bold text-sm px-4 py-2 rounded-lg transition-colors"
@@ -42,16 +48,24 @@ const currentPath = Astro.url.pathname;
         </a>
       </div>
 
-      <button
-        id="menu-toggle"
-        class="md:hidden p-2 rounded-lg text-text hover:bg-surface transition-colors"
-        aria-label="Ouvrir le menu"
-        aria-expanded="false"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+      <div class="flex md:hidden items-center gap-1">
+        <a href="/devis/" class="relative p-2 text-text/70 hover:text-primary transition-colors" aria-label="Votre sélection pour devis">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007Z" />
+          </svg>
+          <span data-panier-badge class="hidden absolute top-0 right-0 bg-primary text-white text-[10px] font-bold rounded-full min-w-4 h-4 px-1 flex items-center justify-center">0</span>
+        </a>
+        <button
+          id="menu-toggle"
+          class="p-2 rounded-lg text-text hover:bg-surface transition-colors"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 

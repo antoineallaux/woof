@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Demande de Devis — Votre Sélection de Produits | Woof"
+  description="Composez votre parc canin : sélectionnez vos équipements d'agility et recevez un devis personnalisé sous 48h. Gratuit et sans engagement."
+>
+  <section class="py-16 bg-bg">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Devis</p>
+      <h1 class="font-display font-extrabold text-3xl sm:text-4xl text-text mb-4">
+        Votre sélection pour devis
+      </h1>
+      <p class="text-muted mb-10 max-w-2xl">
+        Vérifiez les équipements sélectionnés et les quantités, puis envoyez votre demande.
+        Réponse garantie sous 48 h, devis gratuit et sans engagement.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+        <!-- Sélection -->
+        <div>
+          <h2 class="font-display font-bold text-lg text-text mb-4">Équipements sélectionnés</h2>
+
+          <div id="panier-vide" class="hidden bg-surface border border-primary-light rounded-2xl p-8 text-center">
+            <p class="font-display font-bold text-text mb-2">Votre sélection est vide</p>
+            <p class="text-muted text-sm mb-4">Parcourez le catalogue et ajoutez les équipements qui vous intéressent.</p>
+            <a href="/produits/" class="inline-block bg-primary hover:bg-primary-dark text-white font-bold text-sm px-5 py-2.5 rounded-lg transition-colors">
+              Voir le catalogue →
+            </a>
+          </div>
+
+          <ul id="panier-liste" class="flex flex-col gap-3"></ul>
+
+          <template id="panier-item-template">
+            <li class="flex items-center gap-4 bg-white border border-primary-light rounded-2xl p-4">
+              <img data-t-image src="" alt="" width="64" height="64" class="w-16 h-16 object-contain bg-surface rounded-xl flex-shrink-0" loading="lazy" />
+              <div class="flex-1 min-w-0">
+                <a data-t-lien href="#" class="font-display font-bold text-sm text-text hover:text-primary transition-colors block truncate"></a>
+                <p data-t-ref class="text-xs text-muted"></p>
+              </div>
+              <label class="flex items-center gap-2 text-xs text-muted">
+                Qté
+                <input data-t-qty type="number" min="1" max="99" value="1"
+                  class="w-16 border border-primary-light rounded-lg px-2 py-1.5 text-sm text-center bg-white focus:outline-none focus:ring-2 focus:ring-primary" />
+              </label>
+              <button data-t-retirer type="button" aria-label="Retirer de la sélection"
+                class="p-2 text-muted hover:text-red-600 transition-colors flex-shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </li>
+          </template>
+        </div>
+
+        <!-- Formulaire -->
+        <div>
+          <h2 class="font-display font-bold text-lg text-text mb-4">Vos coordonnées</h2>
+
+          <div id="form-success" class="hidden bg-primary-light border border-primary rounded-xl p-6 text-center mb-4">
+            <p class="font-display font-bold text-primary-darker text-lg mb-1">Demande envoyée !</p>
+            <p class="text-muted text-sm">Nous vous répondrons sous 48h avec un devis détaillé.</p>
+          </div>
+          <div id="form-error" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
+            <p class="text-red-700 text-sm font-semibold">Une erreur est survenue. Veuillez réessayer ou nous appeler au +33 1 84 60 23 30.</p>
+          </div>
+
+          <form id="devis-form" class="flex flex-col gap-5" novalidate>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-bold text-text block mb-1.5" for="prenom">Prénom *</label>
+                <input id="prenom" name="prenom" type="text" required autocomplete="given-name" placeholder="Jean"
+                  class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" />
+              </div>
+              <div>
+                <label class="text-sm font-bold text-text block mb-1.5" for="nom">Nom *</label>
+                <input id="nom" name="nom" type="text" required autocomplete="family-name" placeholder="Dupont"
+                  class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" />
+              </div>
+            </div>
+            <div>
+              <label class="text-sm font-bold text-text block mb-1.5" for="email">Email *</label>
+              <input id="email" name="email" type="email" required autocomplete="email" placeholder="jean.dupont@mairie.fr"
+                class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" />
+            </div>
+            <div>
+              <label class="text-sm font-bold text-text block mb-1.5" for="commune">Commune / Organisme *</label>
+              <input id="commune" name="commune" type="text" required placeholder="Mairie de..."
+                class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" />
+            </div>
+            <div>
+              <label class="text-sm font-bold text-text block mb-1.5" for="telephone">Téléphone</label>
+              <input id="telephone" name="telephone" type="tel" autocomplete="tel" placeholder="01 23 45 67 89"
+                class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" />
+            </div>
+            <div>
+              <label class="text-sm font-bold text-text block mb-1.5" for="message">Précisions sur votre projet</label>
+              <textarea id="message" name="message" rows={3}
+                placeholder="Surface disponible, calendrier, contraintes du terrain... (optionnel)"
+                class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none"></textarea>
+            </div>
+            <button type="submit"
+              class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl transition-colors text-base">
+              Envoyer ma demande de devis →
+            </button>
+            <p class="text-xs text-muted text-center">
+              Réponse garantie sous 48h. Vos données ne sont jamais revendues.
+            </p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { lire, changerQty, retirer, vider } from '../scripts/panier.js';
+
+    const liste = document.getElementById('panier-liste');
+    const vide = document.getElementById('panier-vide');
+    const template = document.getElementById('panier-item-template');
+
+    function rendre() {
+      const items = lire();
+      liste.innerHTML = '';
+      vide.classList.toggle('hidden', items.length > 0);
+      for (const item of items) {
+        const node = template.content.cloneNode(true);
+        const img = node.querySelector('[data-t-image]');
+        img.src = item.image;
+        img.alt = item.name;
+        const lien = node.querySelector('[data-t-lien]');
+        lien.textContent = item.name;
+        lien.href = `/produits/${item.slug}/`;
+        node.querySelector('[data-t-ref]').textContent = `Réf. ${item.ref}`;
+        const qty = node.querySelector('[data-t-qty]');
+        qty.value = item.qty;
+        qty.addEventListener('change', () => changerQty(item.slug, qty.value));
+        node.querySelector('[data-t-retirer]').addEventListener('click', () => retirer(item.slug));
+        liste.appendChild(node);
+      }
+    }
+
+    document.addEventListener('panier:change', rendre);
+    rendre();
+
+    const form = document.getElementById('devis-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      const items = lire();
+      const message = form.message.value.trim();
+      if (items.length === 0 && !message) {
+        document.getElementById('form-error').querySelector('p').textContent =
+          'Ajoutez au moins un produit à votre sélection ou décrivez votre projet.';
+        document.getElementById('form-error').classList.remove('hidden');
+        return;
+      }
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours...';
+      const formData = new FormData(form);
+      formData.append('produits', JSON.stringify(items.map(({ slug, name, ref, qty }) => ({ slug, name, ref, qty }))));
+      try {
+        const res = await fetch('/api/contact/', { method: 'POST', body: formData });
+        if (res.ok) {
+          vider();
+          form.style.display = 'none';
+          document.getElementById('form-error').classList.add('hidden');
+          document.getElementById('form-success').classList.remove('hidden');
+        } else {
+          throw new Error();
+        }
+      } catch {
+        document.getElementById('form-error').classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = 'Envoyer ma demande de devis →';
+      }
+    });
+  </script>
+</Layout>
