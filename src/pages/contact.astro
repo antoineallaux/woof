@@ -25,6 +25,14 @@ import Layout from '../layouts/Layout.astro';
           <div id="form-error" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
             <p class="text-red-700 text-sm font-semibold">Une erreur est survenue. Veuillez réessayer ou nous appeler.</p>
           </div>
+          <div id="selection-recap" class="hidden bg-surface border border-primary-light rounded-xl p-4 mb-5">
+            <div class="flex items-center justify-between gap-4">
+              <p class="text-sm text-text"><strong id="selection-count"></strong> sera jointe à votre demande.</p>
+              <a href="/devis/" class="text-primary font-bold text-sm hover:text-primary-dark transition-colors flex-shrink-0">Modifier</a>
+            </div>
+            <p id="selection-liste" class="text-muted text-xs mt-1.5"></p>
+          </div>
+
           <form id="contact-form" class="flex flex-col gap-5" novalidate>
             <div class="grid grid-cols-2 gap-4">
               <div>
@@ -87,24 +95,43 @@ import Layout from '../layouts/Layout.astro';
             </p>
           </form>
 
-          <script is:inline>
-            document.getElementById('contact-form').addEventListener('submit', async (e) => {
+          <script>
+            import { lire, vider } from '../scripts/panier.js';
+
+            const form = document.getElementById('contact-form');
+            const recap = document.getElementById('selection-recap');
+
+            function rendreSelection() {
+              const items = lire();
+              recap.classList.toggle('hidden', items.length === 0);
+              if (items.length === 0) return;
+              const total = items.reduce((n, i) => n + i.qty, 0);
+              document.getElementById('selection-count').textContent =
+                `Votre sélection de ${total} produit${total > 1 ? 's' : ''}`;
+              document.getElementById('selection-liste').textContent =
+                items.map((i) => `${i.name} ×${i.qty}`).join(' · ');
+            }
+
+            document.addEventListener('panier:change', rendreSelection);
+            rendreSelection();
+
+            form.addEventListener('submit', async (e) => {
               e.preventDefault();
-              const form = e.target;
+              if (!form.reportValidity()) return;
               const btn = form.querySelector('button[type="submit"]');
               btn.disabled = true;
               btn.textContent = 'Envoi en cours...';
               const formData = new FormData(form);
+              const items = lire();
+              formData.append('produits', JSON.stringify(items.map(({ slug, name, ref, qty }) => ({ slug, name, ref, qty }))));
               try {
                 const res = await fetch('/api/contact/', { method: 'POST', body: formData });
-                if (res.ok) {
-                  form.style.display = 'none';
-                  document.getElementById('form-success').classList.remove('hidden');
-                } else {
-                  document.getElementById('form-error').classList.remove('hidden');
-                  btn.disabled = false;
-                  btn.textContent = 'Envoyer ma demande de devis →';
-                }
+                if (!res.ok) throw new Error();
+                vider();
+                form.style.display = 'none';
+                recap.classList.add('hidden');
+                document.getElementById('form-error').classList.add('hidden');
+                document.getElementById('form-success').classList.remove('hidden');
               } catch {
                 document.getElementById('form-error').classList.remove('hidden');
                 btn.disabled = false;
