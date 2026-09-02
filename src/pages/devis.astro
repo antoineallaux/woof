@@ -1,5 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+
+// slugs réellement publiés : les lignes du configurateur (clôture, sas, produits sans fiche) n'en ont pas
+const slugsProduits = (await getCollection('products')).map((p) => p.id);
 ---
 
 <Layout
@@ -31,7 +35,7 @@ import Layout from '../layouts/Layout.astro';
             </a>
           </div>
 
-          <ul id="panier-liste" class="flex flex-col gap-3"></ul>
+          <ul id="panier-liste" class="flex flex-col gap-3" data-slugs={JSON.stringify(slugsProduits)}></ul>
 
           <template id="panier-item-template">
             <li class="flex items-center gap-4 bg-white border border-primary-light rounded-2xl p-4">
@@ -121,6 +125,8 @@ import Layout from '../layouts/Layout.astro';
     const liste = document.getElementById('panier-liste');
     const vide = document.getElementById('panier-vide');
     const template = document.getElementById('panier-item-template');
+    // les lignes venant du configurateur (clôture, sas) ne correspondent à aucune fiche produit
+    const SLUGS = new Set(JSON.parse(liste.dataset.slugs));
 
     function rendre() {
       const items = lire();
@@ -133,7 +139,14 @@ import Layout from '../layouts/Layout.astro';
         img.alt = item.name;
         const lien = node.querySelector('[data-t-lien]');
         lien.textContent = item.name;
-        lien.href = `/produits/${item.slug}/`;
+        if (SLUGS.has(item.slug)) {
+          lien.href = `/produits/${item.slug}/`;
+        } else {
+          const texte = document.createElement('span');
+          texte.className = lien.className;
+          texte.textContent = item.name;
+          lien.replaceWith(texte);
+        }
         node.querySelector('[data-t-ref]').textContent = `Réf. ${item.ref}`;
         const qty = node.querySelector('[data-t-qty]');
         qty.value = item.qty;
@@ -148,7 +161,7 @@ import Layout from '../layouts/Layout.astro';
     document.addEventListener('panier:change', rendre);
     rendre();
 
-    // résumé venant du configurateur
+    // résumé venant du configurateur (doit rester égale à CLE_RESUME de src/configurateur/export/devis.ts)
     const CLE_RESUME = 'woof-devis-config';
     const resume = localStorage.getItem(CLE_RESUME);
     if (resume && !form.message.value) form.message.value = resume;
