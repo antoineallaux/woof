@@ -87,6 +87,22 @@ describe('sas dans l’URL', () => {
   })
 })
 
+describe('équipements hors terrain', () => {
+  it('ignore ceux qui ne tiennent pas dans le terrain et le signale', () => {
+    const brut = enBase64Url({ v: 2, n: 'x', t: [10, 10, 'gazon'], c: [0, 1.5, []], e: [['HE-01', 4.9, 0, 0], ['HE-01', 0, 0, 0]] })
+    const res = decoder(brut, ids)!
+    expect(res.config.equipements.map((e) => e.x)).toEqual([0])
+    expect(res.ignores).toEqual(['HE-01 (hors terrain)'])
+  })
+
+  it('ignore le second de deux équipements en collision', () => {
+    const brut = enBase64Url({ v: 2, n: 'x', t: [20, 15, 'gazon'], c: [0, 1.5, []], e: [['HE-01', 0, 0, 0], ['HE-02', 0.3, 0, 0]] })
+    const res = decoder(brut, ids)!
+    expect(res.config.equipements.map((e) => e.id)).toEqual(['HE-01'])
+    expect(res.ignores).toEqual(['HE-02 (hors terrain)'])
+  })
+})
+
 describe('lireHash', () => {
   it('extrait la valeur de cfg', () => {
     expect(lireHash('#cfg=abc_-1')).toBe('abc_-1')

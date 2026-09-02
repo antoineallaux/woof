@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { getProduit } from './catalogue'
+import { corpsDe, getProduit } from './catalogue'
 import { placementValide, snap, type Corps, type Rect } from './geometrie/collisions'
 import { bornerPos, emprisesSas, longueurCote, sasCompatible, type Cote, type Sas } from './geometrie/sas'
 import { CONFIG_DEFAUT, TERRAIN_MAX, TERRAIN_MIN, uid, type Config, type Equipement } from './types'
@@ -7,11 +7,7 @@ import { CONFIG_DEFAUT, TERRAIN_MAX, TERRAIN_MIN, uid, type Config, type Equipem
 export type Vue = '3d' | 'plan' | 'satellite'
 const MAX_HISTO = 20
 
-export function corpsDe(e: Equipement): Corps | null {
-  const p = getProduit(e.id)
-  if (!p) return null
-  return { uid: e.uid, x: e.x, z: e.z, rot: e.rot, w: p.w, d: p.d, clearance: p.clearance }
-}
+export { corpsDe }
 
 export function sasRects(config: Config): Rect[] {
   const { active, sas } = config.cloture
@@ -109,7 +105,8 @@ export const useStore = create<State>((set, get) => ({
     }),
 
   setNom: (nom) => get().modifier((c) => ({ ...c, nom: nom.slice(0, 80) }), false),
-  setTerrain: (t) =>
+  setTerrain: (t) => {
+    let retires = 0
     get().modifier((c) => {
       const terrain = { ...c.terrain, ...t }
       terrain.l = Math.min(TERRAIN_MAX, Math.max(TERRAIN_MIN, terrain.l))
@@ -120,8 +117,21 @@ export const useStore = create<State>((set, get) => ({
         const borne = { ...s, pos: bornerPos(terrain, s.cote, s.pos) }
         if (sasCompatible(terrain, borne, sas)) sas.push(borne)
       }
-      return { ...c, terrain, cloture: { ...c.cloture, sas } }
-    }),
+      // les équipements qui ne tiennent plus (bords ou emprise des sas) sont retirés
+      const equipements: Equipement[] = []
+      for (const e of c.equipements) {
+        const partiel: Config = { ...c, terrain, cloture: { ...c.cloture, sas }, equipements }
+        if (valide(e, partiel)) equipements.push(e)
+      }
+      retires = c.equipements.length - equipements.length
+      return { ...c, terrain, cloture: { ...c.cloture, sas }, equipements }
+    })
+    if (retires > 0)
+      set((s) => ({
+        erreur: `${retires} équipement(s) retiré(s) : hors du nouveau terrain.`,
+        selection: s.selection.filter((u) => s.config.equipements.some((e) => e.uid === u)),
+      }))
+  },
   setCloture: (patch) =>
     get().modifier((c) => {
       const cloture = { ...c.cloture, ...patch }

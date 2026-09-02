@@ -1,8 +1,10 @@
-import { bornerPos, sasCompatible } from './geometrie/sas'
+import { corpsDe } from './catalogue'
+import { placementValide, type Corps } from './geometrie/collisions'
+import { bornerPos, emprisesSas, sasCompatible } from './geometrie/sas'
 import type { Cote, Sas } from './geometrie/sas'
 import {
   CONFIG_DEFAUT, HAUTEURS, SOLS, TERRAIN_MAX, TERRAIN_MIN, uid,
-  type Config, type Hauteur, type Sol,
+  type Config, type Equipement, type Hauteur, type Sol,
 } from './types'
 
 // Forme compacte sérialisée : version, nom, terrain, clôture, équipements
@@ -82,11 +84,17 @@ export function decoder(brut: string, ids: Set<string>): { config: Config; ignor
   }
 
   const ignores: string[] = []
-  const equipements = []
+  const equipements: Equipement[] = []
+  const rects = active ? emprisesSas({ l, w }, sas) : []
   for (const e of c.e) {
     if (!Array.isArray(e) || typeof e[0] !== 'string') continue
     if (!ids.has(e[0])) { ignores.push(e[0]); continue }
-    equipements.push({ uid: uid(), id: e[0], x: nombre(e[1], 0), z: nombre(e[2], 0), rot: ((nombre(e[3], 0) % 360) + 360) % 360 })
+    const eq: Equipement = { uid: uid(), id: e[0], x: nombre(e[1], 0), z: nombre(e[2], 0), rot: ((nombre(e[3], 0) % 360) + 360) % 360 }
+    // un lien fabriqué à la main (ou un terrain redimensionné depuis) peut poser un équipement hors bornes
+    const corps = corpsDe(eq)
+    const autres = equipements.map(corpsDe).filter((x): x is Corps => x !== null)
+    if (corps && placementValide(corps, autres, { l, w }, rects)) equipements.push(eq)
+    else ignores.push(`${eq.id} (hors terrain)`)
   }
 
   return {

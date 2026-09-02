@@ -83,6 +83,21 @@ describe('terrain et sas', () => {
     expect(etat().config.cloture.sas).toEqual([{ cote: 'nord', pos: 3 }])
   })
 
+  it('retire les équipements qui ne tiennent plus dans le terrain réduit', () => {
+    etat().placer('HE-01', 0, 0)
+    etat().placer('HE-01', 7, 0)
+    etat().setTerrain({ l: 8 })
+    expect(etat().config.equipements.map((e) => e.x)).toEqual([0])
+    expect(etat().erreur).toBe('1 équipement(s) retiré(s) : hors du nouveau terrain.')
+  })
+
+  it('garde les équipements qui tiennent encore', () => {
+    etat().placer('HE-01', 0, 0)
+    etat().setTerrain({ l: 18 })
+    expect(etat().config.equipements).toHaveLength(1)
+    expect(etat().erreur).toBeNull()
+  })
+
   it('vide la liste si la clôture est désactivée', () => {
     etat().setCloture({ active: true })
     etat().ajouterSas()
