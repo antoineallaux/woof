@@ -30,8 +30,8 @@ export function preparerModele(source: THREE.Object3D, p: Produit): THREE.Group 
   const maxModele = Math.max(size.x, size.y, size.z)
   const ratioH = p.h / Math.max(p.w, p.d, p.h)
   const diffs = ([['x', size.x], ['y', size.y], ['z', size.z]] as const)
-    // léger biais vers y (GLB généralement déjà debout) : pas de rotation en cas de quasi-égalité
-    .map(([a, v]) => ({ a, diff: Math.abs(v / maxModele - ratioH) - (a === 'y' ? 0.02 : 0) }))
+    // biais infime vers y (GLB généralement déjà debout) : ne tranche que les égalités strictes
+    .map(([a, v]) => ({ a, diff: Math.abs(v / maxModele - ratioH) - (a === 'y' ? 0.002 : 0) }))
     .sort((u, v) => u.diff - v.diff)
   if (diffs[0].a === 'z') axe.rotation.x = -Math.PI / 2
   else if (diffs[0].a === 'x') axe.rotation.z = Math.PI / 2

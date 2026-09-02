@@ -37,3 +37,15 @@ describe('preparerModele', () => {
     expect(s.x).toBeCloseTo(2); expect(s.z).toBeCloseTo(1)
   })
 })
+
+describe('preparerModele — cas limites d’axe', () => {
+  it('redresse un modèle Z-up dont les proportions y et z sont proches', () => {
+    // hauteur réelle sur z (0,30 = ratio exact), y à 0,31 : z doit gagner malgré le biais
+    const { s } = taille(preparerModele(boite(1, 0.31, 0.3), { ...produit, w: 3, d: 0.93, h: 0.9 }))
+    expect(s.y).toBeCloseTo(0.9)
+  })
+  it('ne tourne pas un modèle cubique déjà debout', () => {
+    const { s } = taille(preparerModele(boite(1, 1, 1), { ...produit, w: 1, d: 1, h: 1 }))
+    expect(s.x).toBeCloseTo(1); expect(s.y).toBeCloseTo(1)
+  })
+})

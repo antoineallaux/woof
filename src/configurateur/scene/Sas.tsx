@@ -42,7 +42,7 @@ export function Sas() {
 
   // repère local : x le long du côté, z perpendiculaire (profondeur), sas à cheval sur la clôture
   return (
-    <group position={[x, 0, z]} rotation-y={angle} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp}>
+    <group position={[x, 0, z]} rotation-y={angle} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
       {/* parois latérales */}
       {[-l2, l2].map((px) => (
         <mesh key={px} position={[px, h / 2, 0]} castShadow>

@@ -38,7 +38,7 @@ function PoigneeRotation({ eq, rayon }: { eq: Eq; rayon: number }) {
   }
 
   return (
-    <mesh rotation-x={-Math.PI / 2} position-y={0.06} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp}>
+    <mesh rotation-x={-Math.PI / 2} position-y={0.06} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
       <ringGeometry args={[rayon, rayon + 0.18, 64]} />
       <meshBasicMaterial color="#7CB342" transparent opacity={0.9} side={THREE.DoubleSide} />
     </mesh>
@@ -98,7 +98,7 @@ export function Equipement({ eq }: { eq: Eq }) {
 
   return (
     <group position={[eq.x, 0, eq.z]} rotation-y={(eq.rot * Math.PI) / 180}>
-      <group onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp}>
+      <group onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
         <Suspense fallback={
           <mesh position-y={p.h / 2} castShadow>
             <boxGeometry args={[p.w, p.h, p.d]} />
