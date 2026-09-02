@@ -1,6 +1,9 @@
 import { Scene } from './scene/Scene'
 import { Equipements } from './scene/Equipements'
+import { Cloture } from './scene/Cloture'
+import { Sas } from './scene/Sas'
 import { Proprietes } from './ui/Proprietes'
+import { OngletCloture } from './ui/OngletCloture'
 import { CATALOGUE } from './catalogue'
 import { useStore } from './store'
 
@@ -19,9 +22,12 @@ export default function Configurateur() {
             <span className="block mt-1 font-bold truncate">{p.name}</span>
           </button>
         ))}
+        <div className="col-span-2 mt-4 border-t border-primary-light pt-4">
+          <OngletCloture />
+        </div>
       </aside>
       <div className="relative flex-1 min-h-0">
-        <Scene><Equipements /></Scene>
+        <Scene><Equipements /><Cloture /><Sas /></Scene>
         <div className="absolute top-3 left-3 flex gap-1 rounded-xl bg-white/95 border border-primary-light p-1 shadow-sm">
           {(['3d', 'plan'] as const).map((v) => (
             <button key={v} type="button" onClick={() => setVue(v)}
