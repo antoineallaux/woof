@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { getProduit } from './catalogue'
 import { placementValide, snap, type Corps, type Rect } from './geometrie/collisions'
-import { bornerPos, empriseSas, type Sas } from './geometrie/sas'
+import { bornerPos, emprisesSas, longueurCote, sasCompatible, type Cote, type Sas } from './geometrie/sas'
 import { CONFIG_DEFAUT, TERRAIN_MAX, TERRAIN_MIN, uid, type Config, type Equipement } from './types'
 
 export type Vue = '3d' | 'plan' | 'satellite'
@@ -13,9 +13,9 @@ export function corpsDe(e: Equipement): Corps | null {
   return { uid: e.uid, x: e.x, z: e.z, rot: e.rot, w: p.w, d: p.d, clearance: p.clearance }
 }
 
-export function sasRect(config: Config): Rect | null {
+export function sasRects(config: Config): Rect[] {
   const { active, sas } = config.cloture
-  return active && sas ? empriseSas(config.terrain, sas) : null
+  return active ? emprisesSas(config.terrain, sas) : []
 }
 
 function valide(candidat: Equipement, config: Config, exclure: Set<string> = new Set()): boolean {
@@ -25,7 +25,7 @@ function valide(candidat: Equipement, config: Config, exclure: Set<string> = new
     .filter((e) => !exclure.has(e.uid))
     .map(corpsDe)
     .filter((x): x is Corps => x !== null)
-  return placementValide(c, autres, config.terrain, sasRect(config))
+  return placementValide(c, autres, config.terrain, sasRects(config))
 }
 
 interface State {
@@ -51,7 +51,9 @@ interface State {
   setNom(nom: string): void
   setTerrain(t: Partial<Config['terrain']>): void
   setCloture(c: Partial<Omit<Config['cloture'], 'sas'>>): void
-  setSas(sas: Sas | null): void
+  ajouterSas(): void
+  retirerSas(index: number): void
+  deplacerSas(index: number, sas: Sas): boolean
 
   placer(id: string, x: number, z: number): boolean
   deplacer(uids: string[], dx: number, dz: number, enregistrer?: boolean): boolean
@@ -112,16 +114,52 @@ export const useStore = create<State>((set, get) => ({
       const terrain = { ...c.terrain, ...t }
       terrain.l = Math.min(TERRAIN_MAX, Math.max(TERRAIN_MIN, terrain.l))
       terrain.w = Math.min(TERRAIN_MAX, Math.max(TERRAIN_MIN, terrain.w))
-      const sas = c.cloture.sas ? { ...c.cloture.sas, pos: bornerPos(terrain, c.cloture.sas.cote, c.cloture.sas.pos) } : null
+      // rebornage puis retrait des sas devenus incompatibles (les derniers d'abord)
+      const sas: Sas[] = []
+      for (const s of c.cloture.sas) {
+        const borne = { ...s, pos: bornerPos(terrain, s.cote, s.pos) }
+        if (sasCompatible(terrain, borne, sas)) sas.push(borne)
+      }
       return { ...c, terrain, cloture: { ...c.cloture, sas } }
     }),
   setCloture: (patch) =>
     get().modifier((c) => {
       const cloture = { ...c.cloture, ...patch }
-      if (!cloture.active) cloture.sas = null
+      if (!cloture.active) cloture.sas = []
       return { ...c, cloture }
     }),
-  setSas: (sas) => get().modifier((c) => ({ ...c, cloture: { ...c.cloture, sas } }), false),
+  ajouterSas: () => {
+    const s = get()
+    const { terrain, cloture } = s.config
+    if (!cloture.active) return
+    const milieu = (cote: Cote) => bornerPos(terrain, cote, longueurCote(terrain, cote) / 2)
+    const candidats: Sas[] = (['sud', 'est', 'nord', 'ouest'] as Cote[]).map((cote) => ({ cote, pos: milieu(cote) }))
+    // à défaut, on longe le côté sud par pas de 1 m de part et d'autre du milieu
+    const lSud = longueurCote(terrain, 'sud')
+    for (let d = 1; d <= lSud; d++) {
+      candidats.push({ cote: 'sud', pos: bornerPos(terrain, 'sud', lSud / 2 + d) })
+      candidats.push({ cote: 'sud', pos: bornerPos(terrain, 'sud', lSud / 2 - d) })
+    }
+    const place = candidats.find((c) => sasCompatible(terrain, c, cloture.sas))
+    if (!place) {
+      set({ erreur: 'Pas de place pour un sas supplémentaire.' })
+      return
+    }
+    s.modifier((c) => ({ ...c, cloture: { ...c.cloture, sas: [...c.cloture.sas, place] } }))
+  },
+
+  retirerSas: (index) =>
+    get().modifier((c) => ({ ...c, cloture: { ...c.cloture, sas: c.cloture.sas.filter((_, i) => i !== index) } })),
+
+  deplacerSas: (index, sas) => {
+    const s = get()
+    const liste = s.config.cloture.sas
+    if (!liste[index]) return false
+    const autres = liste.filter((_, i) => i !== index)
+    if (!sasCompatible(s.config.terrain, sas, autres)) return false
+    s.modifier((c) => ({ ...c, cloture: { ...c.cloture, sas: c.cloture.sas.map((x, i) => (i === index ? sas : x)) } }), false)
+    return true
+  },
 
   placer: (id, x, z) => {
     const s = get()

@@ -6,11 +6,17 @@ const ids = new Set(['HE-01', 'HE-02'])
 const config: Config = {
   nom: 'Parc de la Mairie',
   terrain: { l: 24, w: 18, sol: 'sable' },
-  cloture: { active: true, hauteur: 1.8, sas: { cote: 'est', pos: 4.5 } },
+  cloture: { active: true, hauteur: 1.8, sas: [{ cote: 'est', pos: 4.5 }, { cote: 'sud', pos: 12 }] },
   equipements: [
     { uid: 'a', id: 'HE-01', x: 1.2, z: -3.4, rot: 90 },
     { uid: 'b', id: 'HE-02', x: -5, z: 2, rot: 45 },
   ],
+}
+
+// même algorithme que l'encodeur, pour fabriquer des charges utiles arbitraires
+function enBase64Url(objet: unknown): string {
+  const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(objet))))
+  return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
 }
 
 describe('encoder / decoder', () => {
@@ -37,7 +43,7 @@ describe('encoder / decoder', () => {
   })
 
   it('borne les dimensions et corrige les valeurs invalides', () => {
-    const brut = encoder({ ...config, terrain: { l: 500, w: 1, sol: 'béton' as never }, cloture: { active: true, hauteur: 9 as never, sas: null } })
+    const brut = encoder({ ...config, terrain: { l: 500, w: 1, sol: 'béton' as never }, cloture: { active: true, hauteur: 9 as never, sas: [] } })
     const c = decoder(brut, ids)!.config
     expect(c.terrain).toEqual({ l: 60, w: 5, sol: 'gazon' })
     expect(c.cloture.hauteur).toBe(1.5)
@@ -50,6 +56,34 @@ describe('encoder / decoder', () => {
 
   it('accepte la config par défaut', () => {
     expect(decoder(encoder(CONFIG_DEFAUT), ids)!.config).toMatchObject({ nom: CONFIG_DEFAUT.nom })
+  })
+})
+
+describe('sas dans l’URL', () => {
+  it('relit un lien au format v1 avec un sas', () => {
+    const brut = enBase64Url({ v: 1, n: 'Ancien lien', t: [20, 15, 'gazon'], c: [1, 1.5, 'nord', 5], e: [] })
+    const c = decoder(brut, ids)!.config
+    expect(c.cloture.sas).toEqual([{ cote: 'nord', pos: 5 }])
+  })
+
+  it('relit un lien au format v1 sans sas', () => {
+    const brut = enBase64Url({ v: 1, n: 'Ancien lien', t: [20, 15, 'gazon'], c: [1, 1.5, null, null], e: [] })
+    expect(decoder(brut, ids)!.config.cloture.sas).toEqual([])
+  })
+
+  it('ignore les sas invalides et reborne les positions', () => {
+    const brut = enBase64Url({ v: 2, n: 'x', t: [20, 15, 'gazon'], c: [1, 1.5, [['haut', 3], ['nord', 'oui'], ['nord', 0], 'nawak']], e: [] })
+    expect(decoder(brut, ids)!.config.cloture.sas).toEqual([{ cote: 'nord', pos: 1.6 }])
+  })
+
+  it('garde le premier de deux sas qui se chevauchent', () => {
+    const brut = enBase64Url({ v: 2, n: 'x', t: [20, 15, 'gazon'], c: [1, 1.5, [['sud', 10], ['sud', 11], ['sud', 14]]], e: [] })
+    expect(decoder(brut, ids)!.config.cloture.sas).toEqual([{ cote: 'sud', pos: 10 }, { cote: 'sud', pos: 14 }])
+  })
+
+  it('vide la liste quand la clôture est inactive', () => {
+    const brut = enBase64Url({ v: 2, n: 'x', t: [20, 15, 'gazon'], c: [0, 1.5, [['sud', 10]]], e: [] })
+    expect(decoder(brut, ids)!.config.cloture.sas).toEqual([])
   })
 })
 

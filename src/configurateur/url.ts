@@ -1,18 +1,23 @@
-import { bornerPos } from './geometrie/sas'
-import type { Cote } from './geometrie/sas'
+import { bornerPos, sasCompatible } from './geometrie/sas'
+import type { Cote, Sas } from './geometrie/sas'
 import {
   CONFIG_DEFAUT, HAUTEURS, SOLS, TERRAIN_MAX, TERRAIN_MIN, uid,
   type Config, type Hauteur, type Sol,
 } from './types'
 
 // Forme compacte sérialisée : version, nom, terrain, clôture, équipements
+// v2 : la clôture porte une liste de sas [[cote, pos], ...]
+// v1 (liens déjà partagés) : la clôture portait un sas unique [cote | null, pos | null]
+type SasCompact = [string, number]
 interface Compact {
-  v: 1
+  v: 2
   n: string
   t: [number, number, string]
-  c: [0 | 1, number, string | null, number | null]
+  c: [0 | 1, number, SasCompact[]]
   e: [string, number, number, number][]
 }
+// Forme relue : tout est incertain, y compris la version (v1 : c = [actif, hauteur, cote, pos])
+interface CompactBrut { v?: unknown; n?: unknown; t: unknown[]; c: unknown[]; e: unknown[] }
 
 const COTES: Cote[] = ['nord', 'est', 'sud', 'ouest']
 
@@ -29,14 +34,13 @@ function depuisBase64Url(s: string): string {
 
 export function encoder(config: Config): string {
   const c: Compact = {
-    v: 1,
+    v: 2,
     n: config.nom,
     t: [config.terrain.l, config.terrain.w, config.terrain.sol],
     c: [
       config.cloture.active ? 1 : 0,
       config.cloture.hauteur,
-      config.cloture.sas?.cote ?? null,
-      config.cloture.sas?.pos ?? null,
+      config.cloture.sas.map((s) => [s.cote, s.pos]),
     ],
     e: config.equipements.map((e) => [e.id, e.x, e.z, e.rot]),
   }
@@ -48,7 +52,7 @@ const borner = (v: number, min: number, max: number) => Math.min(max, Math.max(m
 
 export function decoder(brut: string, ids: Set<string>): { config: Config; ignores: string[] } | null {
   if (!brut) return null
-  let c: Compact
+  let c: CompactBrut
   try {
     c = JSON.parse(depuisBase64Url(brut))
   } catch {
@@ -61,10 +65,21 @@ export function decoder(brut: string, ids: Set<string>): { config: Config; ignor
   const sol: Sol = SOLS.some((s) => s.id === c.t[2]) ? (c.t[2] as Sol) : CONFIG_DEFAUT.terrain.sol
   const hauteur: Hauteur = HAUTEURS.includes(c.c[1] as Hauteur) ? (c.c[1] as Hauteur) : CONFIG_DEFAUT.cloture.hauteur
   const active = c.c[0] === 1
-  const cote = COTES.includes(c.c[2] as Cote) ? (c.c[2] as Cote) : null
-  const sas = active && cote !== null && typeof c.c[3] === 'number'
-    ? { cote, pos: bornerPos({ l, w }, cote, c.c[3]) }
-    : null
+  // v2 : liste de sas ; v1 : un sas unique en deux champs
+  const brutSas: unknown[] = Array.isArray(c.c[2])
+    ? c.c[2]
+    : typeof c.c[2] === 'string' && typeof c.c[3] === 'number'
+      ? [[c.c[2], c.c[3]]]
+      : []
+  const sas: Sas[] = []
+  if (active) {
+    for (const b of brutSas) {
+      if (!Array.isArray(b) || !COTES.includes(b[0] as Cote) || typeof b[1] !== 'number' || !Number.isFinite(b[1])) continue
+      const candidat: Sas = { cote: b[0] as Cote, pos: bornerPos({ l, w }, b[0] as Cote, b[1]) }
+      // deux sas qui se chevauchent : on garde le premier
+      if (sasCompatible({ l, w }, candidat, sas)) sas.push(candidat)
+    }
+  }
 
   const ignores: string[] = []
   const equipements = []

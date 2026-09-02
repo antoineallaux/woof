@@ -49,24 +49,29 @@ describe('dansTerrain', () => {
 
 describe('placementValide', () => {
   it('accepte un équipement seul au centre', () => {
-    expect(placementValide(corps('a', 0, 0), [], terrain, null)).toBe(true)
+    expect(placementValide(corps('a', 0, 0), [], terrain, [])).toBe(true)
   })
   it('refuse si la marge sort du terrain', () => {
-    expect(placementValide(corps('a', 8.5, 0), [], terrain, null)).toBe(false)
+    expect(placementValide(corps('a', 8.5, 0), [], terrain, [])).toBe(false)
   })
   it('refuse si mon corps entre dans la marge d’un autre', () => {
-    expect(placementValide(corps('b', 2.5, 0), [corps('a', 0, 0)], terrain, null)).toBe(false)
+    expect(placementValide(corps('b', 2.5, 0), [corps('a', 0, 0)], terrain, [])).toBe(false)
   })
   it('accepte deux marges qui se recouvrent sans toucher un corps', () => {
-    expect(placementValide(corps('b', 3, 0), [corps('a', 0, 0)], terrain, null)).toBe(true)
+    expect(placementValide(corps('b', 3, 0), [corps('a', 0, 0)], terrain, [])).toBe(true)
   })
   it('ignore soi-même dans la liste des autres', () => {
-    expect(placementValide(corps('a', 0, 0), [corps('a', 0, 0)], terrain, null)).toBe(true)
+    expect(placementValide(corps('a', 0, 0), [corps('a', 0, 0)], terrain, [])).toBe(true)
   })
-  it('refuse le chevauchement du sas', () => {
-    const sas = { x: 0, z: 0, w: 1.2, d: 2 }
+  it('refuse le chevauchement d’un sas', () => {
+    const sas = [{ x: 0, z: 0, w: 1.2, d: 2 }]
     expect(placementValide(corps('a', 0, 0.5), [], terrain, sas)).toBe(false)
     expect(placementValide(corps('a', 0, 2), [], terrain, sas)).toBe(true)
+  })
+  it('refuse le chevauchement de n’importe quelle emprise de la liste', () => {
+    const sas = [{ x: 0, z: 0, w: 1.2, d: 2 }, { x: 5, z: 0, w: 1.2, d: 2 }]
+    expect(placementValide(corps('a', 5, 0.5), [], terrain, sas)).toBe(false)
+    expect(placementValide(corps('a', -5, 0), [], terrain, sas)).toBe(true)
   })
 })
 

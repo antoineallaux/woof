@@ -1,19 +1,17 @@
 import { useRef } from 'react'
 import type { ThreeEvent } from '@react-three/fiber'
 import { useStore } from '../store'
-import { LARGEUR_SAS, PROFONDEUR_SAS, pointSurCote, projeterSurCote } from '../geometrie/sas'
+import { LARGEUR_SAS, PROFONDEUR_SAS, pointSurCote, projeterSurCote, type Sas as TSas } from '../geometrie/sas'
 import { pointSol } from './pointSol'
 const VERT = '#2F5B3A'
 const PORTILLON = '#7CB342'
 
-export function Sas() {
+function UnSas({ index, sas, hauteur }: { index: number; sas: TSas; hauteur: number }) {
   const terrain = useStore((s) => s.config.terrain)
-  const { active, hauteur, sas } = useStore((s) => s.config.cloture)
-  const setSas = useStore((s) => s.setSas)
+  const deplacerSas = useStore((s) => s.deplacerSas)
   const enregistrer = useStore((s) => s.enregistrer)
   const setDragging = useStore((s) => s.setDragging)
   const actif = useRef(false)
-  if (!active || !sas) return null
 
   const { x, z, angle } = pointSurCote(terrain, sas.cote, sas.pos)
   const h = hauteur
@@ -32,7 +30,7 @@ export function Sas() {
     const pt = pointSol(e)
     if (!pt) return
     const next = projeterSurCote(terrain, pt.x, pt.z)
-    if (next.cote !== sas.cote || next.pos !== sas.pos) setSas(next)
+    if (next.cote !== sas.cote || next.pos !== sas.pos) deplacerSas(index, next)
   }
   const onUp = (e: ThreeEvent<PointerEvent>) => {
     ;(e.target as Element).releasePointerCapture(e.pointerId)
@@ -70,5 +68,15 @@ export function Sas() {
         <meshBasicMaterial color={PORTILLON} transparent opacity={0.25} />
       </mesh>
     </group>
+  )
+}
+
+export function Sas() {
+  const { active, hauteur, sas } = useStore((s) => s.config.cloture)
+  if (!active) return null
+  return (
+    <>
+      {sas.map((s, i) => <UnSas key={i} index={i} sas={s} hauteur={hauteur} />)}
+    </>
   )
 }

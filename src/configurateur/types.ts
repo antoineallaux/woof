@@ -23,14 +23,14 @@ export interface Equipement {
 export interface Config {
   nom: string
   terrain: { l: number; w: number; sol: Sol }
-  cloture: { active: boolean; hauteur: Hauteur; sas: Sas | null }
+  cloture: { active: boolean; hauteur: Hauteur; sas: Sas[] }
   equipements: Equipement[]
 }
 
 export const CONFIG_DEFAUT: Config = {
   nom: 'Mon aire canine',
   terrain: { l: 20, w: 15, sol: 'gazon' },
-  cloture: { active: false, hauteur: 1.5, sas: null },
+  cloture: { active: false, hauteur: 1.5, sas: [] },
   equipements: [],
 }
 

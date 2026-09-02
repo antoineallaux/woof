@@ -43,13 +43,13 @@ export function corpsRect(c: Corps): Rect {
 /**
  * Règle : ma marge reste dans le terrain ; mon corps n'entre pas dans la marge
  * d'un autre ; ma marge n'entre pas dans le corps d'un autre ; mon corps ne
- * chevauche pas le sas. Deux marges peuvent se recouvrir.
+ * chevauche aucun sas. Deux marges peuvent se recouvrir.
  */
-export function placementValide(c: Corps, autres: Corps[], t: Terrain, sas: Rect | null): boolean {
+export function placementValide(c: Corps, autres: Corps[], t: Terrain, sas: Rect[]): boolean {
   const corps = corpsRect(c)
   const zone = marge(corps, c.clearance)
   if (!dansTerrain(zone, t)) return false
-  if (sas && chevauche(corps, sas)) return false
+  for (const r of sas) if (chevauche(corps, r)) return false
   for (const a of autres) {
     if (a.uid === c.uid) continue
     const ca = corpsRect(a)

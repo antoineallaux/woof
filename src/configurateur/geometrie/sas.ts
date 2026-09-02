@@ -6,6 +6,8 @@ export interface Sas { cote: Cote; pos: number }
 export const LARGEUR_SAS = 1.2
 export const PROFONDEUR_SAS = 2
 export const MARGE_ANGLE = 1
+/** Écart minimal entre les emprises de deux sas d'un même côté. */
+export const ECART_SAS = 0.5
 
 export function longueurCote(t: Terrain, cote: Cote): number {
   return cote === 'nord' || cote === 'sud' ? t.l : t.w
@@ -54,4 +56,14 @@ export function empriseSas(t: Terrain, sas: Sas): Rect {
     w: horizontal ? LARGEUR_SAS : PROFONDEUR_SAS,
     d: horizontal ? PROFONDEUR_SAS : LARGEUR_SAS,
   }
+}
+
+export function emprisesSas(t: Terrain, liste: Sas[]): Rect[] {
+  return liste.map((s) => empriseSas(t, s))
+}
+
+/** Un sas peut-il coexister avec les autres ? Faux si deux emprises d'un même côté se touchent. */
+export function sasCompatible(_t: Terrain, sas: Sas, autres: Sas[]): boolean {
+  const mini = LARGEUR_SAS + ECART_SAS
+  return !autres.some((a) => a.cote === sas.cote && Math.abs(sas.pos - a.pos) < mini - 1e-9)
 }

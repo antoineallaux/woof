@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Html } from '@react-three/drei'
 import type { ThreeEvent } from '@react-three/fiber'
-import { useStore, corpsDe, sasRect } from '../store'
+import { useStore, corpsDe, sasRects } from '../store'
 import { getProduit } from '../catalogue'
 import { placementValide, snap } from '../geometrie/collisions'
 import { textureEnvironnement, textureSol } from './textures'
@@ -25,7 +25,7 @@ function Fantome({ x, z }: { x: number; z: number }) {
   const p = outil ? getProduit(outil) : undefined
   if (!p) return null
   const autres = config.equipements.map(corpsDe).filter((c): c is NonNullable<typeof c> => c !== null)
-  const ok = placementValide({ uid: '__fantome', x, z, w: p.w, d: p.d, rot: 0, clearance: p.clearance }, autres, config.terrain, sasRect(config))
+  const ok = placementValide({ uid: '__fantome', x, z, w: p.w, d: p.d, rot: 0, clearance: p.clearance }, autres, config.terrain, sasRects(config))
   return (
     <group position={[x, 0, z]}>
       <mesh position-y={p.h / 2}>
