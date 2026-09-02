@@ -3,6 +3,9 @@ import { useStore } from '../store'
 import { HAUTEURS } from '../types'
 import { genererCloture } from '../geometrie/cloture'
 
+// angle depuis lequel la position est mesurée (sens horaire, cf. pointSurCote)
+const ANGLE_DEPART = { nord: 'nord-ouest', est: 'nord-est', sud: 'sud-est', ouest: 'sud-ouest' } as const
+
 const fmt = (v: number) => v.toFixed(1).replace('.', ',')
 
 export function OngletCloture() {
@@ -42,7 +45,7 @@ export function OngletCloture() {
               <ul className="mt-3 space-y-1">
                 {sas.map((s, i) => (
                   <li key={i} className="flex items-center justify-between gap-2 border-b border-primary-light/60 last:border-0 py-1">
-                    <span className="text-text">Sas {i + 1} — côté {s.cote}, à {fmt(s.pos)} m</span>
+                    <span className="text-text">Sas {i + 1} — côté {s.cote}, à {fmt(s.pos)} m de l'angle {ANGLE_DEPART[s.cote]}</span>
                     <button type="button" onClick={() => retirerSas(i)}
                       aria-label={`Retirer le sas ${i + 1}, côté ${s.cote}`}
                       className="shrink-0 min-w-11 min-h-11 px-2 text-xs font-bold text-red-600 hover:underline">

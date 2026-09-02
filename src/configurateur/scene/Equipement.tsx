@@ -31,6 +31,7 @@ function PoigneeRotation({ eq, rayon }: { eq: Eq; rayon: number }) {
     if (Math.abs(deg - proche) <= 3) deg = proche % 360
     tourner(eq.uid, Math.round(deg), false)
   }
+  const onPerte = () => { actif.current = false; setDragging(false) }
   const onUp = (e: ThreeEvent<PointerEvent>) => {
     ;(e.target as Element).releasePointerCapture(e.pointerId)
     actif.current = false
@@ -38,7 +39,7 @@ function PoigneeRotation({ eq, rayon }: { eq: Eq; rayon: number }) {
   }
 
   return (
-    <mesh rotation-x={-Math.PI / 2} position-y={0.06} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
+    <mesh rotation-x={-Math.PI / 2} position-y={0.06} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} onLostPointerCapture={onPerte}>
       <ringGeometry args={[rayon, rayon + 0.18, 64]} />
       <meshBasicMaterial color="#7CB342" transparent opacity={0.9} side={THREE.DoubleSide} />
     </mesh>
@@ -87,6 +88,7 @@ export function Equipement({ eq }: { eq: Eq }) {
     const groupe = useStore.getState().selection.includes(eq.uid) ? useStore.getState().selection : [eq.uid]
     if (deplacer(groupe, dx, dz, false)) drag.current = { ...drag.current, x: nx, z: nz }
   }
+  const onPerte = () => { drag.current = null; setDragging(false) }
   const onUp = (e: ThreeEvent<PointerEvent>) => {
     if (!drag.current) return
     ;(e.target as Element).releasePointerCapture(e.pointerId)
@@ -98,7 +100,7 @@ export function Equipement({ eq }: { eq: Eq }) {
 
   return (
     <group position={[eq.x, 0, eq.z]} rotation-y={(eq.rot * Math.PI) / 180}>
-      <group onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
+      <group onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} onLostPointerCapture={onPerte}>
         <Suspense fallback={
           <mesh position-y={p.h / 2} castShadow>
             <boxGeometry args={[p.w, p.h, p.d]} />

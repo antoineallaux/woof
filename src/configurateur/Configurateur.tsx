@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Scene } from './scene/Scene'
 import { Equipements } from './scene/Equipements'
 import { Cloture } from './scene/Cloture'
@@ -47,13 +47,18 @@ export default function Configurateur() {
     return () => clearTimeout(t)
   }, [config])
 
+  const dossierEnCours = useRef(false)
   const dossier = async () => {
+    if (dossierEnCours.current) return
+    dossierEnCours.current = true
     try {
       const s = useStore.getState()
       const captures = await capturer()
       imprimerDossier(htmlDossier(s.config, captures, `${window.location.origin}/configurateur/#cfg=${encoder(s.config)}`))
     } catch {
       useStore.getState().setErreur('Impossible de générer le dossier (fenêtre bloquée ?).')
+    } finally {
+      dossierEnCours.current = false
     }
   }
 
