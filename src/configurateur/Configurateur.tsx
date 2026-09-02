@@ -6,6 +6,7 @@ import { Sas } from './scene/Sas'
 import { PanneauLateral } from './ui/PanneauLateral'
 import { BarreOutils } from './ui/BarreOutils'
 import { Proprietes } from './ui/Proprietes'
+import { Satellite } from './ui/Satellite'
 import { Toast } from './ui/Toast'
 import { useStore } from './store'
 
@@ -45,6 +46,7 @@ export default function Configurateur() {
       </aside>
 
       <div className="relative flex-1 min-h-0">
+        <Satellite />
         <Scene><Equipements /><Cloture /><Sas /></Scene>
         <BarreOutils onPartager={() => {}} onDossier={() => {}} onDevis={() => {}} />
         <Proprietes />
