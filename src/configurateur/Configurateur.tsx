@@ -14,6 +14,7 @@ import { decoder, encoder, lireHash } from './url'
 import { CATALOGUE } from './catalogue'
 import { capturer } from './export/captures'
 import { htmlDossier, imprimerDossier } from './export/dossier'
+import { envoyerAuDevis } from './export/devis'
 
 function estChampTexte(t: EventTarget | null) {
   return t instanceof HTMLElement && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)
@@ -84,7 +85,7 @@ export default function Configurateur() {
       <div className="relative flex-1 min-h-0">
         <Satellite />
         <Scene><Equipements /><Cloture /><Sas /></Scene>
-        <BarreOutils onPartager={() => setPartage(true)} onDossier={dossier} onDevis={() => {}} />
+        <BarreOutils onPartager={() => setPartage(true)} onDossier={dossier} onDevis={() => envoyerAuDevis(useStore.getState().config)} />
         <Proprietes />
         <Toast />
         <ModalePartage ouvert={partage} onFermer={() => setPartage(false)} />

@@ -97,7 +97,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <div>
               <label class="text-sm font-bold text-text block mb-1.5" for="message">Précisions sur votre projet</label>
-              <textarea id="message" name="message" rows={3}
+              <textarea id="message" name="message" rows={6}
                 placeholder="Surface disponible, calendrier, contraintes du terrain... (optionnel)"
                 class="w-full border border-primary-light rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none"></textarea>
             </div>
@@ -143,10 +143,16 @@ import Layout from '../layouts/Layout.astro';
       }
     }
 
+    const form = document.getElementById('devis-form');
+
     document.addEventListener('panier:change', rendre);
     rendre();
 
-    const form = document.getElementById('devis-form');
+    // résumé venant du configurateur
+    const CLE_RESUME = 'woof-devis-config';
+    const resume = localStorage.getItem(CLE_RESUME);
+    if (resume && !form.message.value) form.message.value = resume;
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;
@@ -167,6 +173,7 @@ import Layout from '../layouts/Layout.astro';
         const res = await fetch('/api/contact/', { method: 'POST', body: formData });
         if (res.ok) {
           vider();
+          localStorage.removeItem(CLE_RESUME);
           form.style.display = 'none';
           document.getElementById('form-error').classList.add('hidden');
           document.getElementById('form-success').classList.remove('hidden');
