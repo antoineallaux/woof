@@ -1,0 +1,12 @@
+[
+  { "id": "HE-01", "ref": "HE-01", "name": "Chest Press", "category": "musculation", "w": 1.144, "d": 1.223, "h": 1.554, "clearance": 1, "image": "/assets/configurateur/HE-01.webp", "glb": "/models/HE-01.glb", "slug": null },
+  { "id": "HE-02", "ref": "HE-02", "name": "Épaules", "category": "musculation", "w": 1.103, "d": 1.452, "h": 1.913, "clearance": 1, "image": "/assets/configurateur/HE-02.webp", "glb": "/models/HE-02.glb", "slug": null },
+  { "id": "HE-03", "ref": "HE-03", "name": "Dead Lift", "category": "musculation", "w": 1.225, "d": 1.452, "h": 1.671, "clearance": 1, "image": "/assets/configurateur/HE-03.webp", "glb": "/models/HE-03.glb", "slug": null },
+  { "id": "HE-04", "ref": "HE-04", "name": "Back Press", "category": "musculation", "w": 1.559, "d": 1.452, "h": 2.445, "clearance": 1, "image": "/assets/configurateur/HE-04.webp", "glb": "/models/HE-04.glb", "slug": null },
+  { "id": "HE-05", "ref": "HE-05", "name": "Papillon", "category": "musculation", "w": 1.665, "d": 1.452, "h": 2.18, "clearance": 1, "image": "/assets/configurateur/HE-05.webp", "glb": "/models/HE-05.glb", "slug": null },
+  { "id": "HE-06", "ref": "HE-06", "name": "Cuisses", "category": "musculation", "w": 1.112, "d": 1.271, "h": 1.41, "clearance": 1, "image": "/assets/configurateur/HE-06.webp", "glb": "/models/HE-06.glb", "slug": null },
+  { "id": "HE-07", "ref": "HE-07", "name": "Leg Press", "category": "musculation", "w": 1.235, "d": 1.27, "h": 1.668, "clearance": 1, "image": "/assets/configurateur/HE-07.webp", "glb": "/models/HE-07.glb", "slug": null },
+  { "id": "HE-08", "ref": "HE-08", "name": "Squat", "category": "musculation", "w": 1.151, "d": 1.451, "h": 1.342, "clearance": 1, "image": "/assets/configurateur/HE-08.webp", "glb": "/models/HE-08.glb", "slug": null },
+  { "id": "HE-09", "ref": "HE-09", "name": "Bench Press", "category": "musculation", "w": 1.611, "d": 1.268, "h": 1.151, "clearance": 1, "image": "/assets/configurateur/HE-09.webp", "glb": "/models/HE-09.glb", "slug": null },
+  { "id": "USB-01", "ref": "USB-01", "name": "Vélo Elliptique", "category": "cardio", "w": 2.4, "d": 0.58, "h": 1.654, "clearance": 1, "image": "/assets/configurateur/USB-01.webp", "glb": "/models/USB-01.glb", "slug": null }
+]
