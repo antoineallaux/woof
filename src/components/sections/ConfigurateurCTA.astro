@@ -1,0 +1,27 @@
+---
+import Button from '../ui/Button.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+---
+
+<section class="py-20 bg-surface">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <SectionHeader
+        label="Nouveau"
+        title="Dessinez votre aire canine en 3D"
+        subtitle="Dimensionnez le terrain, choisissez le sol, placez les équipements, ajoutez une clôture avec sas. Partagez le plan à vos élus et demandez un devis en un clic."
+      />
+      <ul class="mt-6 space-y-2 text-text">
+        <li>✔ Gratuit, sans inscription</li>
+        <li>✔ Plan coté et vue 3D à imprimer</li>
+        <li>✔ Fonctionne sur ordinateur et tablette</li>
+      </ul>
+      <div class="mt-8">
+        <Button href="/configurateur/" size="lg">Ouvrir le configurateur</Button>
+      </div>
+    </div>
+    <a href="/configurateur/" class="block rounded-2xl overflow-hidden border border-primary-light bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+      <img src="/assets/configurateur/apercu.webp" alt="Aperçu du configurateur d'aire canine en 3D" width="1200" height="771" loading="lazy" class="w-full h-auto" />
+    </a>
+  </div>
+</section>
