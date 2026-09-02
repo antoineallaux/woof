@@ -71,7 +71,7 @@ export function decoder(brut: string, ids: Set<string>): { config: Config; ignor
   for (const e of c.e) {
     if (!Array.isArray(e) || typeof e[0] !== 'string') continue
     if (!ids.has(e[0])) { ignores.push(e[0]); continue }
-    equipements.push({ uid: uid(), id: e[0], x: nombre(e[1], 0), z: nombre(e[2], 0), rot: nombre(e[3], 0) % 360 })
+    equipements.push({ uid: uid(), id: e[0], x: nombre(e[1], 0), z: nombre(e[2], 0), rot: ((nombre(e[3], 0) % 360) + 360) % 360 })
   }
 
   return {

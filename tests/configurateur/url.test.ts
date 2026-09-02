@@ -60,3 +60,10 @@ describe('lireHash', () => {
     expect(lireHash('')).toBeNull()
   })
 })
+
+describe('rotation négative', () => {
+  it('est normalisée dans [0, 360)', () => {
+    const c = decoder(encoder({ ...config, equipements: [{ uid: 'a', id: 'HE-01', x: 0, z: 0, rot: -90 }] }), ids)!.config
+    expect(c.equipements[0].rot).toBe(270)
+  })
+})

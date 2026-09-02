@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Html } from '@react-three/drei'
 import type { ThreeEvent } from '@react-three/fiber'
 import { useStore, corpsDe, sasRect } from '../store'
@@ -49,6 +49,8 @@ export function Terrain() {
   const [fantome, setFantome] = useState<{ x: number; z: number } | null>(null)
 
   const texture = useMemo(() => textureSol(sol, l, w), [sol, l, w])
+  useEffect(() => () => texture.dispose(), [texture])
+  const appui = useRef<{ x: number; y: number } | null>(null)
   const env = useMemo(() => textureEnvironnement(), [])
   // bordure épaisse (4 lattes) : les lignes WebGL font 1 px, invisibles sur un sol de même teinte
   const lattes = useMemo(() => {
@@ -68,8 +70,14 @@ export function Terrain() {
       e.stopPropagation()
       placer(outil, e.point.x, e.point.z)
     } else {
-      select([])
+      appui.current = { x: e.nativeEvent.clientX, y: e.nativeEvent.clientY }
     }
+  }
+  // désélection seulement sur un vrai clic (pas au début d'un orbit ou d'un pan)
+  const onPointerUp = (e: ThreeEvent<PointerEvent>) => {
+    const a = appui.current
+    appui.current = null
+    if (a && Math.hypot(e.nativeEvent.clientX - a.x, e.nativeEvent.clientY - a.y) < 4) select([])
   }
   const onPointerMove = (e: ThreeEvent<PointerEvent>) => {
     if (outil) setFantome({ x: snap(e.point.x), z: snap(e.point.z) })
@@ -94,7 +102,7 @@ export function Terrain() {
         </mesh>
       ))}
       {/* capteur invisible : placement, fantôme, désélection */}
-      <mesh rotation-x={-Math.PI / 2} position-y={0.001} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerLeave={() => setFantome(null)}>
+      <mesh rotation-x={-Math.PI / 2} position-y={0.001} onPointerDown={onPointerDown} onPointerUp={onPointerUp} onPointerMove={onPointerMove} onPointerLeave={() => setFantome(null)}>
         <planeGeometry args={[400, 400]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
