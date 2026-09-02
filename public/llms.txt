@@ -8,6 +8,7 @@
 - [Nos produits](https://www.woof-parcs.fr/produits/) : catalogue complet (obstacles de saut, tunnels, balances, passerelles, plateformes, mobilier)
 - [L'Agility](https://www.woof-parcs.fr/agility/) : guide complet de l'agility canine en collectivité
 - [Qui sommes-nous](https://www.woof-parcs.fr/qui-sommes-nous/) : histoire et valeurs de la marque
+- [Configurateur 3D](https://www.woof-parcs.fr/configurateur/) : dessinez votre aire canine en 3D (terrain, équipements, clôture, sas) et obtenez un devis
 - [Blog](https://www.woof-parcs.fr/blog/) : conseils d'aménagement, réglementation, bien-être animal
 - [Contact](https://www.woof-parcs.fr/contact/) : demande de devis gratuit (réponse en 48h)
 

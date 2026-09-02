@@ -83,7 +83,7 @@ export default function Configurateur() {
   }, [])
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] bg-bg overflow-hidden">
+    <div className="flex h-full bg-bg overflow-hidden">
       <aside className="hidden lg:flex w-[360px] shrink-0 flex-col border-r border-primary-light bg-white">
         <PanneauLateral />
       </aside>

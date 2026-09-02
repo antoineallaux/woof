@@ -8,5 +8,17 @@ import ConfigurateurApp from '../configurateur/Configurateur';
   description="Dessinez votre aire pour chiens en 3D : terrain, sol, équipements, clôture et sas. Partagez le plan et demandez un devis gratuit."
   noindex={false}
 >
-  <ConfigurateurApp client:only="react" />
+  <!-- bandeau compact : garde un H1 et un texte servis dans le HTML sans voler de hauteur au canvas -->
+  <div class="flex flex-col h-[calc(100vh-4rem)]">
+    <div class="shrink-0 border-b border-primary-light bg-white px-4 py-2 text-xs sm:text-sm text-muted">
+      <h1 class="inline font-display font-extrabold text-base text-text">Configurateur d'aire canine en 3D</h1>
+      <span class="ml-2">
+        Dimensionnez le terrain, placez les équipements d'agility, ajoutez la clôture et ses sas.
+        Partagez le plan par lien ou transformez-le en demande de devis.
+      </span>
+    </div>
+    <div class="flex-1 min-h-0">
+      <ConfigurateurApp client:only="react" />
+    </div>
+  </div>
 </Layout>

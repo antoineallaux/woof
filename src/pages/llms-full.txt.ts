@@ -18,6 +18,7 @@ export const GET: APIRoute = async () => {
     `- [Nos produits](${site}/produits/) : catalogue complet`,
     `- [L'Agility](${site}/agility/) : guide complet de l'agility canine en collectivité`,
     `- [Qui sommes-nous](${site}/qui-sommes-nous/) : histoire et valeurs de la marque`,
+    `- [Configurateur 3D](${site}/configurateur/) : dessinez votre aire canine en 3D (terrain, équipements, clôture, sas) et obtenez un devis`,
     `- [Contact](${site}/contact/) : demande de devis gratuit (réponse en 48h)`,
     '',
     `## Produits (${products.length})`,
