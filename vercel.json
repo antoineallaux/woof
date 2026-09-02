@@ -14,7 +14,7 @@
     {
       "source": "/((?!keystatic|api).*)",
       "headers": [
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://server.arcgisonline.com; font-src 'self' data:; connect-src 'self' https://nominatim.openstreetmap.org; worker-src 'self' blob:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" }
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://server.arcgisonline.com; font-src 'self' data:; connect-src 'self' blob: https://nominatim.openstreetmap.org; worker-src 'self' blob:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" }
       ]
     }
   ],
