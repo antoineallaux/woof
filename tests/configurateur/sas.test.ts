@@ -57,3 +57,9 @@ describe('empriseSas', () => {
     expect(e).toEqual({ x: 10, z: 0, w: PROFONDEUR_SAS, d: LARGEUR_SAS })
   })
 })
+
+describe('bornerPos sur un côté trop court', () => {
+  it('centre le sas quand les marges ne tiennent pas', () => {
+    expect(bornerPos({ l: 2, w: 2 }, 'nord', 0.4)).toBe(1)
+  })
+})

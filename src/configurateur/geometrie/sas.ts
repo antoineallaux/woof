@@ -14,6 +14,8 @@ export function longueurCote(t: Terrain, cote: Cote): number {
 export function bornerPos(t: Terrain, cote: Cote, pos: number): number {
   const min = MARGE_ANGLE + LARGEUR_SAS / 2
   const max = longueurCote(t, cote) - min
+  // côté trop court pour respecter les marges (impossible avec TERRAIN_MIN = 5) : on centre
+  if (max < min) return longueurCote(t, cote) / 2
   return Math.min(max, Math.max(min, pos))
 }
 

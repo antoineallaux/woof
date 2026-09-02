@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import * as THREE from 'three'
 import { Html } from '@react-three/drei'
 import type { ThreeEvent } from '@react-three/fiber'
 import { useStore, corpsDe, sasRect } from '../store'
@@ -51,7 +50,16 @@ export function Terrain() {
 
   const texture = useMemo(() => textureSol(sol, l, w), [sol, l, w])
   const env = useMemo(() => textureEnvironnement(), [])
-  const bordure = useMemo(() => new THREE.PlaneGeometry(l, w).rotateX(-Math.PI / 2), [l, w])
+  // bordure épaisse (4 lattes) : les lignes WebGL font 1 px, invisibles sur un sol de même teinte
+  const lattes = useMemo(() => {
+    const e = 0.18
+    return [
+      { pos: [0, 0.015, -w / 2] as const, dims: [l + e, 0.03, e] as const },
+      { pos: [0, 0.015, w / 2] as const, dims: [l + e, 0.03, e] as const },
+      { pos: [-l / 2, 0.015, 0] as const, dims: [e, 0.03, w + e] as const },
+      { pos: [l / 2, 0.015, 0] as const, dims: [e, 0.03, w + e] as const },
+    ]
+  }, [l, w])
   const satellite = vue === 'satellite'
 
   const onPointerDown = (e: ThreeEvent<PointerEvent>) => {
@@ -72,17 +80,19 @@ export function Terrain() {
       {!satellite && (
         <mesh rotation-x={-Math.PI / 2} position-y={-0.02} receiveShadow>
           <planeGeometry args={[400, 400]} />
-          <meshStandardMaterial map={env} />
+          <meshStandardMaterial map={env} color="#D9E6C4" />
         </mesh>
       )}
       <mesh rotation-x={-Math.PI / 2} receiveShadow>
         <planeGeometry args={[l, w]} />
         <meshStandardMaterial map={texture} transparent={satellite} opacity={satellite ? 0.55 : 1} />
       </mesh>
-      <lineSegments position-y={0.01}>
-        <edgesGeometry args={[bordure]} />
-        <lineBasicMaterial color="#558B2F" />
-      </lineSegments>
+      {!satellite && lattes.map((b, i) => (
+        <mesh key={i} position={[...b.pos]}>
+          <boxGeometry args={[...b.dims]} />
+          <meshStandardMaterial color="#8D6E63" />
+        </mesh>
+      ))}
       {/* capteur invisible : placement, fantôme, désélection */}
       <mesh rotation-x={-Math.PI / 2} position-y={0.001} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerLeave={() => setFantome(null)}>
         <planeGeometry args={[400, 400]} />
