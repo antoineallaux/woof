@@ -3,6 +3,7 @@ import { useStore } from '../store'
 import { OngletTerrain } from './OngletTerrain'
 import { OngletCatalogue } from './OngletCatalogue'
 import { OngletCloture } from './OngletCloture'
+import { Recap } from './Recap'
 
 const ONGLETS = [
   { id: 'terrain', label: 'Terrain' },
@@ -37,6 +38,7 @@ export function PanneauLateral() {
         {onglet === 'catalogue' && <OngletCatalogue />}
         {onglet === 'cloture' && <OngletCloture />}
       </div>
+      <Recap />
     </div>
   )
 }
