@@ -109,11 +109,11 @@ export default function Configurateur() {
             Terrain · Équipements · Clôture
           </button>
         )}
-        <div className={`lg:hidden absolute inset-x-0 bottom-0 z-20 bg-white rounded-t-3xl shadow-2xl border-t border-primary-light transition-transform duration-300 ${tiroir ? 'translate-y-0' : 'translate-y-full'}`} style={{ height: '70%' }} aria-hidden={!tiroir} inert={!tiroir || undefined}>
-          <button type="button" onClick={() => setTiroir(false)} className="w-full py-3 flex justify-center" aria-label="Fermer le panneau">
+        <div className={`lg:hidden absolute inset-x-0 bottom-0 z-20 bg-white rounded-t-3xl shadow-2xl border-t border-primary-light flex flex-col transition-transform duration-300 ${tiroir ? 'translate-y-0' : 'translate-y-full'}`} style={{ height: '70%' }} aria-hidden={!tiroir} inert={!tiroir || undefined}>
+          <button type="button" onClick={() => setTiroir(false)} className="w-full min-h-11 shrink-0 flex items-center justify-center" aria-label="Fermer le panneau">
             <span className="w-12 h-1.5 rounded-full bg-primary-light" />
           </button>
-          <div className="h-[calc(100%-2.5rem)]"><PanneauLateral /></div>
+          <div className="flex-1 min-h-0"><PanneauLateral /></div>
         </div>
       </div>
     </div>

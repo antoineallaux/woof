@@ -13,7 +13,7 @@ export function OngletCatalogue() {
       <div className="flex flex-wrap gap-1.5">
         {['tous', ...CATEGORIES].map((c) => (
           <button key={c} type="button" onClick={() => setCat(c)} aria-pressed={cat === c}
-            className={`px-3 py-1.5 rounded-full text-xs font-bold capitalize ${cat === c ? 'bg-primary text-white' : 'bg-surface text-primary-darker hover:bg-primary-light'}`}>
+            className={`inline-flex items-center min-h-11 px-3 rounded-full text-xs font-bold capitalize ${cat === c ? 'bg-primary text-white' : 'bg-surface text-primary-darker hover:bg-primary-light'}`}>
             {c}
           </button>
         ))}
