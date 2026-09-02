@@ -8,7 +8,10 @@ import { BarreOutils } from './ui/BarreOutils'
 import { Proprietes } from './ui/Proprietes'
 import { Satellite } from './ui/Satellite'
 import { Toast } from './ui/Toast'
+import { ModalePartage } from './ui/ModalePartage'
 import { useStore } from './store'
+import { decoder, encoder, lireHash } from './url'
+import { CATALOGUE } from './catalogue'
 
 function estChampTexte(t: EventTarget | null) {
   return t instanceof HTMLElement && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)
@@ -16,10 +19,29 @@ function estChampTexte(t: EventTarget | null) {
 
 export default function Configurateur() {
   const [tiroir, setTiroir] = useState(false)
+  const [partage, setPartage] = useState(false)
   const outil = useStore((s) => s.outil)
 
   // referme le tiroir mobile dès qu'un outil de placement est choisi
   useEffect(() => { if (outil) setTiroir(false) }, [outil])
+
+  // restauration depuis #cfg au montage
+  useEffect(() => {
+    const brut = lireHash(window.location.hash)
+    if (!brut) return
+    const res = decoder(brut, new Set(CATALOGUE.map((p) => p.id)))
+    const s = useStore.getState()
+    if (!res) { s.setErreur('Lien de configuration illisible.'); return }
+    s.charger(res.config)
+    if (res.ignores.length) s.setErreur(`Équipements inconnus ignorés : ${res.ignores.join(', ')}`)
+  }, [])
+
+  // le hash suit la configuration (sans polluer l'historique)
+  const config = useStore((s) => s.config)
+  useEffect(() => {
+    const t = setTimeout(() => history.replaceState(null, '', `#cfg=${encoder(config)}`), 300)
+    return () => clearTimeout(t)
+  }, [config])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -48,9 +70,10 @@ export default function Configurateur() {
       <div className="relative flex-1 min-h-0">
         <Satellite />
         <Scene><Equipements /><Cloture /><Sas /></Scene>
-        <BarreOutils onPartager={() => {}} onDossier={() => {}} onDevis={() => {}} />
+        <BarreOutils onPartager={() => setPartage(true)} onDossier={() => {}} onDevis={() => {}} />
         <Proprietes />
         <Toast />
+        <ModalePartage ouvert={partage} onFermer={() => setPartage(false)} />
 
         {/* tiroir mobile */}
         <button type="button" onClick={() => setTiroir(true)}
