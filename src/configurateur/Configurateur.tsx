@@ -21,6 +21,7 @@ export default function Configurateur() {
   const [tiroir, setTiroir] = useState(false)
   const [partage, setPartage] = useState(false)
   const outil = useStore((s) => s.outil)
+  const selection = useStore((s) => s.selection)
 
   // referme le tiroir mobile dès qu'un outil de placement est choisi
   useEffect(() => { if (outil) setTiroir(false) }, [outil])
@@ -51,7 +52,7 @@ export default function Configurateur() {
       if (ctrl && e.key.toLowerCase() === 'z' && !e.shiftKey) { e.preventDefault(); s.annuler() }
       else if ((ctrl && e.key.toLowerCase() === 'y') || (ctrl && e.shiftKey && e.key.toLowerCase() === 'z')) { e.preventDefault(); s.retablir() }
       else if (e.key === 'Escape') { s.setOutil(null); s.select([]) }
-      else if ((e.key === 'Delete' || e.key === 'Backspace') && s.selection.length) { e.preventDefault(); s.supprimer(s.selection) }
+      else if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); if (s.selection.length) s.supprimer(s.selection) }
       else if (e.key.toLowerCase() === 'r' && s.selection.length === 1) {
         const eq = s.config.equipements.find((x) => x.uid === s.selection[0])
         if (eq) s.tourner(eq.uid, eq.rot + (e.shiftKey ? -90 : 90))
@@ -75,12 +76,14 @@ export default function Configurateur() {
         <Toast />
         <ModalePartage ouvert={partage} onFermer={() => setPartage(false)} />
 
-        {/* tiroir mobile */}
-        <button type="button" onClick={() => setTiroir(true)}
-          className="lg:hidden absolute bottom-3 right-3 px-4 min-h-12 rounded-full bg-primary text-white font-bold text-sm shadow-lg">
-          Terrain · Équipements · Clôture
-        </button>
-        <div className={`lg:hidden absolute inset-x-0 bottom-0 z-20 bg-white rounded-t-3xl shadow-2xl border-t border-primary-light transition-transform duration-300 ${tiroir ? 'translate-y-0' : 'translate-y-full'}`} style={{ height: '70%' }} aria-hidden={!tiroir}>
+        {/* tiroir mobile (bouton masqué quand la fiche Propriétés occupe le bas de l'écran) */}
+        {selection.length === 0 && (
+          <button type="button" onClick={() => setTiroir(true)}
+            className="lg:hidden absolute bottom-3 right-3 px-4 min-h-12 rounded-full bg-primary text-white font-bold text-sm shadow-lg">
+            Terrain · Équipements · Clôture
+          </button>
+        )}
+        <div className={`lg:hidden absolute inset-x-0 bottom-0 z-20 bg-white rounded-t-3xl shadow-2xl border-t border-primary-light transition-transform duration-300 ${tiroir ? 'translate-y-0' : 'translate-y-full'}`} style={{ height: '70%' }} aria-hidden={!tiroir} inert={!tiroir || undefined}>
           <button type="button" onClick={() => setTiroir(false)} className="w-full py-3 flex justify-center" aria-label="Fermer le panneau">
             <span className="w-12 h-1.5 rounded-full bg-primary-light" />
           </button>
