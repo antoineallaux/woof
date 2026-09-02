@@ -38,7 +38,7 @@ export default function Configurateur() {
     const s = useStore.getState()
     if (!res) { s.setErreur('Lien de configuration illisible.'); return }
     s.charger(res.config)
-    if (res.ignores.length) s.setErreur(`Équipements inconnus ignorés : ${res.ignores.join(', ')}`)
+    if (res.ignores.length) s.setErreur(`Équipements ignorés : ${res.ignores.join(', ')}`)
   }, [])
 
   // le hash suit la configuration (sans polluer l'historique)

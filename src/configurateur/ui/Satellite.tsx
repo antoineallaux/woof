@@ -54,6 +54,7 @@ export function Satellite() {
       const res = await fetch(url, { headers: { Accept: 'application/json' } })
       const data: { lat: string; lon: string }[] = await res.json()
       if (!data[0]) { setEtat('introuvable'); return }
+      if (!carte.current) return // démonté pendant la requête
       carte.current.setView([Number(data[0].lat), Number(data[0].lon)], 19)
       setEtat('idle')
     } catch {
