@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ConfigurateurApp from '../configurateur/Configurateur';
+---
+
+<Layout
+  title="Configurateur d'aire canine en 3D | Woof"
+  description="Dessinez votre aire pour chiens en 3D : terrain, sol, équipements, clôture et sas. Partagez le plan et demandez un devis gratuit."
+  noindex={false}
+>
+  <ConfigurateurApp client:only="react" />
+</Layout>
