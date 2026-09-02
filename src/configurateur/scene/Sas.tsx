@@ -1,11 +1,8 @@
 import { useRef } from 'react'
-import * as THREE from 'three'
 import type { ThreeEvent } from '@react-three/fiber'
 import { useStore } from '../store'
 import { LARGEUR_SAS, PROFONDEUR_SAS, pointSurCote, projeterSurCote } from '../geometrie/sas'
-
-const PLAN_SOL = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0)
-const tmp = new THREE.Vector3()
+import { pointSol } from './pointSol'
 const VERT = '#2F5B3A'
 const PORTILLON = '#7CB342'
 
@@ -31,8 +28,10 @@ export function Sas() {
     setDragging(true)
   }
   const onMove = (e: ThreeEvent<PointerEvent>) => {
-    if (!actif.current || !e.ray.intersectPlane(PLAN_SOL, tmp)) return
-    const next = projeterSurCote(terrain, tmp.x, tmp.z)
+    if (!actif.current) return
+    const pt = pointSol(e)
+    if (!pt) return
+    const next = projeterSurCote(terrain, pt.x, pt.z)
     if (next.cote !== sas.cote || next.pos !== sas.pos) setSas(next)
   }
   const onUp = (e: ThreeEvent<PointerEvent>) => {

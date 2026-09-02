@@ -6,13 +6,7 @@ import { getProduit } from '../catalogue'
 import { snap } from '../geometrie/collisions'
 import type { Equipement as Eq } from '../types'
 import { Modele } from './Modele'
-
-const PLAN_SOL = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0)
-const tmp = new THREE.Vector3()
-
-function pointSol(e: ThreeEvent<PointerEvent>): THREE.Vector3 | null {
-  return e.ray.intersectPlane(PLAN_SOL, tmp) ? tmp.clone() : null
-}
+import { pointSol } from './pointSol'
 
 function PoigneeRotation({ eq, rayon }: { eq: Eq; rayon: number }) {
   const tourner = useStore((s) => s.tourner)
@@ -60,7 +54,8 @@ export function Equipement({ eq }: { eq: Eq }) {
   const setDragging = useStore((s) => s.setDragging)
   const outil = useStore((s) => s.outil)
   const cotes = useStore((s) => s.cotes)
-  const drag = useRef<{ ox: number; oz: number } | null>(null)
+  // ox/oz : décalage curseur → centre ; x/z : dernière position appliquée (indépendante du rendu React)
+  const drag = useRef<{ ox: number; oz: number; x: number; z: number } | null>(null)
 
   if (!p) return null
   const selectionne = selection.includes(eq.uid)
@@ -72,11 +67,12 @@ export function Equipement({ eq }: { eq: Eq }) {
       ? selectionne ? selection.filter((u) => u !== eq.uid) : [...selection, eq.uid]
       : selectionne ? selection : [eq.uid]
     select(uids)
+    if (!uids.includes(eq.uid)) return // retiré de la sélection : pas de drag
     const pt = pointSol(e)
     if (!pt) return
     ;(e.target as Element).setPointerCapture(e.pointerId)
     enregistrer()
-    drag.current = { ox: eq.x - pt.x, oz: eq.z - pt.z }
+    drag.current = { ox: eq.x - pt.x, oz: eq.z - pt.z, x: eq.x, z: eq.z }
     setDragging(true)
   }
   const onMove = (e: ThreeEvent<PointerEvent>) => {
@@ -85,11 +81,11 @@ export function Equipement({ eq }: { eq: Eq }) {
     if (!pt) return
     const nx = snap(pt.x + drag.current.ox)
     const nz = snap(pt.z + drag.current.oz)
-    const dx = nx - eq.x
-    const dz = nz - eq.z
+    const dx = nx - drag.current.x
+    const dz = nz - drag.current.z
     if (dx === 0 && dz === 0) return
     const groupe = useStore.getState().selection.includes(eq.uid) ? useStore.getState().selection : [eq.uid]
-    deplacer(groupe, dx, dz, false)
+    if (deplacer(groupe, dx, dz, false)) drag.current = { ...drag.current, x: nx, z: nz }
   }
   const onUp = (e: ThreeEvent<PointerEvent>) => {
     if (!drag.current) return

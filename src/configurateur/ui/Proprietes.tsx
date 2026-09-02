@@ -15,7 +15,7 @@ export function Proprietes() {
     return (
       <div className="absolute bottom-3 left-3 rounded-2xl bg-white/95 border border-primary-light shadow-md p-4 text-sm">
         <p className="font-bold text-text">{selection.length} équipements sélectionnés</p>
-        <button type="button" onClick={() => supprimer(selection)} className="mt-2 text-xs font-bold text-red-600 hover:underline">Supprimer la sélection</button>
+        <button type="button" onClick={() => supprimer(selection)} className="mt-2 px-3 py-2 min-h-11 rounded-lg border border-primary-light text-xs font-bold text-red-600 hover:bg-surface">Supprimer la sélection</button>
       </div>
     )
   }
