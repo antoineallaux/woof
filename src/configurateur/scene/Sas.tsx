@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import type { ThreeEvent } from '@react-three/fiber'
 import { useStore } from '../store'
 import { LARGEUR_SAS, PROFONDEUR_SAS, pointSurCote, projeterSurCote, type Sas as TSas } from '../geometrie/sas'
@@ -12,6 +12,9 @@ function UnSas({ index, sas, hauteur }: { index: number; sas: TSas; hauteur: num
   const enregistrer = useStore((s) => s.enregistrer)
   const setDragging = useStore((s) => s.setDragging)
   const actif = useRef(false)
+  const dragging = useStore((s) => s.dragging)
+  // si le filet global a coupé le drag, on oublie l'état local
+  useEffect(() => { if (!dragging) actif.current = false }, [dragging])
 
   const { x, z, angle } = pointSurCote(terrain, sas.cote, sas.pos)
   const h = hauteur
@@ -32,8 +35,6 @@ function UnSas({ index, sas, hauteur }: { index: number; sas: TSas; hauteur: num
     const next = projeterSurCote(terrain, pt.x, pt.z)
     if (next.cote !== sas.cote || next.pos !== sas.pos) deplacerSas(index, next)
   }
-  // filet : capture perdue (fenêtre, démontage) sans pointerup
-  const onPerte = () => { actif.current = false; setDragging(false) }
   const onUp = (e: ThreeEvent<PointerEvent>) => {
     ;(e.target as Element).releasePointerCapture(e.pointerId)
     actif.current = false
@@ -42,7 +43,7 @@ function UnSas({ index, sas, hauteur }: { index: number; sas: TSas; hauteur: num
 
   // repère local : x le long du côté, z perpendiculaire (profondeur), sas à cheval sur la clôture
   return (
-    <group position={[x, 0, z]} rotation-y={angle} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} onLostPointerCapture={onPerte}>
+    <group position={[x, 0, z]} rotation-y={angle} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
       {/* parois latérales */}
       {[-l2, l2].map((px) => (
         <mesh key={px} position={[px, h / 2, 0]} castShadow>

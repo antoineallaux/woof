@@ -17,6 +17,23 @@ function PontCapture() {
   return null
 }
 
+/** Filet : un drag interrompu sans pointerup sur l'objet (perte de focus, capture perdue) ne doit pas bloquer la caméra. */
+function FiletDrag() {
+  const setDragging = useStore((s) => s.setDragging)
+  useEffect(() => {
+    const reset = () => { if (useStore.getState().dragging) setDragging(false) }
+    window.addEventListener('blur', reset)
+    window.addEventListener('pointerup', reset, true)
+    window.addEventListener('pointercancel', reset, true)
+    return () => {
+      window.removeEventListener('blur', reset)
+      window.removeEventListener('pointerup', reset, true)
+      window.removeEventListener('pointercancel', reset, true)
+    }
+  }, [setDragging])
+  return null
+}
+
 function Cameras() {
   const vue = useStore((s) => s.vue)
   const dragging = useStore((s) => s.dragging)
@@ -73,6 +90,7 @@ export function Scene({ children }: { children?: React.ReactNode }) {
       <Terrain />
       {children}
       <PontCapture />
+      <FiletDrag />
     </Canvas>
   )
 }

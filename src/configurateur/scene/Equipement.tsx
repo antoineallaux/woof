@@ -1,4 +1,4 @@
-import { Suspense, useRef } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import type { ThreeEvent } from '@react-three/fiber'
 import { useStore } from '../store'
@@ -13,6 +13,9 @@ function PoigneeRotation({ eq, rayon }: { eq: Eq; rayon: number }) {
   const enregistrer = useStore((s) => s.enregistrer)
   const setDragging = useStore((s) => s.setDragging)
   const actif = useRef(false)
+  const dragging = useStore((s) => s.dragging)
+  // si le filet global a coupé le drag, on oublie l'état local
+  useEffect(() => { if (!dragging) actif.current = false }, [dragging])
 
   const onDown = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation()
@@ -31,7 +34,6 @@ function PoigneeRotation({ eq, rayon }: { eq: Eq; rayon: number }) {
     if (Math.abs(deg - proche) <= 3) deg = proche % 360
     tourner(eq.uid, Math.round(deg), false)
   }
-  const onPerte = () => { actif.current = false; setDragging(false) }
   const onUp = (e: ThreeEvent<PointerEvent>) => {
     ;(e.target as Element).releasePointerCapture(e.pointerId)
     actif.current = false
@@ -39,7 +41,7 @@ function PoigneeRotation({ eq, rayon }: { eq: Eq; rayon: number }) {
   }
 
   return (
-    <mesh rotation-x={-Math.PI / 2} position-y={0.06} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} onLostPointerCapture={onPerte}>
+    <mesh rotation-x={-Math.PI / 2} position-y={0.06} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
       <ringGeometry args={[rayon, rayon + 0.18, 64]} />
       <meshBasicMaterial color="#7CB342" transparent opacity={0.9} side={THREE.DoubleSide} />
     </mesh>
@@ -57,6 +59,8 @@ export function Equipement({ eq }: { eq: Eq }) {
   const cotes = useStore((s) => s.cotes)
   // ox/oz : décalage curseur → centre ; x/z : dernière position appliquée (indépendante du rendu React)
   const drag = useRef<{ ox: number; oz: number; x: number; z: number } | null>(null)
+  const dragging = useStore((s) => s.dragging)
+  useEffect(() => { if (!dragging) drag.current = null }, [dragging])
 
   if (!p) return null
   const selectionne = selection.includes(eq.uid)
@@ -88,7 +92,6 @@ export function Equipement({ eq }: { eq: Eq }) {
     const groupe = useStore.getState().selection.includes(eq.uid) ? useStore.getState().selection : [eq.uid]
     if (deplacer(groupe, dx, dz, false)) drag.current = { ...drag.current, x: nx, z: nz }
   }
-  const onPerte = () => { drag.current = null; setDragging(false) }
   const onUp = (e: ThreeEvent<PointerEvent>) => {
     if (!drag.current) return
     ;(e.target as Element).releasePointerCapture(e.pointerId)
@@ -100,7 +103,7 @@ export function Equipement({ eq }: { eq: Eq }) {
 
   return (
     <group position={[eq.x, 0, eq.z]} rotation-y={(eq.rot * Math.PI) / 180}>
-      <group onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} onLostPointerCapture={onPerte}>
+      <group onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
         <Suspense fallback={
           <mesh position-y={p.h / 2} castShadow>
             <boxGeometry args={[p.w, p.h, p.d]} />
