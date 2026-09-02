@@ -7,6 +7,7 @@ import { snap } from '../geometrie/collisions'
 import type { Equipement as Eq } from '../types'
 import { Modele } from './Modele'
 import { pointSol } from './pointSol'
+import { Limite } from '../ui/Limite'
 
 function PoigneeRotation({ eq, rayon }: { eq: Eq; rayon: number }) {
   const tourner = useStore((s) => s.tourner)
@@ -100,17 +101,21 @@ export function Equipement({ eq }: { eq: Eq }) {
   }
 
   const rayon = Math.max(p.w, p.d) / 2 + 0.5
+  // repli commun au chargement (Suspense) et au modèle introuvable (Limite)
+  const boite = (
+    <mesh position-y={p.h / 2} castShadow>
+      <boxGeometry args={[p.w, p.h, p.d]} />
+      <meshStandardMaterial color="#BDBDBD" />
+    </mesh>
+  )
 
   return (
     <group position={[eq.x, 0, eq.z]} rotation-y={(eq.rot * Math.PI) / 180}>
       <group onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
-        <Suspense fallback={
-          <mesh position-y={p.h / 2} castShadow>
-            <boxGeometry args={[p.w, p.h, p.d]} />
-            <meshStandardMaterial color="#BDBDBD" />
-          </mesh>
-        }>
-          <Modele produit={p} />
+        <Suspense fallback={boite}>
+          <Limite repli={boite}>
+            <Modele produit={p} />
+          </Limite>
         </Suspense>
         {/* volume de saisie invisible : rend le drag fiable même sur des maillages fins */}
         <mesh position-y={p.h / 2}>

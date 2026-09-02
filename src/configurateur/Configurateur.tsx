@@ -9,6 +9,7 @@ import { Proprietes } from './ui/Proprietes'
 import { Satellite } from './ui/Satellite'
 import { Toast } from './ui/Toast'
 import { ModalePartage } from './ui/ModalePartage'
+import { Limite } from './ui/Limite'
 import { useStore } from './store'
 import { decoder, encoder, lireHash } from './url'
 import { CATALOGUE } from './catalogue'
@@ -89,7 +90,13 @@ export default function Configurateur() {
 
       <div className="relative flex-1 min-h-0">
         <Satellite />
-        <Scene><Equipements /><Cloture /><Sas /></Scene>
+        <Limite repli={
+          <div className="absolute inset-0 flex items-center justify-center p-8 text-center text-sm font-bold text-muted">
+            Votre navigateur ne gère pas l'affichage 3D (WebGL). Essayez avec un navigateur récent.
+          </div>
+        }>
+          <Scene><Equipements /><Cloture /><Sas /></Scene>
+        </Limite>
         <BarreOutils onPartager={() => setPartage(true)} onDossier={dossier} onDevis={() => envoyerAuDevis(useStore.getState().config)} />
         <Proprietes />
         <Toast />
