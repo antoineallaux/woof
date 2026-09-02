@@ -11,7 +11,12 @@ function Dimension({ label, valeur, onChange }: { label: string; valeur: number;
         <input type="range" min={TERRAIN_MIN} max={TERRAIN_MAX} step={0.5} value={valeur} onChange={(e) => onChange(Number(e.target.value))} className="flex-1 accent-primary" aria-label={label} />
         {/* non contrôlé, appliqué au blur/Entrée : évite le saut à 5 m pendant la frappe ; key resynchronise après slider/undo */}
         <input type="number" min={TERRAIN_MIN} max={TERRAIN_MAX} step={0.5} defaultValue={valeur} key={valeur}
-          onBlur={(e) => { const n = Number(e.target.value); if (Number.isFinite(n) && n > 0) onChange(n) }}
+          onBlur={(e) => {
+            const n = Number(e.target.value)
+            if (Number.isFinite(n) && n > 0) onChange(n)
+            // réaffiche la valeur réelle (bornée) même si le store n'a pas changé
+            e.target.value = String(Math.min(TERRAIN_MAX, Math.max(TERRAIN_MIN, Number.isFinite(n) && n > 0 ? n : valeur)))
+          }}
           onKeyDown={(e) => { if (e.key === 'Enter') (e.target as HTMLInputElement).blur() }}
           className={`${input} w-20`} aria-label={`${label} en mètres`} />
       </div>

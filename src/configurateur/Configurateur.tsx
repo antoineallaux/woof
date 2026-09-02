@@ -47,6 +47,7 @@ export default function Configurateur() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (estChampTexte(e.target)) return
+      if (document.querySelector('dialog[open]')) return // pas de raccourci sous une modale
       const s = useStore.getState()
       const ctrl = e.ctrlKey || e.metaKey
       if (ctrl && e.key.toLowerCase() === 'z' && !e.shiftKey) { e.preventDefault(); s.annuler() }
