@@ -23,20 +23,27 @@ export function Satellite() {
   const [etat, setEtat] = useState<'idle' | 'recherche' | 'introuvable'>('idle')
   const visible = vue === 'satellite'
 
+  // la carte est créée au premier passage en satellite et conservée ensuite : le cadrage survit aux changements de vue
   useEffect(() => {
-    if (!visible || !conteneur.current || carte.current) return
-    const map = L.map(conteneur.current, { zoomControl: true, attributionControl: true, zoomSnap: 0.25 }).setView(DEPART, 18)
-    L.tileLayer(TUILES, { maxZoom: 20, maxNativeZoom: 19, attribution: ATTRIB }).addTo(map)
-    // le coin haut-gauche est occupé par la barre d'outils et le champ d'adresse : zoom à droite, sous les boutons
-    map.zoomControl.setPosition('topright')
-    const coin = map.getContainer().querySelector<HTMLElement>('.leaflet-top.leaflet-right')
-    if (coin) coin.style.marginTop = '48px'
-    const sync = () => setSatellite(pixelsParMetre(map))
-    map.on('move zoom resize', sync)
-    sync()
-    carte.current = map
-    return () => { map.remove(); carte.current = null }
+    if (!visible || !conteneur.current) return
+    if (!carte.current) {
+      const map = L.map(conteneur.current, { zoomControl: true, attributionControl: true, zoomSnap: 0.25 }).setView(DEPART, 18)
+      L.tileLayer(TUILES, { maxZoom: 20, maxNativeZoom: 19, attribution: ATTRIB }).addTo(map)
+      // le coin haut-gauche est occupé par la barre d'outils et le champ d'adresse : zoom à droite, sous les boutons
+      map.zoomControl.setPosition('topright')
+      const coin = map.getContainer().querySelector<HTMLElement>('.leaflet-top.leaflet-right')
+      if (coin) coin.style.marginTop = '48px'
+      map.on('move zoom resize', () => setSatellite(pixelsParMetre(map)))
+      carte.current = map
+    } else {
+      // le conteneur était masqué : Leaflet doit reprendre ses mesures
+      carte.current.invalidateSize()
+    }
+    setSatellite(pixelsParMetre(carte.current))
   }, [visible, setSatellite])
+
+  // démontage seulement : ne pas détruire la carte en quittant la vue satellite
+  useEffect(() => () => { carte.current?.remove(); carte.current = null }, [])
 
   const chercher = async (e: SyntheticEvent) => {
     e.preventDefault()
