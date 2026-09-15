@@ -22,7 +22,7 @@ async function creerProspect(p: {
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` },
-    body: JSON.stringify({ ...p, lead_source: 'Site Woof', lead_status: 'A recontacter' }),
+    body: JSON.stringify({ ...p, lead_source: 'Site Woof', lead_status: 'Nouveau' }),
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(`prospect ${res.status}: ${JSON.stringify(data).slice(0, 200)}`);
