@@ -30,10 +30,15 @@ const toAbs = (u: string) => (u.startsWith('http') ? u : `${siteUrl}${u}`);
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
   "name": "Woof!",
+  "alternateName": ["Woof! Parcs", "Woof Parcs", "Woof! by Herkules Fitness"],
   "url": siteUrl,
   "logo": `${siteUrl}/assets/logo-header-woof.png`,
   "description": "Fabricant français d'équipements d'agility canine et de caniparcs pour collectivités. Une marque du groupe Herkules Fitness.",
+  // Désambiguïsation : homonymes « Woof » = parcs de loisirs canins, promeneurs de chiens
+  "disambiguatingDescription": "Fabricant B2B de parcs canins et de modules d'agility pour collectivités, marque de Herkules Fitness. Ni un parc de loisirs canin, ni un service de promenade ou de garde de chiens.",
+  "slogan": "Créez votre parcours canin agility en collectivité.",
   "telephone": "+33184602330",
   "address": {
     "@type": "PostalAddress",
@@ -43,15 +48,18 @@ const orgSchema = {
     "addressCountry": "FR"
   },
   "areaServed": { "@type": "Country", "name": "France" },
+  // Profils sociaux = ceux de Herkules (Woof! n'en a pas en propre) : rattachés au parent, pas à Woof!
   "parentOrganization": {
     "@type": "Organization",
+    "@id": "https://www.herkules-fitness.com/#organization",
     "name": "Herkules Fitness",
-    "url": "https://www.herkules-fitness.com"
+    "url": "https://www.herkules-fitness.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/herkules-fitness",
+      "https://www.instagram.com/herkules_fitness/",
+      "https://www.facebook.com/herkulesfitnessfrance"
+    ]
   },
-  "sameAs": [
-    "https://www.herkules-fitness.com",
-    "https://www.linkedin.com/company/herkules-outdoor-fitness"
-  ],
 };
 
 const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
