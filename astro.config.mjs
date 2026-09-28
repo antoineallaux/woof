@@ -12,7 +12,8 @@ export default defineConfig({
   // 'ignore' (et non 'always') : requis pour les routes API Keystatic ;
   // la canonicalisation avec slash reste assurée par Vercel (308) et le sitemap
   trailingSlash: 'ignore',
-  adapter: vercel(),
+  // 300 s : la génération d'un article par le cron blog prend 1 à 2 min
+  adapter: vercel({ maxDuration: 300 }),
   integrations: [
     react(),
     keystatic(),
