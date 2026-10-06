@@ -122,7 +122,6 @@ export default config({
           { label: 'FAQ', itemLabel: (props) => props.fields.question.value || 'Question' }
         ),
         technicalSheet: fields.text({ label: 'Fiche technique (PDF)', description: 'URL ou chemin, optionnel' }),
-        dwgFile: fields.text({ label: 'Fichier DWG', description: 'URL ou chemin, optionnel' }),
       },
     }),
   },
