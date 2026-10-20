@@ -29,17 +29,16 @@ async function creerProspect(p: {
   return data;
 }
 
-// Alerte Telegram vers HerkulesFitnessBot. Silencieuse si non configurée.
-async function notifierTelegram(text: string) {
-  const token = import.meta.env.TELEGRAM_ALERT_BOT_TOKEN;
-  const chatId = import.meta.env.TELEGRAM_ALERT_CHAT_ID;
-  if (!token || !chatId) return;
-  const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+// Alerte Discord #leads (même webhook que les demandes du site Herkules). Silencieuse si non configurée.
+async function notifierDiscord(text: string) {
+  const webhook = import.meta.env.DISCORD_LEADS_WEBHOOK;
+  if (!webhook) return;
+  const res = await fetch(webhook, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chatId, text: text.slice(0, 4000) }),
+    body: JSON.stringify({ content: text.slice(0, 2000), allowed_mentions: { parse: [] } }),
   });
-  if (!res.ok) throw new Error(`telegram ${res.status}: ${(await res.text()).slice(0, 150)}`);
+  if (!res.ok) throw new Error(`discord ${res.status}: ${(await res.text()).slice(0, 150)}`);
 }
 
 function resumeProduits(produits: Produit[]) {
@@ -130,7 +129,7 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ error: 'Erreur envoi email.' }), { status: 500 });
   }
 
-  // CRM + Telegram : best-effort, un échec ici ne doit pas perdre la demande (l'email est parti)
+  // CRM + Discord : best-effort, un échec ici ne doit pas perdre la demande (l'email est parti)
   const detail = [
     message ? `Projet :\n${message}` : '',
     produits.length ? `Produits sélectionnés (${produits.length}) :\n${resumeProduits(produits)}` : '',
@@ -155,7 +154,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
-    await notifierTelegram(
+    await notifierDiscord(
       [
         '🐶 Woof — nouvelle demande de devis',
         `${prenom} ${nom} — ${commune}`,
@@ -168,7 +167,7 @@ export const POST: APIRoute = async ({ request }) => {
         .join('\n')
     );
   } catch (e) {
-    console.error('contact: alerte Telegram échouée', email, e);
+    console.error('contact: alerte Discord échouée', email, e);
   }
 
   return new Response(JSON.stringify({ success: true }), { status: 200 });
