@@ -108,3 +108,13 @@ test('statut d’erreur tronqué à 180 caractères', () => {
   assert.equal(statutErreur(new Error('x'.repeat(300))), 'Erreur : ' + 'x'.repeat(180));
   assert.equal(statutErreur({}), 'Erreur : inconnue');
 });
+
+test('liste blanche : /caniparc/, /agility/ et /prix-parc-canin/ gardés et cités dans la consigne', () => {
+  const pages = ['/caniparc/', '/agility/', '/prix-parc-canin/'];
+  const r = validerEtFormaterMdx(reponse({ article: corps(pages.map((p) => ` [page](${p})`).join('')) }), sheet);
+  assert.equal(r.unlinked, 1);
+  for (const p of pages) {
+    assert.ok(r.mdx.includes(`[page](${p})`), p);
+    assert.ok(construireRequeteClaude(sheet, 2026).system.includes(p), p);
+  }
+});
