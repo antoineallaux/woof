@@ -23,14 +23,21 @@ test('maillage : les articles mairies lient /caniparc/ et /agility/ dans le text
   }
 });
 
-test('maillage : aucun lien interne du build vers une page absente', () => {
-  // Les anciennes adresses redirigées par vercel.json répondent (301), elles ne sont pas cassées
+test('maillage : les articles budget lient /prix-parc-canin/ une fois au plus', () => {
+  const articles = pages.filter((p) => p.f.startsWith('blog/') && p.f !== 'blog/index.html');
+  const liens = articles.map((p) => corps(p.html).split('href="/prix-parc-canin/"').length - 1);
+  assert.ok(liens.filter((n) => n > 0).length >= 6, `${liens.filter((n) => n > 0).length} articles`);
+  assert.ok(liens.every((n) => n <= 1), 'un article lie /prix-parc-canin/ plusieurs fois');
+});
+
+test('maillage : aucun lien interne du build vers une page absente ou redirigée', () => {
+  // Une ancienne adresse redirigée par vercel.json coûte un saut (301) : on lie l'adresse finale
   const redirections = new Set(JSON.parse(readFileSync('vercel.json', 'utf8')).redirects.map((r: { source: string }) => r.source));
   const casses = new Set<string>();
   for (const p of pages) {
     for (const [, href] of p.html.matchAll(/href="(\/(?!\/)[^"#?]*)/g)) {
       const f = `dist/client${decodeURIComponent(href)}`;
-      if (!existsSync(f) && !existsSync(f.replace(/\/?$/, '/index.html')) && !redirections.has(href)) casses.add(`${p.f} → ${href}`);
+      if (redirections.has(href) || (!existsSync(f) && !existsSync(f.replace(/\/?$/, '/index.html')))) casses.add(`${p.f} → ${href}`);
     }
   }
   assert.deepEqual([...casses], []);
