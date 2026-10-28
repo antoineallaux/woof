@@ -8,7 +8,7 @@ const decode = (s: string) => s.replace(/&#39;/g, "'").replace(/&quot;/g, '"').r
 const pages = {
   '': {
     title: 'Fabricant de parcs canins pour collectivités | Woof! Parcs',
-    description: 'Parcs canins et agility pour collectivités : plus de 500 communes équipées en Europe, garantie 5 ans, devis gratuit sous 48h.',
+    description: 'Parcs canins et agility pour collectivités : fabricant depuis 2007, garantie 5 ans, devis gratuit sous 48h.',
   },
   'blog/combien-coute-un-parc-canin-pour-une-commune-budget-detaille': {
     title: 'Combien coûte un parc canin ? 8 000 à 45 000 € | Woof!',
