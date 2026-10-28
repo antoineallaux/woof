@@ -1,0 +1,163 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FAQSection from '../components/sections/FAQSection.astro';
+import CTAFinal from '../components/sections/CTAFinal.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+
+// Montants : tous tirés de l'article « combien coûte un parc canin » (lignes citées dans la fiche du lot 006)
+const article = '/blog/combien-coute-un-parc-canin-pour-une-commune-budget-detaille/';
+
+const parcs = [
+  { type: 'Petit caniparc de village', surface: '300 à 500 m²', contenu: 'Clôture simple, 2 ou 3 agrès de base, panneau d\'information', prix: '8 000 à 15 000 €' },
+  { type: 'Parc canin intercommunal', surface: '800 à 1 200 m²', contenu: 'Clôture complète, parcours d\'agility structuré, mobilier, éclairage', prix: '18 000 à 30 000 €' },
+  { type: 'Aire canine urbaine avec zones séparées', surface: 'Petits et grands chiens', contenu: 'Double enclos, équipements complets, sol synthétique, signalétique', prix: '30 000 à 45 000 €' },
+];
+
+const modules = [
+  { module: 'Tunnel ou passerelle isolée', prix: '400 à 1 500 € pièce', href: '/produits/grande-passerelle/' },
+  { module: 'Parcours d\'agility complet (slalom, obstacles, tunnels)', prix: '5 000 à 15 000 €', href: '/produits/parcours-agility-complet/' },
+  { module: 'Mobilier : bancs, panneaux d\'information, porte-laisses', prix: '1 000 à 3 000 €', href: '/produits/banc-os/' },
+];
+
+const postes = [
+  { poste: 'Clôture', prix: '40 à 90 € le mètre linéaire posé', note: '4 000 à 9 000 € pour 1 000 m² ; 30 à 40 % du budget' },
+  { poste: 'Agrès d\'agility et mobilier', prix: '30 à 50 % du budget', note: 'Voir les fourchettes par module ci-dessus' },
+  { poste: 'Sol', prix: '15 à 30 €/m² en gazon synthétique drainant', note: 'Herbe naturelle : coût faible ; copeaux ou paillage : coût intermédiaire' },
+  { poste: 'Pose', prix: 'Incluse chez Woof!', note: 'Les trois parcs types comprennent fourniture et pose' },
+];
+
+const faqs = [
+  {
+    q: 'Combien coûte un parc canin pour une commune ?',
+    a: 'Un parc canin complet coûte généralement entre 8 000 € et 45 000 €, fourniture et pose comprises : 8 000 à 15 000 € pour un petit caniparc de village (300 à 500 m²), 18 000 à 30 000 € pour un parc intercommunal de 800 à 1 200 m², 30 000 à 45 000 € pour une aire urbaine avec zones séparées.',
+  },
+  {
+    q: 'Combien coûte la clôture d\'un parc canin ?',
+    a: 'Comptez 40 à 90 € le mètre linéaire posé, selon le matériau et la hauteur (1,20 m minimum recommandé). Pour un espace de 1 000 m², la clôture revient généralement à 4 000 à 9 000 €, soit 30 à 40 % du budget.',
+  },
+  {
+    q: 'Combien coûte un parcours d\'agility pour chiens ?',
+    a: 'Un tunnel ou une passerelle isolée coûte 400 à 1 500 € pièce. Un parcours d\'agility complet avec slalom, obstacles et tunnels coûte 5 000 à 15 000 €. Le mobilier (bancs, panneaux, porte-laisses) ajoute 1 000 à 3 000 €.',
+  },
+  {
+    q: 'Quel sol choisir et à quel prix ?',
+    a: 'L\'herbe naturelle coûte peu à l\'installation mais demande un entretien régulier. Les copeaux ou le paillage ont un coût intermédiaire et se renouvellent chaque année. Le gazon synthétique drainant coûte 15 à 30 €/m², avec un entretien minimal.',
+  },
+  {
+    q: 'La pose est-elle comprise dans le prix ?',
+    a: 'Oui, chez Woof! l\'installation est incluse. Les fourchettes des trois parcs types comprennent la fourniture des équipements et leur pose ; elles varient selon la pente du terrain, l\'accès au chantier et les contraintes locales.',
+  },
+  {
+    q: 'Comment obtenir un prix exact pour ma commune ?',
+    a: 'Le montant dépend de votre terrain, de la clôture et du niveau d\'équipement. Demandez un devis gratuit et personnalisé : nous chiffrons votre projet de la clôture aux agrès.',
+  },
+];
+---
+
+<Layout
+  title="Prix d'un parc canin pour une commune : 8 000 à 45 000 €, Woof!"
+  description="Prix d'un parc canin communal : 8 000 à 45 000 € pose comprise selon la taille. Fourchettes par parc type, par module, clôture (40 à 90 €/ml) et sol. Devis gratuit."
+>
+
+  <!-- ===== EN-TÊTE ===== -->
+  <section class="pt-32 pb-16 bg-surface">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge class="mb-4">Repères de prix</Badge>
+      <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-text leading-tight mb-6">
+        Prix d'un parc canin pour une commune
+      </h1>
+      <p class="text-muted text-base sm:text-lg leading-relaxed mb-8">
+        Un parc canin complet coûte généralement entre <strong class="text-text">8 000 € et 45 000 €</strong>, fourniture et pose comprises, selon la surface, le niveau d'équipement et la clôture. Voici les fourchettes par parc type, par module et par poste.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <Button href="/contact/" size="lg">Demander un devis gratuit</Button>
+        <Button href={article} variant="outline" size="lg">Le budget en détail</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARCS TYPES ===== -->
+  <section class="py-16 bg-bg">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display font-extrabold text-2xl md:text-3xl text-text mb-6">Prix par parc type</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left border border-primary-light rounded-xl overflow-hidden">
+          <thead class="bg-surface text-text font-display">
+            <tr><th class="p-4">Parc</th><th class="p-4 hidden sm:table-cell">Contenu</th><th class="p-4 whitespace-nowrap">Fourchette</th></tr>
+          </thead>
+          <tbody class="bg-white">
+            {parcs.map((p) => (
+              <tr class="border-t border-primary-light">
+                <td class="p-4"><strong class="text-text">{p.type}</strong><br /><span class="text-muted">{p.surface}</span><span class="sm:hidden block text-muted mt-1">{p.contenu}</span></td>
+                <td class="p-4 text-muted hidden sm:table-cell">{p.contenu}</td>
+                <td class="p-4 font-bold text-primary whitespace-nowrap">{p.prix}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted text-sm mt-4">Fourniture et pose comprises ; le montant varie selon la topographie, l'accès au chantier et les contraintes locales. Surface et aménagement : <a href="/caniparc/" class="text-primary font-semibold underline">créer un caniparc dans votre commune</a>.</p>
+    </div>
+  </section>
+
+  <!-- ===== MODULES ===== -->
+  <section class="py-16 bg-surface">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display font-extrabold text-2xl md:text-3xl text-text mb-6">Prix par module</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left border border-primary-light rounded-xl overflow-hidden">
+          <thead class="bg-bg text-text font-display">
+            <tr><th class="p-4">Module</th><th class="p-4 whitespace-nowrap">Fourchette</th></tr>
+          </thead>
+          <tbody class="bg-white">
+            {modules.map((m) => (
+              <tr class="border-t border-primary-light">
+                <td class="p-4"><a href={m.href} class="text-text font-semibold underline">{m.module}</a></td>
+                <td class="p-4 font-bold text-primary whitespace-nowrap">{m.prix}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted text-sm mt-4">Tous les agrès et le mobilier : <a href="/produits/" class="text-primary font-semibold underline">nos équipements</a> ; le parcours en parc public : <a href="/agility/" class="text-primary font-semibold underline">l'agility pour collectivités</a>.</p>
+    </div>
+  </section>
+
+  <!-- ===== POSTES ===== -->
+  <section class="py-16 bg-bg">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display font-extrabold text-2xl md:text-3xl text-text mb-6">Prix par poste : clôture, sol, pose</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left border border-primary-light rounded-xl overflow-hidden">
+          <thead class="bg-surface text-text font-display">
+            <tr><th class="p-4">Poste</th><th class="p-4">Fourchette</th><th class="p-4">Repère</th></tr>
+          </thead>
+          <tbody class="bg-white">
+            {postes.map((p) => (
+              <tr class="border-t border-primary-light">
+                <td class="p-4 font-semibold text-text">{p.poste}</td>
+                <td class="p-4 font-bold text-primary">{p.prix}</td>
+                <td class="p-4 text-muted">{p.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted text-sm mt-4">Le détail poste par poste, les aides et l'entretien : <a href={article} class="text-primary font-semibold underline">combien coûte un parc canin pour une commune</a>.</p>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <FAQSection faqs={faqs} title="Combien coûte un parc canin ? Questions fréquentes" />
+
+  <!-- ===== DEVIS ===== -->
+  <CTAFinal />
+
+  <section class="py-10 bg-bg">
+    <p class="text-center text-muted text-sm px-4">
+      Vous savez déjà quels modules vous voulez ? <a href="/devis/" class="text-primary font-semibold underline">Composez votre sélection pour devis</a>.
+    </p>
+  </section>
+
+</Layout>
