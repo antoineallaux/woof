@@ -58,6 +58,9 @@ const legalLinks = [
           {legalLinks.map(({ label, href }) => (
             <li><a href={href} class="text-sm text-white/60 hover:text-primary transition-colors">{label}</a></li>
           ))}
+          {import.meta.env.PUBLIC_GA4_ID?.trim() && (
+            <li><button type="button" data-consentement-regler class="text-sm text-white/60 hover:text-primary transition-colors">Gérer les cookies</button></li>
+          )}
         </ul>
       </div>
     </div>

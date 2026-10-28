@@ -62,6 +62,9 @@ const orgSchema = {
   },
 };
 
+// Identifiant de mesure GA4, posé dans Vercel ; absent = ni bandeau ni balise
+const ga4 = import.meta.env.PUBLIC_GA4_ID?.trim();
+
 const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 ---
 
@@ -107,8 +110,24 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
       <slot />
     </main>
     <Footer />
+    {ga4 && (
+      <section data-consentement hidden aria-label="Cookies" class="fixed inset-x-0 bottom-0 z-50 bg-surface border-t-4 border-primary shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-3 text-sm">
+          <p class="flex-1">
+            Nous mesurons l'audience du site avec Google Analytics pour l'améliorer. Vous pouvez refuser, maintenant ou plus tard.
+            <a href="/confidentialite/" class="underline">En savoir plus</a>
+          </p>
+          <div class="flex gap-2">
+            <button type="button" data-consentement="oui" class="flex-1 whitespace-nowrap bg-primary-darker text-white font-bold px-4 py-2 rounded-lg">Tout accepter</button>
+            <button type="button" data-consentement="non" class="flex-1 whitespace-nowrap bg-primary-darker text-white font-bold px-4 py-2 rounded-lg">Tout refuser</button>
+          </div>
+        </div>
+      </section>
+    )}
     <script>
       import '../scripts/panier.js';
+      import { demarrer } from '../scripts/mesure.js';
+      demarrer(import.meta.env.PUBLIC_GA4_ID);
     </script>
   </body>
 </html>

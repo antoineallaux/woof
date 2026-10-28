@@ -127,6 +127,7 @@ import Layout from '../layouts/Layout.astro';
               try {
                 const res = await fetch('/api/contact/', { method: 'POST', body: formData });
                 if (!res.ok) throw new Error();
+                window.woofLead?.();
                 vider();
                 form.style.display = 'none';
                 recap.classList.add('hidden');
