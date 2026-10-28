@@ -4,14 +4,39 @@ import FAQSection from '../components/sections/FAQSection.astro';
 import CTAFinal from '../components/sections/CTAFinal.astro';
 import Button from '../components/ui/Button.astro';
 import Badge from '../components/ui/Badge.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 
 const allProducts = await getCollection('products');
 const agilityProducts = allProducts
   .filter((p) => p.data.category === 'agility' || p.data.category === 'saut')
   .slice(0, 4);
 
+// Modules : longDescription des fiches produits ; emprise et hauteur : fiches techniques public/fiches/AG35, AG36, AG34.pdf
+const packDetails = [
+  { slug: 'parcours-agility-essentiel', modules: ['Rampes', 'Escaliers', 'Tubes', 'Plateformes de différentes hauteurs'], emprise: '5,48 × 4,11 m', hauteur: '1,11 m' },
+  { slug: 'parcours-agility-intermediaire', modules: ['Tunnels', 'Escaliers', 'Rampes', 'Plateformes sur plusieurs niveaux'], emprise: '4,96 × 3,20 m', hauteur: '1,11 m' },
+  { slug: 'parcours-agility-complet', modules: ['Escaliers', 'Rampe', 'Plateformes surélevées'], emprise: '2,58 × 2,51 m', hauteur: '0,89 m' },
+];
+const packs = await Promise.all(
+  packDetails.map(async (d) => ({ ...d, product: (await getEntry('products', d.slug))! })),
+);
+
+const photos = [
+  { src: '/assets/26-CerceauDeSaut.webp', alt: "Border collie sautant dans un cerceau d'agility en bois, guidé par sa maîtresse dans un parc public" },
+  { src: '/assets/20-OrganiserUneSeance.jpg', alt: "Chiens franchissant une ligne de haies d'agility lors d'une séance collective en parc public" },
+  { src: '/assets/38-MaitriserPasserelle.jpg', alt: "Beagle descendant la rampe d'une passerelle d'agility en bois, tenu en longe par sa maîtresse" },
+  { src: '/assets/12-FatigueChien.jpg', alt: "Border collie assis devant un tunnel d'agility rouge dans un parc canin public" },
+];
+
 const agilityFaqs = [
+  {
+    q: "Combien coûte un parcours agility pour chien dans une commune ?",
+    a: "À titre de repère, un parcours d'agility complet avec slalom, obstacles et tunnels coûte en général entre 5 000 € et 15 000 € en équipements, et un agrès isolé (tunnel, passerelle) entre 400 € et 1 500 €. Les parcours prêts à installer Dog Park 1, 2 et 3 sont chiffrés sur devis, selon le terrain et la pose.",
+  },
+  {
+    q: "Que contiennent les parcours prêts à installer Dog Park 1, 2 et 3 ?",
+    a: "Chaque parcours réunit plusieurs agrès en une seule structure en acier galvanisé. Dog Park 1 : rampes, escaliers, tubes et plateformes, sur 5,48 × 4,11 m. Dog Park 2 : tunnels, escaliers, rampes et plateformes sur plusieurs niveaux, sur 4,96 × 3,20 m. Dog Park 3 : escaliers, rampe et plateformes surélevées, sur 2,58 × 2,51 m, pour les espaces restreints.",
+  },
   {
     q: "À partir de quel âge un chien peut-il faire de l'agility ?",
     a: "Il est recommandé d'attendre que le chien ait au moins 12 mois, et idéalement 18 mois pour les grandes races, avant de commencer l'agility avec des sauts. Les articulations d'un chiot ne sont pas encore consolidées. Pour les exercices au sol (tunnels, slalom lent), on peut commencer dès 6-8 mois.",
@@ -83,8 +108,8 @@ const communeCards = [
 ---
 
 <Layout
-  title="Parcours agility pour collectivités : matériel pro | Woof"
-  description="Matériel d'agility professionnel pour caniparcs de collectivités : obstacles garantis 5 ans, installation incluse. Devis en 48h."
+  title="Parcours agility chien pour collectivités | Woof!"
+  description="Parcours agility chien pour collectivités : 3 parcours prêts à installer ou agrès à l'unité, de 5 000 à 15 000 € pour un parcours complet. Garantis 5 ans, devis sous 48 h."
 >
 
   <!-- ===== SECTION 1 : HERO ===== -->
@@ -105,11 +130,11 @@ const communeCards = [
         </span>
 
         <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-          Parcours Agility : L'Équipement Idéal pour vos Parcs Canins
+          Parcours agility chien pour collectivités
         </h1>
 
         <p class="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
-          Offrez des plateformes de sport en extérieur de qualité à l'agility canine. Des équipements professionnels, accessibles et durables pour le bien-être des chiens et de leurs maîtres.
+          Trois parcours prêts à installer ou des agrès à l'unité pour l'espace canin de votre commune. Des équipements professionnels, accessibles et durables pour le bien-être des chiens et de leurs maîtres.
         </p>
 
         <div class="flex flex-wrap gap-3">
@@ -183,8 +208,57 @@ const communeCards = [
     </div>
   </section>
 
-  <!-- ===== SECTION 3 : LES BIENFAITS — 6 cards ===== -->
+  <!-- ===== LES 3 PARCOURS PRÊTS À INSTALLER ===== -->
   <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <Badge class="mb-4">Pour les collectivités</Badge>
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          3 parcours agility prêts à installer
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          Plusieurs agrès réunis en une seule structure en acier galvanisé : la solution la plus simple pour un premier projet.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {packs.map(({ product, modules, emprise, hauteur }) => (
+          <div class="bg-white rounded-2xl border border-primary-light overflow-hidden shadow-sm flex flex-col">
+            <a href={`/produits/${product.id}/`} class="block aspect-square overflow-hidden bg-surface">
+              <img src={product.data.image} alt={product.data.imageAlt} class="w-full h-full object-cover" loading="lazy" />
+            </a>
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-xs text-muted font-mono mb-1">{product.data.ref}</p>
+              <h3 class="font-display font-bold text-xl text-text mb-3">{product.data.name}</h3>
+              <ul class="text-muted text-sm space-y-1 mb-4">
+                {modules.map((m) => <li>• {m}</li>)}
+              </ul>
+              <p class="text-sm text-text mb-1"><strong>Emprise :</strong> {emprise}, hauteur {hauteur}</p>
+              <p class="text-sm text-text mb-5"><strong>Prix :</strong> sur devis</p>
+              <a href={`/produits/${product.id}/`} class="mt-auto text-primary font-semibold underline text-sm">
+                Voir la fiche du {product.data.name.split(' - ')[0]} →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center text-muted text-sm mt-8 max-w-2xl mx-auto">
+        Repère de prix : un parcours d'agility complet coûte en général 5 000 à 15 000 € en équipements, un agrès isolé 400 à 1 500 €. Détail poste par poste : <a href="/blog/combien-coute-un-parc-canin-pour-une-commune-budget-detaille/" class="text-primary font-semibold underline">combien coûte un parc canin pour une commune</a>.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        <Button href="/devis/" size="lg">
+          Composer ma sélection pour devis →
+        </Button>
+        <Button href="/caniparc/" variant="outline" size="lg">
+          Créer un caniparc complet →
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3 : LES BIENFAITS — 6 cards ===== -->
+  <section class="py-20 bg-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Une activité complète</p>
@@ -209,7 +283,7 @@ const communeCards = [
   </section>
 
   <!-- ===== SECTION 4 : LES OBSTACLES — grille 4x2 ===== -->
-  <section class="py-20 bg-bg">
+  <section class="py-20 bg-surface">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
@@ -222,7 +296,7 @@ const communeCards = [
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {obstacles.map((obs) => (
-          <div class="bg-surface border border-primary-light rounded-xl p-5 hover:border-primary transition-colors">
+          <div class="bg-white border border-primary-light rounded-xl p-5 hover:border-primary transition-colors">
             <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mb-3" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -237,7 +311,7 @@ const communeCards = [
   </section>
 
   <!-- ===== SECTION 5 : ACCESSIBLE À TOUS ===== -->
-  <section class="py-20 bg-surface">
+  <section class="py-20 bg-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
@@ -287,7 +361,7 @@ const communeCards = [
   </section>
 
   <!-- ===== SECTION 6 : POURQUOI INSTALLER — 4 cards communes ===== -->
-  <section class="py-20 bg-bg">
+  <section class="py-20 bg-surface">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <Badge class="mb-4">Pour les collectivités</Badge>
@@ -301,7 +375,7 @@ const communeCards = [
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {communeCards.map((card, i) => (
-          <div class="bg-surface border border-primary-light rounded-2xl p-7 hover:shadow-md transition-shadow">
+          <div class="bg-white border border-primary-light rounded-2xl p-7 hover:shadow-md transition-shadow">
             <div class="w-8 h-8 bg-primary text-white font-display font-extrabold text-sm rounded-lg flex items-center justify-center mb-4">
               {i + 1}
             </div>
@@ -367,8 +441,24 @@ const communeCards = [
     </div>
   </section>
 
+  <!-- ===== PHOTOS ===== -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight">
+          L'agility en parc public
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {photos.map((p) => (
+          <img src={p.src} alt={p.alt} width="1600" height="679" class="w-full h-56 lg:h-72 object-cover rounded-2xl shadow-sm" loading="lazy" />
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- ===== SECTION 9 : FAQ ===== -->
-  <FAQSection faqs={agilityFaqs} />
+  <FAQSection faqs={agilityFaqs} title="Questions fréquentes sur les parcours agility pour collectivités" />
 
   <!-- ===== SECTION 10 : CTA FINAL ===== -->
   <CTAFinal />
