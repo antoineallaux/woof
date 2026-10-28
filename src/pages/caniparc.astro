@@ -1,0 +1,319 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FAQSection from '../components/sections/FAQSection.astro';
+import CTAFinal from '../components/sections/CTAFinal.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import { getEntry } from 'astro:content';
+
+// Chiffres : articles « budget détaillé », « quelle surface », « 7 étapes » et fiches produits (sources listées dans la fiche du lot 004)
+
+const surfaces = [
+  { size: '300 à 500 m²', who: 'Petite commune (moins de 5 000 habitants)', desc: 'Suffisant pour un usage occasionnel : clôture, quelques agrès de base et un panneau d\'information.' },
+  { size: '800 à 1 500 m²', who: 'Commune moyenne ou intercommunalité', desc: 'Idéalement divisé en deux zones, petits et grands chiens, avec un parcours d\'agility structuré.' },
+  { size: 'Plus de 1 500 m²', who: 'Ville ou zone urbaine dense', desc: 'Place pour un parcours d\'agility complet, plusieurs modules répartis et des zones séparées.' },
+];
+
+const budgets = [
+  { range: '8 000 à 15 000 €', who: 'Petit caniparc de village (300 à 500 m²)', desc: 'Clôture simple, 2 ou 3 agrès de base, panneau d\'information.' },
+  { range: '18 000 à 30 000 €', who: 'Parc canin intercommunal (800 à 1 200 m²)', desc: 'Clôture complète, parcours d\'agility structuré, mobilier, éclairage.' },
+  { range: '30 000 à 45 000 €', who: 'Aire canine urbaine avec zones séparées', desc: 'Double enclos, équipements complets, sol synthétique, signalétique.' },
+];
+
+const moduleGroups = [
+  { title: 'Parcours prêts à installer', slugs: ['parcours-agility-essentiel', 'parcours-agility-intermediaire', 'parcours-agility-complet'] },
+  { title: 'Agrès d\'agility', slugs: ['grande-passerelle', 'tunnel-rex', 'slalom', 'barre-saut'] },
+  { title: 'Mobilier du parc', slugs: ['banc-os', 'panneau-info', 'porte-laisse'] },
+];
+const modules = await Promise.all(
+  moduleGroups.map(async (g) => ({
+    title: g.title,
+    products: await Promise.all(g.slugs.map(async (slug) => (await getEntry('products', slug))!)),
+  })),
+);
+
+const steps = [
+  { title: 'Identifier le besoin', desc: 'Recueillir les demandes des habitants et poser le cadre politique du projet.' },
+  { title: 'Choisir le site', desc: 'Surface, accès, distance aux habitations, drainage du sol.' },
+  { title: 'Cadrer le budget', desc: 'Chiffrer fourniture, livraison et pose ; identifier les financements.' },
+  { title: 'Vérifier la réglementation', desc: 'Arrêté municipal, règlement intérieur, conformité des équipements.' },
+  { title: 'Concevoir l\'aménagement', desc: 'Plan du parc, choix des agrès et du mobilier.' },
+  { title: 'Installer', desc: 'Travaux, pose des équipements, contrôle avant ouverture.' },
+  { title: 'Inaugurer', desc: 'Informer les habitants et ouvrir le parc.' },
+];
+
+const photos = [
+  { src: '/assets/12-FatigueChien.jpg', alt: 'Border collie assis devant un tunnel d\'agility rouge dans un parc canin public' },
+  { src: '/assets/20-OrganiserUneSeance.jpg', alt: 'Chiens franchissant une ligne de haies d\'agility lors d\'une séance collective en parc public' },
+  { src: '/assets/38-MaitriserPasserelle.jpg', alt: 'Beagle descendant la rampe d\'une passerelle d\'agility en bois, tenu en longe par sa maîtresse' },
+  { src: '/assets/14-ApprendreLesZones.webp', alt: 'Cocker sur une plateforme d\'agility verte dans un parc arboré' },
+];
+
+const faqs = [
+  {
+    q: 'Qu\'est-ce qu\'un caniparc ?',
+    a: 'Un caniparc est un espace public clôturé réservé aux chiens, où ils peuvent se dépenser sans laisse sous la surveillance de leur maître. Il est souvent équipé de modules d\'agility, de bancs, d\'un panneau de règlement et de distributeurs de sacs. Pour la commune, il canalise la présence canine sur une zone dédiée.',
+  },
+  {
+    q: 'Quelle surface prévoir pour un caniparc ?',
+    a: 'Comptez 300 à 500 m² pour une petite commune de moins de 5 000 habitants, 800 à 1 500 m² pour une commune moyenne ou une intercommunalité, idéalement en deux zones (petits et grands chiens), et plus de 1 500 m² pour un parcours d\'agility complet en zone urbaine.',
+  },
+  {
+    q: 'Combien coûte un caniparc pour une commune ?',
+    a: 'À titre de repère, fourniture et pose comprises : 8 000 à 15 000 € pour un petit caniparc de village (300 à 500 m²), 18 000 à 30 000 € pour un parc intercommunal de 800 à 1 200 m², 30 000 à 45 000 € pour une aire urbaine avec zones séparées. Le montant dépend du terrain, de la clôture et du niveau d\'équipement ; un devis personnalisé le précise.',
+  },
+  {
+    q: 'Combien de temps faut-il pour créer un caniparc ?',
+    a: 'Un caniparc se planifie en 6 à 12 mois, de l\'étude préalable à l\'inauguration : identification du besoin, choix du site, budget, réglementation, plan d\'aménagement, travaux et ouverture.',
+  },
+  {
+    q: 'Quelle clôture pour un caniparc ?',
+    a: 'Une clôture d\'au moins 1,20 m à 1,50 m de hauteur évite les fugues, y compris des chiens sauteurs. Un double sas d\'entrée (deux portails successifs) permet de détacher la laisse sans risque qu\'un chien s\'échappe.',
+  },
+  {
+    q: 'Quelles aides pour financer un caniparc ?',
+    a: 'Plusieurs leviers existent : la Dotation d\'Équipement des Territoires Ruraux (DETR) pour les communes éligibles, les fonds de concours intercommunaux, le mécénat local (vétérinaires, animaleries) et le phasage du projet sur plusieurs exercices budgétaires.',
+  },
+  {
+    q: 'Les équipements Woof! sont-ils garantis ?',
+    a: 'Oui, tous les équipements Woof! sont garantis 5 ans. Les agrès sont en acier galvanisé, conçus pour un usage collectif en libre accès, et l\'installation est incluse.',
+  },
+];
+---
+
+<Layout
+  title="Caniparc : équipement et aménagement pour collectivités, Woof!"
+  description="Caniparc pour votre commune : 300 à 1 500 m², de 8 000 à 45 000 € pose comprise, 6 à 12 mois de projet. Modules d'agility garantis 5 ans, devis sous 48 h."
+>
+
+  <!-- ===== HERO ===== -->
+  <section class="relative min-h-[70vh] flex items-center overflow-hidden">
+    <img
+      src="/assets/13-PqParcChienCollectivite.jpg"
+      alt="Berger australien passant sous des arceaux d'agility verts dans un caniparc municipal"
+      class="absolute inset-0 w-full h-full object-cover"
+      width="1600"
+      height="679"
+      fetchpriority="high"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-primary-darker/90 via-primary-darker/65 to-transparent"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+      <div class="max-w-2xl">
+        <span class="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 text-white font-bold text-xs px-3 py-1.5 rounded-full mb-6">
+          Pour les collectivités
+        </span>
+        <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
+          Caniparc : équipement et aménagement pour collectivités
+        </h1>
+        <p class="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
+          Surface, modules, budget, étapes : les repères pour créer un parc canin dans votre commune. Woof! fournit et installe les équipements, garantis 5 ans.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <Button href="/contact/" variant="white" size="lg">
+            Demander un devis gratuit
+          </Button>
+          <Button
+            href="/produits/"
+            variant="outline"
+            size="lg"
+            class="border-white text-white hover:bg-white hover:text-primary-darker"
+          >
+            Voir les équipements
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QU'EST-CE QU'UN CANIPARC ===== -->
+  <section class="py-20 bg-bg">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Définition</p>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-6">
+        Qu'est-ce qu'un caniparc ?
+      </h2>
+      <div class="text-muted text-base leading-relaxed space-y-4">
+        <p>
+          Un caniparc, ou parc canin, est un espace public clôturé réservé aux chiens. Ils s'y dépensent sans laisse, sous la surveillance de leur maître, sur un terrain équipé de modules d'agility et de mobilier.
+        </p>
+        <p>
+          Pour la commune, c'est un espace canin qui répond à une demande fréquente des habitants : il canalise la présence des chiens sur une zone dédiée, améliore la propreté des rues et crée un lieu de rencontre entre propriétaires.
+        </p>
+        <p>
+          Un caniparc complet comprend une clôture d'au moins 1,20 m avec un double sas d'entrée, un sol stable et drainant, des agrès d'agility, des bancs, un panneau de règlement, des poubelles et distributeurs de sacs, et si possible un point d'eau.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SURFACE ===== -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Quelle surface pour un parc canin communal ?
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          La surface dépend de la population desservie. Prévoyez une zone séparée pour les petits chiens dès que l'espace le permet.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {surfaces.map((s) => (
+          <div class="bg-white rounded-2xl p-7 border border-primary-light shadow-sm">
+            <div class="font-display font-extrabold text-3xl text-primary mb-2">{s.size}</div>
+            <h3 class="font-display font-bold text-lg text-text mb-2">{s.who}</h3>
+            <p class="text-muted text-sm leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-center text-muted text-sm mt-8">
+        Emplacement, sol et clôture : <a href="/blog/quelle-surface-et-quel-emplacement-pour-un-caniparc-reussi/" class="text-primary font-semibold underline">notre guide surface et emplacement</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== MODULES ===== -->
+  <section class="py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Les modules d'un caniparc
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          Un parcours prêt à installer pour démarrer, des agrès à l'unité pour composer votre propre parcours, et le mobilier pour l'accueil des propriétaires. Agrès en acier galvanisé, tout l'équipement garanti 5 ans, installation incluse.
+        </p>
+      </div>
+
+      <div class="space-y-10">
+        {modules.map((g) => (
+          <div>
+            <h3 class="font-display font-bold text-xl text-text mb-4">{g.title}</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {g.products.map((p) => (
+                <a
+                  href={`/produits/${p.id}/`}
+                  class="group bg-white rounded-2xl border border-primary-light overflow-hidden hover:shadow-lg transition-shadow no-underline"
+                >
+                  <div class="aspect-square overflow-hidden bg-surface">
+                    <img
+                      src={p.data.image}
+                      alt={p.data.imageAlt}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="p-4">
+                    <p class="text-xs text-muted font-mono mb-1">{p.data.ref}</p>
+                    <p class="font-display font-bold text-sm text-text line-clamp-2">{p.data.name}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-3 mt-10">
+        <Button href="/produits/" variant="outline" size="lg">
+          Tous les équipements →
+        </Button>
+        <Button href="/agility/" variant="outline" size="lg">
+          L'agility en parc public →
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BUDGET ===== -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <Badge class="mb-4">Repères de prix</Badge>
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Quel budget pour un caniparc ?
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          Trois scénarios types, fourniture et pose comprises. La clôture représente 30 à 40 % du budget, les équipements d'agility et le mobilier 30 à 50 %.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {budgets.map((b) => (
+          <div class="bg-white rounded-2xl p-7 border border-primary-light shadow-sm">
+            <div class="font-display font-extrabold text-3xl text-primary mb-2">{b.range}</div>
+            <h3 class="font-display font-bold text-lg text-text mb-2">{b.who}</h3>
+            <p class="text-muted text-sm leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-center text-muted text-sm mt-8 max-w-2xl mx-auto">
+        Ces montants varient selon le terrain (pente, accès au chantier, zone inondable). Détail poste par poste : <a href="/blog/combien-coute-un-parc-canin-pour-une-commune-budget-detaille/" class="text-primary font-semibold underline">combien coûte un parc canin pour une commune</a> ; aides : <a href="/blog/financer-un-caniparc-subventions-et-aides-pour-les-collectivites/" class="text-primary font-semibold underline">financer un caniparc</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== ÉTAPES ===== -->
+  <section class="py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Les étapes d'un projet de caniparc
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          Comptez 6 à 12 mois de l'étude préalable à l'inauguration.
+        </p>
+      </div>
+      <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {steps.map((s, i) => (
+          <li class="bg-surface border border-primary-light rounded-xl p-5">
+            <div class="w-8 h-8 bg-primary text-white font-display font-extrabold text-sm rounded-lg flex items-center justify-center mb-3">
+              {i + 1}
+            </div>
+            <h3 class="font-display font-bold text-base text-text mb-1">{s.title}</h3>
+            <p class="text-muted text-sm leading-relaxed">{s.desc}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="text-center text-muted text-sm mt-8">
+        Chaque étape en détail : <a href="/blog/de-lidee-a-linauguration-les-7-etapes-dun-projet-de-caniparc/" class="text-primary font-semibold underline">de l'idée à l'inauguration, les 7 étapes d'un projet de caniparc</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== PHOTOS ===== -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight">
+          Nos équipements en parc public
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {photos.map((p) => (
+          <img
+            src={p.src}
+            alt={p.alt}
+            width="1600"
+            height="679"
+            class="w-full h-56 lg:h-72 object-cover rounded-2xl shadow-sm"
+            loading="lazy"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <FAQSection faqs={faqs} title="Questions fréquentes sur les caniparcs" />
+
+  <!-- ===== DEVIS ===== -->
+  <CTAFinal />
+
+  <section class="py-10 bg-bg">
+    <p class="text-center text-muted text-sm px-4">
+      Vous savez déjà quels modules vous voulez ? <a href="/devis/" class="text-primary font-semibold underline">Composez votre sélection pour devis</a>.
+    </p>
+  </section>
+
+</Layout>
