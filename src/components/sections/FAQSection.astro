@@ -6,6 +6,7 @@ interface FAQItem {
 
 interface Props {
   faqs?: FAQItem[];
+  title?: string;
 }
 
 const defaultFaqs: FAQItem[] = [
@@ -35,7 +36,7 @@ const defaultFaqs: FAQItem[] = [
   },
 ];
 
-const { faqs = defaultFaqs } = Astro.props;
+const { faqs = defaultFaqs, title = "Tout savoir sur les parcours d'agility pour collectivités" } = Astro.props;
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -54,7 +55,7 @@ const faqSchema = {
     <div class="text-center mb-12">
       <p class="font-bold text-xs text-primary uppercase tracking-widest mb-3">Questions fréquentes</p>
       <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight">
-        Tout savoir sur les parcours d'agility pour collectivités
+        {title}
       </h2>
     </div>
 
@@ -81,13 +82,8 @@ const faqSchema = {
   </div>
 </section>
 
-<!-- FAQPage JSON-LD schema -->
-<script is:inline define:vars={{ faqSchema }}>
-  const el = document.createElement('script');
-  el.type = 'application/ld+json';
-  el.textContent = JSON.stringify(faqSchema);
-  document.head.appendChild(el);
-</script>
+<!-- FAQPage JSON-LD schema (dans le HTML statique, lisible sans exécuter de JS) -->
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <script>
   document.querySelectorAll('[data-faq-toggle]').forEach((btn) => {
