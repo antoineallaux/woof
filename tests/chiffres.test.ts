@@ -64,10 +64,27 @@ const phrases = (f: string) => nettoie(lire(f)
   .replace(/<\/(p|li|h[1-6]|td|th|dt|dd|div|tr|summary|figcaption)>|<br\s*\/?>|<[^>]*\bblock\b[^>]*>|","|":"/g, ' ¶ ')
   .replace(f.endsWith('.txt') ? /\n/g : /^\b$/g, ' ¶ ')).split(/[.?!¶](?:\s|$)/);
 
-test('aucune phrase n\'associe un parcours d\'agility à plus de 60 m²', () => {
-  const trouves = fichiers.flatMap((f) => phrases(f)
-    .filter((p) => /parcours (d'|d’)?agility/i.test(p))
-    .filter((p) => [...p.matchAll(/(\d{1,3}(?: \d{3})+|\d+) ?m²/g)].some((m) => Number(m[1].replace(/ /g, '')) > 60))
+// Ligne : chaque <tr> et chaque <div> court (carte, ligne de tableau, version mobile comprise) et chaque titre + puces, cellules lues ensemble, coupé aux seules fins de phrase
+const lignes = (f: string) => {
+  const brut = lire(f);
+  if (f.endsWith('.txt')) return brut.split('\n');
+  const ouverts: number[] = [], blocs: string[] = [];
+  for (const m of brut.matchAll(/<(\/?)(tr|div)\b[^>]*>/g)) {
+    if (!m[1]) ouverts.push(m.index!);
+    else if (ouverts.length) blocs.push(nettoie(brut.slice(ouverts.pop()!, m.index! + m[0].length)));
+  }
+  // Scénario d'article : paragraphe titre suivi de sa liste à puces
+  for (const m of brut.matchAll(/<p\b[^>]*>(?:(?!<\/p>)[\s\S])*<\/p>\s*<ul\b[\s\S]*?<\/ul>/g)) blocs.push(nettoie(m[0]));
+  // ponytail: seuil de longueur pour ne garder que cartes et lignes, pas les sections entières
+  return blocs.filter((b) => b.length <= 400).flatMap((b) => b.split(/[.?!](?:\s|$)/));
+};
+
+const associe = (p: string) => /parcours (d'|d’)?agility/i.test(p)
+  && [...p.matchAll(/(\d{1,3}(?: \d{3})+|\d+) ?m²/g)].some((m) => Number(m[1].replace(/ /g, '')) > 60);
+
+test('aucune phrase ni ligne de tableau n\'associe un parcours d\'agility à plus de 60 m²', () => {
+  const trouves = fichiers.flatMap((f) => [...phrases(f), ...lignes(f)]
+    .filter(associe)
     .map((p) => `${f} : « ${p.trim()} »`));
   assert.deepEqual([...new Set(trouves)], []);
 });
