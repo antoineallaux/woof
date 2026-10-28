@@ -64,17 +64,10 @@ const phrases = (f: string) => nettoie(lire(f)
   .replace(/<\/(p|li|h[1-6]|td|th|dt|dd|div|tr|summary|figcaption)>|<br\s*\/?>|<[^>]*\bblock\b[^>]*>|","|":"/g, ' ¶ ')
   .replace(f.endsWith('.txt') ? /\n/g : /^\b$/g, ' ¶ ')).split(/[.?!¶](?:\s|$)/);
 
-// Articles hors périmètre du lot 011, signalés dans sa fiche : à corriger dans un prochain lot, puis retirer d'ici
-const exceptions = [
-  'blog/budget-participatif-faire-elire-un-projet-de-caniparc-dans-sa-ville/index.html : « Une surface de 300 à 1 000 m² suffit',
-  'blog/quelle-surface-et-quel-emplacement-pour-un-caniparc-reussi/index.html : « Ville ou zone urbaine dense : au-delà de 1 500 m²',
-];
-
 test('aucune phrase n\'associe un parcours d\'agility à plus de 60 m²', () => {
   const trouves = fichiers.flatMap((f) => phrases(f)
     .filter((p) => /parcours (d'|d’)?agility/i.test(p))
     .filter((p) => [...p.matchAll(/(\d{1,3}(?: \d{3})+|\d+) ?m²/g)].some((m) => Number(m[1].replace(/ /g, '')) > 60))
-    .map((p) => `${f} : « ${p.trim()} »`))
-    .filter((t) => !exceptions.some((e) => t.startsWith(e)));
+    .map((p) => `${f} : « ${p.trim()} »`));
   assert.deepEqual([...new Set(trouves)], []);
 });
