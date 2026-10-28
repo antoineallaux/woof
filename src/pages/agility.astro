@@ -43,7 +43,7 @@ const agilityFaqs = [
   },
   {
     q: "Quelle surface faut-il prévoir pour installer un parcours ?",
-    a: "Un parcours pour collectivité nécessite 30 à 60m² au minimum pour un parcours complet. Des configurations plus denses sont possibles avec nos configurations spéciales en L ou en U.",
+    a: "Un parcours d'agility pour collectivité s'installe à partir de 30 m². Pour un terrain étroit ou irrégulier, les agrès peuvent être disposés en L ou en U.",
   },
   {
     q: "Les équipements sont-ils adaptés à une utilisation intensive ?",
@@ -178,14 +178,10 @@ const communeCards = [
           </div>
 
           <!-- Stats -->
-          <div class="grid grid-cols-3 gap-4">
+          <div class="grid grid-cols-2 gap-4">
             <div class="text-center bg-surface rounded-xl p-4 border border-primary-light">
-              <div class="font-display font-extrabold text-3xl text-primary mb-1">100+</div>
-              <div class="text-muted text-xs font-semibold">Communes équipées</div>
-            </div>
-            <div class="text-center bg-surface rounded-xl p-4 border border-primary-light">
-              <div class="font-display font-extrabold text-3xl text-primary mb-1">15+</div>
-              <div class="text-muted text-xs font-semibold">Années d'expérience</div>
+              <div class="font-display font-extrabold text-3xl text-primary mb-1">2007</div>
+              <div class="text-muted text-xs font-semibold">Fabricant depuis</div>
             </div>
             <div class="text-center bg-surface rounded-xl p-4 border border-primary-light">
               <div class="font-display font-extrabold text-3xl text-primary mb-1">100%</div>
@@ -347,7 +343,7 @@ const communeCards = [
             { num: '2', label: 'Catégories de taille' },
             { num: '3', label: 'Niveaux par obstacle' },
             { num: '100%', label: 'Acier galvanisé' },
-            { num: '50m²', label: 'Surface minimum' },
+            { num: '30 m²', label: 'Surface, à partir de' },
           ].map((s) => (
             <div class="bg-white rounded-2xl p-6 text-center border border-primary-light shadow-sm">
               <div class="font-display font-extrabold text-4xl text-primary mb-2">{s.num}</div>
