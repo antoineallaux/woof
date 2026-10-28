@@ -9,11 +9,13 @@ const fichiers = (readdirSync(racine, { recursive: true }) as string[])
   .filter((f) => /\.(html|txt)$/.test(f) && !f.startsWith('_astro'));
 
 // Texte visible + JSON-LD (les balises sont retirées, le contenu des <script> reste) ; adresses retirées
-const texte = (f: string) => readFileSync(join(racine, f), 'utf8')
+const lire = (f: string) => readFileSync(join(racine, f), 'utf8');
+const nettoie = (brut: string) => brut
   .replace(/<[^>]+>/g, ' ')
   .replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&nbsp;| | /g, ' ')
   .replace(/\S*parcours-agility-(essentiel|intermediaire|complet)\S*/g, ' ')
   .replace(/\s+/g, ' ');
+const texte = (f: string) => nettoie(lire(f));
 
 const anciens: [string, RegExp][] = [
   // « plus de 15 ans d'expérience » d'un éducateur cité dans un article n'est pas l'ancienneté de Herkules
@@ -55,4 +57,24 @@ test('fiches Dog Park : aucune étiquette de niveau, emprise réelle affichée',
     assert.ok(t.includes(emprise), `${slug} : emprise ${emprise}`);
     assert.doesNotMatch(fiche.replace(/<[^>]+>/g, ' ').replace(/\S*parcours-agility-\S*/g, ' '), /\b(essentiel|intermédiaire|complet)\b/i, slug);
   }
+});
+
+// Phrase : coupée aux ponctuations finales, aux fins de bloc (paragraphe, puce, cellule), entre champs JSON-LD et aux lignes de llms-full.txt
+const phrases = (f: string) => nettoie(lire(f)
+  .replace(/<\/(p|li|h[1-6]|td|th|dt|dd|div|tr|summary|figcaption)>|<br\s*\/?>|<[^>]*\bblock\b[^>]*>|","|":"/g, ' ¶ ')
+  .replace(f.endsWith('.txt') ? /\n/g : /^\b$/g, ' ¶ ')).split(/[.?!¶](?:\s|$)/);
+
+// Articles hors périmètre du lot 011, signalés dans sa fiche : à corriger dans un prochain lot, puis retirer d'ici
+const exceptions = [
+  'blog/budget-participatif-faire-elire-un-projet-de-caniparc-dans-sa-ville/index.html : « Une surface de 300 à 1 000 m² suffit',
+  'blog/quelle-surface-et-quel-emplacement-pour-un-caniparc-reussi/index.html : « Ville ou zone urbaine dense : au-delà de 1 500 m²',
+];
+
+test('aucune phrase n\'associe un parcours d\'agility à plus de 60 m²', () => {
+  const trouves = fichiers.flatMap((f) => phrases(f)
+    .filter((p) => /parcours (d'|d’)?agility/i.test(p))
+    .filter((p) => [...p.matchAll(/(\d{1,3}(?: \d{3})+|\d+) ?m²/g)].some((m) => Number(m[1].replace(/ /g, '')) > 60))
+    .map((p) => `${f} : « ${p.trim()} »`))
+    .filter((t) => !exceptions.some((e) => t.startsWith(e)));
+  assert.deepEqual([...new Set(trouves)], []);
 });
