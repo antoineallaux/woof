@@ -2,7 +2,8 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
-import { htmlMailDevis, type Produit } from '../../lib/mail-devis';
+import { htmlMailDevis, type Produit } from '../../lib/mail-devis.ts';
+import { limiteDepassee } from '../../lib/securite.ts';
 
 // Crée le lead dans Zoho CRM via herkules-assistant /api/prospect
 // (seul projet à détenir les credentials Zoho). Silencieux si non configuré.
@@ -44,8 +45,13 @@ function resumeProduits(produits: Produit[]) {
   return produits.map((p) => `- ${p.name}${p.ref ? ` (${p.ref})` : ''} × ${p.qty}`).join('\n');
 }
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+  if (limiteDepassee(clientAddress)) {
+    return new Response(JSON.stringify({ error: 'Trop de demandes, réessayez plus tard.' }), { status: 429 });
+  }
   const data = await request.formData();
+  // Champ piège caché : rempli = robot, on répond « envoyé » sans rien envoyer
+  if (data.get('site_web')) return new Response(JSON.stringify({ success: true }), { status: 200 });
   const prenom = data.get('prenom')?.toString().trim();
   const nom = data.get('nom')?.toString().trim();
   const email = data.get('email')?.toString().trim();

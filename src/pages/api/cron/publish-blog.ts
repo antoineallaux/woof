@@ -13,6 +13,7 @@ import {
   type LigneSheet,
 } from '../../../lib/blog-cron';
 import { jetonGoogle, lirePlage, ecrireCellule } from '../../../lib/google-sheets';
+import { jetonValide } from '../../../lib/securite';
 
 // Publie chaque jour les articles du planning (remplace le workflow n8n « Woof! Blog Auto-Publisher v5 »).
 // Recette : ?dry=1 (génère sans rien écrire), ?branch=<nom> (commit ailleurs que main),
@@ -66,7 +67,7 @@ async function commitGithub(slug: string, titre: string, mdx: string, branch: st
 
 export const GET: APIRoute = async ({ request, url }) => {
   const secret = import.meta.env.CRON_SECRET;
-  if (!secret || request.headers.get('authorization') !== `Bearer ${secret}`) {
+  if (!secret || !jetonValide(request.headers.get('authorization'), secret)) {
     return json({ error: 'Non autorisé' }, 401);
   }
 
