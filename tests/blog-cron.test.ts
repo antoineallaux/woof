@@ -1,16 +1,17 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
 import {
   dateDuJour,
   filtrerArticlesDuJour,
-  lignesDepuisValeurs,
+  publierDuJour,
   construireRequeteClaude,
   validerEtFormaterMdx,
   statutErreur,
-  type LigneSheet,
+  type EntreePlanning,
 } from '../src/lib/blog-cron.ts';
 
-const ligne = (o: Partial<LigneSheet>): LigneSheet => ({ row_number: 2, ...o }) as LigneSheet;
+const ligne = (o: Partial<EntreePlanning>): EntreePlanning => ({ date: '', titre: '', categorie: '', statut: '', ...o });
 
 // Article valide : 750 mots, lien autorisé, lien inventé, lien externe
 const corps = (extra = '') =>
@@ -23,7 +24,7 @@ const reponse = (o: { titre?: string; desc?: string; article?: string } = {}) =>
     },
   ],
 });
-const sheet = ligne({ Date: '01/10/2026', Titre: "Clôture de parc canin : hauteur, sas d'entrée et réglementation.", 'Catégorie': 'Équipements', 'Image URL': '/assets/blog/48-cloture/image.webp', Statut: 'À publier', row_number: 50 });
+const sheet = ligne({ date: '01/10/2026', titre: "Clôture de parc canin : hauteur, sas d'entrée et réglementation.", categorie: 'Équipements', image: '/assets/blog/48-cloture/image.webp', statut: 'À publier' });
 
 test('dateDuJour : format jj/mm/aaaa à l’heure de Paris', () => {
   // 30/09 22h30 UTC = 01/10 00h30 à Paris
@@ -33,26 +34,74 @@ test('dateDuJour : format jj/mm/aaaa à l’heure de Paris', () => {
 
 test('filtre : garde seulement date du jour ET statut « À publier » (espaces tolérés)', () => {
   const items = [
-    ligne({ Date: '01/10/2026', Statut: 'À publier', row_number: 2 }),
-    ligne({ Date: ' 01/10/2026 ', Statut: 'À publier ', row_number: 3 }),
-    ligne({ Date: '01/10/2026', Statut: 'Publié', row_number: 4 }),
-    ligne({ Date: '08/10/2026', Statut: 'À publier', row_number: 5 }),
-    ligne({ Date: '01/10/2026', Statut: 'a publier', row_number: 6 }),
-    ligne({ row_number: 7 }),
+    ligne({ date: '01/10/2026', statut: 'À publier', titre: 'a' }),
+    ligne({ date: ' 01/10/2026 ', statut: 'À publier ', titre: 'b' }),
+    ligne({ date: '01/10/2026', statut: 'Publié', titre: 'c' }),
+    ligne({ date: '08/10/2026', statut: 'À publier', titre: 'd' }),
+    ligne({ date: '01/10/2026', statut: 'a publier', titre: 'e' }),
+    ligne({ titre: 'f' }),
   ];
-  assert.deepEqual(filtrerArticlesDuJour(items, '01/10/2026').map((i) => i.row_number), [2, 3]);
+  assert.deepEqual(filtrerArticlesDuJour(items, '01/10/2026').map((i) => i.titre), ['a', 'b']);
 });
 
-test('lignesDepuisValeurs : en-têtes en clés, row_number = ligne du Sheet', () => {
-  const l = lignesDepuisValeurs([
-    ['Date', 'Titre', 'Catégorie', 'Image URL', 'Statut'],
-    ['24/09/2026', 'A', 'Conseils', '/x.webp', 'Publié'],
-    ['01/10/2026', 'B', 'Équipements'],
-  ]);
-  assert.equal(l[0].row_number, 2);
-  assert.equal(l[1].row_number, 3);
-  assert.equal(l[1]['Titre'], 'B');
-  assert.equal(l[1]['Statut'], '');
+// Génération simulée : la réponse Claude est fabriquée, le commit est un faux qui enregistre le slug
+const publieur = () => {
+  const publies: string[] = [];
+  const publier = async (e: EntreePlanning) => {
+    const a = validerEtFormaterMdx(reponse(), e);
+    publies.push(a.slug);
+    return { slug: a.slug };
+  };
+  return { publies, publier };
+};
+
+test('planning : le sujet du jour est publié et son entrée marquée « Publié »', async () => {
+  const planning = [ligne({ ...sheet }), ligne({ ...sheet, date: '08/10/2026', titre: 'Plus tard' })];
+  const { publies, publier } = publieur();
+  const r = await publierDuJour(planning, '01/10/2026', publier);
+  assert.deepEqual(publies, ['cloture-de-parc-canin-hauteur-sas-dentree-et-reglementation']);
+  assert.equal(r.trouves, 1);
+  assert.equal(r.resultats[0].statut, 'Publié');
+  assert.deepEqual(planning.map((e) => e.statut), ['Publié', 'À publier']);
+});
+
+test('planning : rien à publier ce jour -> aucun appel, planning inchangé', async () => {
+  const planning = [ligne({ ...sheet, date: '08/10/2026' })];
+  const { publies, publier } = publieur();
+  const r = await publierDuJour(planning, '01/10/2026', publier);
+  assert.deepEqual(publies, []);
+  assert.deepEqual(r, { trouves: 0, resultats: [] });
+  assert.equal(planning[0].statut, 'À publier');
+});
+
+test('planning : entrée du jour déjà publiée ignorée', async () => {
+  const planning = [ligne({ ...sheet, statut: 'Publié' })];
+  const { publies, publier } = publieur();
+  const r = await publierDuJour(planning, '01/10/2026', publier);
+  assert.deepEqual(publies, []);
+  assert.equal(r.trouves, 0);
+});
+
+test('planning : échec de génération -> entrée marquée « Erreur : … »', async () => {
+  const planning = [ligne({ ...sheet })];
+  const r = await publierDuJour(planning, '01/10/2026', async () => {
+    throw new Error('Claude API 529');
+  });
+  assert.equal(planning[0].statut, 'Erreur : Claude API 529');
+  assert.equal(r.resultats[0].statut, 'Erreur : Claude API 529');
+});
+
+test('planning du dépôt : entrées complètes, plus aucun appel Google Sheets', () => {
+  const planning: EntreePlanning[] = JSON.parse(readFileSync('src/content/planning-blog.json', 'utf8'));
+  assert.ok(planning.length > 0);
+  for (const e of planning) {
+    assert.match(e.date, /^\d{2}\/\d{2}\/\d{4}$/, e.titre);
+    assert.ok(e.titre && e.categorie && e.statut, e.titre);
+  }
+  assert.equal(existsSync('src/lib/google-sheets.ts'), false);
+  for (const f of ['src/lib/blog-cron.ts', 'src/pages/api/cron/publish-blog.ts']) {
+    assert.doesNotMatch(readFileSync(f, 'utf8'), /googleapis|google-sheets|SHEET_ID/, f);
+  }
 });
 
 test('prompt : modèle, année et titre injectés', () => {
@@ -62,6 +111,8 @@ test('prompt : modèle, année et titre injectés', () => {
   assert.match(b.system, /INTERDICTION ABSOLUE : ne mentionne JAMAIS la norme EN 16630/);
   assert.match(b.system, /nous sommes en 2026/);
   assert.match(b.messages[0].content, /^Rédige un article de blog SEO complet sur : Clôture de parc canin/);
+  assert.doesNotMatch(b.messages[0].content, /Mot-clé principal/);
+  assert.match(construireRequeteClaude({ ...sheet, motCle: 'parc canin bailleur' }, 2026).messages[0].content, /\nMot-clé principal : parc canin bailleur\n/);
 });
 
 test('validateur : article conforme -> MDX, slug et dé-linkage hors liste blanche', () => {

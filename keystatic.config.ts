@@ -19,7 +19,7 @@ export default config({
           name: { label: 'Nom du média', description: 'Ex. : caniparc-hiver-drainage' },
           slug: {
             label: 'Slug (nom du fichier)',
-            description: 'L’image sera servie sur : /assets/blog/<slug>/image.webp — c’est ce chemin qu’il faut coller dans la colonne « Image URL » du Google Sheet',
+            description: 'L’image sera servie sur : /assets/blog/<slug>/image.webp — c’est ce chemin qu’il faut mettre dans le champ « image » de src/content/planning-blog.json',
           },
         }),
         image: fields.image({
