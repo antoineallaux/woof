@@ -1,11 +1,8 @@
-// Logique du publieur de blog, reprise telle quelle des 3 nœuds Code du workflow n8n
-// « Woof! Blog Auto-Publisher v5 » (filtre, prompt, validation MDX).
+// Logique du publieur de blog (reprise du workflow n8n « Woof! Blog Auto-Publisher v5 ») :
+// filtre du planning src/content/planning-blog.json, prompt, validation MDX.
 
-// Ligne du planning : colonnes du Sheet par en-tête (Date, Titre, Catégorie, Image URL, Statut)
-export type LigneSheet = { row_number: number; [colonne: string]: any };
-
-export const SHEET_ID = '1Q4i_K5OyF94ZFsBU3HNOFlCJWPHaOYsplir0VnCBX2M';
-export const ONGLET = 'PostPlanning de publication';
+// Entrée de src/content/planning-blog.json (date jj/mm/aaaa, statut « À publier », « Publié » ou « Erreur : … »)
+export type EntreePlanning = { date: string; titre: string; categorie: string; motCle?: string; image?: string; statut: string };
 
 // --- Nœud « Filtrer articles du jour »
 
@@ -18,34 +15,40 @@ export function dateDuJour(now: Date = new Date()): string {
   });
 }
 
-export function filtrerArticlesDuJour(items: LigneSheet[], todayStr: string): LigneSheet[] {
-  return items.filter((item) => {
-    const date = (item['Date'] || '').trim();
-    const statut = (item['Statut'] || '').trim();
-    return date === todayStr && statut === 'À publier';
-  });
+export function filtrerArticlesDuJour(items: EntreePlanning[], todayStr: string): EntreePlanning[] {
+  return items.filter((item) => (item.date || '').trim() === todayStr && (item.statut || '').trim() === 'À publier');
 }
 
-// Valeurs brutes de l'API Sheets (A:F) -> objets par en-tête, row_number = numéro de ligne du Sheet
-export function lignesDepuisValeurs(values: string[][]): LigneSheet[] {
-  const [entetes = [], ...lignes] = values;
-  return lignes.map((cellules, i) => {
-    const ligne = { row_number: i + 2 } as LigneSheet;
-    entetes.forEach((h, j) => {
-      if (h) ligne[h] = cellules[j] ?? '';
-    });
-    return ligne;
-  });
+// Publie les entrées du jour et met leur statut à jour dans le planning (modifié en place)
+export async function publierDuJour(
+  planning: EntreePlanning[],
+  todayStr: string,
+  publier: (e: EntreePlanning) => Promise<Record<string, unknown>>,
+) {
+  const entrees = filtrerArticlesDuJour(planning, todayStr);
+  const resultats: Record<string, unknown>[] = [];
+  for (const e of entrees) {
+    try {
+      resultats.push({ titre: e.titre, statut: 'Publié', ...(await publier(e)) });
+      e.statut = 'Publié';
+    } catch (err) {
+      e.statut = statutErreur(err);
+      console.error('publish-blog', e.titre, e.statut);
+      resultats.push({ titre: e.titre, statut: e.statut });
+    }
+  }
+  return { trouves: entrees.length, resultats };
 }
 
 // --- Nœud « Préparer prompt Claude »
 
 const SYSTEM_PROMPT = "Tu es un expert en rédaction SEO française spécialisé dans les parcs canins (caniparcs) et les équipements d'agility pour collectivités. Tu rédiges pour Woof!, une marque du groupe Herkules Fitness, fabricant d'équipements de sport en extérieur depuis 2007. Ne cite jamais de nombre de communes équipées. Les Dog Park 1, 2 et 3 n'ont pas d'étiquette de niveau : jamais « gammes », « essentiel », « intermédiaire » ni « complet » à côté de leur nom ; distingue-les par leur emprise (Dog Park 1 : 5,48 × 4,11 m, Dog Park 2 : 4,96 × 3,20 m, Dog Park 3 : 2,58 × 2,51 m). Garantie 5 ans, installation incluse.\n\nINTERDICTION ABSOLUE : ne mentionne JAMAIS la norme EN 16630 ni aucune norme désignée par un numéro. Parle uniquement d'exigences de sécurité, sans référence normative chiffrée.\n\nTon audience : élus locaux, directeurs des services techniques, responsables des espaces verts dans les mairies et intercommunalités françaises.\n\nMOTS-CLÉS À INTÉGRER NATURELLEMENT (selon le sujet) : parc canin, caniparc, parc chien collectivité, agility canine, matériel agility professionnel, aire canine, espace canin.\n\nRÈGLES DE RÉDACTION :\n- Longueur : 1200-1600 mots\n- Structure : introduction accrocheuse, puis une section \"## À retenir\" avec 4-5 puces synthétiques, puis 4-6 sections H2 (avec H3 si utile), conclusion avec appel à l'action vers le devis gratuit\n- Ton : expert, rassurant, institutionnel mais accessible\n- Listes à puces pour la lisibilité\n- Format : Markdown compatible MDX, PAS de frontmatter YAML, PAS de titre H1\n\nLIENS INTERNES — RÈGLE ABSOLUE : tu ne peux lier QUE les URLs listées ci-dessous, telles quelles. N'invente JAMAIS d'URL produit. Si un produit n'est pas dans la liste, n'en fais pas un lien. Intègre 2 à 4 liens produits pertinents par article.\n- /produits/3-cercles/ : 3 Cercles\n- /produits/grande-passerelle/ : Grande Passerelle\n- /produits/abris-en-bois/ : Abris en Bois\n- /produits/abris-en-metal/ : Abris en Métal\n- /produits/anneaux-ligne/ : Anneaux Ligne\n- /produits/anneaux-triangle/ : Anneaux Triangle\n- /produits/banc-dos/ : Banc Dos\n- /produits/banc-os/ : Banc Os\n- /produits/barre-saut/ : Barre de Saut 5 Niveaux\n- /produits/barres-hautes/ : Barres Hautes\n- /produits/barres-saut-3-niveaux/ : Barre de Saut 3 Niveaux\n- /produits/barres/ : Barres\n- /produits/cerceau/ : Cerceau\n- /produits/cercle-flot/ : Cercle Flot\n- /produits/champignons/ : Champignons\n- /produits/parcours-agility-essentiel/ : Dog Park 1\n- /produits/parcours-agility-intermediaire/ : Dog Park 2\n- /produits/parcours-agility-complet/ : Dog Park 3\n- /produits/grande-palissade/ : Grande Palissade\n- /produits/grand-triangle/ : Grand Triangle\n- /produits/grande-balance/ : Grande Balance\n- /produits/grande-plateforme/ : Grande Plateforme\n- /produits/labyrinthe/ : Labyrinthe\n- /produits/obstacles-os/ : Obstacles Os\n- /produits/obstacles-pattes/ : Obstacles Pattes\n- /produits/panneau-info/ : Panneau info\n- /produits/patte/ : Patte\n- /produits/petite-palissade/ : Petite Palissade\n- /produits/petit-triangle/ : Petit Triangle\n- /produits/petite-balance/ : Petite Balance\n- /produits/petite-plateforme/ : Petite Plateforme\n- /produits/petits-murs/ : Petits Murs\n- /produits/piste-tube/ : Piste Tube\n- /produits/passerelle/ : Passerelle\n- /produits/porte-laisse-ii/ : Porte Laisse II\n- /produits/porte-laisse/ : Porte Laisse\n- /produits/slalom/ : Slalom\n- /produits/triple-cerceau/ : Triple Cerceau\n- /produits/triple-stand/ : Triple Stand\n- /produits/tunnel-maison/ : Tunnel Maison\n- /produits/tube/ : Tube\n- /produits/tunnel-niche/ : Tunnel Niche\n- /produits/tunnel-milou/ : Tunnel Milou\n- /produits/tunnel-maison-xl/ : Tunnel Maison XL\n- /produits/tunnel-rex/ : Tunnel Rex\nAutres pages internes autorisées : /produits/ , /agility/ , /contact/ , /blog/ , /qui-sommes-nous/\nQuand le sujet s'y prête, tu peux aussi lier ces pages : /caniparc/ (créer un parc canin), /agility/ (parcours d'agility pour collectivités), /prix-parc-canin/ (prix et budget d'un parc canin)\n\nSOURCES EXTERNES — OBLIGATOIRE : cite 2 à 3 sources externes faisant autorité (Légifrance, service-public.fr, centrale-canine.fr, afnor.org, sites de mairies). Si tu n'es pas certain de l'URL exacte d'une page, lie le domaine racine. Jamais de lien inventé.\n\nFORMAT DE SORTIE — OBLIGATOIRE, réponds EXACTEMENT dans ce format, sans aucun texte avant ni après :\nSEO_TITLE: <titre pour Google, 50-58 caractères maximum, mot-clé principal en tête>\nSEO_DESCRIPTION: <description pour Google, 130-155 caractères, bénéfice + incitation>\nIMAGE_ALT: <description factuelle de l'image d'illustration, 8-15 mots>\n---ARTICLE---\n<le corps de l'article en Markdown>\n\nINTERDIT : tout commentaire méta (\"je vais rédiger\", \"voici l'article\", etc.). Ta réponse commence directement par \"SEO_TITLE:\".";
 
-export function construireRequeteClaude(ligne: LigneSheet, annee: number = new Date().getFullYear()) {
+export function construireRequeteClaude(ligne: EntreePlanning, annee: number = new Date().getFullYear()) {
   const SYSTEM_FINAL = SYSTEM_PROMPT + `\n\nCONTEXTE TEMPOREL : nous sommes en ${annee}. N'écris JAMAIS une autre année que ${annee} (pas de \"2024\" ni \"2025\").\n\nRAPPEL : intègre bien 2 à 4 liens produits de la liste blanche, aux endroits où un équipement est mentionné.`;
-  const titre = ligne['Titre'] || '';
-  const categorie = ligne['Catégorie'] || '';
+  const titre = ligne.titre || '';
+  const categorie = ligne.categorie || '';
+  const motCle = ligne.motCle?.trim() ? '\nMot-clé principal : ' + ligne.motCle.trim() + '\n' : '';
 
   return {
     model: 'claude-sonnet-5',
@@ -54,7 +57,7 @@ export function construireRequeteClaude(ligne: LigneSheet, annee: number = new D
     messages: [
       {
         role: 'user',
-        content: 'Rédige un article de blog SEO complet sur : ' + titre + '\n\nCatégorie : ' + categorie + '\n\nL\'article doit apporter une vraie valeur informative aux collectivités françaises (équipements, réglementation, budget, entretien selon le sujet), intégrer naturellement 2-3 références à Woof! et Herkules Fitness, et se terminer par un appel à l\'action pour demander un devis gratuit. Respecte strictement le format de sortie SEO_TITLE / SEO_DESCRIPTION / IMAGE_ALT / ---ARTICLE---.',
+        content: 'Rédige un article de blog SEO complet sur : ' + titre + '\n\nCatégorie : ' + categorie + '\n' + motCle + '\nL\'article doit apporter une vraie valeur informative aux collectivités françaises (équipements, réglementation, budget, entretien selon le sujet), intégrer naturellement 2-3 références à Woof! et Herkules Fitness, et se terminer par un appel à l\'action pour demander un devis gratuit. Respecte strictement le format de sortie SEO_TITLE / SEO_DESCRIPTION / IMAGE_ALT / ---ARTICLE---.',
       },
     ],
   };
@@ -70,7 +73,6 @@ export type ArticleMdx = {
   titre: string;
   date: string;
   isoDate: string;
-  rowNumber: number | string;
   categorie: string;
   imageUrl: string;
   words: number;
@@ -78,7 +80,7 @@ export type ArticleMdx = {
   unlinked: number;
 };
 
-export function validerEtFormaterMdx(reponse: { content?: { type: string; text?: string }[] }, sheetData: LigneSheet): ArticleMdx {
+export function validerEtFormaterMdx(reponse: { content?: { type: string; text?: string }[] }, sheetData: EntreePlanning): ArticleMdx {
   // 1. Extraction robuste : concaténer TOUS les blocs text (jamais content[0].text)
   const blocks = reponse.content || [];
   const raw = blocks.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
@@ -121,11 +123,10 @@ export function validerEtFormaterMdx(reponse: { content?: { type: string; text?:
   const extLinks = (article.match(/\]\(https?:\/\/(?!www\.woof-parcs\.fr)[^)]+\)/g) || []).length;
 
   // 7. Frontmatter
-  const titre = sheetData['Titre'] || '';
-  const categorie = sheetData['Catégorie'] || '';
-  const imageUrl = sheetData['Image URL'] || '/assets/13-PqParcChienCollectivite.jpg'; // image de substitution si la colonne du Sheet est vide
-  const date = sheetData['Date'] || '';
-  const rowNumber = sheetData['row_number'] || '';
+  const titre = sheetData.titre || '';
+  const categorie = sheetData.categorie || '';
+  const imageUrl = sheetData.image || '/assets/13-PqParcChienCollectivite.jpg'; // image de substitution si le planning n'en donne pas
+  const date = sheetData.date || '';
 
   const parts = date.split('/');
   const isoDate = parts.length === 3 ? `${parts[2]}-${parts[1]}-${parts[0]}` : date;
@@ -154,10 +155,10 @@ category: "${categorie}"
 
 ${article}`;
 
-  return { slug, mdx, titre, date, isoDate, rowNumber, categorie, imageUrl, words, extLinks, unlinked };
+  return { slug, mdx, titre, date, isoDate, categorie, imageUrl, words, extLinks, unlinked };
 }
 
-// --- Nœud « Marquer Erreur dans le Sheet »
+// --- Statut d'erreur écrit dans le planning
 
 export function statutErreur(e: unknown): string {
   const msg = (e as { message?: string })?.message || 'inconnue';
