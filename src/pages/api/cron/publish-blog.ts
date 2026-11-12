@@ -6,6 +6,7 @@ import {
   publierDuJour,
   construireRequeteClaude,
   validerEtFormaterMdx,
+  controlerImage,
   type EntreePlanning,
 } from '../../../lib/blog-cron';
 import { jetonValide } from '../../../lib/securite';
@@ -18,7 +19,7 @@ import { jetonValide } from '../../../lib/securite';
 const json = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data, null, 2), { status, headers: { 'Content-Type': 'application/json' } });
 
-async function appelClaude(ligne: EntreePlanning) {
+async function appelClaude(requete: object) {
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -26,7 +27,7 @@ async function appelClaude(ligne: EntreePlanning) {
       'x-api-key': import.meta.env.ANTHROPIC_API_KEY,
       'anthropic-version': '2023-06-01',
     },
-    body: JSON.stringify(construireRequeteClaude(ligne)),
+    body: JSON.stringify(requete),
     signal: AbortSignal.timeout(180000),
   });
   const data = await res.json().catch(() => ({}));
@@ -47,6 +48,23 @@ async function lirePlanning(branch: string): Promise<{ planning: EntreePlanning[
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(`GitHub lecture planning ${res.status}: ${data?.message || ''}`);
   return { planning: JSON.parse(Buffer.from(data.content, 'base64').toString('utf-8')), sha: data.sha };
+}
+
+// Fichier brut du dépôt (image de l'article, lue sur la branche publiée : présente même avant déploiement)
+async function lireFichierGithub(chemin: string, branch: string): Promise<Uint8Array> {
+  const res = await fetch(`${API_DEPOT}${chemin}?ref=${encodeURIComponent(branch)}`, {
+    headers: { ...enTetesGithub(), Accept: 'application/vnd.github.raw' },
+  });
+  if (!res.ok) throw new Error(`GitHub lecture ${chemin} ${res.status}`);
+  return new Uint8Array(await res.arrayBuffer());
+}
+
+// Alerte #woof. Silencieuse si le webhook n'est pas configuré (l'entrée reste bloquée dans le planning).
+async function alerterWoof(message: object) {
+  const webhook = import.meta.env.DISCORD_WOOF_WEBHOOK;
+  if (!webhook) return console.error('publish-blog: DISCORD_WOOF_WEBHOOK absent, alerte #woof non envoyée');
+  const res = await fetch(webhook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(message) });
+  if (!res.ok) throw new Error(`discord ${res.status}`);
 }
 
 // Commit par l'API GitHub contents (sha = mise à jour d'un fichier existant), 2 essais comme dans n8n
@@ -82,8 +100,14 @@ export const GET: APIRoute = async ({ request, url }) => {
   const { planning, sha } = await lirePlanning(branch);
 
   const { trouves, resultats } = await publierDuJour(planning, today, async (e) => {
-    const article = validerEtFormaterMdx(await appelClaude(e), e);
-    if (dry) return { statut: 'dry', ...article };
+    // Image contrôlée avant la rédaction : sans agrès Woof, rien n'est publié (alerte #woof hors recette dry)
+    const controle = await controlerImage(e, {
+      lireImage: (chemin) => lireFichierGithub('public' + chemin, branch),
+      appelModele: appelClaude,
+      alerter: dry ? undefined : alerterWoof,
+    });
+    const article = validerEtFormaterMdx(await appelClaude(construireRequeteClaude(e)), e);
+    if (dry) return { statut: 'dry', controle, ...article };
     const commit = await commitGithub(`src/content/blog/${article.slug}.mdx`, `content: publish blog article - ${article.titre}`, article.mdx, branch);
     return { slug: article.slug, branch, sha: commit };
   });

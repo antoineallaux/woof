@@ -125,7 +125,7 @@ export function validerEtFormaterMdx(reponse: { content?: { type: string; text?:
   // 7. Frontmatter
   const titre = sheetData.titre || '';
   const categorie = sheetData.categorie || '';
-  const imageUrl = sheetData.image || '/assets/13-PqParcChienCollectivite.jpg'; // image de substitution si le planning n'en donne pas
+  const imageUrl = sheetData.image || IMAGE_PAR_DEFAUT;
   const date = sheetData.date || '';
 
   const parts = date.split('/');
@@ -156,6 +156,109 @@ category: "${categorie}"
 ${article}`;
 
   return { slug, mdx, titre, date, isoDate, categorie, imageUrl, words, extLinks, unlinked };
+}
+
+// --- Contrôle de l'image avant publication (D-20261112-15) : sans agrès Woof visible, publication bloquée
+
+export const IMAGE_PAR_DEFAUT = '/assets/13-PqParcChienCollectivite.jpg'; // si le planning ne donne pas d'image
+export const SITE = 'https://www.woof-parcs.fr';
+
+// Bibliothèque des remplacements : images relues le 12/11/2026, agrès Woof bien visibles
+export const IMAGES_AVEC_AGRES = [
+  '/assets/blog/52-drainage/image.webp',
+  '/assets/blog/53-camping/image.webp',
+  '/assets/blog/49-Entretien/image.webp',
+  '/assets/blog/48-cloture/image.webp',
+  '/assets/blog/43-combien-coute-un-parc/image.webp',
+];
+
+const CONSIGNE_IMAGE = "Tu contrôles l'image d'illustration d'un article du blog Woof!, marque d'agrès de parc canin (agility pour chiens) installés par les communes. Les agrès Woof sont des modules d'extérieur fixés au sol, en plastique PEHD coloré (bleu, vert, jaune, rouge, orange) et en acier, parfois avec du bois : tunnels en forme de niche ou de maisonnette, passerelles et rampes à lattes, palissades, barres de saut en forme d'os, plots et champignons, slalom, cerceaux, plateformes, bancs en forme d'os.\n\nRéponds agres=true seulement si au moins un de ces agrès est réellement présent dans la scène photographiée et reconnaissable. Réponds agres=false si l'image n'en montre aucun, ou seulement sur un écran, une affiche, un plan, une fiche ou un document. raison : une phrase courte en français qui dit ce que montre l'image.";
+
+const TYPES_IMAGE: Record<string, string> = { webp: 'image/webp', jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', gif: 'image/gif' };
+
+export function requeteControleImage(octets: Uint8Array, chemin: string) {
+  const ext = chemin.split('.').pop()?.toLowerCase() || '';
+  const media_type = TYPES_IMAGE[ext];
+  if (!media_type) throw new Error(`format d'image non contrôlable : ${chemin}`);
+  return {
+    model: 'claude-opus-5-5',
+    max_tokens: 4000,
+    output_config: {
+      effort: 'low',
+      format: {
+        type: 'json_schema',
+        schema: {
+          type: 'object',
+          properties: { agres: { type: 'boolean' }, raison: { type: 'string' } },
+          required: ['agres', 'raison'],
+          additionalProperties: false,
+        },
+      },
+    },
+    messages: [
+      {
+        role: 'user',
+        content: [
+          { type: 'image', source: { type: 'base64', media_type, data: Buffer.from(octets).toString('base64') } },
+          { type: 'text', text: CONSIGNE_IMAGE },
+        ],
+      },
+    ],
+  };
+}
+
+export function lireVerdictImage(reponse: { content?: { type: string; text?: string }[] }): { agres: boolean; raison: string } {
+  const texte = (reponse.content || []).filter((b) => b.type === 'text').map((b) => b.text).join('');
+  const v = JSON.parse(texte || '{}');
+  if (typeof v.agres !== 'boolean') throw new Error('verdict illisible');
+  return { agres: v.agres, raison: String(v.raison || '') };
+}
+
+// Remplacement proposé : une image de la bibliothèque, autre que celle refusée, choisie d'après le titre
+export function propositionImage(refusee: string, titre: string): string {
+  const choix = IMAGES_AVEC_AGRES.filter((i) => i !== refusee);
+  const h = [...titre].reduce((n, c) => n + c.charCodeAt(0), 0);
+  return choix[h % choix.length];
+}
+
+// Message #woof (webhook Discord) : texte, image refusée, proposition
+export function messageImageRefusee(e: EntreePlanning, image: string, raison: string, proposition: string) {
+  return {
+    content:
+      `⛔ Blog Woof : publication du ${e.date} bloquée, « ${e.titre} ».\n` +
+      `L'image prévue ne montre aucun agrès Woof (${raison}).\n` +
+      `Proposition : ${proposition}\n` +
+      `Pour publier : dans src/content/planning-blog.json, mettre cette image (ou une autre avec nos agrès), une nouvelle date et le statut « À publier ».`,
+    embeds: [
+      { title: 'Image refusée', description: image, image: { url: SITE + image } },
+      { title: 'Proposition (agrès Woof)', description: proposition, image: { url: SITE + proposition } },
+    ],
+  };
+}
+
+// Contrôle avant rédaction : sans agrès (ou contrôle impossible), alerte #woof puis erreur -> statut « Erreur : … »
+export async function controlerImage(
+  e: EntreePlanning,
+  outils: {
+    lireImage: (chemin: string) => Promise<Uint8Array>;
+    appelModele: (requete: ReturnType<typeof requeteControleImage>) => Promise<{ content?: { type: string; text?: string }[] }>;
+    alerter?: (message: ReturnType<typeof messageImageRefusee>) => Promise<void>;
+  },
+) {
+  const image = e.image?.trim() || IMAGE_PAR_DEFAUT;
+  let verdict;
+  try {
+    verdict = lireVerdictImage(await outils.appelModele(requeteControleImage(await outils.lireImage(image), image)));
+  } catch (err) {
+    verdict = { agres: false, raison: `contrôle impossible : ${(err as Error)?.message || err}` };
+  }
+  if (verdict.agres) return { image, ...verdict };
+  if (outils.alerter) {
+    await outils.alerter(messageImageRefusee(e, image, verdict.raison, propositionImage(image, e.titre))).catch((err) =>
+      console.error('publish-blog: alerte #woof échouée', err),
+    );
+  }
+  throw new Error(`image sans agrès Woof, publication bloquée (${image} : ${verdict.raison})`);
 }
 
 // --- Statut d'erreur écrit dans le planning
