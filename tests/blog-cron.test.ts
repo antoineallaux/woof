@@ -8,6 +8,10 @@ import {
   construireRequeteClaude,
   validerEtFormaterMdx,
   statutErreur,
+  controlerImage,
+  requeteControleImage,
+  propositionImage,
+  IMAGES_AVEC_AGRES,
   type EntreePlanning,
 } from '../src/lib/blog-cron.ts';
 
@@ -168,4 +172,99 @@ test('liste blanche : /caniparc/, /agility/ et /prix-parc-canin/ gardés et cit�
     assert.ok(r.mdx.includes(`[page](${p})`), p);
     assert.ok(construireRequeteClaude(sheet, 2026).system.includes(p), p);
   }
+});
+
+// --- Contrôle de l'image (lot 016) : modèle de vision et Discord factices, vraies images du dépôt lues sur disque
+
+const lireImage = async (chemin: string) => new Uint8Array(readFileSync('public' + chemin));
+const verdict = (agres: boolean, raison: string) => async () => ({ content: [{ type: 'thinking' }, { type: 'text', text: JSON.stringify({ agres, raison }) }] });
+const article12_11 = ligne({ date: '12/11/2026', titre: "Bailleurs sociaux : un espace canin en pied d'immeuble, bonne idée ?", categorie: 'Actualités', image: '/assets/blog/54-bailleurs/image.webp', statut: 'À publier' });
+
+test('essai image du 12/11 (54-bailleurs, sans agrès) : publication bloquée, alerte #woof avec image refusée et proposition', async () => {
+  const requetes: ReturnType<typeof requeteControleImage>[] = [];
+  const alertes: { content: string; embeds: { title: string; description: string; image: { url: string } }[] }[] = [];
+  const planning = [{ ...article12_11 }];
+  let redige = 0;
+  const { resultats } = await publierDuJour(planning, '12/11/2026', async (e) => {
+    await controlerImage(e, {
+      lireImage,
+      appelModele: async (r) => (requetes.push(r), verdict(false, 'un homme devant une résidence, pelouse vide')()),
+      alerter: async (m) => void alertes.push(m),
+    });
+    redige++;
+    return {};
+  });
+  assert.equal(redige, 0, 'aucune rédaction ni publication');
+  assert.match(planning[0].statut, /^Erreur : image sans agrès Woof, publication bloquée \(\/assets\/blog\/54-bailleurs\/image\.webp/);
+  assert.equal(resultats[0].statut, planning[0].statut);
+  // l'image réellement envoyée au modèle est celle du planning
+  const bloc = requetes[0].messages[0].content[0] as { source: { media_type: string; data: string } };
+  assert.equal(bloc.source.media_type, 'image/webp');
+  assert.equal(bloc.source.data, readFileSync('public/assets/blog/54-bailleurs/image.webp').toString('base64'));
+  // message #woof : texte, image refusée, proposition prise dans la bibliothèque
+  assert.equal(alertes.length, 1);
+  const m = alertes[0];
+  assert.match(m.content, /publication du 12\/11\/2026 bloquée, « Bailleurs sociaux/);
+  assert.match(m.content, /un homme devant une résidence/);
+  assert.equal(m.embeds[0].image.url, 'https://www.woof-parcs.fr/assets/blog/54-bailleurs/image.webp');
+  assert.ok(IMAGES_AVEC_AGRES.includes(m.embeds[1].description));
+  assert.match(m.content, new RegExp('Proposition : ' + m.embeds[1].description.replace(/[.]/g, '\\.')));
+  console.log('Message #woof factice :\n' + JSON.stringify(m, null, 2));
+});
+
+test('essai image avec agrès (52-drainage) : acceptée, l\'article est rédigé et publié, aucune alerte', async () => {
+  const planning = [{ ...article12_11, image: '/assets/blog/52-drainage/image.webp' }];
+  let alertes = 0;
+  const { resultats } = await publierDuJour(planning, '12/11/2026', async (e) => {
+    const c = await controlerImage(e, { lireImage, appelModele: verdict(true, 'tunnel niche, rampe et barre os'), alerter: async () => void alertes++ });
+    return { controle: c };
+  });
+  assert.equal(planning[0].statut, 'Publié');
+  assert.equal(alertes, 0);
+  assert.deepEqual(resultats[0].controle, { image: '/assets/blog/52-drainage/image.webp', agres: true, raison: 'tunnel niche, rampe et barre os' });
+});
+
+test('contrôle impossible (modèle en panne, verdict illisible, image absente) : publication bloquée aussi', async () => {
+  for (const [nom, outils] of [
+    ['panne', { lireImage, appelModele: async () => { throw new Error('Claude API 529'); } }],
+    ['illisible', { lireImage, appelModele: async () => ({ content: [{ type: 'text', text: 'oui' }] }) }],
+    ['absente', { lireImage: async () => { throw new Error('GitHub lecture 404'); }, appelModele: verdict(true, 'x') }],
+  ] as const) {
+    await assert.rejects(controlerImage(article12_11, outils as Parameters<typeof controlerImage>[1]), /image sans agrès Woof, publication bloquée .*contrôle impossible/, nom);
+  }
+});
+
+test('contrôle : sans image au planning, l\'image par défaut est contrôlée ; alerte en échec ne débloque rien', async () => {
+  let vue = '';
+  await assert.rejects(
+    controlerImage(ligne({ titre: 't' }), {
+      lireImage: async (c) => ((vue = c), lireImage(c)),
+      appelModele: verdict(false, 'r'),
+      alerter: async () => { throw new Error('discord 500'); },
+    }),
+    /publication bloquée/,
+  );
+  assert.equal(vue, '/assets/13-PqParcChienCollectivite.jpg');
+});
+
+test('requête de contrôle : modèle de vision, format JSON imposé, formats d\'image reconnus', () => {
+  const r = requeteControleImage(new Uint8Array([1, 2]), '/a/b.JPG');
+  assert.equal(r.model, 'claude-opus-5-5');
+  assert.deepEqual(r.output_config.format.schema.required, ['agres', 'raison']);
+  assert.equal((r.messages[0].content[0] as { source: { media_type: string } }).source.media_type, 'image/jpeg');
+  assert.throws(() => requeteControleImage(new Uint8Array(), '/a/b.svg'), /non contrôlable/);
+});
+
+test('bibliothèque : images présentes dans public/, proposition jamais égale à l\'image refusée', () => {
+  for (const i of IMAGES_AVEC_AGRES) assert.ok(existsSync('public' + i), i);
+  for (const i of IMAGES_AVEC_AGRES) assert.notEqual(propositionImage(i, 'titre quelconque'), i);
+});
+
+test('chemin réel du cron (vercel.json -> /api/cron/publish-blog/) : image contrôlée avant toute rédaction', () => {
+  assert.match(readFileSync('vercel.json', 'utf-8'), /"path": "\/api\/cron\/publish-blog\/"/);
+  const route = readFileSync('src/pages/api/cron/publish-blog.ts', 'utf-8');
+  const controle = route.indexOf('await controlerImage(e,');
+  assert.ok(controle > 0, 'controlerImage appelé dans la route');
+  assert.ok(controle < route.indexOf('appelClaude(construireRequeteClaude(e))'), 'contrôle avant la rédaction');
+  assert.match(route, /alerter: dry \? undefined : alerterWoof/);
 });
