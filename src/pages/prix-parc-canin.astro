@@ -24,13 +24,13 @@ const postes = [
   { poste: 'Clôture', prix: '40 à 90 € le mètre linéaire posé', note: '4 000 à 9 000 € pour 1 000 m² ; 30 à 40 % du budget' },
   { poste: 'Agrès d\'agility et mobilier', prix: '30 à 50 % du budget', note: 'Voir les fourchettes par module ci-dessus' },
   { poste: 'Sol', prix: '15 à 30 €/m² en gazon synthétique drainant', note: 'Herbe naturelle : coût faible ; copeaux ou paillage : coût intermédiaire' },
-  { poste: 'Pose', prix: 'Incluse chez Woof!', note: 'Les trois parcs types comprennent fourniture et pose' },
+  { poste: 'Pose', prix: 'Sur devis', note: 'Installation possible sur devis' },
 ];
 
 const faqs = [
   {
     q: 'Combien coûte un parc canin pour une commune ?',
-    a: 'Un parc canin complet coûte généralement entre 8 000 € et 45 000 €, fourniture et pose comprises : 8 000 à 15 000 € pour un petit caniparc de village (300 à 500 m²), 18 000 à 30 000 € pour un parc intercommunal de 800 à 1 200 m², 30 000 à 45 000 € pour une aire urbaine avec zones séparées.',
+    a: 'Un parc canin complet coûte généralement entre 8 000 € et 45 000 € : 8 000 à 15 000 € pour un petit caniparc de village (300 à 500 m²), 18 000 à 30 000 € pour un parc intercommunal de 800 à 1 200 m², 30 000 à 45 000 € pour une aire urbaine avec zones séparées. Installation possible sur devis.',
   },
   {
     q: 'Combien coûte la clôture d\'un parc canin ?',
@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     q: 'La pose est-elle comprise dans le prix ?',
-    a: 'Oui, chez Woof! l\'installation est incluse. Les fourchettes des trois parcs types comprennent la fourniture des équipements et leur pose ; elles varient selon la pente du terrain, l\'accès au chantier et les contraintes locales.',
+    a: 'Chez Woof!, l\'installation est possible sur devis ; son montant varie selon la pente du terrain, l\'accès au chantier et les contraintes locales.',
   },
   {
     q: 'Comment obtenir un prix exact pour ma commune ?',
@@ -57,7 +57,7 @@ const faqs = [
 
 <Layout
   title="Prix d'un parc canin pour une commune : 8 000 à 45 000 €, Woof!"
-  description="Prix d'un parc canin communal : 8 000 à 45 000 € pose comprise selon la taille. Fourchettes par parc type, par module, clôture (40 à 90 €/ml) et sol. Devis gratuit."
+  description="Prix d'un parc canin communal : 8 000 à 45 000 € selon la taille, installation possible sur devis. Fourchettes par parc type, par module, clôture (40 à 90 €/ml) et sol. Devis gratuit."
 >
 
   <!-- ===== EN-TÊTE ===== -->
@@ -68,7 +68,7 @@ const faqs = [
         Prix d'un parc canin pour une commune
       </h1>
       <p class="text-muted text-base sm:text-lg leading-relaxed mb-8">
-        Un parc canin complet coûte généralement entre <strong class="text-text">8 000 € et 45 000 €</strong>, fourniture et pose comprises, selon la surface, le niveau d'équipement et la clôture. Voici les fourchettes par parc type, par module et par poste.
+        Un parc canin complet coûte généralement entre <strong class="text-text">8 000 € et 45 000 €</strong> selon la surface, le niveau d'équipement et la clôture, installation possible sur devis. Voici les fourchettes par parc type, par module et par poste.
       </p>
       <div class="flex flex-wrap gap-3">
         <Button href="/contact/" size="lg">Demander un devis gratuit</Button>
@@ -97,7 +97,7 @@ const faqs = [
           </tbody>
         </table>
       </div>
-      <p class="text-muted text-sm mt-4">Fourniture et pose comprises ; le montant varie selon la topographie, l'accès au chantier et les contraintes locales. Surface et aménagement : <a href="/caniparc/" class="text-primary font-semibold underline">créer un caniparc dans votre commune</a>.</p>
+      <p class="text-muted text-sm mt-4">Installation possible sur devis ; le montant varie selon la topographie, l'accès au chantier et les contraintes locales. Surface et aménagement : <a href="/caniparc/" class="text-primary font-semibold underline">créer un caniparc dans votre commune</a>.</p>
     </div>
   </section>
 

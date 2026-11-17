@@ -21,7 +21,9 @@ const anciens: [string, RegExp][] = [
   // « plus de 15 ans d'expérience » d'un éducateur cité dans un article n'est pas l'ancienneté de Herkules
   ['ancienneté en années', /\b(15|20) ?\+ ?(ans|années)|(depuis|fort de) plus de \d+ ans|plus de 20 ans|20 ans d'expérience/i],
   ['ancienneté Herkules en « 15 ans »', /Herkules[^.?!]{0,80}\b(15|quinze) ans/i],
-  ['nombre de communes', /\d ?\+? ?communes|communes équipées/i],
+  // Installation : possible sur devis, jamais promise dans le prix (D-20261117-4)
+  ['installation promise dans le prix', /(installation|pose)( est)? (incluse?|comprise?)s?|inclu(ant|t|ent) l['’]installation|incluent[^.]{0,40}\bpose\b|fourniture et pose|installation offerte|posée? par nos soins/i],
+  ['nombre de communes',/\d ?\+? ?communes|communes équipées/i],
   ['50 m² minimum', /50 ?m²/i],
   ['30 à 60 m²', /30 à 60 ?m²/i],
   ['étiquette Dog Park', /Dog Park \d[^.?!]{0,40}\b(essentiel|intermédiaire|complet)\b|\b(essentiel|intermédiaire|complet)\b[^.?!]{0,40}Dog Park \d/i],
