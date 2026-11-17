@@ -6,5 +6,33 @@
     "motCle": "",
     "image": "/assets/blog/54-bailleurs/image.webp",
     "statut": "Publié"
+  },
+  {
+    "date": "05/12/2026",
+    "titre": "Marchés publics : comment acheter les équipements d'un parc canin",
+    "categorie": "Règlementation",
+    "motCle": "marché public parc canin",
+    "statut": "À publier"
+  },
+  {
+    "date": "12/12/2026",
+    "titre": "Parc canin en copropriété ou résidence : ce qu'il faut savoir",
+    "categorie": "Règlementation",
+    "motCle": "parc canin copropriété",
+    "statut": "À publier"
+  },
+  {
+    "date": "19/12/2026",
+    "titre": "Caniparc ou parc canin : quelle différence ?",
+    "categorie": "Conseils",
+    "motCle": "différence caniparc parc canin",
+    "statut": "À publier"
+  },
+  {
+    "date": "26/12/2026",
+    "titre": "Faire connaître son parc canin : cartes en ligne et signalétique",
+    "categorie": "Conseils",
+    "motCle": "faire connaître son parc canin commune",
+    "statut": "À publier"
   }
 ]
