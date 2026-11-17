@@ -27,11 +27,13 @@ Gardé tel quel (pas une promesse de prix, hors « autres formulations ») : « 
 Descriptions plus longues : prix-parc-canin (≈ 180 caractères), caniparc (≈ 175), campings (168) ; Google peut couper la fin.
 Contrôle en ligne à faire : /prix-parc-canin/ (ligne « Pose : Sur devis » et FAQ), /caniparc/ (paragraphe équipements), /produits/slalom/ (puce « Installation possible sur devis »).
 
-Suite : Alfred : contrôle en ligne des 3 pages ci-dessus après mise en ligne.
+Suite : aucune (le contrôle en ligne des 3 pages ci-dessus suit la mise en ligne, lancé par livrer.sh).
 
 ## Preuve
 
 Lot en cours : vérification à lancer par le chef — 018-installation-sur-devis, PR #22 https://github.com/antoineallaux/woof/pull/22
+Fait : 59 remplacements (21 fiches produits, 2 pages, FAQ accueil, llms, 13 articles, consigne du rédacteur) ; test « chiffres » rouge puis vert ; tests 68/68, build vert, gitleaks 0 fuite.
+Reste : contrôle en ligne de 3 pages après mise en ligne (livrer.sh).
 
 Phrases changées (avant → après, fichier:ligne) :
 - `src/content/blog/financer-un-caniparc-subventions-et-aides-pour-les-collectivites.mdx:74` : « et installation incluse par des équipes qualifiées » → « et installation possible sur devis par des équipes qualifiées »
