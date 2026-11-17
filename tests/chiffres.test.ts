@@ -20,6 +20,7 @@ const texte = (f: string) => nettoie(lire(f));
 const anciens: [string, RegExp][] = [
   // « plus de 15 ans d'expérience » d'un éducateur cité dans un article n'est pas l'ancienneté de Herkules
   ['ancienneté en années', /\b(15|20) ?\+ ?(ans|années)|(depuis|fort de) plus de \d+ ans|plus de 20 ans|20 ans d'expérience/i],
+  ['ancienneté Herkules en « 15 ans »', /Herkules[^.?!]{0,80}\b(15|quinze) ans/i],
   ['nombre de communes', /\d ?\+? ?communes|communes équipées/i],
   ['50 m² minimum', /50 ?m²/i],
   ['30 à 60 m²', /30 à 60 ?m²/i],
