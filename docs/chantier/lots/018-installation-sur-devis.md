@@ -17,7 +17,7 @@ Porte         : rien
 Ticket        : aucun
 Demande       : D-20261117-4
 Branche       : lot/018-installation-sur-devis
-Tentatives    : 0/3
+Tentatives    : 1/3
 
 ## Pour Alfred
 
@@ -33,6 +33,7 @@ Suite : aucune (le contrôle en ligne des 3 pages ci-dessus suit la mise en lign
 
 Lot en cours : vérification à lancer par le chef — 018-installation-sur-devis, PR #22 https://github.com/antoineallaux/woof/pull/22
 Fait : 59 remplacements (21 fiches produits, 2 pages, FAQ accueil, llms, 13 articles, consigne du rédacteur) ; test « chiffres » rouge puis vert ; tests 68/68, build vert, gitleaks 0 fuite.
+Tentative 2 (après REFUS t1) : le test « chiffres » lit désormais l'attribut `content` des balises (meta description, og:description, twitter:description) en plus du texte visible, du JSON-LD et des llms ; prouvé rouge sur chacune, vert après ; espace remise dans `['nombre de communes', /…`.
 Reste : contrôle en ligne de 3 pages après mise en ligne (livrer.sh).
 
 Phrases changées (avant → après, fichier:ligne) :
@@ -83,6 +84,30 @@ Test rouge avant (`tests/chiffres.test.ts`, motif « installation promise dans l
 42 pages fautives, dont : index.html « installation incluse », llms.txt, llms-full.txt, caniparc, prix-parc-canin « fourniture et pose », 21 fiches produits « Installation incluse », 13 articles (« pose incluse », « pose est incluse », « incluant l’installation »…)
 ```
 code 1
+
+Tentative 2 — solidité du test (`tests/chiffres.test.ts:14` : `nettoie()` garde la valeur de `content="…"` de chaque balise au lieu de la jeter). Sur le build de la branche, formule remise à la main dans le `dist`, puis `node --test tests/chiffres.test.ts` :
+- « pose comprise » dans les 3 meta de `caniparc/index.html` (description, og:description, twitter:description) :
+```
+✖ aucun ancien chiffre : installation promise dans le prix
+  +   'caniparc/index.html : « pose comprise »'
+ℹ tests 11 · pass 10 · fail 1
+```
+code 1
+- la même, une balise à la fois (rebuild entre chaque) : `name="description"` → fail 1, code 1 ; `property="og:description"` → fail 1, code 1 ; `name="twitter:description"` → fail 1, code 1
+- « installation est incluse » dans le seul JSON-LD (FAQPage) de `prix-parc-canin/index.html`, texte visible intact :
+```
+  +   'prix-parc-canin/index.html : « installation est incluse »'
+ℹ fail 1
+```
+code 1
+- « installation incluse » dans `llms.txt` et `llms-full.txt` :
+```
+  +   'llms-full.txt : « installation incluse »',
+  +   'llms.txt : « installation incluse »'
+ℹ fail 1
+```
+code 1
+- build propre relancé : `ℹ pass 11 · fail 0`, code 0
 
 Après, `npm test` :
 ```

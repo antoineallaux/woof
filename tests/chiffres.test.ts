@@ -8,10 +8,10 @@ const racine = 'dist/client';
 const fichiers = (readdirSync(racine, { recursive: true }) as string[])
   .filter((f) => /\.(html|txt)$/.test(f) && !f.startsWith('_astro'));
 
-// Texte visible + JSON-LD (les balises sont retirées, le contenu des <script> reste) ; adresses retirées
+// Texte visible + JSON-LD (contenu des <script>) + attribut content des balises (meta description, og, twitter) ; adresses retirées
 const lire = (f: string) => readFileSync(join(racine, f), 'utf8');
 const nettoie = (brut: string) => brut
-  .replace(/<[^>]+>/g, ' ')
+  .replace(/<[^>]*\scontent="([^"]*)"[^>]*>|<[^>]+>/g, (_, c) => ` ${c ?? ''} `)
   .replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&nbsp;| | /g, ' ')
   .replace(/\S*parcours-agility-(essentiel|intermediaire|complet)\S*/g, ' ')
   .replace(/\s+/g, ' ');
@@ -23,7 +23,7 @@ const anciens: [string, RegExp][] = [
   ['ancienneté Herkules en « 15 ans »', /Herkules[^.?!]{0,80}\b(15|quinze) ans/i],
   // Installation : possible sur devis, jamais promise dans le prix (D-20261117-4)
   ['installation promise dans le prix', /(installation|pose)( est)? (incluse?|comprise?)s?|inclu(ant|t|ent) l['’]installation|incluent[^.]{0,40}\bpose\b|fourniture et pose|installation offerte|posée? par nos soins/i],
-  ['nombre de communes',/\d ?\+? ?communes|communes équipées/i],
+  ['nombre de communes', /\d ?\+? ?communes|communes équipées/i],
   ['50 m² minimum', /50 ?m²/i],
   ['30 à 60 m²', /30 à 60 ?m²/i],
   ['étiquette Dog Park', /Dog Park \d[^.?!]{0,40}\b(essentiel|intermédiaire|complet)\b|\b(essentiel|intermédiaire|complet)\b[^.?!]{0,40}Dog Park \d/i],
