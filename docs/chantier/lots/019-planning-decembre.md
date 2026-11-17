@@ -69,5 +69,5 @@ code 0
 
 Lot en cours: vérification à lancer par le chef
 Fait: mots-clés sujets 3 et 4, tableau des doublons, tests et build verts
-Reste: PR et livre.sh
+Reste: vérification (PR #23 ouverte : https://github.com/antoineallaux/woof/pull/23)
 Dernière preuve: tests 66/66, build ok, gitleaks 0 fuite
