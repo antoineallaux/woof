@@ -93,7 +93,18 @@ Tentative 2 — solidité du test (`tests/chiffres.test.ts:14` : `nettoie()` gar
 ℹ tests 11 · pass 10 · fail 1
 ```
 code 1
-- la même, une balise à la fois (rebuild entre chaque) : `name="description"` → fail 1, code 1 ; `property="og:description"` → fail 1, code 1 ; `name="twitter:description"` → fail 1, code 1
+- la même, une balise à la fois (rebuild entre chaque) :
+```
+name="description" : 1 ligne(s)
+ℹ fail 1
+code 1
+property="og:description" : 1 ligne(s)
+ℹ fail 1
+code 1
+name="twitter:description" : 1 ligne(s)
+ℹ fail 1
+code 1
+```
 - « installation est incluse » dans le seul JSON-LD (FAQPage) de `prix-parc-canin/index.html`, texte visible intact :
 ```
   +   'prix-parc-canin/index.html : « installation est incluse »'
@@ -107,7 +118,12 @@ code 1
 ℹ fail 1
 ```
 code 1
-- build propre relancé : `ℹ pass 11 · fail 0`, code 0
+- build propre relancé, puis le test :
+```
+ℹ pass 11
+ℹ fail 0
+```
+code 0
 
 Après, `npm test` :
 ```
