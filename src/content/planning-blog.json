@@ -6,5 +6,33 @@
     "motCle": "",
     "image": "/assets/blog/54-bailleurs/image.webp",
     "statut": "Publié"
+  },
+  {
+    "date": "05/12/2026",
+    "titre": "Parc canin : le cahier des charges type pour un marché public",
+    "categorie": "Règlementation",
+    "motCle": "cahier des charges parc canin",
+    "statut": "À publier"
+  },
+  {
+    "date": "12/12/2026",
+    "titre": "Combien coûte l'entretien d'un parc canin par an ?",
+    "categorie": "Guide Pratique",
+    "motCle": "parc canin commune",
+    "statut": "À publier"
+  },
+  {
+    "date": "19/12/2026",
+    "titre": "Comment financer un parc canin : subventions, DETR et budget participatif en 2027",
+    "categorie": "Guide Pratique",
+    "motCle": "parc canin subvention",
+    "statut": "À publier"
+  },
+  {
+    "date": "26/12/2026",
+    "titre": "Quel fabricant de parc canin choisir : 7 critères pour une mairie",
+    "categorie": "Équipements",
+    "motCle": "fabricant parc canin",
+    "statut": "À publier"
   }
 ]
