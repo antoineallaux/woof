@@ -32,6 +32,8 @@ const products = defineCollection({
     ref: z.string(),
     faq: z.array(z.object({ question: z.string(), answer: z.string() })).default([]),
     technicalSheet: z.string().nullable().optional(),
+    // Caractéristiques de la fiche technique PDF (fiches-woof/data/fiches), jamais un prix
+    specs: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
   }),
 });
 

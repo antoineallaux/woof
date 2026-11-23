@@ -31,5 +31,31 @@
       "answer": "Le design en forme de maisonnette adoucit l'aspect technique de l'obstacle. Même en version XL, il reste ludique et accueillant pour les familles. Cela permet d'intégrer un équipement sportif volumineux de manière harmonieuse et esthétique dans le paysage de votre parc pour chien ou camping."
     }
   ],
-  "technicalSheet": "/fiches/AG25-B.pdf"
+  "technicalSheet": "/fiches/AG25-B.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "3 148 × 1 263 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 181 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "4"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

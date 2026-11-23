@@ -30,5 +30,43 @@
       "answer": "Oui, nous offrons la possibilité de personnaliser les coloris de la structure. Vous pouvez choisir des couleurs vives pour faire ressortir les motifs de pattes ou des teintes plus sobres pour intégrer l'équipement à la nature environnante. Cette flexibilité permet d'harmoniser votre parcours canin avec l'esthétique de la ville."
     }
   ],
-  "technicalSheet": "/fiches/AG13.pdf"
+  "technicalSheet": "/fiches/AG13.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "900 × 99 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "410 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Assemblage",
+      "value": "À assembler"
+    },
+    {
+      "label": "Scellement",
+      "value": "Scellement direct"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 × 600 mm"
+    },
+    {
+      "label": "Profondeur d'ancrage",
+      "value": "600 mm"
+    }
+  ]
 }

@@ -87,6 +87,14 @@ const breadcrumbSchema = {
         <time datetime={post.data.pubDate.toISOString()}>
           Publié le {post.data.pubDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
         </time>
+        {post.data.updatedDate && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <time datetime={post.data.updatedDate.toISOString()}>
+              Mis à jour le {post.data.updatedDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+          </>
+        )}
       </p>
 
       <!-- Hero image -->

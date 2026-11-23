@@ -30,5 +30,47 @@
       "answer": "Fabriquée en acier galvanisé thermolaqué, la structure de la Barre de Saut 3 Niveaux est totalement insensible à la rouille et aux intempéries. C'est un point crucial pour les mairies, car cela garantit que le mécanisme de réglage ne grippera pas avec le temps, même après des années d'exposition à la pluie."
     }
   ],
-  "technicalSheet": "/fiches/AG17.pdf"
+  "technicalSheet": "/fiches/AG17.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 450 × 234 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "930 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Assemblage",
+      "value": "À assembler"
+    },
+    {
+      "label": "Scellement",
+      "value": "Scellement direct"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 × 600 mm"
+    },
+    {
+      "label": "Profondeur d'ancrage",
+      "value": "600 mm"
+    },
+    {
+      "label": "Volume de béton",
+      "value": "0,19 m³"
+    }
+  ]
 }

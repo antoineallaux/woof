@@ -24,6 +24,8 @@ const anciens: [string, RegExp][] = [
   // Installation : possible sur devis, jamais promise dans le prix (D-20261117-4)
   ['installation promise dans le prix', /(installation|pose)( est)? (incluse?|comprise?)s?|inclu(ant|t|ent) l['’]installation|incluent[^.]{0,40}\bpose\b|fourniture et pose|installation offerte|posée? par nos soins/i],
   ['nombre de communes', /\d ?\+? ?communes|communes équipées/i],
+  // Origine : « fabricant européen » (D-20261123-23)
+  ['fabricant français', /fabricants? fran[cç]ais|fabrication fran[cç]aise|made in france/i],
   ['50 m² minimum', /50 ?m²/i],
   ['30 à 60 m²', /30 à 60 ?m²/i],
   ['étiquette Dog Park', /Dog Park \d[^.?!]{0,40}\b(essentiel|intermédiaire|complet)\b|\b(essentiel|intermédiaire|complet)\b[^.?!]{0,40}Dog Park \d/i],
@@ -90,4 +92,46 @@ test('aucune phrase ni ligne de tableau n\'associe un parcours d\'agility à plu
     .filter(associe)
     .map((p) => `${f} : « ${p.trim()} »`));
   assert.deepEqual([...new Set(trouves)], []);
+});
+
+// Lot 020 (audit acheteurs) : fiches produit au niveau Herkules, sans prix
+const produits = readdirSync('src/content/products').map((f) => f.replace(/\.json$/, ''));
+
+test('fiches produit : caractéristiques techniques, garantie, délai, pose sur devis et FAQ, sans prix', () => {
+  for (const slug of produits) {
+    const t = texte(`produits/${slug}/index.html`);
+    assert.match(t, /Caractéristiques techniques/, slug);
+    assert.match(t, /Emprise au sol \d[\d ]* × \d[\d ]* mm/, slug);
+    assert.match(t, /Hauteur \d[\d ]* mm/, slug);
+    assert.match(t, /Garantie 5 ans/, slug);
+    assert.ok(t.includes('3 à 4 semaines en coloris standard, 12 à 15 en coloris spécial'), slug);
+    assert.match(t, /Transport et pose En plus, sur devis/, slug);
+    assert.match(t, /Quel délai de fabrication/, slug);
+    assert.doesNotMatch(t, /€|\bà partir de \d/i, slug);
+  }
+});
+
+test('fiches Dog Park 1, 2, 3 : dimensions de la fiche technique', () => {
+  const attendu = { essentiel: ['5 479 × 4 105 mm', '1 110 mm', '13'], intermediaire: ['4 961 × 3 196 mm', '1 113 mm', '18'], complet: ['2 582 × 2 513 mm', '889 mm', '12'] };
+  for (const [slug, [emprise, hauteur, massifs]] of Object.entries(attendu)) {
+    const t = texte(`produits/parcours-agility-${slug}/index.html`);
+    assert.ok(t.includes(`Emprise au sol ${emprise}`), slug);
+    assert.ok(t.includes(`Hauteur ${hauteur}`), slug);
+    assert.ok(t.includes(`Nombre de massifs ${massifs}`), slug);
+  }
+});
+
+test('aucun prix nouveau : /caniparc/ garde ses seuls repères, article loi sans montant', () => {
+  const montants = [...new Set(texte('caniparc/index.html').match(/\d[\d ]* ?€/g))].sort();
+  assert.deepEqual(montants, ['15 000 €', '30 000 €', '45 000 €']);
+  assert.doesNotMatch(texte('blog/creation-dun-parc-chien-collectivite-ce-que-dit-la-loi/index.html'), /€/);
+});
+
+test('article « ce que dit la loi » : mise à jour 2026, Woof! dans le titre, renvois vers le prix et le devis', () => {
+  const page = lire('blog/creation-dun-parc-chien-collectivite-ce-que-dit-la-loi/index.html');
+  assert.match(page.match(/<title>(.*?)<\/title>/)![1], /2026.*Woof!/);
+  assert.match(page, /"dateModified":"2026-11-23/);
+  assert.match(page, /Mis à jour le 23 novembre 2026/);
+  const corps = page.split('<div class="prose')[1].split('<aside')[0];
+  for (const href of ['/prix-parc-canin/', '/devis/']) assert.ok(corps.includes(`href="${href}"`), href);
 });

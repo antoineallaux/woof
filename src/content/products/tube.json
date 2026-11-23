@@ -30,5 +30,31 @@
       "answer": "Le diamètre du tunnel est prévu pour laisser passer la plupart des races moyennes et grandes. La structure porteuse est calculée pour supporter le poids de chiens lourds. C'est un équipement robuste adapté à l'usage intensif d'un parcours canin collectivité accueillant une grande diversité de visiteurs canins."
     }
   ],
-  "technicalSheet": "/fiches/AG33.pdf"
+  "technicalSheet": "/fiches/AG33.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "3 647 × 953 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 600 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "8"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm, 300 × 300 mm"
+    }
+  ]
 }

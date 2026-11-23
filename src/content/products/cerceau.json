@@ -31,5 +31,31 @@
       "answer": "Le PEHD ne demande aucun entretien. Le bois peut griser avec le temps, ce qui est un processus naturel n'altérant pas sa solidité. Si vous souhaitez conserver la teinte d'origine, une simple application de lasure tous les quelques années suffit à maintenir l'éclat de votre parcours sportif canin."
     }
   ],
-  "technicalSheet": "/fiches/AG30.pdf"
+  "technicalSheet": "/fiches/AG30.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 444 × 96 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 820 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Mélèze, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "500 × 500 mm"
+    }
+  ]
 }

@@ -30,5 +30,31 @@
       "answer": "L'entretien est très facile. La surface lisse du PEHD et du tunnel n'accroche pas la saleté. Un nettoyage occasionnel au jet d'eau suffit pour redonner son éclat au chien rouge. C'est une solution économique et pratique pour les services techniques en charge de votre parc pour chien."
     }
   ],
-  "technicalSheet": "/fiches/AG28.pdf"
+  "technicalSheet": "/fiches/AG28.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 190 × 1 180 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 430 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "4"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

@@ -30,5 +30,31 @@
       "answer": "Cet obstacle permet de travailler la commande de saut en douceur. Le fait d'avoir deux hauteurs permet au chien de comprendre l'exercice sur la barre la plus basse avant de tenter la plus haute. C'est un outil pédagogique excellent pour les cours d'éducation canine dispensés dans votre commune."
     }
   ],
-  "technicalSheet": "/fiches/AG14.pdf"
+  "technicalSheet": "/fiches/AG14.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 561 × 93 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "610 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "3"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

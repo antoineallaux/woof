@@ -30,5 +30,31 @@
       "answer": "Oui, en tant que fabricant pour les collectivités, nous pouvons personnaliser les coloris de la structure métallique et des zones de contact. Cela vous permet d'harmoniser votre parcours agility avec l'identité visuelle de votre ville ou la charte graphique de votre camping."
     }
   ],
-  "technicalSheet": "/fiches/AG05-A.pdf"
+  "technicalSheet": "/fiches/AG05-A.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "5 923 × 964 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "964 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "8"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

@@ -30,5 +30,31 @@
       "answer": "L'entretien est quasi inexistant. La finition thermolaquée de haute qualité empêche l'adhérence des salissures et protège contre la corrosion. Un simple jet d'eau occasionnel suffit pour redonner son éclat à cet équipement de parcours canin collectivité, simplifiant la tâche des agents d'entretien de la commune."
     }
   ],
-  "technicalSheet": "/fiches/AG12.pdf"
+  "technicalSheet": "/fiches/AG12.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "903 × 100 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "490 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

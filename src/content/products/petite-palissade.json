@@ -30,5 +30,43 @@
       "answer": "Non, l'entretien est minimal. Une simple inspection visuelle régulière et un nettoyage à l'eau suffisent pour maintenir cet obstacle agility en parfait état. Sa conception robuste est pensée pour minimiser les interventions des services techniques municipaux sur le long terme."
     }
   ],
-  "technicalSheet": "/fiches/AG01.pdf"
+  "technicalSheet": "/fiches/AG01.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 638 × 865 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "722 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Assemblage",
+      "value": "À assembler"
+    },
+    {
+      "label": "Scellement",
+      "value": "Scellement direct"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "6"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 × 600 mm, 300 × 300 × 600 mm"
+    },
+    {
+      "label": "Profondeur d'ancrage",
+      "value": "600 mm"
+    }
+  ]
 }

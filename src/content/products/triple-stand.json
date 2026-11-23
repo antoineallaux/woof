@@ -30,5 +30,31 @@
       "answer": "La structure en acier est dimensionnée pour supporter le poids de chiens de grand gabarit sans bouger. Les plateformes sont suffisamment larges pour une réception stable. C'est un équipement robuste adapté à l'usage intensif par toutes les races fréquentant votre aire d'ébats canine publique."
     }
   ],
-  "technicalSheet": "/fiches/AG10.pdf"
+  "technicalSheet": "/fiches/AG10.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "806 × 750 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "402 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "700 × 700 mm, 500 × 500 mm"
+    }
+  ]
 }

@@ -30,5 +30,23 @@
       "answer": "Le corps en forme d'os est souvent disponible en plusieurs coloris vifs. Choisir une couleur contrastée permet de rendre l'équipement bien visible pour les usagers. Cela ajoute une touche de gaieté à l'entrée de votre parc pour chien et incite les propriétaires à utiliser ce service pratique mis à leur disposition."
     }
   ],
-  "technicalSheet": "/fiches/AG49.pdf"
+  "technicalSheet": "/fiches/AG49.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 099 × 266 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 100 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    }
+  ]
 }

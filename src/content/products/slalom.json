@@ -30,5 +30,31 @@
       "answer": "Cet obstacle agility développe la souplesse latérale et l'obéissance. Le chien doit suivre les indications du maître sans sauter de porte. C'est l'exercice roi pour renforcer la complicité et la connexion maître-chien au sein de votre espace canin public ou de votre terrain de camping."
     }
   ],
-  "technicalSheet": "/fiches/AG16-A.pdf"
+  "technicalSheet": "/fiches/AG16-A.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "3 062 × 60 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "820 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "6"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

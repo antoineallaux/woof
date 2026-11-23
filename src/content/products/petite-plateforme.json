@@ -30,5 +30,31 @@
       "answer": "La surface de la plateforme est traitée avec un revêtement antidérapant haute performance. Cela assure la sécurité des animaux même par temps de pluie. Les chiens peuvent y grimper et tenir la position sans glisser, un critère de sécurité indispensable pour tout équipement de parcours sportif canin en accès libre."
     }
   ],
-  "technicalSheet": "/fiches/AG06.pdf"
+  "technicalSheet": "/fiches/AG06.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 076 × 916 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "505 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "4"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

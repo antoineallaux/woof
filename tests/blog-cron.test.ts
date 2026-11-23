@@ -135,6 +135,12 @@ test('validateur : moins de 700 mots refusé', () => {
   assert.throws(() => validerEtFormaterMdx(reponse({ article: 'mot '.repeat(600) }), sheet), /Article trop court : 600 mots/);
 });
 
+test('validateur : « fabricant français » refusé, consigne « fabricant européen »', () => {
+  assert.match(construireRequeteClaude(sheet, 2026).system, /fabricant européen d'équipements[^.]*depuis 2007\. Origine : toujours « fabricant européen », jamais « fabricant français »/);
+  assert.throws(() => validerEtFormaterMdx(reponse({ article: corps(' Woof!, fabricant français de parcs canins.') }), sheet), /fabricant européen/);
+  assert.throws(() => validerEtFormaterMdx(reponse({ titre: 'Caniparc : un fabricant français pour votre commune' }), sheet), /fabricant européen/);
+});
+
 test('validateur : mention EN 16630 refusée (corps, titre ou description)', () => {
   assert.throws(() => validerEtFormaterMdx(reponse({ article: corps(' Conforme à la norme EN16630.') }), sheet), /EN 16630/);
   assert.throws(() => validerEtFormaterMdx(reponse({ titre: 'Parc canin et norme EN 16630 : le guide' }), sheet), /EN 16630/);

@@ -4,6 +4,7 @@ import FAQSection from '../components/sections/FAQSection.astro';
 import CTAFinal from '../components/sections/CTAFinal.astro';
 import Button from '../components/ui/Button.astro';
 import Badge from '../components/ui/Badge.astro';
+import References from '../components/sections/References.astro';
 import { getEntry } from 'astro:content';
 
 // Chiffres : articles « budget détaillé », « quelle surface », « 7 étapes » et fiches produits (sources listées dans la fiche du lot 004)
@@ -12,6 +13,23 @@ const surfaces = [
   { size: '300 à 500 m²', who: 'Petite commune (moins de 5 000 habitants)', desc: 'Suffisant pour un usage occasionnel : clôture, quelques agrès de base et un panneau d\'information.' },
   { size: '800 à 1 500 m²', who: 'Commune moyenne ou intercommunalité', desc: 'Idéalement divisé en deux zones, petits et grands chiens, avec plusieurs agrès d\'agility.' },
   { size: 'Plus de 1 500 m²', who: 'Ville ou zone urbaine dense', desc: 'Un grand caniparc urbain : plusieurs modules d\'agility répartis et des zones séparées.' },
+];
+
+// Lot 020 (audit acheteurs du 23/11) : la moitié des demandes vient de sites privés
+const publics = [
+  { title: 'Communes et intercommunalités', desc: 'Un espace canin public qui canalise les chiens sur une zone dédiée, améliore la propreté des rues et répond à une demande fréquente des habitants.' },
+  { title: 'Campings et hôtellerie de plein air', desc: 'Un enclos équipé pour accueillir les vacanciers qui viennent avec leur chien, et un argument de plus dans votre fiche d\'accueil.', href: '/blog/campings-et-hotellerie-de-plein-air-le-parc-canin-qui-fidelise/', lien: 'Le parc canin en camping' },
+  { title: 'Garderies et éducateurs canins', desc: 'Des agrès solides, utilisés tous les jours, pour les séances d\'éducation, d\'agility et de socialisation en plein air.' },
+  { title: 'Refuges', desc: 'Un espace clôturé pour dépenser et sociabiliser les chiens en attente d\'adoption, et les présenter aux familles.' },
+  { title: 'Bailleurs sociaux et promoteurs', desc: 'Un espace canin en pied d\'immeuble ou au cœur d\'un nouveau quartier, qui limite les conflits entre résidents.', href: '/blog/bailleurs-sociaux-un-espace-canin-en-pied-dimmeuble-bonne-idee/', lien: 'L\'espace canin en pied d\'immeuble' },
+  { title: 'Hôtels', desc: 'Un coin canin pour les clients qui voyagent avec leur chien : quelques agrès, un banc et un porte-laisse suffisent.' },
+];
+
+// Packs décrits par surface et modules, sans prix (prix : décision d'Antoine à venir)
+const packs = [
+  { title: 'Petit caniparc', surface: '300 à 500 m²', zones: 'Un seul enclos avec double sas d\'entrée.', modules: [['parcours-agility-complet', 'Dog Park 3'], ['slalom', 'Slalom'], ['barre-saut', 'Barre de saut'], ['banc-os', 'Banc Os'], ['panneau-info', 'Panneau d\'info']] },
+  { title: 'Moyen caniparc', surface: '800 à 1 500 m²', zones: 'Deux zones, petits et grands chiens.', modules: [['parcours-agility-intermediaire', 'Dog Park 2'], ['tunnel-rex', 'Tunnel Rex'], ['passerelle', 'Passerelle'], ['slalom', 'Slalom'], ['banc-os', 'Bancs Os'], ['porte-laisse', 'Porte-laisse'], ['panneau-info', 'Panneau d\'info']] },
+  { title: 'Grand caniparc', surface: 'Plus de 1 500 m²', zones: 'Plusieurs zones séparées, agrès répartis sur le terrain.', modules: [['parcours-agility-essentiel', 'Dog Park 1'], ['grande-passerelle', 'Grande Passerelle'], ['triple-cerceau', 'Triple Cerceau'], ['labyrinthe', 'Labyrinthe'], ['tunnel-maison', 'Tunnel Maison'], ['banc-dos', 'Bancs Dos'], ['abris-en-bois', 'Abri en bois'], ['panneau-info', 'Panneau d\'info']] },
 ];
 
 const budgets = [
@@ -78,6 +96,27 @@ const faqs = [
     q: 'Les équipements Woof! sont-ils garantis ?',
     a: 'Oui, tous les équipements Woof! sont garantis 5 ans. Les agrès sont en acier galvanisé, conçus pour un usage collectif en libre accès, et l\'installation est possible sur devis.',
   },
+  // Achat public (lot 020) : jamais l'UGAP
+  {
+    q: 'Comment une collectivité achète-t-elle un caniparc Woof! ?',
+    a: 'Sur devis : nous chiffrons votre projet sous 48 h, puis vous commandez selon votre procédure de commande publique (achat direct ou MAPA selon le montant). Nous fournissons les fiches techniques et les plans utiles à votre dossier.',
+  },
+  {
+    q: 'Acceptez-vous le paiement par mandat administratif ?',
+    a: 'Oui. Les collectivités et établissements publics règlent par mandat administratif, à réception de la facture.',
+  },
+  {
+    q: 'Vos factures passent-elles par Chorus Pro ?',
+    a: 'Oui. Les factures adressées aux acheteurs publics sont déposées sur Chorus Pro, le portail de facturation électronique de l\'État.',
+  },
+  {
+    q: 'Quels sont les délais de fabrication ?',
+    a: 'Comptez 3 à 4 semaines en coloris standard, 12 à 15 en coloris spécial. Le transport et la pose sont en plus, sur devis.',
+  },
+  {
+    q: 'La pose est-elle faite par Woof! ?',
+    a: 'Elle est séparée de la fourniture : le transport et la pose sont chiffrés en plus, sur devis. Vos services techniques ou votre entreprise de travaux peuvent aussi poser les équipements à partir de la fiche technique (plan coté, massifs béton).',
+  },
 ];
 ---
 
@@ -102,7 +141,7 @@ const faqs = [
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
       <div class="max-w-2xl">
         <span class="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 text-white font-bold text-xs px-3 py-1.5 rounded-full mb-6">
-          Pour les collectivités
+          Collectivités et sites privés
         </span>
         <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
           Caniparc : équipement et aménagement pour collectivités
@@ -148,8 +187,31 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ===== SURFACE ===== -->
+  <!-- ===== POUR QUI ===== -->
   <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Pour qui ?
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          Les communes, mais aussi de plus en plus de sites privés qui accueillent des chiens.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {publics.map((p) => (
+          <div class="bg-white rounded-2xl p-7 border border-primary-light shadow-sm">
+            <h3 class="font-display font-bold text-lg text-text mb-2">{p.title}</h3>
+            <p class="text-muted text-sm leading-relaxed">{p.desc}</p>
+            {p.href && <a href={p.href} class="inline-block text-primary font-semibold text-sm underline mt-3">{p.lien} →</a>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SURFACE ===== -->
+  <section class="py-20 bg-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
@@ -170,6 +232,37 @@ const faqs = [
       </div>
       <p class="text-center text-muted text-sm mt-8">
         Emplacement, sol et clôture : <a href="/blog/quelle-surface-et-quel-emplacement-pour-un-caniparc-reussi/" class="text-primary font-semibold underline">notre guide surface et emplacement</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== PACKS ===== -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight mb-4">
+          Trois packs pour démarrer
+        </h2>
+        <p class="text-muted text-base max-w-2xl mx-auto">
+          Une base de départ par taille de terrain, à ajuster à votre projet. Chaque équipement est garanti 5 ans ; transport et pose en plus, sur devis.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {packs.map((p) => (
+          <div class="bg-white rounded-2xl p-7 border border-primary-light shadow-sm">
+            <h3 class="font-display font-extrabold text-2xl text-text mb-1">{p.title}</h3>
+            <p class="font-display font-bold text-primary text-lg mb-3">{p.surface}</p>
+            <p class="text-muted text-sm leading-relaxed mb-3">{p.zones}</p>
+            <ul class="text-sm text-text space-y-1">
+              {p.modules.map(([slug, nom]) => (
+                <li><a href={`/produits/${slug}/`} class="hover:text-primary underline decoration-primary/30">{nom}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p class="text-center text-muted text-sm mt-8 max-w-2xl mx-auto">
+        Repères de budget par taille de parc : <a href="/prix-parc-canin/" class="text-primary font-semibold underline">prix d'un parc canin</a>. Vous savez déjà ce qu'il vous faut ? <a href="/devis/" class="text-primary font-semibold underline">Composez votre sélection pour devis</a>.
       </p>
     </div>
   </section>
@@ -303,6 +396,8 @@ const faqs = [
       </div>
     </div>
   </section>
+
+  <References />
 
   <!-- ===== FAQ ===== -->
   <FAQSection faqs={faqs} title="Questions fréquentes sur les caniparcs" />

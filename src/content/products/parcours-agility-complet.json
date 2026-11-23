@@ -30,5 +30,23 @@
       "answer": "Ce module permet de travailler plusieurs compétences simultanées : la montée d'escaliers, souvent crainte par certains chiens urbains, la traversée en hauteur et la descente contrôlée. C'est un obstacle agility riche qui renforce la confiance du chien et sa coordination motrice globale sur le parcours sportif."
     }
   ],
-  "technicalSheet": "/fiches/AG34.pdf"
+  "technicalSheet": "/fiches/AG34.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "2 582 × 2 513 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "889 mm"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "12"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm, 300 × 300 mm, 400 × 300 mm"
+    }
+  ]
 }

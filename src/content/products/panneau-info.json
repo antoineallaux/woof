@@ -30,5 +30,15 @@
       "answer": "L'entretien est très léger. Il suffit de nettoyer la surface une fois par an pour retirer la poussière ou la mousse. Les matériaux sont souvent traités anti-graffitis pour faciliter le nettoyage. C'est un équipement de parcours canin collectivité durable qui demande peu d'intervention des services techniques."
     }
   ],
-  "technicalSheet": "/fiches/AG50.pdf"
+  "technicalSheet": "/fiches/AG50.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "564 × 77 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 800 mm"
+    }
+  ]
 }

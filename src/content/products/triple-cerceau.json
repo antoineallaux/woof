@@ -30,5 +30,47 @@
       "answer": "Cet équipement demande au chien une grande concentration. Il doit focaliser son attention sur trois cibles successives. C'est un outil formidable pour les cours d'éducation canine dispensés dans votre parc pour chien, permettant de travailler le focus et l'écoute du maître malgré l'excitation du jeu."
     }
   ],
-  "technicalSheet": "/fiches/AG31.pdf"
+  "technicalSheet": "/fiches/AG31.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "6 540 × 856 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 200 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Assemblage",
+      "value": "À assembler"
+    },
+    {
+      "label": "Scellement",
+      "value": "Scellement direct"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "6"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 × 600 mm"
+    },
+    {
+      "label": "Profondeur d'ancrage",
+      "value": "600 mm"
+    },
+    {
+      "label": "Volume de béton",
+      "value": "0,576 m³"
+    }
+  ]
 }

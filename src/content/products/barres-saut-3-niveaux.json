@@ -30,5 +30,47 @@
       "answer": "Pouvoir monter la barre progressivement permet de bâtir la confiance du chien. Il apprend à évaluer l'obstacle et à ajuster son impulsion. C'est un outil formidable pour les séances d'éducation canine organisées dans votre commune, permettant de transformer un simple jeu en véritable séance d'entraînement sur le parcours agility."
     }
   ],
-  "technicalSheet": "/fiches/AG18.pdf"
+  "technicalSheet": "/fiches/AG18.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 450 × 234 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "930 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Assemblage",
+      "value": "À assembler"
+    },
+    {
+      "label": "Scellement",
+      "value": "Scellement direct"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 × 600 mm"
+    },
+    {
+      "label": "Profondeur d'ancrage",
+      "value": "600 mm"
+    },
+    {
+      "label": "Volume de béton",
+      "value": "0,19 m³"
+    }
+  ]
 }

@@ -31,5 +31,23 @@
       "answer": "Le diamètre du corps du tunnel est standardisé pour laisser passer confortablement la majorité des races, du petit chien au grand gabarit. La découpe de la façade du Tunnel Milou est optimisée pour ne pas gêner l'entrée, garantissant une fluidité parfaite sur votre terrain d'agility public."
     }
   ],
-  "technicalSheet": "/fiches/AG28-B.pdf"
+  "technicalSheet": "/fiches/AG28-B.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 190 × 1 180 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 429 mm"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "4"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

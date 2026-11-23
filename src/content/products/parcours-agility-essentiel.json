@@ -30,5 +30,23 @@
       "answer": "Installer le Dog Park 1 crée un point d'attraction visuel fort. Son architecture complexe et ses couleurs signalent immédiatement la présence d'une zone ludique de qualité. C'est un élément structurant qui valorise l'image de votre commune et attire les visiteurs vers votre parcours canin agility nouvellement créé."
     }
   ],
-  "technicalSheet": "/fiches/AG35.pdf"
+  "technicalSheet": "/fiches/AG35.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "5 479 × 4 105 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 110 mm"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "13"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm, 1 020 × 300 mm, 830 × 300 mm, 1 654 × 500 mm"
+    }
+  ]
 }
