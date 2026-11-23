@@ -30,5 +30,23 @@
       "answer": "C'est un obstacle de niveau intermédiaire à confirmé. La hauteur et l'étroitesse relative de la planche demandent au chien de la concentration et une bonne proprioception. C'est un agrès valorisant qui permet aux chiens de progresser et de gagner en assurance sur votre parcours canin agility."
     }
   ],
-  "technicalSheet": "/fiches/AG29.pdf"
+  "technicalSheet": "/fiches/AG29.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "5 060 × 300 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 067 mm"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "5"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

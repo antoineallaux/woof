@@ -30,5 +30,23 @@
       "answer": "Absolument. Conçu pour l'agility collectivités, le Dog Park 2 utilise des matériaux robustes comme l'acier galvanisé et le PEHD. Il résiste aux griffures, aux chocs et aux intempéries. C'est un investissement durable, capable de supporter l'usage intensif quotidien d'un parc public urbain ouvert toute l'année."
     }
   ],
-  "technicalSheet": "/fiches/AG36.pdf"
+  "technicalSheet": "/fiches/AG36.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "4 961 × 3 196 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 113 mm"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "18"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm, 300 × 300 mm, 400 × 300 mm"
+    }
+  ]
 }

@@ -30,5 +30,31 @@
       "answer": "Tout à fait. De nombreux éducateurs utilisent l'obstacle Patte pour apprendre au chien la focalisation. C'est aussi un excellent cadre pour travailler le statique (assis ou couché) en regardant à travers le trou. Sa polyvalence en fait un atout pour les associations fréquentant votre terrain d'agility."
     }
   ],
-  "technicalSheet": "/fiches/AG23.pdf"
+  "technicalSheet": "/fiches/AG23.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 481 × 116 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 700 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

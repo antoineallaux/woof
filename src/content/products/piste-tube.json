@@ -30,5 +30,23 @@
       "answer": "Lors de l'installation, vous avez la liberté de sceller les arceaux en ligne droite parfaite ou de créer une légère courbe pour augmenter la difficulté technique. Cette flexibilité de pose permet d'adapter la Piste Tube à la topographie de votre terrain d'agility et de varier les défis."
     }
   ],
-  "technicalSheet": "/fiches/AG16-B.pdf"
+  "technicalSheet": "/fiches/AG16-B.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "3 361 × 1 880 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "617 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    }
+  ]
 }

@@ -30,5 +30,31 @@
       "answer": "Pour garantir la stabilité face au vent et aux passages répétés, les façades doivent être scellées sur des plots en béton. Une fixation rigide est indispensable pour que le Tunnel maison reste en place et sécurisé, répondant aux exigences des aménagements de parcs canins collectivités."
     }
   ],
-  "technicalSheet": "/fiches/AG25.pdf"
+  "technicalSheet": "/fiches/AG25.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 200 × 1 145 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 260 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "4"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

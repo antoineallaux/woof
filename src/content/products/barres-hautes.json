@@ -30,5 +30,31 @@
       "answer": "Oui, Woof propose la personnalisation des coloris pour les Barres Hautes. Vous pouvez opter pour des couleurs vives pour signaler la zone sportive ou des tons neutres pour une intégration paysagère douce. Cela permet de créer un parcours canin agility unique et cohérent avec l'identité de votre ville."
     }
   ],
-  "technicalSheet": "/fiches/AG15.pdf"
+  "technicalSheet": "/fiches/AG15.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 573 × 93 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "870 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "3"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

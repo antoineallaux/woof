@@ -30,5 +30,31 @@
       "answer": "Oui, pour garantir le bon fonctionnement du pivot et la sécurité des usagers, la Petite Balance doit être fixée sur une surface plane et stable (dalle béton ou plots). Un ancrage solide est impératif pour éviter tout déplacement du module lors des passages répétés des chiens."
     }
   ],
-  "technicalSheet": "/fiches/AG03.pdf"
+  "technicalSheet": "/fiches/AG03.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 951 × 540 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "518 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

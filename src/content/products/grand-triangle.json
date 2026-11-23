@@ -30,5 +30,31 @@
       "answer": "Ce module sert de table de pause ou de zone de calme. Il est idéal pour apprendre au chien à rester immobile à distance (le pas bouger) malgré les distractions du parc public. C'est un outil pédagogique précieux pour les clubs canins utilisant les infrastructures municipales pour leurs cours."
     }
   ],
-  "technicalSheet": "/fiches/AG09.pdf"
+  "technicalSheet": "/fiches/AG09.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "888 × 829 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "610 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "3"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

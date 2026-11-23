@@ -30,5 +30,31 @@
       "answer": "Non, la grande palissade est conçu pour une maintenance minimale. Son revêtement thermolaqué le protège contre la corrosion. Un simple nettoyage occasionnel suffit pour conserver son aspect dans votre parc canin."
     }
   ],
-  "technicalSheet": "/fiches/AG02.pdf"
+  "technicalSheet": "/fiches/AG02.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "3 203 × 968 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 113 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "6"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm, 300 × 300 mm"
+    }
+  ]
 }

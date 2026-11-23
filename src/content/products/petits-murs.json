@@ -30,5 +30,47 @@
       "answer": "Au-delà du saut, cet équipement de parc canin permet de travailler le pas bouger entre chaque barrière ou le saut à la demande. C'est un outil polyvalent pour les éducateurs canins qui peuvent complexifier l'exercice en demandant des arrêts ou des changements de rythme."
     }
   ],
-  "technicalSheet": "/fiches/AG32.pdf"
+  "technicalSheet": "/fiches/AG32.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "7 635 × 962 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "490 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Assemblage",
+      "value": "À assembler"
+    },
+    {
+      "label": "Scellement",
+      "value": "Scellement direct"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "8"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 × 600 mm"
+    },
+    {
+      "label": "Profondeur d'ancrage",
+      "value": "600 mm"
+    },
+    {
+      "label": "Volume de béton",
+      "value": "0,77 m³"
+    }
+  ]
 }

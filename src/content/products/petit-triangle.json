@@ -30,5 +30,31 @@
       "answer": "Pour éviter le vol et assurer la stabilité lors des sauts, cet équipement doit être scellé au sol sur des plots en béton. Une fixation rigide est indispensable pour tout mobilier urbain canin afin de prévenir les accidents et garantir la pérennité de l'installation."
     }
   ],
-  "technicalSheet": "/fiches/AG08.pdf"
+  "technicalSheet": "/fiches/AG08.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "888 × 829 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "410 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "3"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

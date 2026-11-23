@@ -31,5 +31,23 @@
       "answer": "L'hygiène est cruciale dans un parc public. La surface lisse et non poreuse du banc se nettoie très simplement au jet d'eau ou avec un désinfectant classique. Il sèche vite et n'absorbe pas les odeurs, assurant un confort sanitaire optimal pour les visiteurs de votre parcours canin."
     }
   ],
-  "technicalSheet": "/fiches/BNII.pdf"
+  "technicalSheet": "/fiches/BNII.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "2 053 × 476 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "420 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Mélèze, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    }
+  ]
 }

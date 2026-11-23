@@ -31,5 +31,15 @@
       "answer": "Oui, le bois utilisé pour cet abri de parc canin est traité autoclave ou naturellement imputrescible pour résister aux conditions extérieures difficiles. La toiture est conçue pour évacuer efficacement les eaux pluviales, garantissant un espace sec pour les maîtres, quelle que soit la saison."
     }
   ],
-  "technicalSheet": "/fiches/ABI.pdf"
+  "technicalSheet": "/fiches/ABI.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "4 241 × 2 019 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "2 500 mm"
+    }
+  ]
 }

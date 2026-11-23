@@ -31,5 +31,31 @@
       "answer": "Le mécanisme de réglage du Cercle flottant est conçu pour être simple et robuste, adapté à l'usage public intensif. Il permet de modifier la hauteur sans pièces détachables fragiles. C'est une solution technique fiable pour les mairies souhaitant installer de l'agility collectivités sans risque de casse fréquente."
     }
   ],
-  "technicalSheet": "/fiches/AG22.pdf"
+  "technicalSheet": "/fiches/AG22.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 185 × 140 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 545 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "500 × 500 mm"
+    }
+  ]
 }

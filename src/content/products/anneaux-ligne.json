@@ -30,5 +30,31 @@
       "answer": "Oui, la personnalisation des couleurs est possible. Choisir des teintes contrastées pour les Anneaux ligne aide le chien à mieux percevoir l'obstacle dans l'espace. Cela permet aussi d'harmoniser le design de l'agrès avec le reste du mobilier urbain de votre parc pour chien ou l'identité de votre ville."
     }
   ],
-  "technicalSheet": "/fiches/AG20.pdf"
+  "technicalSheet": "/fiches/AG20.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "2 424 × 42 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 207 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "500 × 500 mm"
+    }
+  ]
 }

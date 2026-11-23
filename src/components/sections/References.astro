@@ -1,0 +1,26 @@
+---
+// Bloc masqué tant qu'aucune référence n'a l'accord écrit du client (première attendue : Vidauban, D-20261123-23).
+// Ajouter une ligne ici suffit à l'afficher sur l'accueil et /caniparc/.
+const references: { commune: string; projet: string; photo: string; alt: string }[] = [];
+---
+
+{references.length > 0 && (
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl text-text leading-tight text-center mb-12">
+        Ils nous ont fait confiance
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {references.map((r) => (
+          <figure class="bg-white rounded-2xl border border-primary-light overflow-hidden shadow-sm">
+            <img src={r.photo} alt={r.alt} class="w-full h-56 object-cover" loading="lazy" />
+            <figcaption class="p-5">
+              <p class="font-display font-bold text-lg text-text">{r.commune}</p>
+              <p class="text-muted text-sm leading-relaxed">{r.projet}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

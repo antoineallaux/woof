@@ -30,5 +30,31 @@
       "answer": "En tant que fabricant, nous proposons la personnalisation des coloris de la Grande Plateforme de dressage. Vous pouvez choisir une teinte qui s'intègre à l'environnement paysager de votre commune ou qui respecte le code couleur de votre camping, pour un aménagement harmonieux, esthétique et unique."
     }
   ],
-  "technicalSheet": "/fiches/AG07.pdf"
+  "technicalSheet": "/fiches/AG07.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "1 076 × 916 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "715 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "4"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

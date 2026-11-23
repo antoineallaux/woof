@@ -31,5 +31,15 @@
       "answer": "Absolument. Nous proposons une large gamme de coloris pour la structure métallique. Vous pouvez ainsi harmoniser cet abri avec le reste du mobilier urbain de votre commune ou utiliser les couleurs de votre charte graphique pour une intégration paysagère réussie au sein du parc."
     }
   ],
-  "technicalSheet": "/fiches/ABII.pdf"
+  "technicalSheet": "/fiches/ABII.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "2 568 × 2 080 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "2 449 mm"
+    }
+  ]
 }

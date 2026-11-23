@@ -30,5 +30,31 @@
       "answer": "En raison de l'écartement entre les plateformes, le Champignon s'adresse plutôt aux chiens de taille moyenne à grande (Border Collie, Berger, Labrador). Les petits chiens peuvent l'utiliser comme slalom au sol ou sauter sur les plateformes les plus basses si la configuration le permet dans votre parc public."
     }
   ],
-  "technicalSheet": "/fiches/AG11.pdf"
+  "technicalSheet": "/fiches/AG11.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "3 900 × 392 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "383 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "5"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "500 × 500 mm"
+    }
+  ]
 }

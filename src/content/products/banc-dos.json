@@ -30,5 +30,31 @@
       "answer": "Absolument pas. Le Banc Dos ne nécessite ni peinture ni traitement annuel. Sa surface non poreuse se nettoie facilement et ne craint pas les détergents. Pour les services techniques gérant le parc canin agility, c'est l'assurance d'un mobilier propre et hygiénique avec une intervention humaine réduite au minimum."
     }
   ],
-  "technicalSheet": "/fiches/AG53.pdf"
+  "technicalSheet": "/fiches/AG53.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "2 060 × 585 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "1 001 mm"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "500 × 500 × 600 mm"
+    },
+    {
+      "label": "Profondeur d'ancrage",
+      "value": "600 mm"
+    },
+    {
+      "label": "Volume de béton",
+      "value": "0,3 m³"
+    }
+  ]
 }

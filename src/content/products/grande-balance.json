@@ -31,5 +31,31 @@
       "answer": "Compte tenu du mouvement de la planche et de l'envergure du module, il est nécessaire de prévoir une zone de dégagement libre d'obstacles tout autour de la Grande Balance. Cela permet au chien de descendre en toute sécurité et aux maîtres de circuler sans risque."
     }
   ],
-  "technicalSheet": "/fiches/AG04.pdf"
+  "technicalSheet": "/fiches/AG04.pdf",
+  "specs": [
+    {
+      "label": "Emprise au sol",
+      "value": "2 994 × 594 mm"
+    },
+    {
+      "label": "Hauteur",
+      "value": "782 mm"
+    },
+    {
+      "label": "Matériaux",
+      "value": "Acier galvanisé, PEHD, aluminium, acier inoxydable"
+    },
+    {
+      "label": "Finition",
+      "value": "Thermolaquage"
+    },
+    {
+      "label": "Nombre de massifs",
+      "value": "2"
+    },
+    {
+      "label": "Massifs béton",
+      "value": "400 × 400 mm"
+    }
+  ]
 }

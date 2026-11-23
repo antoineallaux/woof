@@ -10,7 +10,26 @@ export async function getStaticPaths() {
 
 const { product } = Astro.props;
 const slug = product.id;
-const { name, category, description, longDescription, image, imageAlt, features, ref, faq, technicalSheet } = product.data;
+const { name, category, description, longDescription, image, imageAlt, features, ref, technicalSheet, specs } = product.data;
+
+// Lot 020 : fiche au niveau Herkules, sans prix (délai exact demandé par Antoine, D-20261123-23)
+const DELAI = '3 à 4 semaines en coloris standard, 12 à 15 en coloris spécial';
+const spec = (label: string) => specs.find((s) => s.label === label)?.value;
+const caracteristiques = [
+  ...specs,
+  { label: 'Garantie', value: '5 ans' },
+  { label: 'Délai de fabrication', value: DELAI },
+  { label: 'Transport et pose', value: 'En plus, sur devis' },
+];
+const faq = [
+  ...product.data.faq,
+  ...(spec('Emprise au sol') ? [{
+    question: 'Quelles sont les dimensions de cet équipement ?',
+    answer: `Emprise au sol : ${spec('Emprise au sol')} ; hauteur : ${spec('Hauteur')}${spec('Nombre de massifs') ? ` ; ${spec('Nombre de massifs')} massifs béton` : ''}. Toutes les cotes figurent sur la fiche technique.`,
+  }] : []),
+  { question: 'Quel délai de fabrication et de livraison ?', answer: `Comptez ${DELAI}. Le transport et la pose sont en plus, sur devis.` },
+  { question: 'Quelle garantie ?', answer: 'Garantie 5 ans, comme tous les équipements Woof!.' },
+];
 
 // 4 produits complémentaires (même catégorie, ou aléatoires si pas assez)
 const allProducts = await getCollection('products');
@@ -45,7 +64,7 @@ const productSchema = {
   "image": `${siteUrl}${image}`,
   "brand": { "@type": "Brand", "name": "Woof!" },
   "manufacturer": { "@type": "Organization", "name": "Herkules Fitness" },
-  ...(materials.length > 0 && { "material": materials.join(', ') }),
+  ...((spec('Matériaux') || materials.length > 0) && { "material": spec('Matériaux') ?? materials.join(', ') }),
   "audience": { "@type": "Audience", "audienceType": "Collectivités, mairies, bailleurs, entreprises" },
   "offers": {
     "@type": "Offer",
@@ -159,6 +178,26 @@ const schemas = [productSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Caractéristiques techniques -->
+  <section class="max-w-3xl mx-auto px-4 pt-12">
+    <h2 class="font-display font-extrabold text-3xl text-text text-center mb-8">Caractéristiques techniques</h2>
+    <table class="w-full text-sm font-body bg-white border border-primary/20 rounded-xl overflow-hidden">
+      <tbody>
+        {caracteristiques.map((c) => (
+          <tr class="border-b border-primary/10 last:border-0">
+            <th scope="row" class="text-left font-semibold text-text px-5 py-3 w-2/5 align-top">{c.label}</th>
+            <td class="text-muted px-5 py-3">{c.value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    {technicalSheet && (
+      <p class="text-center text-sm text-muted mt-4">
+        Plan coté et massifs : <a href={technicalSheet} target="_blank" rel="noopener noreferrer" class="text-primary font-semibold underline">télécharger la fiche technique (PDF)</a>
+      </p>
+    )}
   </section>
 
   <!-- FAQ section -->

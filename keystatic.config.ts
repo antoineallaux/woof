@@ -122,6 +122,13 @@ export default config({
           { label: 'FAQ', itemLabel: (props) => props.fields.question.value || 'Question' }
         ),
         technicalSheet: fields.text({ label: 'Fiche technique (PDF)', description: 'URL ou chemin, optionnel' }),
+        specs: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Libellé' }),
+            value: fields.text({ label: 'Valeur' }),
+          }),
+          { label: 'Caractéristiques techniques', description: 'Reprises de la fiche technique PDF', itemLabel: (props) => props.fields.label.value || 'Ligne' }
+        ),
       },
     }),
   },
