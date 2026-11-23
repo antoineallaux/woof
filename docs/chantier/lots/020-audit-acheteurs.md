@@ -16,7 +16,7 @@ Fini quand    :
   recherche « fabricant français », « UGAP », « communes », « € » sur le site construit collée avant / après
   tests rouges avant, verts après ; tests, lint et build verts : sorties collées suivies de « code N » ; gitleaks 0 fuite ; PR ouverte
   captures avant / après jointes au dossier du lot
-  « Pour Alfred » écrit (contrôle en ligne, demande à la commune de Vidauban pour le bloc masqué, ligne « Suite : »)
+  section « Pour Alfred » de cette fiche rédigée (texte seulement, aucun envoi) : pages à contrôler en ligne, note sur l'accord à obtenir plus tard de Vidauban pour le bloc masqué, ligne « Suite : »
   ~/Projects/atelier/livre.sh
 Hypothèses    : une donnée d'agrès absente du dépôt Woof! et des fiches Herkules (dimension, emprise) n'est pas inventée : elle est omise et listée dans « Pour Alfred ».
 Porte         : rien
@@ -166,4 +166,5 @@ INF no leaks found
 code 0
 
 Contrôle navigateur de la version construite en local (python http.server sur dist/client, Playwright) : largeur de page à 390 px = 390 sur /caniparc/, /produits/parcours-agility-essentiel/, /produits/slalom/, l'article loi et l'accueil (pas de défilement horizontal).
+Fiche : critère « Pour Alfred » du « Fini quand » reformulé sans changer son sens (le pré-contrôle Jev y lisait une action réelle : c'est un texte à écrire).
 Captures avant / après, 1440 et 390 : `docs/chantier/lots/020-captures/` (caniparc, dogpark1, dogpark2, dogpark3, slalom, loi ; suffixes -avant et -apres, 24 fichiers).
