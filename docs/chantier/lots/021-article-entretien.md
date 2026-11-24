@@ -17,7 +17,6 @@ Fini quand    :
   ~/Projects/atelier/livre.sh
 Hypothèses    : 1) Le faible nombre d'affichages vient d'un titre et d'un angle qui ne répondent pas aux requêtes des services techniques, pas d'un défaut d'indexation (indexé d'après Search Console). 2) L'URL reste la même : la changer ferait perdre l'indexation.
 Porte         : rien
-Retenu        : demande d'Antoine (conception du pilote validée, message 1569312902886850631)
 Ticket        : aucun
 Demande       : D-20261124-1
 Branche       : lot/021-article-entretien
