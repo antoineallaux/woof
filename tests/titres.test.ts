@@ -18,6 +18,10 @@ const pages = {
     title: 'Revêtement de parc canin : 6 sols comparés | Woof!',
     description: 'Gazon naturel ou synthétique, copeaux, sable, dalles caoutchouc, béton : 6 revêtements de parc canin comparés (sécurité, entretien, drainage, coût).',
   },
+  'blog/entretien-dun-parc-canin-la-checklist-annuelle-des-services-techniques': {
+    title: "Entretien d'un parc canin : checklist et fréquences | Woof!",
+    description: "Quoi contrôler et quand : la checklist d'entretien d'un parc canin (agrès, sol, clôture), semaine, mois, trimestre et année, plus le registre et le budget.",
+  },
   produits: {
     title: "Équipements d'agility canine garantis 5 ans | Woof!",
     description: 'Sauts, tunnels, passerelles, balances, plateformes, mobilier et parcours complets pour collectivités. Fabriqués en Europe, garantis 5 ans.',
