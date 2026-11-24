@@ -42,3 +42,13 @@ test('maillage : aucun lien interne du build vers une page absente ou redirigée
   }
   assert.deepEqual([...casses], []);
 });
+
+test('maillage : l\'article entretien lie les pages d\'achat et la loi, deux articles le lient', () => {
+  const slug = 'blog/entretien-dun-parc-canin-la-checklist-annuelle-des-services-techniques/index.html';
+  const article = corps(pages.find((p) => p.f === slug)!.html);
+  for (const cible of ['/caniparc/', '/produits/', '/prix-parc-canin/', '/devis/', '/blog/creation-dun-parc-chien-collectivite-ce-que-dit-la-loi/']) {
+    assert.ok(article.includes(`href="${cible}"`), cible);
+  }
+  const entrants = pages.filter((p) => corps(p.html).includes(`href="/${slug.replace('index.html', '')}"`));
+  assert.ok(entrants.length >= 3, `${entrants.length} articles`);
+});
