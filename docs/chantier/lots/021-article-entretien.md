@@ -39,7 +39,36 @@ Avant / après (source : git show origin/main et page construite dist/client/blo
 Liens internes ajoutés dans l'article : /caniparc/, /produits/, /prix-parc-canin/, /devis/ (remplace /contact/), /blog/creation-dun-parc-chien-collectivite-ce-que-dit-la-loi/, /produits/panneau-info/, /produits/porte-laisse/ ; gardés : grande-passerelle, passerelle, grande-palissade, grande-plateforme, grande-balance, tunnel-rex, tunnel-milou, abris-en-bois.
 Liens entrants ajoutés (2) : creation-dun-parc-chien-collectivite-ce-que-dit-la-loi.mdx (§ Entretien et maintenance) et combien-coute-un-parc-canin-pour-une-commune-budget-detaille.mdx (§ coûts cachés) ; existant : creer-un-parcours-agility-chien-dans-sa-commune.mdx.
 Page construite (grep -c href dans dist/client/blog/entretien-…/index.html, en-tête et pied compris) : /caniparc/ 3, /produits/ 3, /prix-parc-canin/ 2, /devis/ 3, /blog/creation-dun-parc-chien-collectivite-ce-que-dit-la-loi/ 1. Test ajouté : maillage.test.ts « l'article entretien lie les pages d'achat et la loi, deux articles le lient » ; titres.test.ts : titre et description de l'article.
-npm run build → « [build] Complete! » code 0
-npm test → tests 81, pass 81, fail 0 code 0
-Lint : pas de script lint ; npx astro check → 95 errors code 1, même total que sur origin/main (lot 020), aucune dans les fichiers du lot (grep des fichiers du lot dans la sortie : vide).
-gitleaks detect --log-opts origin/main..HEAD → no leaks found ; git diff | gitleaks detect --pipe → no leaks found.
+npm run build (fin de sortie) :
+```
+08:21:13 [@astrojs/vercel] Copying static files to .vercel/output/static
+08:21:13 [build] Server built in 3.80s
+08:21:13 [build] Complete!
+```
+code 0
+npm test (résumé et tests du lot) :
+```
+✔ maillage : l'article entretien lie les pages d'achat et la loi, deux articles le lient (0.943958ms)
+✔ /blog/entretien-dun-parc-canin-la-checklist-annuelle-des-services-techniques : title et description (0.066042ms)
+ℹ tests 81
+ℹ pass 81
+ℹ fail 0
+```
+code 0
+Lint : pas de script lint dans package.json ; npx astro check rouge, même total que sur origin/main (lot 020 : 95 errors), aucune erreur dans les fichiers du lot (0 ligne de sortie qui les cite).
+npx astro check :
+```
+- 95 errors
+- 0 warnings
+```
+code 1
+gitleaks detect --log-opts origin/main..HEAD :
+```
+8:21AM INF no leaks found
+```
+code 0
+
+Lot en cours : vérification à lancer par le chef — 021-article-entretien, PR #25 https://github.com/antoineallaux/woof/pull/25
+Fait : article entretien réécrit (titre Google, méta, H1, checklist semaine/mois/trimestre/année, tableau, registre, budget sans prix, garantie et pièces, FAQ 5 questions, lien devis), updatedDate 24/11/2026, liens entrants depuis les articles loi et coût, tests titres et maillage étendus.
+Reste : demande d'indexation Search Console et contrôle en ligne après mise en ligne (ligne Suite de « Pour Alfred »).
+Dernière preuve : build vert, tests 81/81 verts, gitleaks 0 fuite, PR #25.
