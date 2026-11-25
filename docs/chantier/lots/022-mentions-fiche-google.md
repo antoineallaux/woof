@@ -25,5 +25,23 @@ Branche       : lot/022-mentions-fiche-google
 Tentatives    : 0/3
 
 ## Pour Alfred
+Textes seulement : « leader européen » et « Made in Europe » ont disparu du site, une seule formule « fabricant européen » ; les chiffres de /qui-sommes-nous/ sont présentés comme ceux du groupe Herkules Fitness. Un test bloque désormais les deux anciennes formules.
+Suite : contrôle en ligne de l'accueil, /agility/ et /qui-sommes-nous/ (aucune des deux formules, bloc de chiffres titré groupe) ; la fiche Google peut alors être créée.
 
 ## Preuve
+Lot en cours : terminé, PR à ouvrir par livre.sh.
+
+Remplacements (avant → après) :
+- Hero.astro:40 « leader européen, depuis 2007. » → « fabricant européen depuis 2007. »
+- Herkules.astro:18 « La puissance d'un leader européen » → « La puissance d'un fabricant européen »
+- Herkules.astro:21 « le leader européen des équipements » → « fabricant européen d'équipements »
+- Footer.astro:29 « Herkules Fitness, leader européen. » → « Herkules Fitness, fabricant européen. »
+- qui-sommes-nous.astro:10 « leader européen des équipements de sport » → « fabricant européen d'équipements de sport »
+- qui-sommes-nous.astro:100 titre « leader du fitness extérieur » → « fabricant européen de fitness extérieur » (ajout : « leader » interdit par les contraintes)
+- agility.astro:188 « 100% / Made in Europe » → « UE / Fabricant européen »
+- qui-sommes-nous.astro:146 ajout du titre « Herkules Fitness en chiffres (groupe, tous équipements) » ; :149 « Appareils installés » → « Appareils Herkules installés » ; :178 ajout de la ligne « Herkules Fitness en chiffres : 500+ appareils installés, depuis 2007, 100+ appareils différents, 15 pays » (chiffres inchangés)
+
+Test neuf (tests/chiffres.test.ts) : rouge sur le code d'origine (« aucun ancien chiffre : leader européen / Made in Europe », index.html et autres pages en échec), vert après.
+Après : tests 82 pass, 0 fail, code 0 ; build Complete, code 0.
+grep « leader européen|made in europe » : src 0 ligne, dist 0 ligne.
+gitleaks : aucune fuite dans src ni dans mes changements ; 2 alertes anciennes dans l'historique (commit e5fa464, .vercel/output, générique, hors lot).
