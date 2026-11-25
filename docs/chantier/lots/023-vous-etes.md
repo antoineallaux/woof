@@ -26,13 +26,15 @@ Tentatives    : 0/3
 ## Pour Alfred
 Le formulaire de devis (et celui de /contact/, qui envoie vers la même API) demande « Vous êtes » : Commune, Bailleur social, Copropriété, Entreprise, Camping, Autre, aucune présélection ; sans choix ou hors liste, la demande est refusée. Le choix part dans `industry` vers `herkules-assistant /api/prospect`, apparaît dans le mail interne et dans la description du lead.
 Bailleur social et Copropriété : absents de la liste Industry de Zoho et impossible de vérifier ici si l'API les accepte (code d'herkules-assistant absent de ce poste, aucun essai réel) : envoyés en « Autre » en attendant, le vrai choix reste lu dans la description (« Vous êtes : … »).
-Suite : Alfred : ajouter « Bailleur social » et « Copropriété » à la liste Industry de Zoho, vérifier que /api/prospect transmet bien `industry` au lead, puis changer deux lignes de `VOUS_ETES` dans `src/lib/mail-devis.ts` ; après mise en ligne, essai avec un prospect TEST (à supprimer ensuite par Antoine) et contrôle que Industry est rempli.
+Suite : mise en service par le guetteur ; ensuite Alfred : ajouter « Bailleur social » et « Copropriété » à la liste Industry de Zoho, vérifier que /api/prospect transmet bien `industry` au lead, puis changer deux lignes de `VOUS_ETES` dans `src/lib/mail-devis.ts` ; après mise en ligne, essai avec un prospect TEST (à supprimer ensuite par Antoine) et contrôle que Industry est rempli.
 
 ## Preuve
 Lot en cours : 023-vous-etes livré, PR ouverte, vérification à lancer par le chef.
+Fait : sélection « Vous êtes » (devis et contact), refus API, Industry dans la requête prospect, ligne dans le mail interne, tests et build verts, captures.
+Reste : rien (gestes d'après mise en ligne dans « Suite : »).
 Demande de fusion : PR #27 https://github.com/antoineallaux/woof/pull/27
 
-Tests rouges sur le code d'origine (tests neufs, code 1) :
+Tests rouges sur le code d'origine (tests neufs) :
 ```
 ✖ contact : sans « Vous êtes » = 400, rien envoyé
 ✖ contact : « Vous êtes » hors liste = 400, rien envoyé
