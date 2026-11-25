@@ -32,6 +32,7 @@ Suite : mise en service par le guetteur, puis contrôle en ligne de l'accueil, /
 Lot en cours : terminé, vérification à lancer par le chef.
 Fait : remplacements de texte, titres de chiffres de /qui-sommes-nous/, test neuf, tests et build verts.
 Reste : rien.
+Demande de fusion : PR #26 https://github.com/antoineallaux/woof/pull/26
 
 Remplacements (avant → après) :
 - Hero.astro:40 « leader européen, depuis 2007. » → « fabricant européen depuis 2007. »
