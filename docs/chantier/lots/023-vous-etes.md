@@ -24,5 +24,50 @@ Branche       : lot/023-vous-etes
 Tentatives    : 0/3
 
 ## Pour Alfred
+Le formulaire de devis (et celui de /contact/, qui envoie vers la même API) demande « Vous êtes » : Commune, Bailleur social, Copropriété, Entreprise, Camping, Autre, aucune présélection ; sans choix ou hors liste, la demande est refusée. Le choix part dans `industry` vers `herkules-assistant /api/prospect`, apparaît dans le mail interne et dans la description du lead.
+Bailleur social et Copropriété : absents de la liste Industry de Zoho et impossible de vérifier ici si l'API les accepte (code d'herkules-assistant absent de ce poste, aucun essai réel) : envoyés en « Autre » en attendant, le vrai choix reste lu dans la description (« Vous êtes : … »).
+Suite : Alfred : ajouter « Bailleur social » et « Copropriété » à la liste Industry de Zoho, vérifier que /api/prospect transmet bien `industry` au lead, puis changer deux lignes de `VOUS_ETES` dans `src/lib/mail-devis.ts` ; après mise en ligne, essai avec un prospect TEST (à supprimer ensuite par Antoine) et contrôle que Industry est rempli.
 
 ## Preuve
+Lot en cours : 023-vous-etes livré, PR ouverte, vérification à lancer par le chef.
+Demande de fusion : PR #27 https://github.com/antoineallaux/woof/pull/27
+
+Tests rouges sur le code d'origine (tests neufs, code 1) :
+```
+✖ contact : sans « Vous êtes » = 400, rien envoyé
+✖ contact : « Vous êtes » hors liste = 400, rien envoyé
+✖ tests/mail-devis.test.ts (import de corpsProspect / VOUS_ETES absent)
+ℹ tests 6 · pass 3 · fail 3
+```
+code 1
+
+Tests après correction (suite complète, build fait avant) :
+```
+ℹ tests 86
+ℹ pass 86
+ℹ fail 0
+```
+code 0
+
+Build :
+```
+[build] Server built in 4.23s
+[build] Complete!
+```
+code 0
+
+Valeur choisie → Industry envoyée (test « Industry posée dans la requête prospect », corps `corpsProspect`) :
+| Choisi | Industry |
+|---|---|
+| Commune | Ville |
+| Bailleur social | Autre (+ « Vous êtes : Bailleur social » en description) |
+| Copropriété | Autre (+ description) |
+| Entreprise | Entreprise |
+| Camping | Camping |
+| Autre | Autre |
+
+Écart : la requête Zoho est vérifiée sur le corps construit par `corpsProspect` (le test ne peut pas passer l'envoi Resend sous node, `import.meta.env` absent) ; l'API refuse sans choix et hors liste (`toString`, `__proto__` compris).
+Captures locales : docs/chantier/lots/023-captures/devis-ordinateur.png et devis-telephone.png (aucune présélection, « Choisissez... »).
+Page /contact/ aussi modifiée : elle poste sur la même API, qui refuse désormais sans choix.
+
+gitleaks : diff du lot, aucune fuite (« no leaks found »). L'historique signale 2 anciennes entrées dans `.vercel/output/...` du commit e5fa464, antérieur au lot (hors périmètre).
