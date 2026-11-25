@@ -14,8 +14,23 @@ Fini quand    :
   grep « leader européen » et « Made in Europe » sur src et sur la page construite (dist) : 0 ligne, sortie collée
   test neuf rouge sur origin/main puis vert : sorties collées
   tests et build verts : sorties collées suivies de « code N » ; gitleaks 0 fuite ; PR ouverte
-  fiche de lot « Lot en cours : terminé, vérification à lancer par le chef.
-Fait : 9 remplacements de texte, titres de chiffres de /qui-sommes-nous/, test neuf, tests et build verts.
+  fiche de lot « Lot en cours : … » après « ## Preuve »
+  « Pour Alfred » rédigé (texte seulement) avec sa ligne « Suite : » (contrôle en ligne de l'accueil, /agility/ et /qui-sommes-nous/ ; la fiche Google peut alors être créée)
+  ~/Projects/atelier/livre.sh
+Hypothèses    : 1) « fabricant européen » est la formule validée (lot 020) et vaut aussi pour la marque Herkules Fitness. 2) Les chiffres de /qui-sommes-nous/ sont ceux du groupe : on les attribue, on ne les vérifie pas dans ce lot.
+Porte         : rien
+Ticket        : aucun
+Demande       : D-20261125-3
+Branche       : lot/022-mentions-fiche-google
+Tentatives    : 0/3
+
+## Pour Alfred
+Textes seulement : « leader européen » et « Made in Europe » ont disparu du site, une seule formule « fabricant européen » ; les chiffres de /qui-sommes-nous/ sont présentés comme ceux du groupe Herkules Fitness. Un test bloque désormais les deux anciennes formules.
+Suite : mise en service par le guetteur, puis contrôle en ligne de l'accueil, /agility/ et /qui-sommes-nous/ ; la fiche Google peut alors être créée.
+
+## Preuve
+Lot en cours : terminé, vérification à lancer par le chef.
+Fait : remplacements de texte, titres de chiffres de /qui-sommes-nous/, test neuf, tests et build verts.
 Reste : rien.
 
 Remplacements (avant → après) :
