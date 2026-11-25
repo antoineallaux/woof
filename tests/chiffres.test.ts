@@ -26,6 +26,8 @@ const anciens: [string, RegExp][] = [
   ['nombre de communes', /\d ?\+? ?communes|communes équipées/i],
   // Origine : « fabricant européen » (D-20261123-23)
   ['fabricant français', /fabricants? fran[cç]ais|fabrication fran[cç]aise|made in france/i],
+  // Origine : jamais « leader européen » ni « Made in Europe » (D-20261125-3)
+  ['leader européen / Made in Europe', /leader europ[ée]en|made in europe/i],
   ['50 m² minimum', /50 ?m²/i],
   ['30 à 60 m²', /30 à 60 ?m²/i],
   ['étiquette Dog Park', /Dog Park \d[^.?!]{0,40}\b(essentiel|intermédiaire|complet)\b|\b(essentiel|intermédiaire|complet)\b[^.?!]{0,40}Dog Park \d/i],
