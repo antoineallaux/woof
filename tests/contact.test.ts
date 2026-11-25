@@ -14,7 +14,7 @@ const envoi = (ip: string, champs: Record<string, string>) => {
   for (const [k, v] of Object.entries(champs)) body.append(k, v);
   return POST({ request: new Request('http://localhost/api/contact/', { method: 'POST', body }), clientAddress: ip } as any);
 };
-const demande = { prenom: 'Jean', nom: 'Robot', email: 'robot@example.com', commune: 'Test', message: 'spam' };
+const demande = { prenom: 'Jean', nom: 'Robot', email: 'robot@example.com', commune: 'Test', vous_etes: 'Commune', message: 'spam' };
 
 test('contact : champ piège rempli = réponse 200 et rien envoyé', async () => {
   appels.length = 0;
@@ -36,4 +36,20 @@ test('formulaires /contact/ et /devis/ : champ piège présent, caché et hors t
     const html = readFileSync(`dist/client/${page}/index.html`, 'utf8');
     assert.ok(/<input[^>]*name="site_web"[^>]*tabindex="-1"/.test(html), page);
   }
+});
+
+test('contact : sans « Vous êtes » = 400, rien envoyé', async () => {
+  appels.length = 0;
+  const { vous_etes, ...sans } = demande;
+  const res = await envoi('192.0.2.3', sans);
+  assert.equal(res.status, 400);
+  assert.deepEqual(appels, []);
+});
+
+test('contact : « Vous êtes » hors liste = 400, rien envoyé', async () => {
+  appels.length = 0;
+  for (const v of ['Particulier', 'toString', '__proto__']) {
+    assert.equal((await envoi('192.0.2.4', { ...demande, vous_etes: v })).status, 400, v);
+  }
+  assert.deepEqual(appels, []);
 });

@@ -2,27 +2,19 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
-import { htmlMailDevis, type Produit } from '../../lib/mail-devis.ts';
+import { htmlMailDevis, VOUS_ETES, corpsProspect, type Prospect, type Produit } from '../../lib/mail-devis.ts';
 import { limiteDepassee } from '../../lib/securite.ts';
 
 // Crée le lead dans Zoho CRM via herkules-assistant /api/prospect
 // (seul projet à détenir les credentials Zoho). Silencieux si non configuré.
-async function creerProspect(p: {
-  email: string;
-  company: string;
-  first_name: string;
-  last_name: string;
-  phone?: string;
-  city?: string;
-  description?: string;
-}): Promise<{ lead_url?: string; deduped?: boolean }> {
+async function creerProspect(p: Prospect): Promise<{ lead_url?: string; deduped?: boolean }> {
   const url = import.meta.env.CRM_PROSPECT_URL;
   const secret = import.meta.env.CRM_PROSPECT_SECRET;
   if (!url || !secret) return {};
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` },
-    body: JSON.stringify({ ...p, lead_source: 'Site Woof', lead_status: 'Nouveau' }),
+    body: JSON.stringify(corpsProspect(p)),
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(`prospect ${res.status}: ${JSON.stringify(data).slice(0, 200)}`);
@@ -55,6 +47,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   const prenom = data.get('prenom')?.toString().trim();
   const nom = data.get('nom')?.toString().trim();
   const email = data.get('email')?.toString().trim();
+  const vousEtes = data.get('vous_etes')?.toString().trim() ?? '';
   const commune = data.get('commune')?.toString().trim();
   const telephone = data.get('telephone')?.toString().trim() || 'Non renseigné';
   const message = data.get('message')?.toString().trim();
@@ -78,6 +71,10 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     // produits illisible : on l'ignore, la demande reste valable
   }
 
+  if (!Object.hasOwn(VOUS_ETES, vousEtes)) {
+    return new Response(JSON.stringify({ error: 'Merci de préciser « Vous êtes ».' }), { status: 400 });
+  }
+
   if (!prenom || !nom || !email || !commune || (!message && produits.length === 0)) {
     return new Response(JSON.stringify({ error: 'Champs obligatoires manquants.' }), { status: 400 });
   }
@@ -96,6 +93,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       nom,
       email,
       commune,
+      vousEtes,
       telephone: telephone === 'Non renseigné' ? undefined : telephone,
       message,
       produits,
@@ -123,7 +121,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       last_name: nom,
       phone: telephone === 'Non renseigné' ? undefined : telephone,
       city: commune,
-      description: `Demande de devis via woof-parcs.fr\n\n${detail}`,
+      industry: VOUS_ETES[vousEtes],
+      description: `Demande de devis via woof-parcs.fr\nVous êtes : ${vousEtes}\n\n${detail}`,
     });
     leadUrl = r.lead_url;
   } catch (e) {

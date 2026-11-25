@@ -1,6 +1,30 @@
 // Mail interne d'une demande de devis (maquette « version 1, Bandeau vert ») :
 // tableaux et styles en ligne pour Outlook, logo en adresse absolue.
 
+// Choix « Vous êtes » → valeur Industry de Zoho. Bailleur social et Copropriété ne sont pas dans la liste Zoho : « Autre » en attendant.
+export const VOUS_ETES: Record<string, string> = {
+  Commune: 'Ville',
+  'Bailleur social': 'Autre',
+  Copropriété: 'Autre',
+  Entreprise: 'Entreprise',
+  Camping: 'Camping',
+  Autre: 'Autre',
+};
+
+export type Prospect = {
+  email: string;
+  company: string;
+  first_name: string;
+  last_name: string;
+  phone?: string;
+  city?: string;
+  description?: string;
+  industry: string;
+};
+
+// Corps JSON envoyé à herkules-assistant /api/prospect
+export const corpsProspect = (p: Prospect) => ({ ...p, lead_source: 'Site Woof', lead_status: 'Nouveau' });
+
 export type Produit = { slug: string; name: string; ref: string; qty: number };
 
 const esc = (s: string) =>
@@ -18,6 +42,7 @@ export function htmlMailDevis(d: {
   nom: string;
   email: string;
   commune: string;
+  vousEtes: string;
   telephone?: string;
   message?: string;
   produits: Produit[];
@@ -52,7 +77,7 @@ export function htmlMailDevis(d: {
   <div style="margin-top:6px;color:#fff;${TITRE};font-size:28px;line-height:1.15;text-transform:uppercase">${esc(d.commune)}</div>
   <div style="margin-top:6px;color:#CFE3C0;font-size:15px">${sousTitre}</div>
 </td></tr>
-<tr><td style="padding:26px 32px 6px"><table width="100%" cellpadding="0" cellspacing="0">${ligne('Contact', `${esc(d.prenom)} ${esc(d.nom)}`)}${ligne('Commune / organisme', esc(d.commune))}${ligne('Email', `<a href="mailto:${esc(d.email)}" style="color:#1F3D31">${esc(d.email)}</a>`)}${ligne('Téléphone', d.telephone ? esc(d.telephone) : 'Non renseigné')}</table></td></tr>
+<tr><td style="padding:26px 32px 6px"><table width="100%" cellpadding="0" cellspacing="0">${ligne('Contact', `${esc(d.prenom)} ${esc(d.nom)}`)}${ligne('Vous êtes', esc(d.vousEtes))}${ligne('Commune / organisme', esc(d.commune))}${ligne('Email', `<a href="mailto:${esc(d.email)}" style="color:#1F3D31">${esc(d.email)}</a>`)}${ligne('Téléphone', d.telephone ? esc(d.telephone) : 'Non renseigné')}</table></td></tr>
 ${projet}
 ${produits}
 <tr><td style="padding:18px 32px 26px"><a href="mailto:${esc(d.email)}" style="background:#F6BA0E;color:#1F3D31;${BOUTON}">Répondre à ${esc(d.prenom)}</a>${appeler}</td></tr>

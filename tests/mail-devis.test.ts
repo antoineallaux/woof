@@ -1,12 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { htmlMailDevis } from '../src/lib/mail-devis.ts';
+import { htmlMailDevis, corpsProspect, VOUS_ETES } from '../src/lib/mail-devis.ts';
 
 const base = {
   prenom: 'Marie',
   nom: 'Lambert',
   email: 'm.lambert@mairie-exemple.fr',
   commune: 'Mairie de Saint-Exemple',
+  vousEtes: 'Bailleur social',
   telephone: '02 40 00 00 00',
   message: 'Parc de 400 m²\nprès du stade',
   produits: [
@@ -53,6 +54,7 @@ test('caractères spéciaux échappés partout, y compris mailto: et tel:', () =
     nom: x,
     email: `a"><script>@b.fr`,
     commune: x,
+    vousEtes: x,
     telephone: `+33"><script>`,
     message: x,
     produits: [{ slug: `s"><script>`, name: x, ref: x, qty: 1 }],
@@ -60,4 +62,25 @@ test('caractères spéciaux échappés partout, y compris mailto: et tel:', () =
   assert.doesNotMatch(html, /<script/);
   assert.match(html, /&lt;script&gt;alert\(1\)&lt;\/script&gt;&amp;&quot;&#39;/);
   assert.match(html, /href="mailto:a&quot;&gt;&lt;script&gt;@b\.fr"/);
+});
+
+test('mail interne : la ligne « Vous êtes » apparaît', () => {
+  assert.match(htmlMailDevis(base), />Vous êtes<\/td><td[^>]*>Bailleur social</);
+});
+
+test('Industry posée dans la requête prospect pour chaque choix', () => {
+  const attendu = {
+    Commune: 'Ville',
+    'Bailleur social': 'Autre',
+    Copropriété: 'Autre',
+    Entreprise: 'Entreprise',
+    Camping: 'Camping',
+    Autre: 'Autre',
+  };
+  assert.deepEqual(VOUS_ETES, attendu);
+  for (const [choix, industry] of Object.entries(attendu)) {
+    const corps = corpsProspect({ email: 'a@example.com', company: 'X', first_name: 'A', last_name: 'B', industry: VOUS_ETES[choix] });
+    assert.equal(corps.industry, industry, choix);
+    assert.equal(corps.lead_source, 'Site Woof');
+  }
 });
